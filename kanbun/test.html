@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返り点でみる漢文 — 回帰テスト</title>
+<style>
+  body { font-family: "Yu Gothic", "Meiryo", sans-serif; margin: 1.5em; background: #faf7f0; color: #322; }
+  h1 { font-size: 1.2em; }
+  #summary { font-size: 1.1em; font-weight: bold; margin: 0.8em 0; }
+  #summary.pass { color: #1a7a2e; }
+  #summary.fail { color: #b3231c; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 0.15em 0.4em; border-bottom: 1px solid #e6ddcc; font-size: 0.9em; }
+  li.ok::before { content: "✅ "; }
+  li.ng::before { content: "❌ "; }
+  li.ng { background: #fde8e6; }
+  .version { color: #998; font-size: 0.8em; }
+</style>
+</head>
+<body>
+<h1>返り点でみる漢文 — 回帰テスト <span class="version">v1</span></h1>
+<div id="summary">実行中…</div>
+<ul id="list"></ul>
+<script src="kanbun.js?v=1"></script>
+<script src="tests.js?v=1"></script>
+<script>
+fetch('texts.json?v=1')
+  .then(r => r.json())
+  .then(texts => {
+    const rs = window.KanbunTests.run(texts.problems);
+    const fails = rs.filter(r => !r.ok);
+    const sum = document.getElementById('summary');
+    sum.textContent = rs.length + ' 件中 ' + (rs.length - fails.length) + ' 件合格 / ' + fails.length + ' 件失敗';
+    sum.className = fails.length ? 'fail' : 'pass';
+    const ul = document.getElementById('list');
+    for (const r of rs){
+      const li = document.createElement('li');
+      li.className = r.ok ? 'ok' : 'ng';
+      li.textContent = r.name + (r.ok ? '' : ' — ' + r.msg);
+      ul.appendChild(li);
+    }
+  })
+  .catch(e => {
+    const sum = document.getElementById('summary');
+    sum.className = 'fail';
+    sum.textContent = 'texts.json の読み込みに失敗: ' + e;
+  });
+</script>
+</body>
+</html>
