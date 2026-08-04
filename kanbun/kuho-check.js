@@ -1,0 +1,142 @@
+'use strict';
+/*
+ * kuho-check.js — 句形データ（kuho.json）の機械検査
+ *
+ * 使い方: node kanbun/kuho-check.js
+ * 不備が1件でもあれば exit 1。人の記憶に頼らないための道具（化学レンズの verify-release.js と同じ役目）。
+ *
+ * 検査する内容:
+ *   1. UTF-8（BOMなし）で JSON として読めること
+ *   2. categories が定義済みのカテゴリ集合とちょうど一致すること
+ *   3. 各型に必須フィールドがそろい、型（配列・文字列）が合っていること
+ *   4. id に重複がないこと
+ *   5. category が定義済みの集合に含まれること
+ *   6. examples の問題 ID が texts.json に実在すること
+ *   7. blank が kakikudashi の部分文字列で、かつ1回だけ現れること（空欄が一意に決まる）
+ *   8. blankNg が3件あり、互いに重複せず、正解の blank とも重ならないこと
+ *   9. confuse の参照先 ID が実在し、自分自身を指していないこと
+ */
+const fs = require('fs');
+const path = require('path');
+
+// kanbun.js の難易度表（KUHO_DIFF）と同じキー集合。ここがずれると訓点モードと句法クイズが食い違う
+const CATEGORIES = ['hitei', 'shieki', 'ukemi', 'gimon', 'hango', 'hikaku',
+                    'sentaku', 'katei', 'gentei', 'yokuyo', 'eitan'];
+const REQUIRED_STR = ['id', 'category', 'label', 'name', 'pattern', 'kakikudashi', 'meaning', 'blank'];
+const REQUIRED_ARR = ['markers', 'examples', 'blankNg'];
+
+const errors = [];
+const err = m => errors.push(m);
+
+function readJson(file){
+  const raw = fs.readFileSync(file);
+  if (raw.length >= 3 && raw[0] === 0xEF && raw[1] === 0xBB && raw[2] === 0xBF){
+    err(path.basename(file) + ': BOM が付いています（UTF-8 BOMなしで保存してください）');
+  }
+  return JSON.parse(raw.toString('utf8'));
+}
+
+const here    = __dirname;
+const kuho    = readJson(path.join(here, 'kuho.json'));
+const texts   = readJson(path.join(here, 'texts.json'));
+const textIds = new Set((texts.problems || []).map(p => p.id));
+
+// ---- 2. カテゴリ集合 -------------------------------------------------------
+const catKeys = Object.keys(kuho.categories || {});
+CATEGORIES.filter(k => catKeys.indexOf(k) < 0)
+  .forEach(k => err('categories: 「' + k + '」が定義されていません'));
+catKeys.filter(k => CATEGORIES.indexOf(k) < 0)
+  .forEach(k => err('categories: 「' + k + '」は定義済みの集合にありません'));
+
+// ---- 3〜9. 型ごとの検査 ----------------------------------------------------
+const types = kuho.types || [];
+if (!types.length) err('types: 型が1件もありません');
+
+const seenId = new Set();
+const countByCat = {};
+
+types.forEach((t, idx) => {
+  const where = 'types[' + idx + ']' + (t && t.id ? '「' + t.id + '」' : '');
+
+  if (!t || typeof t !== 'object'){ err(where + ': オブジェクトではありません'); return; }
+
+  REQUIRED_STR.forEach(f => {
+    if (typeof t[f] !== 'string' || !t[f].trim()) err(where + ': ' + f + ' が空、または文字列ではありません');
+  });
+  REQUIRED_ARR.forEach(f => {
+    if (!Array.isArray(t[f])) { err(where + ': ' + f + ' が配列ではありません'); return; }
+    t[f].forEach((v, i) => {
+      if (typeof v !== 'string' || !v.trim()) err(where + ': ' + f + '[' + i + '] が空、または文字列ではありません');
+    });
+  });
+  if (Array.isArray(t.markers) && !t.markers.length) err(where + ': markers が空です');
+  if (t.note !== undefined && typeof t.note !== 'string') err(where + ': note が文字列ではありません');
+  if (t.confuse !== undefined && !Array.isArray(t.confuse)) err(where + ': confuse が配列ではありません');
+
+  // 4. id 重複
+  if (typeof t.id === 'string'){
+    if (seenId.has(t.id)) err(where + ': id が重複しています');
+    seenId.add(t.id);
+  }
+
+  // 5. カテゴリ
+  if (CATEGORIES.indexOf(t.category) < 0){
+    err(where + ': category「' + t.category + '」は定義済みの集合にありません');
+  } else {
+    countByCat[t.category] = (countByCat[t.category] || 0) + 1;
+  }
+
+  // 6. examples の実在
+  (Array.isArray(t.examples) ? t.examples : []).forEach(id => {
+    if (!textIds.has(id)) err(where + ': examples の「' + id + '」が texts.json にありません');
+  });
+
+  // 7. blank は kakikudashi にちょうど1回出ること（○○ に置き換える位置が一意に決まる）
+  if (typeof t.blank === 'string' && typeof t.kakikudashi === 'string'){
+    const n = t.kakikudashi.split(t.blank).length - 1;
+    if (n === 0) err(where + ': blank「' + t.blank + '」が kakikudashi「' + t.kakikudashi + '」に含まれません');
+    else if (n > 1) err(where + ': blank「' + t.blank + '」が kakikudashi に ' + n + ' 回出ます（1回にしてください）');
+  }
+
+  // 8. 誤答候補
+  if (Array.isArray(t.blankNg)){
+    if (t.blankNg.length !== 3) err(where + ': blankNg は3件必要です（現在 ' + t.blankNg.length + ' 件）');
+    const set = new Set(t.blankNg);
+    if (set.size !== t.blankNg.length) err(where + ': blankNg に重複があります');
+    if (set.has(t.blank)) err(where + ': blankNg に正解「' + t.blank + '」が混ざっています');
+  }
+
+  // 9. confuse の参照
+  (Array.isArray(t.confuse) ? t.confuse : []).forEach(id => {
+    if (id === t.id) err(where + ': confuse が自分自身を指しています');
+  });
+});
+
+// confuse の参照先は全 id が出そろってから確かめる
+types.forEach((t, idx) => {
+  (Array.isArray(t.confuse) ? t.confuse : []).forEach(id => {
+    if (!seenId.has(id)){
+      err('types[' + idx + ']「' + t.id + '」: confuse の「' + id + '」という型がありません');
+    }
+  });
+});
+
+// ---- 結果 -----------------------------------------------------------------
+console.log('kuho.json 検査');
+console.log('  収録 ' + types.length + ' 型 / ' + catKeys.length + ' カテゴリ');
+CATEGORIES.forEach(k => {
+  const label = (kuho.categories || {})[k] || k;
+  console.log('    ' + label + '（' + k + '）: ' + (countByCat[k] || 0) + ' 型');
+});
+const used = new Set();
+types.forEach(t => (t.examples || []).forEach(id => used.add(id)));
+console.log('  texts.json と結び付いた問題: ' + used.size + ' / ' + textIds.size + ' 件');
+console.log('----');
+
+if (errors.length){
+  errors.forEach(m => console.error('NG ' + m));
+  console.error(errors.length + ' 件の不備があります');
+  process.exit(1);
+}
+console.log('不備なし');
+process.exit(0);

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返り点でみる漢文｜句法クイズ | 国語レンズ</title>
+<style>
+  :root {
+    --ink: #322a20;
+    --paper: #faf6ec;
+    --panel: #fffdf6;
+    --frame: #d8cdb4;
+    --accent: #b3410e;   /* 訓点の朱 */
+    --badge: #1e6b5e;
+    --ok: #1a7a2e;
+    --ng: #b3231c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 0.8em;
+    padding: 0.6em 1em; background: #2e2618; color: #f5efdf;
+  }
+  header h1 { font-size: 1.15em; margin: 0; }
+  header .brand { font-size: 0.75em; color: #cfc4a6; }
+  header .version { margin-left: auto; font-size: 0.7em; color: #a89c7c; }
+
+  #toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center;
+    padding: 0.6em 1em; border-bottom: 1px solid var(--frame); background: var(--panel);
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.85em;
+  }
+  #toolbar select { font-size: 1em; padding: 0.2em; }
+  button {
+    font-family: inherit; font-size: 1em; padding: 0.3em 0.9em;
+    border: 1px solid var(--frame); border-radius: 0.4em;
+    background: #fff; color: var(--ink); cursor: pointer;
+  }
+  button:hover { background: #f3ecdb; }
+  button.primary { background: #2e5d47; color: #fff; border-color: #2e5d47; }
+  button.primary:hover { background: #38735a; }
+
+  main { display: flex; gap: 1em; padding: 1em; align-items: flex-start; flex-wrap: wrap; }
+
+  /* ---- 出題パネル ---- */
+  #quiz {
+    flex: 1 1 26em; max-width: 44em;
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em;
+    padding: 1em 1.2em;
+  }
+  #q-kind {
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.75em;
+    color: #877a5e; letter-spacing: 0.05em;
+  }
+  #q-text {
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.95em;
+    margin: 0.3em 0 0.8em;
+  }
+  #q-pattern {
+    font-size: 1.9em; letter-spacing: 0.18em; text-align: center;
+    padding: 0.5em 0.3em; border: 1px solid var(--frame); border-radius: 0.4em;
+    background: #fffaf0; color: var(--accent);
+    overflow-x: auto; white-space: nowrap;
+  }
+  #q-sub {
+    font-size: 0.95em; margin: 0.6em 0 1em; color: #554b39; line-height: 1.6;
+  }
+
+  /* ---- 選択肢 ---- */
+  #choices { display: flex; flex-direction: column; gap: 0.45em; }
+  #choices button.choice {
+    text-align: left; font-size: 1.05em; padding: 0.55em 0.9em; line-height: 1.5;
+  }
+  #choices button.choice:disabled { cursor: default; opacity: 0.75; }
+  #choices button.choice.right {
+    background: #e7f3e4; border-color: var(--ok); color: #14571f; opacity: 1;
+    font-weight: bold;
+  }
+  #choices button.choice.wrong {
+    background: #fde8e6; border-color: var(--ng); color: #8d1a15; opacity: 1;
+  }
+
+  /* ---- 正誤と解説 ---- */
+  #judge { margin-top: 0.9em; font-size: 1.15em; min-height: 1.4em; }
+  #judge.ok { color: var(--ok); }
+  #judge.ng { color: var(--ng); }
+  #explain { display: none; }
+  #explain.shown {
+    display: block; margin-top: 0.6em; padding: 0.8em 0.9em;
+    border: 1px solid var(--frame); border-radius: 0.5em; background: #fdf8ea;
+    font-size: 0.92em; line-height: 1.65;
+  }
+  #explain .row { display: flex; gap: 0.6em; margin-bottom: 0.2em; }
+  #explain .row .k {
+    flex: 0 0 5em; color: #877a5e; font-size: 0.85em;
+    font-family: "Yu Gothic", "Meiryo", sans-serif; padding-top: 0.15em;
+  }
+  #explain .row .v { flex: 1 1 auto; }
+  #explain .note { margin: 0.6em 0 0; padding-top: 0.6em; border-top: 1px dotted var(--frame); }
+  #explain .rel {
+    margin: 0.5em 0 0; font-size: 0.85em; color: #6b5f48;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+
+  /* ---- 右の柱 ---- */
+  #side {
+    flex: 1 1 15em; max-width: 22em;
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.9em;
+  }
+  #score-panel {
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em;
+    padding: 0.8em;
+  }
+  #score-panel .label { font-size: 0.8em; color: #877a5e; }
+  #score { font-size: 1.25em; margin-top: 0.2em; color: var(--badge); }
+  #meta { margin-top: 0.8em; font-size: 0.8em; color: #6b5f48; line-height: 1.7; }
+
+  footer { padding: 0.8em 1em 1.5em; font-size: 0.75em; color: #998a6a;
+           font-family: "Yu Gothic", sans-serif; }
+  footer a { color: #6b5f48; }
+  @media (max-width: 700px) {
+    main { flex-direction: column; }
+    #quiz, #side { max-width: none; width: 100%; }
+    #q-pattern { font-size: 1.5em; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>返り点でみる漢文｜句法クイズ</h1>
+  <span class="brand">国語レンズ｜KokugoLenz</span>
+  <span class="version">v3</span>
+</header>
+
+<div id="toolbar">
+  <label>範囲:
+    <select id="cat-select"></select>
+  </label>
+  <label>形式:
+    <select id="kind-select">
+      <option value="mix">まぜて出す</option>
+      <option value="katachi">何の句形か</option>
+      <option value="blank">書き下しの空欄</option>
+      <option value="imi">意味</option>
+    </select>
+  </label>
+  <button id="btn-next" class="primary">次の問題</button>
+  <button id="btn-reset">成績をリセット</button>
+</div>
+
+<main>
+  <div id="quiz">
+    <div id="q-kind"></div>
+    <div id="q-text">読み込み中…</div>
+    <div id="q-pattern"></div>
+    <div id="q-sub"></div>
+    <div id="choices"></div>
+    <div id="judge"></div>
+    <div id="explain"></div>
+  </div>
+  <div id="side">
+    <div id="score-panel">
+      <div class="label">成績</div>
+      <div id="score">正答 0 / 出題 0</div>
+    </div>
+    <div id="meta"></div>
+  </div>
+</main>
+
+<footer>
+  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
+</footer>
+
+<script src="kanbun.js?v=3"></script>
+<script src="kuho.js?v=3"></script>
+</body>
+</html>
