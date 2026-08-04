@@ -84,7 +84,7 @@
       "kakikudashi": "Aセざルハなシ",
       "meaning": "Aしないものはない（必ずAする）。",
       "note": "打ち消しを二つ重ねると、打ち消し同士が打ち消し合って強い肯定になる。ふつうに肯定で言うより断定の力が強い、という点が学習のねらい。",
-      "examples": [],
+      "examples": ["mujun-3"],
       "blank": "なシ",
       "blankNg": ["あリ", "ンや", "しむ"],
       "confuse": ["hitei-fu", "hitei-nashi"]
@@ -99,7 +99,7 @@
       "kakikudashi": "つねニハAセず",
       "meaning": "いつもAするとは限らない。",
       "note": "打ち消しの字が副詞の上に来る形。打ち消しが副詞にかかるので「全部ではない」という部分的な打ち消しになる。書き下しでは「〜には」と「は」が入るのが目印。",
-      "examples": [],
+      "examples": ["shisetsu-fuhitsu"],
       "blank": "ニハ",
       "blankNg": ["ニ", "ヲシテ", "ヨリ"],
       "confuse": ["hitei-zenbu"]
@@ -176,7 +176,7 @@
       "kakikudashi": "Aセらル",
       "meaning": "Aされる。",
       "note": "動詞の上に受身の助字を置く形。書き下しでは助字を読まず、助動詞「る・らる」に変える。「見」は「みる」ではなく受身の目印である点に注意。",
-      "examples": [],
+      "examples": ["soshi-taiho"],
       "blank": "らル",
       "blankNg": ["しむ", "なシ", "ごとシ"],
       "confuse": ["shieki-shimu", "ukemi-tokoro"]
@@ -344,7 +344,7 @@
       "kakikudashi": "AハBヨリモC",
       "meaning": "AはBよりもCだ。",
       "note": "置き字の下に比べる相手が来る形。上に形容詞・形容動詞が来ると比較になりやすい。同じ字が受身にも場所にもなるので、上下の語の品詞で見分ける。",
-      "examples": [],
+      "examples": ["sanko-momiji", "shisetsu-fuhitsu"],
       "blank": "ヨリモ",
       "blankNg": ["ニ", "ヲシテ", "トモ"],
       "confuse": ["ukemi-oite"]
@@ -452,7 +452,7 @@
       "kakikudashi": "Aスルノみ",
       "meaning": "Aするだけだ。",
       "note": "文末の字だけで限定と断定を同時に表す形。上に「唯」がなくても限定になる。置き字と間違えやすいが、これは読む字である点に注意。",
-      "examples": [],
+      "examples": ["moshi-hyappo"],
       "blank": "ノみ",
       "blankNg": ["ナリ", "なシ", "ンや"],
       "confuse": ["gentei-tada"]
@@ -483,7 +483,7 @@
       "kakikudashi": "AスラかツB、いはンヤCヲや",
       "meaning": "AでさえBなのだから、ましてCはなおさらだ。",
       "note": "程度の軽い例をまず低く置き（抑）、そのうえで本命を高く持ち上げる（揚）形。前半の「すら」と後半の「いはんや〜をや」が対になる。",
-      "examples": [],
+      "examples": ["senju-shiba"],
       "blank": "いはンヤ",
       "blankNg": ["あニ", "いやしクモ", "すなはチ"],
       "confuse": ["yokuyo-nao"]
