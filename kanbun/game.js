@@ -49,7 +49,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=4')
+  fetch('texts.json?v=5')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -280,6 +280,8 @@
     let html = '出典: ' + problem.source.work + '（' + problem.source.chapter + '）';
     if (cleared() || showAnswer){
       html += '<br>書き下し: ' + problem.kakikudashi + '<br>意味: ' + problem.meaning;
+      // note は「教科書の記述をそのまま事実と思わせない」ための注記（帰属の疑義・読みの落とし穴）
+      if (problem.note) html += '<br><span class="note">※ ' + problem.note + '</span>';
     }
     $('meta').innerHTML = html;
   }
