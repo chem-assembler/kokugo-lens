@@ -1,7 +1,8 @@
 # SchoolLenz アプリ公開チェックリスト（GitHub Pages ＋ 独自サブドメイン）
 
 最終確認日: 2026-08-05 ／ 確認方法: 実リポジトリの `git remote -v`・`CNAME`、GitHub API（`gh api .../pages`）、
-実 DNS 照会（`nslookup ... 8.8.8.8`）、GitHub Docs と Squarespace ヘルプの現行ページ。
+実 DNS 照会（`nslookup ... 8.8.8.8`）、`curl -sI` によるヘッダ実測、GitHub Docs。
+**2026-08-11 改訂: DNS の管理が Squarespace から Cloudflare へ移ったため [B] を全面差し替えし、[G]（プロキシ復帰）と §5-1b（Cloudflare 特有のつまずき）を追加した。**
 **このファイルに書いた値は推測ではなく、上の方法で実在を確認したもの**（判断が要る箇所は「要判断」と明示）。
 
 ---
@@ -34,7 +35,8 @@ koku の手順で迷ったら、必ず info の実際の値（3章の表）と�
 ```
 [A] リポジトリ名を決める（要判断・ユーザー）
       ↓
-[B] DNS レコードを先に追加する（Squarespace・ユーザー操作）★これだけは Claude が代行できない
+[B] DNS レコードを先に追加する（Cloudflare・ユーザー操作）★これだけは Claude が代行できない
+    　　※ このとき **Proxy status は「DNS only」（灰色の雲）** にする
       ↓
 [C] GitHub リポジトリを作る（Claude が gh で代行可）
       ↓
@@ -44,7 +46,9 @@ koku の手順で迷ったら、必ず info の実際の値（3章の表）と�
       ↓
 [F] DNS チェック通過を待って Enforce HTTPS を入れる（同上）
       ↓
-[G] 動作確認（Claude 作業）
+[G] Cloudflare のプロキシを ON に戻す（ユーザー操作・任意だが既存2サイトに合わせる）
+      ↓
+[H] 動作確認（Claude 作業）
 ```
 
 ### 順序の理由（重要）
@@ -54,14 +58,20 @@ koku の手順で迷ったら、必ず info の実際の値（3章の表）と�
   Let's Encrypt の証明書発行が始まる。DNS が未設定のまま E をやると、チェックに落ちて
   Enforce HTTPS がグレーアウトしたまま待たされ、結局 DNS を入れてから「解除→再設定」で
   やり直すはめになる。**先に DNS を入れておけば、E→F がほぼ待ち時間なしで通る。**
+- **証明書が出るまでは Cloudflare のプロキシを切っておく（灰色の雲）。**
+  オレンジ（Proxied）のままだと Cloudflare が通信を横取りするため、
+  GitHub の証明書発行の確認が通らない。証明書が approved になってから
+  [G] でオレンジに戻す。**既存の chem・info はどちらも最終的にオレンジ（Proxied）で運用中**
+  なので、koku も最後はオレンジに揃えるのが自然。
 - **info→koku の順**は今回は実質「info の完成形を見本にして koku を作る」の意味になる。
   info の Pages 設定値・DNS レコードの形が正解なので、koku はそれを1文字だけ変えて再現する。
 
 ### 「ユーザーが触らないといけない」のはどこか
 
 Claude は GitHub 側は `gh` CLI（認証済み・アカウント `o9o4oo78o42`、スコープ `repo` あり）で代行できるが、
-**Squarespace の DNS 管理画面にはアクセス手段がない**。
-したがって **必須のユーザー操作は「1つの DNS レコードを追加する」だけ**（＋リポジトリ名の判断1件）。
+**Cloudflare のダッシュボードにはアクセス手段がない**。
+したがって **必須のユーザー操作は DNS レコードの追加（[B]）と、最後のプロキシ ON（[G]）の2つ**
+（＋リポジトリ名の判断1件）。
 GitHub 側も自分で画面を触りたい場合のために、UI 手順を全ステップ併記してある。
 
 ---
@@ -87,50 +97,59 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 
 ---
 
-### [B] Squarespace に DNS レコードを追加する ★ユーザー必須
+### [B] Cloudflare に DNS レコードを追加する ★ユーザー必須
+
+> **2026-08-11 更新: DNS の管理は Squarespace から Cloudflare へ移っている。**
+> 実測で確認済み（`nslookup -type=NS schoollenz.com` → `junade.ns.cloudflare.com` /
+> `lia.ns.cloudflare.com`）。**Squarespace の DNS 画面をいくら触っても反映されない**ので、
+> 必ず Cloudflare ダッシュボードで操作すること。
 
 - [ ] **[ユーザー操作]** ブラウザで以下をたどる。
 
-  1. `https://account.squarespace.com/domains` を開く（Squarespace アカウントでログイン）
-  2. **`schoollenz.com`** をクリック
-  3. 左（サイドパネル）の **「DNS」** をクリック → **「DNS settings（DNS 設定）」**
-  4. 下へスクロールして **「Custom records（カスタムレコード）」** の欄を出す
-  5. **「Add record（レコードを追加）」** をクリック
-  6. 各欄に次を入力する（**コピペ推奨**）
+  1. `https://dash.cloudflare.com/` を開いてログイン
+  2. **`schoollenz.com`** のサイトをクリック
+  3. 左メニューの **「DNS」→「Records（レコード）」**
+  4. **「Add record（レコードを追加）」** をクリック
+  5. 各欄に次を入力する（**コピペ推奨**）
 
      Type（種別）:
      ```
      CNAME
      ```
 
-     Host / Name（ホスト名）:
+     Name（名前）:
      ```
      koku
      ```
 
-     Data / Value（値）:
+     Target（ターゲット）:
      ```
      chem-assembler.github.io
      ```
 
-     TTL: 既定のまま（4 hours）でよい
+     **Proxy status（プロキシ状態）: 　まず「DNS only」（灰色の雲）にする** ← 最重要
+     TTL: Auto のまま
 
-  7. **「Save（保存）」** をクリック（パスワードまたは2段階認証の確認が入ることがある）
+  6. **「Save」** をクリック
 
 - **入力時の注意**
-  - Host は **`koku` だけ**。`koku.schoollenz.com` とフルで書かない（Squarespace はドメイン部を自動で補う）。
-  - Value の末尾に **リポジトリ名を付けない**。`chem-assembler.github.io/kokugo-lens` は誤り。
+  - **最初は必ず「DNS only（灰色の雲）」にする。** オレンジの雲（Proxied）のままだと
+    Cloudflare が通信を横取りするため、GitHub が Let's Encrypt 証明書を発行するための
+    確認に失敗し、**Enforce HTTPS がグレーアウトしたまま先へ進めなくなる**。
+    証明書が発行できてから（[F] のあと）オレンジに切り替える（[G]）。
+  - Name は **`koku` だけ**。`koku.schoollenz.com` とフルで書いてもよい（Cloudflare が正規化する）。
+  - Target の末尾に **リポジトリ名を付けない**。`chem-assembler.github.io/kokugo-lens` は誤り。
     正しい値は組織の Pages ドメインそのもの＝`chem-assembler.github.io`。
-    これは chem・info の**実際の DNS 応答**で確認済み（両方とも CNAME 先は `chem-assembler.github.io`）。
-  - Value 末尾のドット（`chem-assembler.github.io.`）は付けても付けなくてよい。Squarespace 側で正規化される。
   - **A レコードではなく CNAME**。サブドメインなので GitHub の 185.199.108–111.153 を直接書く必要はない。
 
 - [ ] **[Claude作業]** 反映を確認する。
   ```bash
   nslookup koku.schoollenz.com 8.8.8.8
   ```
-  `canonical name = chem-assembler.github.io` と GitHub の IP が返れば OK。
-  返らなければ 5章「つまずきポイント」の DNS 伝播を参照。
+  **DNS only（灰色）で登録した場合**は `canonical name = chem-assembler.github.io` と
+  GitHub の IP（185.199.108–111.153）が返る。これが [E] へ進んでよい合図。
+  **もし Cloudflare の IP（104.21.x.x / 172.67.x.x）が返る**なら、まだオレンジの雲なので
+  灰色に直す。返らなければ 5章「つまずきポイント」の DNS 伝播を参照。
 
 ---
 
@@ -230,7 +249,37 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 
 ---
 
-### [G] 動作確認
+### [G] Cloudflare のプロキシを ON に戻す ★ユーザー操作（2026-08-11 追加）
+
+**[F] で Enforce HTTPS が入り、証明書が approved になってから**行う。
+
+- [ ] **[Claude作業]** 先に証明書の状態を確かめる。
+  ```bash
+  gh api repos/chem-assembler/kokugo-lens/pages --jq '.https_certificate.state, .https_enforced'
+  ```
+  `approved` と `true` が返ってから次へ進む。
+
+- [ ] **[ユーザー操作]** Cloudflare ダッシュボード →「DNS」→「Records」→ `koku` の行の
+  **雲アイコンをクリックしてオレンジ（Proxied）に変える** → Save。
+
+- [ ] **[ユーザー操作]** 併せて「SSL/TLS」→「Overview」で暗号化モードを確認する。
+  **「Full」または「Full (strict)」であること。**
+  **「Flexible」だと GitHub Pages 側の HTTPS 強制とぶつかってリダイレクトループになる**
+  （ブラウザが「リダイレクトが多すぎます」で止まる）。
+  既存の chem・info が正常に動いているので、現状のモードは Full 系のはず。ここは変更不要のことが多い。
+
+- [ ] **[Claude作業]** オレンジに変えたあと、Cloudflare 経由で正しく返るか確認する。
+  ```bash
+  curl -sI https://koku.schoollenz.com/ | grep -iE '^HTTP|^server:|cf-ray'
+  ```
+  `HTTP/1.1 200`・`Server: cloudflare`・`CF-RAY` が返れば完了。
+
+**プロキシを ON にしなくても公開自体は成立する**（灰色のままでも GitHub Pages が直接配信する）。
+既存2サイトに揃えたい／Cloudflare の解析やキャッシュを効かせたい場合に ON にする。
+
+---
+
+### [H] 動作確認
 
 - [ ] **[Claude作業]** 4章の確認コマンドを順に実行し、結果をユーザーに報告する。
 
@@ -253,16 +302,24 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 | ローカルパス | `C:\Users\maequ\マイドライブ\Antigravity\OrganicChemistryPuzzle` | `C:\Users\maequ\マイドライブ\Antigravity\InfoLens` | `C:\Users\maequ\マイドライブ\Antigravity\KokugoLens` |
 | 状態 | 公開済み・証明書 2026-10-21 まで | 公開済み・証明書 2026-10-27 まで | **未公開（DNS も未登録）** |
 
-### 3-2. Squarespace に追加する DNS レコード
+### 3-2. Cloudflare に追加する DNS レコード
 
-親ドメイン `schoollenz.com` のネームサーバは `nsb1〜nsb4.squarespacedns.com`（実照会で確認）。
-＝ **DNS の編集場所は Squarespace で正しい**。
+親ドメイン `schoollenz.com` のネームサーバは **`junade.ns.cloudflare.com` / `lia.ns.cloudflare.com`**
+（2026-08-11 実照会で確認）。＝ **DNS の編集場所は Cloudflare**。
+以前は Squarespace（`nsb1〜nsb4.squarespacedns.com`）だったが移管済みで、
+**Squarespace 側をいくら編集しても反映されない**。
 
-| アプリ | Type | Host（Name） | Data（Value） | TTL | 状態 |
+各行には Type / Name / Target のほかに **Proxy status（雲の色）** がある。
+koku は **登録時は灰色（DNS only）→ 証明書発行後にオレンジ（Proxied）** の順にする（[B]・[G]）。
+
+| アプリ | Type | Name | Target | Proxy status | 状態 |
 |---|---|---|---|---|---|
-| chem | `CNAME` | `chem` | `chem-assembler.github.io` | 既定 | 登録済み |
-| info | `CNAME` | `info` | `chem-assembler.github.io` | 既定 | 登録済み |
-| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | 既定 | **未登録＝今回追加する1件** |
+| chem | `CNAME` | `chem` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
+| info | `CNAME` | `info` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
+| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | **まず灰色 → 発行後オレンジ** | **未登録＝今回追加する1件** |
+
+※ chem・info がオレンジであることは `nslookup` が Cloudflare の IP（104.21.21.125 /
+172.67.198.158）を返すこと、`curl -sI` が `Server: cloudflare` と `CF-RAY` を返すことで確認済み。
 
 - **追加するのはこの1行だけ。** 既存のレコードは触らない。
 - 特に **apex（`schoollenz.com` 本体）のレコードは絶対に触らない**。
@@ -286,9 +343,8 @@ CNAME レコードだけを見たいとき:
 nslookup -type=CNAME koku.schoollenz.com 8.8.8.8
 ```
 
-**目安時間**: Squarespace で保存してから **5〜30分**で引けることが多い。
-公式の案内は「24〜48時間かかることがある」。30分たっても `Non-existent domain` なら
-入力（Host に `koku` だけ入っているか）を見直す。
+**目安時間**: Cloudflare は自社の権威 DNS なので反映が速く、**数十秒〜数分**で引けることが多い。
+5分たっても `Non-existent domain` なら入力（Name に `koku` だけ入っているか）を見直す。
 
 ### 4-2. Pages の状態（[E] の直後）
 
@@ -346,11 +402,47 @@ curl -sI http://koku.schoollenz.com/ | head -5
 
 ### 5-1. DNS 伝播待ち
 
-- Squarespace で保存しても**すぐには引けない**。5〜30分が普通、最大48時間。
+- Cloudflare は反映が速い（ふつう数十秒〜数分）。それでも引けないときは下記を疑う。
 - **ローカルの DNS キャッシュに古い「存在しない」が残る**ことがある。
   確認は必ず `nslookup ... 8.8.8.8` のように**公開 DNS を明示**して行う。
   手元のキャッシュを消すなら PowerShell で `Clear-DnsClientCache`。
 - ブラウザは特にしつこくキャッシュする。うまく出ないときはシークレットウィンドウで開く。
+
+### 5-1b. Cloudflare 特有のつまずき（2026-08-11 追加）
+
+**すべて実測にもとづく。既存の chem・info はこの構成で正常に動いている。**
+
+| 症状 | 原因 | 対処 |
+|---|---|---|
+| Enforce HTTPS がいつまでもグレーアウト。DNS チェックも通らない | **雲がオレンジ（Proxied）のまま**で、GitHub の証明書発行の確認が Cloudflare に横取りされている | 雲を**灰色（DNS only）**に戻す。証明書が approved になってから [G] でオレンジに戻す |
+| ブラウザが「リダイレクトが多すぎます」で止まる | SSL/TLS モードが **Flexible**。Cloudflare が HTTP で GitHub に取りに行き、GitHub が HTTPS へ飛ばし返すループ | SSL/TLS →「Full」または「Full (strict)」にする |
+| `nslookup` が Cloudflare の IP（104.21.x.x / 172.67.x.x）を返す | オレンジの雲。**これ自体は正常な運用状態**だが、証明書発行前だと [E][F] が通らない | 発行前なら灰色へ。発行後ならそのままでよい |
+| 更新したはずのファイルが古いまま返る | Cloudflare のエッジキャッシュ | `?v=NN` を上げれば URL が変わるので自動で解決する（下記）。それでも直らなければ Cloudflare で「Purge Everything」 |
+
+**キャッシュの実測結果（`curl -sI` で確認）**
+
+| 種類 | 実測 | 意味 |
+|---|---|---|
+| HTML | `cf-cache-status: DYNAMIC`（`max-age=600`） | **エッジにキャッシュされない**。デプロイ後すぐ新しい HTML が出る |
+| `.js` | `cf-cache-status: EXPIRED/HIT`（`max-age=14400`） | エッジに4時間キャッシュされる |
+| `.json` | `cf-cache-status: DYNAMIC` | キャッシュされない |
+
+→ **`?v=NN` を上げるコミット儀式は Cloudflare でもそのまま有効**。
+版を上げると URL が変わるので別のキャッシュ項目になり、古い JS が配られることはない。
+**HTML がキャッシュされないのが効いていて**、新しい HTML が新しい `?v=` を参照する形で確実に伝わる。
+ただし Cloudflare で「Cache Everything」のルールを足すと HTML もキャッシュされ、この前提が崩れる。
+**入れないこと。** 入れるなら公開のたびにキャッシュパージが必須になる。
+
+**Rocket Loader は OFF のままにする。**
+現状は chem の配信 HTML に書き換えの痕跡がないので OFF。
+ON にすると script の実行順が変わり、`kanbun.js` が `window.Kanbun` を用意する前に
+`game.js` が走って**アプリが起動しなくなる**（この構成は読み込み順に依存している）。
+
+**証明書の自動更新に注意（要監視）。**
+現在の証明書の期限は chem が 2026-10-21、info が 2026-10-27。
+GitHub は期限の約30日前に自動更新するが、**オレンジの雲のままだと更新の確認が
+通らない可能性がある**。9月下旬に `gh api repos/<owner>/<repo>/pages --jq '.https_certificate.state'`
+で `approved` のままか確認し、失敗していたら一時的に灰色へ戻して更新させる。
 
 ### 5-2. Enforce HTTPS が最初グレーアウトする
 
@@ -372,7 +464,8 @@ curl -sI http://koku.schoollenz.com/ | head -5
 
 - 誤: Host = `koku.schoollenz.com`（`koku.schoollenz.com.schoollenz.com` になってしまう）
 - 正: Host = `koku`
-- 保存後に Squarespace の一覧で表示が `koku.schoollenz.com` になっていれば正しい。
+- Cloudflare は Name にフルドメインを書いても正規化してくれるが、保存後の一覧表示が
+  `koku.schoollenz.com` になっていることを必ず確認する。
 
 ### 5-5. `CNAME` ファイルの置き場所・中身
 
@@ -394,8 +487,8 @@ curl -sI http://koku.schoollenz.com/ | head -5
 
 ### 5-8. 既存レコードを壊さない
 
-- Squarespace の DNS 画面には apex（`@`）や `www`、メール関連の MX / TXT が並んでいる。
-  **追加するのは Custom records の CNAME 1行だけ**で、既存行の編集・削除はしない。
+- Cloudflare の DNS 画面には apex（`schoollenz.com`）や `www`、chem / info、
+  メール関連の MX / TXT が並んでいる。**追加するのは CNAME 1行だけ**で、既存行の編集・削除はしない。
 - apex は現在 Vercel を向いている（別系統）。ここを触ると `schoollenz.com` 本体が落ちる。
 
 ### 5-9. push 前の品質条件を飛ばさない
@@ -422,12 +515,13 @@ curl -sI http://koku.schoollenz.com/ | head -5
 | 区分 | 件数 | 内訳 |
 |---|---|---|
 | **ユーザーの判断が必要** | **1件** | [A] リポジトリ名の決定（推奨 `kokugo-lens`） |
-| **ユーザーの画面操作が必須** | **1件** | [B] Squarespace に CNAME レコードを1行追加（Claude は Squarespace に入れない） |
+| **ユーザーの画面操作が必須** | **2件** | [B] Cloudflare に CNAME を1行追加（灰色の雲で）／ [G] 証明書発行後にオレンジへ戻す（Claude は Cloudflare に入れない） |
 | ユーザーの承認が必要（実行は Claude） | 3件 | [C] 公開リポジトリ作成 ／ [D] commit・push ／ [E] Pages 公開設定 |
-| Claude が単独で実行可 | 4件 | [D] CNAME ファイル作成 ／ [F] Enforce HTTPS ／ [G] 動作確認 ／ [6] README 更新 |
+| Claude が単独で実行可 | 4件 | [D] CNAME ファイル作成 ／ [F] Enforce HTTPS ／ [H] 動作確認 ／ [6] README 更新 |
 
-**要するに、ユーザーが手を動かすのは「リポジトリ名を1つ決める」と
-「Squarespace で CNAME を1行足す」の2つだけ**。残りは承認さえもらえれば Claude 側で完了できる。
+**要するに、ユーザーが手を動かすのは「リポジトリ名を1つ決める」
+「Cloudflare で CNAME を1行足す（灰色の雲）」「証明書が出たら雲をオレンジに戻す」の3つだけ**。
+残りは承認さえもらえれば Claude 側で完了できる。
 
 ---
 
@@ -437,7 +531,9 @@ curl -sI http://koku.schoollenz.com/ | head -5
   https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 - GitHub Docs「Securing your GitHub Pages site with HTTPS」
   https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https
-- Squarespace Help「Pointing a Squarespace domain」
-  https://support.squarespace.com/hc/en-us/articles/215744668-Pointing-a-Squarespace-domain
-- Squarespace Help「DNS records for web hosting」
+- Cloudflare Docs「Manage DNS records」
+  https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/
+- Cloudflare Docs「SSL/TLS encryption modes」
+  https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/
+- （参考・移管前の情報）Squarespace Help「DNS records for web hosting」
   https://support.squarespace.com/hc/en-us/articles/31119879125645-DNS-records-for-web-hosting
