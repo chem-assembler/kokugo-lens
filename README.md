@@ -1,6 +1,8 @@
 # 国語レンズ（KokugoLenz）
 
-SchoolLenz の第3の教科サブブランド。公開予定 URL: **koku.schoollenz.com**（DNS・Pages は未設定）。
+SchoolLenz の第3の教科サブブランド。
+**公開中: https://koku.schoollenz.com/** （2026-08-11 公開）
+リポジトリ: `chem-assembler/kokugo-lens` ／ GitHub Pages（main / ルート）／ HTTPS 強制済み
 
 ## 構成
 

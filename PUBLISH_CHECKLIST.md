@@ -300,7 +300,7 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 | サブドメイン | `chem.schoollenz.com` | `info.schoollenz.com` | `koku.schoollenz.com` |
 | `CNAME` ファイルの中身 | `chem.schoollenz.com` | `info.schoollenz.com` | `koku.schoollenz.com` |
 | ローカルパス | `C:\Users\maequ\マイドライブ\Antigravity\OrganicChemistryPuzzle` | `C:\Users\maequ\マイドライブ\Antigravity\InfoLens` | `C:\Users\maequ\マイドライブ\Antigravity\KokugoLens` |
-| 状態 | 公開済み・証明書 2026-10-21 まで | 公開済み・証明書 2026-10-27 まで | **未公開（DNS も未登録）** |
+| 状態 | 公開済み・証明書 2026-10-21 まで | 公開済み・証明書 2026-10-27 まで | **公開済み（2026-08-11）・証明書 2026-11-09 まで** |
 
 ### 3-2. Cloudflare に追加する DNS レコード
 
@@ -316,7 +316,7 @@ koku は **登録時は灰色（DNS only）→ 証明書発行後にオレンジ
 |---|---|---|---|---|---|
 | chem | `CNAME` | `chem` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
 | info | `CNAME` | `info` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
-| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | **まず灰色 → 発行後オレンジ** | **未登録＝今回追加する1件** |
+| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | **灰色（DNS only）で登録済み → [G] でオレンジへ** | **登録済み（2026-08-11）** |
 
 ※ chem・info がオレンジであることは `nslookup` が Cloudflare の IP（104.21.21.125 /
 172.67.198.158）を返すこと、`curl -sI` が `Server: cloudflare` と `CF-RAY` を返すことで確認済み。
