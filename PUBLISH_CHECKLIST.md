@@ -33,7 +33,7 @@ koku の手順で迷ったら、必ず info の実際の値（3章の表）と�
 ### 何をどの順でやるか
 
 ```
-[A] リポジトリ名を決める（要判断・ユーザー）
+[A] リポジトリ名を決める → **`kokugo-lens` に確定（2026-08-11）**
       ↓
 [B] DNS レコードを先に追加する（Cloudflare・ユーザー操作）★これだけは Claude が代行できない
     　　※ このとき **Proxy status は「DNS only」（灰色の雲）** にする
@@ -82,14 +82,14 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 
 ### [A] リポジトリ名を決める
 
-- [ ] **[ユーザー判断]** GitHub のリポジトリ名を決める。
+- [x] **[ユーザー判断]** GitHub のリポジトリ名を決める。→ **`kokugo-lens`**
   - 組織アカウントは **`chem-assembler`**（GitHub API で `type: Organization` を確認済み）。
   - 命名の前例:
     - chem … `chem-assembler.github.io`（**組織の Pages サイト用の特別な名前**。1組織に1つだけ。すでに chem が使用中なので koku では使えない）
     - info … `info-lens`（プロジェクトリポジトリ。ハイフン区切り・小文字）
   - **推奨は `kokugo-lens`**（info-lens と同じ「教科の英字名 + `-lens`」の形）。
   - 2026-08-05 時点で `kokugo-lens` / `koku-lens` / `kokugolens` の3つとも **未使用（作成可能）** を確認済み。
-  - 決めたら 3章の表の「（要判断）」を実際の名前で置き換えてから先へ進む。
+  - **2026-08-11 ユーザー決定: `kokugo-lens` に確定。** 同日に未使用（HTTP 404）を再確認済み。
 
 > 補足: プロジェクトリポジトリでも、カスタムドメインを設定すればサイトは
 > `https://koku.schoollenz.com/` の**ルート**で配信される（`/kokugo-lens/` は付かない）。
@@ -293,7 +293,7 @@ GitHub 側も自分で画面を触りたい場合のために、UI 手順を全�
 |---|---|---|---|
 | 表示名 | パズルでみる有機化学 ほか（化学レンズ） | 情報レンズ（InfoLenz） | 国語レンズ（KokugoLenz） |
 | GitHub 組織 | `chem-assembler` | `chem-assembler` | `chem-assembler` |
-| リポジトリ名 | `chem-assembler.github.io` | `info-lens` | **（要判断／推奨 `kokugo-lens`）** |
+| リポジトリ名 | `chem-assembler.github.io` | `info-lens` | **`kokugo-lens`（2026-08-11 確定）** |
 | リポジトリ種別 | 組織 Pages サイト | プロジェクトサイト | プロジェクトサイト |
 | リモート URL | `https://github.com/chem-assembler/chem-assembler.github.io.git` | `https://github.com/chem-assembler/info-lens.git` | `https://github.com/chem-assembler/<決めた名前>.git` |
 | 公開ブランチ / パス | `main` / `/` | `main` / `/` | `main` / `/` |
