@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返り点でみる漢文｜書き下し練習 | 国語レンズ</title>
+<style>
+  :root {
+    --ink: #322a20;
+    --paper: #faf6ec;
+    --panel: #fffdf6;
+    --frame: #d8cdb4;
+    --accent: #b3410e;
+    --badge: #1e6b5e;
+    --ok: #1a7a2e;
+    --ng: #b3231c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 0.8em;
+    padding: 0.6em 1em; background: #2e2618; color: #f5efdf;
+  }
+  header h1 { font-size: 1.15em; margin: 0; }
+  header .brand { font-size: 0.75em; color: #cfc4a6; }
+  header .version { margin-left: auto; font-size: 0.7em; color: #a89c7c; }
+  #toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center;
+    padding: 0.6em 1em; border-bottom: 1px solid var(--frame); background: var(--panel);
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.85em;
+  }
+  #problem-select { font-size: 1em; max-width: 22em; padding: 0.2em; }
+  button {
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 1em;
+    padding: 0.3em 0.9em; border: 1px solid var(--frame); border-radius: 0.4em;
+    background: #fff; color: var(--ink); cursor: pointer;
+  }
+  button:hover { background: #f3ecdb; }
+  button.primary { background: #2e5d47; color: #fff; border-color: #2e5d47; }
+  button.primary:hover { background: #38735a; }
+  button.toggled { background: #e9dfc8; }
+
+  main { padding: 1em; font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.9em; }
+  .hint { color: #877a5e; font-size: 0.85em; margin-bottom: 0.8em; line-height: 1.6; }
+
+  #boards { display: flex; gap: 0.8em; align-items: flex-start; flex-wrap: wrap; }
+  .board {
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em;
+    padding: 0.6em; flex: 0 0 auto; min-width: 8.5em;
+  }
+  .board h2 { font-size: 0.85em; margin: 0 0 0.5em; color: #6b5f48; font-weight: normal; }
+  .board .sub { font-size: 0.75em; color: #a5987c; }
+  .tray {
+    min-height: 15em; max-height: 26em; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 0.3em;
+    padding: 0.3em; border-radius: 0.4em; background: #f6f0e0;
+  }
+  #tray-order { background: #eef3e9; }
+  #tray-drop  { background: #f0ece2; min-height: 6em; }
+
+  /* ---- カード ---- */
+  .card {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border: 1px solid var(--frame); border-radius: 0.4em;
+    padding: 0.25em 0.4em; cursor: grab; touch-action: manipulation;
+    min-height: 2.6em;
+  }
+  .card:active { cursor: grabbing; }
+  .card .kanji { font-family: "Yu Mincho", serif; font-size: 1.6em; line-height: 1.2; }
+  .card .seq {
+    position: absolute; left: 0.25em; top: 0.15em;
+    font-size: 0.62em; background: var(--badge); color: #fff;
+    border-radius: 0.8em; padding: 0.05em 0.45em; min-width: 1.4em; text-align: center;
+  }
+  .card .yomi {
+    position: absolute; right: 0.3em; top: 50%; transform: translateY(-50%);
+    font-size: 0.62em; color: #776a52;
+  }
+  .card .dup {
+    position: absolute; right: 0.2em; bottom: 0.1em;
+    font-size: 0.6em; padding: 0 0.3em; line-height: 1.5; border-radius: 0.3em;
+  }
+  .card.reread { border-color: var(--accent); border-style: dashed; }
+  .card.nth2 { background: #fdf3e6; }
+  .card.placed-hint { border-style: dotted; color: #8a7d63; }
+  .card.bad { background: #fde0dd; border-color: var(--ng); }
+  .card.good { background: #e7f3e4; border-color: var(--ok); }
+  .sortable-ghost { opacity: 0.35; }
+
+  #result {
+    margin-top: 0.9em; padding: 0.8em; border-radius: 0.5em; display: none; line-height: 1.6;
+  }
+  #result.ok { display: block; background: #e7f3e4; border: 1px solid var(--ok); }
+  #result.wrong { display: block; background: #fde8e6; border: 1px solid var(--ng); }
+  #result .kudashi {
+    font-family: "Yu Mincho", serif; font-size: 1.25em; margin-top: 0.4em; display: block;
+  }
+  #meta { margin-top: 0.8em; font-size: 0.85em; color: #6b5f48; line-height: 1.6; }
+  #meta .note { color: #8a6a3a; font-size: 0.92em; }
+  footer { padding: 0.8em 1em 1.5em; font-size: 0.75em; color: #998a6a;
+           font-family: "Yu Gothic", sans-serif; }
+  footer a { color: #6b5f48; }
+  @media (max-width: 600px) {
+    #boards { gap: 0.5em; }
+    .board { min-width: 6.8em; padding: 0.4em; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>返り点でみる漢文｜書き下し練習</h1>
+  <span class="brand">国語レンズ｜KokugoLenz</span>
+  <span class="version">v6</span>
+</header>
+
+<div id="toolbar">
+  <label>問題:
+    <select id="problem-select"></select>
+  </label>
+  <button id="btn-grade" class="primary">判定する</button>
+  <button id="btn-reset">やり直す</button>
+  <button id="btn-answer">正解を見る</button>
+  <button id="btn-yomi">読み仮名</button>
+</div>
+
+<main>
+  <p class="hint">
+    <strong>訓点はありません。</strong>白文のカードを、読む順に「読む順」へ並べてください。
+    読まない字（置き字）は「読まない箱」へ。<br>
+    一字を二度読む再読文字は <strong>［＋］</strong> を押すとカードが2枚になります。
+    ドラッグで並べ替えられます（スマホは長押ししてから動かす）。
+  </p>
+
+  <div id="boards">
+    <div class="board">
+      <h2>白文 <span class="sub">原文の順</span></h2>
+      <div class="tray" id="tray-source"></div>
+    </div>
+    <div class="board">
+      <h2>読む順 <span class="sub">上から順に読む</span></h2>
+      <div class="tray" id="tray-order"></div>
+    </div>
+    <div class="board">
+      <h2>読まない箱 <span class="sub">置き字</span></h2>
+      <div class="tray" id="tray-drop"></div>
+    </div>
+  </div>
+
+  <div id="result"></div>
+  <div id="meta"></div>
+</main>
+
+<footer>
+  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
+</footer>
+
+<script src="kanbun.js?v=6"></script>
+<script src="sortable-lite.js?v=6"></script>
+<script src="kudashi.js?v=6"></script>
+</body>
+</html>
