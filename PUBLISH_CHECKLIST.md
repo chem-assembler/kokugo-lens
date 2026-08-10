@@ -7,6 +7,25 @@
 
 ---
 
+## 0-0. 公開完了（2026-08-11）
+
+**3アプリすべて公開済み。このチェックリストの全工程 [A]〜[H] は完了している。**
+以降は「4つ目のサブドメインを足すとき」の手順書として読む。
+
+| | chem | info | **koku** |
+|---|---|---|---|
+| URL | https://chem.schoollenz.com/ | https://info.schoollenz.com/ | **https://koku.schoollenz.com/** |
+| リポジトリ | `chem-assembler.github.io` | `info-lens` | **`kokugo-lens`** |
+| 証明書 | 2026-10-21 まで | 2026-10-27 まで | **2026-11-09 まで** |
+| Cloudflare | オレンジ（Proxied） | オレンジ（Proxied） | **オレンジ（Proxied）** |
+
+**koku の公開で実証されたこと**: 灰色（DNS only）で先に DNS を通しておくと、
+**証明書は待ち時間ゼロで approved になる**（[E] の直後にはもう発行済みだった）。
+オレンジに戻したあともリダイレクトループは起きず、`Server: cloudflare` で 200 が返る。
+SSL/TLS モードは **Full**（Cloudflare ダッシュボードで確認）。
+
+---
+
 ## 0. 先に読む「現状の訂正」
 
 作業指示では InfoLens を「未公開その1」としていたが、**実機確認の結果 InfoLens はすでに公開済み**だった。
@@ -46,7 +65,7 @@ koku の手順で迷ったら、必ず info の実際の値（3章の表）と�
       ↓
 [F] DNS チェック通過を待って Enforce HTTPS を入れる（同上）
       ↓
-[G] Cloudflare のプロキシを ON に戻す（ユーザー操作・任意だが既存2サイトに合わせる）
+[G] Cloudflare のプロキシを ON に戻す（ユーザー操作・任意だが既存2サイトに合わせる）　✅完了
       ↓
 [H] 動作確認（Claude 作業）
 ```
@@ -316,7 +335,7 @@ koku は **登録時は灰色（DNS only）→ 証明書発行後にオレンジ
 |---|---|---|---|---|---|
 | chem | `CNAME` | `chem` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
 | info | `CNAME` | `info` | `chem-assembler.github.io` | オレンジ（Proxied） | 登録済み |
-| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | **灰色（DNS only）で登録済み → [G] でオレンジへ** | **登録済み（2026-08-11）** |
+| **koku** | **`CNAME`** | **`koku`** | **`chem-assembler.github.io`** | オレンジ（Proxied） | **完了（2026-08-11）** |
 
 ※ chem・info がオレンジであることは `nslookup` が Cloudflare の IP（104.21.21.125 /
 172.67.198.158）を返すこと、`curl -sI` が `Server: cloudflare` と `CF-RAY` を返すことで確認済み。
