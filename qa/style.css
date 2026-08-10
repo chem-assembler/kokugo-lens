@@ -1,0 +1,208 @@
+/* 一問一答（Schoollenz 国語レンズ） — ハブのトークンを踏襲した自己完結スタイル */
+:root{
+  --ground:#eef2f3;--surface:#ffffff;--surface-2:#f6f9fa;
+  --ink:#0f171c;--ink-soft:#4d5a62;--ink-faint:#7d8a91;
+  --line:#dde4e7;--line-strong:#c7d1d5;
+  --accent:#0c8a84;--accent-ink:#065450;
+  --yuki:#1f9e6a;--warn:#d98a2b;--bad:#d75a4f;
+  --shadow:0 1px 2px rgba(15,23,28,.04),0 8px 30px rgba(15,23,28,.06);
+  --shadow-lift:0 2px 6px rgba(15,23,28,.06),0 20px 50px rgba(15,23,28,.12);
+  --radius:16px;--maxw:720px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#0a1013;--surface:#111a1f;--surface-2:#0e161a;
+    --ink:#e9f0f1;--ink-soft:#98a7ad;--ink-faint:#6c7b82;
+    --line:#202e35;--line-strong:#2c3d45;
+    --accent:#43c187;--accent-ink:#8de6df;
+    --yuki:#43c187;--warn:#f0b25a;--bad:#e8776b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.5);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.65);
+  }
+}
+:root[data-theme="light"]{--ground:#eef2f3;--surface:#ffffff;--surface-2:#f6f9fa;--ink:#0f171c;--ink-soft:#4d5a62;--ink-faint:#7d8a91;--line:#dde4e7;--line-strong:#c7d1d5;--accent:#0c8a84;--accent-ink:#065450;--yuki:#1f9e6a;--warn:#d98a2b;--bad:#d75a4f;}
+:root[data-theme="dark"]{--ground:#0a1013;--surface:#111a1f;--surface-2:#0e161a;--ink:#e9f0f1;--ink-soft:#98a7ad;--ink-faint:#6c7b82;--line:#202e35;--line-strong:#2c3d45;--accent:#43c187;--accent-ink:#8de6df;--yuki:#43c187;--warn:#f0b25a;--bad:#e8776b;}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP",Meiryo,system-ui,sans-serif;
+  line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"palt" 1;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+/* ---- header ---- */
+.top{display:flex;align-items:center;gap:12px;padding:18px 0 8px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft);font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;transition:border-color .18s,transform .15s}
+.back:hover{border-color:var(--accent);transform:translateX(-2px)}
+.back svg{width:13px;height:13px}
+.brand{display:flex;align-items:baseline;gap:10px;margin-left:2px}
+.brand b{font-size:17px;font-weight:800;letter-spacing:.01em}
+.brand .dom{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 8%,var(--surface));border-radius:999px;padding:3px 9px}
+.version{margin-left:auto;font-size:11px;color:var(--ink-faint);font-family:ui-monospace,monospace}
+
+.view{padding:14px 0 60px}
+
+/* ---- home ---- */
+.lede{color:var(--ink-soft);font-size:14.5px;margin:2px 0 22px}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px 18px;margin-bottom:16px}
+.unit h2{margin:0 0 4px;font-size:19px;font-weight:800}
+.unit .u-sum{margin:0 0 14px;font-size:13.5px;color:var(--ink-soft)}
+.meter{height:8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;margin:0 0 6px}
+.meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 60%,#7bd));transition:width .4s ease}
+.u-stat{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-faint);margin-bottom:16px}
+.u-stat b{color:var(--ink);font-weight:800}
+.u-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:11px;font-weight:800;font-size:14.5px;border:1px solid transparent;cursor:pointer;transition:transform .14s,box-shadow .2s,background .2s,border-color .2s}
+.btn.primary{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+@media(prefers-color-scheme:dark){.btn.primary{color:#04231f}}
+:root[data-theme="dark"] .btn.primary{color:#04231f}
+:root[data-theme="light"] .btn.primary{color:#fff}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.btn.ghost{background:var(--surface);border-color:var(--line-strong);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* ---- 習得マップ（単元 × 難易度） ---- */
+.go-map{width:100%;margin:0 0 20px;justify-content:flex-start}
+.go-map svg{width:15px;height:15px;color:var(--accent)}
+
+/* 4状態の色。ここだけで決めて、点・凡例・帯・一覧が同じ色を使う。
+   unconfirmed（測定で未確認）は**定着と同じ緑を枠だけで持つ** ——
+   「そこまで積んである」ことは伝えつつ、塗りは与えない（塗り＝測定で確かめた証）。
+   別の色を割り当てると「悪い状態」に見えるが、実際には学習中より進んでいる */
+.dot{display:inline-block;width:9px;height:9px;border-radius:2.5px;flex:none}
+.dot.new{background:var(--surface-2);border:1px solid var(--line-strong)}
+.dot.wip{background:var(--warn)}
+.dot.unconfirmed{background:transparent;border:1.5px solid var(--yuki)}
+.dot.done{background:var(--yuki)}
+
+.map-sum{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px 18px;margin-bottom:16px}
+.map-sum h2{margin:0 0 4px;font-size:19px;font-weight:800}
+.map-sum .sub{margin:0 0 14px;font-size:13.5px;color:var(--ink-soft)}
+.stack{display:flex;height:10px;border-radius:999px;overflow:hidden;border:1px solid var(--line);background:var(--surface-2)}
+.stack .sg{display:block}
+.stack .sg.done{background:var(--yuki)}
+/* 帯では枠線が使えないので、定着の緑を薄めて「同じ系統だが未確定」を出す */
+.stack .sg.unconfirmed{background:var(--yuki);opacity:.42}
+.stack .sg.wip{background:var(--warn)}
+.stack .sg.new{background:var(--surface-2)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--ink-faint);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend b{color:var(--ink);font-weight:800}
+.legend .tot{margin-left:auto}
+
+.map-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.grid{display:grid;grid-template-columns:106px repeat(4,minmax(112px,1fr));gap:6px;min-width:560px}
+.gh{font-size:11.5px;font-weight:800;letter-spacing:.03em;color:var(--ink-faint);text-align:center;padding:2px 0 4px}
+.gh span{display:block;font-size:10px;font-weight:700;opacity:.8}
+.gh.lv1{color:var(--yuki)}.gh.lv2{color:var(--accent)}.gh.lv3{color:var(--warn)}.gh.lv4{color:var(--bad)}
+.gr{display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--ink-soft);line-height:1.35;padding-right:4px}
+.gc{position:relative;display:block;width:100%;min-height:54px;text-align:left;padding:8px 8px 6px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .15s,transform .12s,box-shadow .2s}
+.gc:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow)}
+.gc.is-sel{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 28%,transparent)}
+.gc.empty{background:transparent;border-style:dashed;border-color:var(--line);min-height:54px}
+.gc .dots{display:flex;flex-wrap:wrap;gap:3px;padding-right:18px}
+.gc .gc-n{position:absolute;right:7px;bottom:4px;font-size:10.5px;font-weight:800;color:var(--ink-faint);font-family:ui-monospace,monospace}
+
+.map-note{font-size:12.5px;color:var(--ink-faint);margin:14px 0 0;line-height:1.7}
+
+/* 「測定で未確認」をまとめて確かめる導線。降格を損失ではなく**やること**として見せる */
+.confirm-cta{background:var(--surface);border:1px solid var(--yuki);border-radius:var(--radius);padding:16px 18px;margin:16px 0 0}
+.confirm-cta p{margin:0 0 12px;font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+.confirm-cta .btn{width:100%}
+/* 単元カードの「測定で未確認」だけ色を分ける（他の数字と混ざると読み飛ばす） */
+.u-stat .u-unconf b{color:var(--yuki)}
+
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-top:16px}
+.detail h3{margin:0 0 4px;font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.detail .sub{margin:0 0 14px;font-size:13px;color:var(--ink-soft)}
+.mi-list{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
+.mi{display:flex;align-items:flex-start;gap:9px;padding:8px 2px;font-size:13px;line-height:1.6;border-top:1px solid var(--line)}
+.mi .dot{margin-top:6px}
+.mi-k{flex:1;color:var(--ink-soft)}
+.mi.done .mi-k{color:var(--ink)}
+.mi-s{flex:none;font-size:11px;font-weight:800;color:var(--ink-faint)}
+.mi.wip .mi-s{color:var(--warn)}
+.mi.done .mi-s{color:var(--yuki)}
+
+/* ---- study ---- */
+.study-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.study-head .q-of{font-size:12.5px;color:var(--ink-faint);font-weight:700;font-family:ui-monospace,monospace}
+.pbar{flex:1;height:6px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.pbar > span{display:block;height:100%;background:var(--accent);transition:width .3s ease}
+.quit{font-size:12.5px;color:var(--ink-faint);font-weight:700;border:none;background:none;cursor:pointer;padding:4px}
+.quit:hover{color:var(--bad)}
+
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;min-height:230px;display:flex;flex-direction:column}
+.card .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-size:11px;font-weight:800;letter-spacing:.03em;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-faint);background:var(--surface-2)}
+.chip.d1{color:var(--yuki);border-color:color-mix(in srgb,var(--yuki) 40%,var(--line))}
+.chip.d2{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.chip.d3{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+.chip.d4{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,var(--line))}
+.q-text{font-size:clamp(18px,3.4vw,23px);font-weight:800;line-height:1.55;letter-spacing:.005em;margin:0}
+.q-hint{margin-top:auto;padding-top:18px;font-size:12.5px;color:var(--ink-faint)}
+
+.answer{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line-strong);animation:reveal .28s ease}
+@keyframes reveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.answer .a-label{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--accent-ink);text-transform:uppercase;margin-bottom:6px}
+.answer .a-text{font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--ink);margin:0}
+.answer .a-supp{margin:12px 0 0;font-size:13.5px;color:var(--ink-soft);line-height:1.72}
+.a-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:13px;font-weight:800;color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 8%,var(--surface));border-radius:10px;padding:8px 13px;transition:border-color .18s,transform .15s}
+.a-link:hover{border-color:var(--accent);transform:translateY(-2px)}
+.a-link svg{width:14px;height:14px}
+
+/* ---- 来た道の帯（アプリ横断の戻り道・v44） ---- */
+/* `?code=&from=` で戻ってきたときだけ出る。ビューの外に置いてあるので、
+   ホーム・演習のどちらに着地しても同じ位置に出る */
+.back-band{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 0;padding:10px 14px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 7%,var(--surface));border-radius:12px;font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.back-band.hidden{display:none}
+.back-band .bb-where{flex:1 1 200px;min-width:0}
+/* 指された項目が無いとき。黙って単元一覧を出すのではなく、そう見える色で言う */
+.back-band .bb-where.bb-miss{color:var(--bad)}
+.back-band b{color:var(--ink)}
+
+/* ---- 複数選択（測定モード） ---- */
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:13px 15px;border:1px solid var(--line-strong);border-radius:11px;background:var(--surface-2);cursor:pointer;font-size:15px;font-weight:600;line-height:1.5;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--accent)}
+.opt input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex:none}
+.opt.locked{cursor:default}
+.opt.locked:hover{border-color:var(--line-strong)}
+.opt.is-correct{border-color:var(--yuki);background:color-mix(in srgb,var(--yuki) 12%,var(--surface))}
+.opt.is-correct:hover{border-color:var(--yuki)}
+.opt.is-wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.opt.is-wrong:hover{border-color:var(--bad)}
+.opt.is-missed{border-style:dashed;border-color:var(--yuki)}
+.opt.is-correct span::after{content:" ✓";color:var(--yuki);font-weight:800}
+.opt.is-wrong span::after{content:" ✗";color:var(--bad);font-weight:800}
+.opt.is-missed span::after{content:" （正解）";color:var(--yuki);font-size:12px;font-weight:800}
+
+.actions{display:flex;gap:12px;margin-top:20px}
+.actions .btn{flex:1;padding:14px}
+.btn.good{background:color-mix(in srgb,var(--yuki) 14%,var(--surface));border-color:color-mix(in srgb,var(--yuki) 45%,var(--line));color:var(--yuki)}
+.btn.good:hover{border-color:var(--yuki);transform:translateY(-2px)}
+.btn.again{background:color-mix(in srgb,var(--bad) 12%,var(--surface));border-color:color-mix(in srgb,var(--bad) 40%,var(--line));color:var(--bad)}
+.btn.again:hover{border-color:var(--bad);transform:translateY(-2px)}
+
+/* ---- result ---- */
+.result{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;text-align:center}
+.result h2{margin:0 0 4px;font-size:22px;font-weight:800}
+.result .sub{color:var(--ink-soft);font-size:14px;margin:0 0 22px}
+.score{display:flex;justify-content:center;gap:26px;margin:0 0 24px}
+.score .s{display:flex;flex-direction:column;gap:2px}
+.score .s b{font-size:34px;font-weight:800;line-height:1;font-family:ui-monospace,monospace}
+.score .s span{font-size:12px;color:var(--ink-faint);font-weight:700}
+.score .s.ok b{color:var(--yuki)}
+.score .s.ng b{color:var(--bad)}
+.result .r-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+.hidden{display:none!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+footer{padding:24px 0 40px;text-align:center;color:var(--ink-faint);font-size:12px}
