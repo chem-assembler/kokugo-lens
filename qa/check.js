@@ -76,9 +76,15 @@ for (const u of d.units || []){
   console.log('    ' + u.name + '（' + u.id + '）: ' + ps.length + ' 項目　難度1/2/3/4 = ' + byDiff);
   if (!ps.length) errs.push('unit ' + u.id + ' に項目が1つもない');
 }
-const choiceCount = (d.patterns || []).filter(
-  p => (p.variants || []).some(v => v.mode === 'choice')).length;
-console.log('  測定（choice）を持つ項目: ' + choiceCount + ' / ' + (d.patterns || []).length);
+// 二面構成（暗記めくり／測定複数選択）はこのアプリの根幹なので、
+// 片面しかない項目は不備として扱う。app.js は choice が無いと flip にフォールバックするため、
+// 放っておくと「測定モードなのにめくりが出る」状態が静かに混ざる。
+const noChoice = (d.patterns || []).filter(p => !(p.variants || []).some(v => v.mode === 'choice'));
+const noFlip = (d.patterns || []).filter(p => !(p.variants || []).some(v => v.mode === 'flip'));
+console.log('  測定（choice）を持つ項目: ' + ((d.patterns || []).length - noChoice.length)
+  + ' / ' + (d.patterns || []).length);
+for (const p of noChoice) errs.push(p.code + ': choice の variant がない（測定モードでめくりに落ちる）');
+for (const p of noFlip) errs.push(p.code + ': flip の variant がない（暗記モードで出せない）');
 
 console.log('----');
 for (const w of warn) console.log('warn: ' + w);
