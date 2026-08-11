@@ -45,12 +45,14 @@
       return c;
     });
   }
+  // 訓点を自分で打つ段。L3（白文＋送り仮名）と L6（書き下し文だけ）の2つ
+  const isMarkMode = () => mode === 'L3' || mode === 'L6';
   const problemMarks = () => problem.tokens.map(t => t.mark || []);
   const expectedReads = () => problem.tokens.reduce(
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=14')
+  fetch('texts.json?v=15')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -67,7 +69,7 @@
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
 
   // ---- 学習履歴の表示 ----------------------------------------------------
-  // 選択肢の頭に印を出す。◎=4モード全部クリア / ○=どれか / 無印=未着手
+  // 選択肢の頭に印を出す。◎=全モード制覇 / ○=どれか / 無印=未着手
   const STATE_MARK = { all: '◎ ', some: '○ ', none: '' };
 
   function refreshOptionLabels(){
@@ -85,7 +87,7 @@
     const per = PR.MODES.map(m => PR.MODE_NAME[m] + ' ' + s.byMode[m]).join('　');
     $('progress-text').innerHTML =
       '学習の記録: <span class="done">' + s.touched + '</span> / ' + s.total + ' 問に着手'
-      + '（4モード全部クリア <span class="done">' + s.complete + '</span> 問）　' + per;
+      + '（全' + PR.MODES.length + 'モード制覇 <span class="done">' + s.complete + '</span> 問）　' + per;
   }
 
   function loadProblem(idx){
@@ -189,7 +191,7 @@
         : K.readOrder(withMarks(marks));
       return { marks, order, badges: l2Solved, kudashiOrder: order };
     }
-    // L3
+    // L3 / L6（自分で打った訓点で読む）
     const order = K.readOrder(withMarks(userMarks));
     return { marks: userMarks, order, badges: true, kudashiOrder: order };
   }
@@ -212,8 +214,8 @@
       const cell = document.createElement('div');
       cell.className = 'cell';
       cell.dataset.i = i;
-      if (mode === 'L3' && i === selected) cell.classList.add('selected');
-      if (mode === 'L3' && lastResult && lastResult.status === 'wrong' && !showAnswer
+      if (isMarkMode() && i === selected) cell.classList.add('selected');
+      if (isMarkMode() && lastResult && lastResult.status === 'wrong' && !showAnswer
           && lastResult.order[lastResult.divergeAt] === i) cell.classList.add('diverge');
 
       const kanji = document.createElement('span');
@@ -230,7 +232,10 @@
           cell.appendChild(yomi);
         }
       }
-      if (t.okuri || (t.reread && t.reread.first.okuri)){
+      // L6 は「書き下し文だけを見て訓点を復元する」課題なので送り仮名を隠す。
+      // 送り仮名が見えていると読み順がほぼ割れてしまい、逆問題にならない
+      const hideOkuri = (mode === 'L6' && !showAnswer && !cleared());
+      if (!hideOkuri && (t.okuri || (t.reread && t.reread.first.okuri))){
         const ok = document.createElement('span');
         ok.className = 'okuri';
         ok.textContent = t.reread ? t.reread.first.okuri : t.okuri;
@@ -262,20 +267,28 @@
     // ライブ書き下し（間違った読み方でもそのまま出す = それ自体がフィードバック）
     const toks = withMarks(st.marks);
     const kud = K.toKakikudashi(toks, st.kudashiOrder);
-    $('kudashi-live').textContent = kud ||
-      (mode === 'L1' ? '（読む順に字をタップすると書き下しが伸びていきます）'
-                     : '（訓点を打つとここに書き下しが出ます）');
+    if (mode === 'L6'){
+      // L6 は与えられた書き下し文が「問題文」。これに合うよう訓点を打つ
+      $('kudashi-live').textContent = problem.kakikudashi;
+      $('kudashi-col').querySelector('.label').textContent = 'この書き下しになるよう訓点を打つ';
+    } else {
+      $('kudashi-col').querySelector('.label').textContent = '書き下し（あなたの読み方から自動生成）';
+      $('kudashi-live').textContent = kud ||
+        (mode === 'L1' ? '（読む順に字をタップすると書き下しが伸びていきます）'
+                       : '（訓点を打つとここに書き下しが出ます）');
+    }
     $('kudashi-note').textContent =
       (st.kudashiOrder.length < expectedReads() && st.kudashiOrder.length > 0 && mode !== 'L1')
         ? '（まだ読まれない字が残っています）' : '';
 
     // モードごとの操作パネル
-    $('palette').style.display = (mode === 'L3') ? 'block' : 'none';
+    $('palette').style.display = isMarkMode() ? 'block' : 'none';
     $('choices').style.display = (mode === 'L2') ? 'block' : 'none';
-    $('btn-grade').style.display = (mode === 'L3') ? 'inline-block' : 'none';
+    $('btn-grade').style.display = isMarkMode() ? 'inline-block' : 'none';
     $('mode-hint').textContent = ({
       L1: '訓点に従って、読む順に字をタップしてください（再読文字は2回タップ）',
-      L3: '字をタップして、打つ訓点を選んでください（もう一度押すと消えます）'
+      L3: '字をタップして、打つ訓点を選んでください（もう一度押すと消えます）',
+      L6: '上の書き下し文のとおりに読めるよう、返り点を打ってください（送り仮名は隠してあります）'
     })[mode] || '';
     if (mode === 'L2') renderChoices();
 
@@ -314,7 +327,7 @@
   }
   function currentWrongOrder(){
     if (mode === 'L2' && l2Attempt) return l2Attempt;
-    if (mode === 'L3' && lastResult && lastResult.status === 'wrong') return lastResult;
+    if (isMarkMode() && lastResult && lastResult.status === 'wrong') return lastResult;
     return null;
   }
 
@@ -364,7 +377,7 @@
       }
       return;
     }
-    if (mode === 'L3'){
+    if (isMarkMode()){
       selected = (selected === i) ? -1 : i;
       render();
     }
@@ -380,7 +393,7 @@
   // ---- 訓点パレット（L3） -------------------------------------------------
   document.querySelectorAll('#palette .keys button').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (mode !== 'L3' || selected < 0 || showAnswer) return;
+      if (!isMarkMode() || selected < 0 || showAnswer) return;
       const v = btn.dataset.mark;
       let marks = userMarks[selected];
       if (v === 'erase'){
@@ -403,14 +416,14 @@
 
   // ---- 判定（L3） ---------------------------------------------------------
   $('btn-grade').addEventListener('click', () => {
-    if (!problem || mode !== 'L3') return;
+    if (!problem || !isMarkMode()) return;
     lastResult = K.grade(userMarks, problem);
     if (lastResult.status === 'ok'){
-      recordClear('L3');
+      recordClear(mode);
       showResult('ok', '○ クリア！ 読み順が正解と一致しました。');
       render();
     } else if (lastResult.status === 'variant'){
-      recordClear('L3');
+      recordClear(mode);
       showResult('ok', '○ クリア！ 登録と違う打ち方ですが、読み順は正しい別解です（原則: 表記ではなく読み順で判定します）。');
       render();
     } else {

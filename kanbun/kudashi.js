@@ -31,7 +31,7 @@
     step === 'K2' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=14')
+  fetch('texts.json?v=15')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -49,7 +49,7 @@
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
 
   // ---- 学習履歴（訓点モードと同じ localStorage を共有する） ----------------
-  // 印は訓点モードと同じ意味。◎=4モード全部 / ○=どれか / 無印=未着手。
+  // 印は訓点モードと同じ意味。◎=全モード制覇 / ○=どれか / 無印=未着手。
   // 「書き下し」列だけは、このページでクリアしたかどうかを ✓ で別に出す
   function refreshOptionLabels(){
     const sel = $('problem-select');

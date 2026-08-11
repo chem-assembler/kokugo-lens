@@ -145,18 +145,22 @@
     test('進捗: 記録前はすべて未着手', () => {
       P.reset();
       const ps = [{ id: 'test-a' }, { id: 'test-b' }];
-      eq(P.summary(ps), { total: 2, touched: 0, complete: 0,
-        byMode: { L1: 0, L2: 0, L3: 0, K: 0 } });
+      const s = P.summary(ps);
+      eq([s.total, s.touched, s.complete], [2, 0, 0]);
+      // モードが増減しても壊れないよう、期待値は MODES から作る
+      eq(Object.keys(s.byMode).sort(), P.MODES.slice().sort());
+      ok(P.MODES.every(m => s.byMode[m] === 0), 'どのモードも 0');
       eq(P.stateOf('test-a'), 'none');
       P.reset();
     });
-    test('進捗: モードごとに記録され、4モード揃うと all', () => {
+    test('進捗: モードごとに記録され、全モード揃うと all', () => {
       P.reset();
-      P.markClear('test-a', 'L1', 100);
+      const first = P.MODES[0], second = P.MODES[1];
+      P.markClear('test-a', first, 100);
       eq(P.stateOf('test-a'), 'some');
-      ok(P.isClear('test-a', 'L1'), 'L1 はクリア済み');
-      ok(!P.isClear('test-a', 'L2'), 'L2 はまだ');
-      ['L2', 'L3', 'K'].forEach(m => P.markClear('test-a', m, 100));
+      ok(P.isClear('test-a', first), first + ' はクリア済み');
+      ok(!P.isClear('test-a', second), second + ' はまだ');
+      P.MODES.slice(1).forEach(m => P.markClear('test-a', m, 100));
       eq(P.stateOf('test-a'), 'all');
       P.reset();
     });

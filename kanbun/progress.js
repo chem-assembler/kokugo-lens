@@ -12,8 +12,8 @@
  */
 const Progress = (() => {
   const KEY = 'slz-koku-kanbun-v1';
-  const MODES = ['L1', 'L2', 'L3', 'K'];   // K = 書き下し練習（カード並べ替え）
-  const MODE_NAME = { L1: 'L1 タップ', L2: 'L2 4択', L3: 'L3 訓点', K: '書き下し' };
+  const MODES = ['L1', 'L2', 'L3', 'L6', 'K'];   // L6 = 逆問題 / K = 書き下し練習（カード並べ替え）
+  const MODE_NAME = { L1: 'L1 タップ', L2: 'L2 4択', L3: 'L3 訓点', L6: 'L6 逆問題', K: '書き下し' };
 
   let mem = null;   // localStorage が使えないときの受け皿
 
@@ -37,7 +37,7 @@ const Progress = (() => {
 
   function get(id){
     const d = load();
-    return d[id] || { L1: 0, L2: 0, L3: 0, K: 0, last: 0 };
+    return d[id] || { L1: 0, L2: 0, L3: 0, L6: 0, K: 0, last: 0 };
   }
   const isClear = (id, mode) => (get(id)[mode] || 0) > 0;
 
@@ -45,7 +45,7 @@ const Progress = (() => {
   function markClear(id, mode, now){
     if (MODES.indexOf(mode) < 0) throw new Error('未知のモード: ' + mode);
     const d = load();
-    const r = d[id] || { L1: 0, L2: 0, L3: 0, K: 0, last: 0 };
+    const r = d[id] || { L1: 0, L2: 0, L3: 0, L6: 0, K: 0, last: 0 };
     r[mode] = (r[mode] || 0) + 1;
     r.last = now || 0;
     d[id] = r;
