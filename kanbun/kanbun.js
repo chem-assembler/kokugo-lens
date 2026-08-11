@@ -201,6 +201,192 @@ const Kanbun = (() => {
     return Math.round(d * 10) / 10;
   }
 
+  // ---- 送り仮名の候補づくり（書き下し練習 K2 用） --------------------------
+  // 設計: docs/DESIGN_kudashi_input.md 論点1。
+  // **候補はデータから導出する**（字ごとの読み表は持たない）。
+  // 表を持つと texts.json と食い違ったときにどちらが正か機械が決められず、
+  // このリポジトリの「二重帳簿で正しさを担保する」やり方と噛み合わないため。
+
+  // 活用の系列。日本語文法の閉じた知識なのでコード側に置く（作品データではない）
+  const OKURI_FAMILY = [
+    ['ハ', 'ヒ', 'フ', 'ヘ', 'ホ'],                        // ハ行四段
+    ['ズ', 'ザル', 'ザレバ', 'ザリ', 'ヌ', 'ネ'],           // 打消
+    ['シ', 'キ', 'ク', 'カラ', 'カリ', 'ケレバ'],           // 形容詞
+    ['ス', 'スル', 'スレバ', 'セ', 'シテ'],                 // サ変
+    ['ル', 'ラ', 'リ', 'レ', 'ラン'],                       // ラ行
+    ['テ', 'ニシテ', 'トモ', 'ドモ', 'バ', 'レバ'],         // 接続
+    ['シム', 'シメ', 'シムル', 'シメバ', 'ヲシテ'],         // 使役
+    ['ヲ', 'ニ', 'ハ', 'ノ', 'ト', 'ヨリ']                  // 助詞
+  ];
+  // corpus に用例が乏しいときの埋め草（送り仮名を持たないトークンが約1/3あるので「なし」は必ず入れる）
+  const OKURI_COMMON = ['ヲ', 'ニ', 'ハ', 'ノ', 'ズ', ''];
+
+  // 再読文字は9字で閉じているのでここだけ表を持つ（corpus には4字しか出ず導出できない）
+  const REREAD_PRESETS = {
+    '未': { first: 'ダ',   second: 'ズ' },
+    '将': { first: 'ニ',   second: 'ントス' },
+    '且': { first: 'ニ',   second: 'ントス' },
+    '当': { first: 'ニ',   second: 'ベシ' },
+    '応': { first: 'ニ',   second: 'ベシ' },
+    '宜': { first: 'シク', second: 'ベシ' },
+    '須': { first: 'ベカラク', second: 'ベシ' },
+    '猶': { first: 'ホ',   second: 'ゴトシ' },
+    '盍': { first: 'ゾ',   second: 'ザル' }
+  };
+
+  // 送り仮名を問えるカード（置き字は問わない。送り仮名を持つものだけ）
+  function askableOkuri(tokens){
+    const out = [];
+    tokens.forEach((t, i) => {
+      if (isPlaced(t)) return;
+      if (t.reread){
+        if (t.reread.first && t.reread.first.okuri)  out.push({ i, nth: 1 });
+        if (t.reread.second && t.reread.second.okuri) out.push({ i, nth: 2 });
+        return;
+      }
+      if (t.okuri) out.push({ i, nth: 1 });
+    });
+    return out;
+  }
+
+  const okuriOf = (t, nth) => t.reread
+    ? ((nth === 2 ? t.reread.second : t.reread.first) || {}).okuri || ''
+    : (t.okuri || '');
+
+  // 実際に問うカードを選ぶ。**全部は問わない**（設計 論点3。
+  // 毎回フル組み立ては作業になって離脱要因になる、という既存の知見に合わせる）。
+  // 実データでは問える枚数が最大8枚あるので上限を課す。読む順に前から選ぶので、
+  // 文の頭から順に埋まっていき、途中だけ穴が空くことがない。
+  function pickAskable(problem, limit){
+    const all = askableOkuri(problem.tokens);
+    const max = (limit === undefined) ? 5 : limit;
+    if (all.length <= max) return all;
+    const pos = new Map();               // 読み順での位置を持たせて、前から選ぶ
+    const seen = new Map();
+    problem.order.forEach((i, k) => {
+      const nth = (seen.get(i) || 0) + 1;
+      seen.set(i, nth);
+      pos.set(i + ':' + nth, k);
+    });
+    return all.slice()
+      .sort((a, b) => (pos.get(a.i + ':' + a.nth) || 0) - (pos.get(b.i + ':' + b.nth) || 0))
+      .slice(0, max);
+  }
+
+  // 決定的なシャッフル（Math.random を使わない。テストで並びを固定できるようにするため）
+  function seededOrder(n, seed){
+    let h = 0;
+    for (let k = 0; k < seed.length; k++) h = (h * 31 + seed.charCodeAt(k)) >>> 0;
+    const idx = [];
+    for (let k = 0; k < n; k++) idx.push(k);
+    for (let k = n - 1; k > 0; k--){
+      h = (h * 1103515245 + 12345) >>> 0;
+      const j = h % (k + 1);
+      const tmp = idx[k]; idx[k] = idx[j]; idx[j] = tmp;
+    }
+    return idx;
+  }
+
+  // その位置の送り仮名を cand に差し替えた文が、正解の書き下しとして通ってしまうか
+  function okuriIsAccidentallyRight(problem, i, nth, cand, answer){
+    if (normalizeKana(cand) === normalizeKana(answer)) return true;
+    const toks = problem.tokens.map((t, k) => {
+      if (k !== i) return t;
+      const c = Object.assign({}, t);
+      if (c.reread){
+        c.reread = Object.assign({}, c.reread);
+        const side = (nth === 2) ? 'second' : 'first';
+        c.reread[side] = Object.assign({}, c.reread[side], { okuri: cand });
+      } else {
+        c.okuri = cand;
+      }
+      return c;
+    });
+    return matchesKakikudashi(toKakikudashi(toks, problem.order), problem);
+  }
+
+  // 送り仮名の選択肢を作る。problems は corpus 全体（同じ字の他の用例を借りるため）
+  function okuriChoices(problems, problem, i, nth){
+    const t = problem.tokens[i];
+    const answer = okuriOf(t, nth);
+    const pool = [];
+    const push = v => {
+      if (v === undefined || v === null) return;
+      if (pool.some(x => normalizeKana(x) === normalizeKana(v))) return;
+      pool.push(v);
+    };
+
+    // 0. データ側で候補を指定したいときの逃げ道（今は使っていない）
+    if (Array.isArray(t.decoy)) t.decoy.forEach(push);
+
+    // 1. 再読文字は閉じた表から
+    if (t.reread && REREAD_PRESETS[t.c]){
+      const p = REREAD_PRESETS[t.c];
+      push(nth === 2 ? p.first : p.second);   // もう一方の読みを混ぜる（取り違えを突く）
+    }
+    // 2. 正解が属する活用系列から
+    for (const fam of OKURI_FAMILY){
+      if (fam.some(v => normalizeKana(v) === normalizeKana(answer))) fam.forEach(push);
+    }
+    // 3. 同じ字の corpus 内の他の用例
+    for (const p of problems){
+      for (const tk of p.tokens){
+        if (tk.c !== t.c) continue;
+        if (tk.reread){ push((tk.reread.first || {}).okuri); push((tk.reread.second || {}).okuri); }
+        else push(tk.okuri);
+      }
+    }
+    // 4. 埋め草
+    OKURI_COMMON.forEach(push);
+
+    // 偶然正解になる肢を落とす（L2 の誤答肢生成と同じ原則を仮名の層に移したもの）
+    const wrongs = pool.filter(c => !okuriIsAccidentallyRight(problem, i, nth, c, answer));
+    const seed = problem.id + ':' + i + ':' + nth;
+    const picked = seededOrder(wrongs.length, seed).slice(0, 3).map(k => wrongs[k]);
+    const all = picked.concat([answer]);
+    const order = seededOrder(all.length, seed + ':a');
+    return { answer, choices: order.map(k => all[k]) };
+  }
+
+  // 読みの採点。**合否は文全体で見る**（カード単位だと現代仮名遣いが落ちる。設計 論点2）
+  // inputs は { 'i:nth': 送り仮名 } の形。未入力のキーはデータの値で埋める
+  function gradeReadings(problem, inputs){
+    const toks = problem.tokens.map((t, i) => {
+      const c = Object.assign({}, t);
+      if (c.reread){
+        c.reread = Object.assign({}, c.reread);
+        [1, 2].forEach(n => {
+          const key = i + ':' + n;
+          if (!(key in inputs)) return;
+          const side = (n === 2) ? 'second' : 'first';
+          c.reread[side] = Object.assign({}, c.reread[side], { okuri: inputs[key] });
+        });
+      } else if ((i + ':1') in inputs){
+        c.okuri = inputs[i + ':1'];
+      }
+      return c;
+    });
+    const got = toKakikudashi(toks, problem.order);
+    if (got === problem.kakikudashi) return { status: 'ok', kakikudashi: got };
+    if (matchesKakikudashi(got, problem)) return { status: 'variant', kakikudashi: got };
+    return { status: 'wrong', kakikudashi: got, divergeAt: firstDivergentCard(problem, inputs) };
+  }
+
+  // 何枚目のカードで初めて食い違うか（赤く塗る位置を決めるためだけに使う。合否には関与しない）
+  function firstDivergentCard(problem, inputs){
+    const seen = new Map();
+    for (let pos = 0; pos < problem.order.length; pos++){
+      const i = problem.order[pos];
+      const nth = (seen.get(i) || 0) + 1;
+      seen.set(i, nth);
+      const key = i + ':' + nth;
+      if (!(key in inputs)) continue;
+      const t = problem.tokens[i];
+      if (!kanaEquals(inputs[key], okuriOf(t, nth))) return pos;
+    }
+    return -1;
+  }
+
   // ---- 二重帳簿の検査（テスト・監査用） -----------------------------------
   function validateProblem(p){
     const errs = [];
@@ -223,7 +409,10 @@ const Kanbun = (() => {
 
   return { readOrder, toKakikudashi, tokenReading, grade, difficulty,
            normalizeKana, kanaEquals, matchesKakikudashi, validateProblem,
-           canonMarks, isPlaced, marksOf, numMarks, hasRe, isReread };
+           canonMarks, isPlaced, marksOf, numMarks, hasRe, isReread,
+           prevReadable, nextReadable,
+           OKURI_FAMILY, REREAD_PRESETS,
+           askableOkuri, pickAskable, okuriOf, okuriChoices, gradeReadings, firstDivergentCard };
 })();
 
 if (typeof module !== 'undefined') module.exports = Kanbun;

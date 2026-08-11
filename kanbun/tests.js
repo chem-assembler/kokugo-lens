@@ -180,6 +180,160 @@
       P.reset();
     });
 
+    // ---- 送り仮名の候補と採点（書き下し練習 K2・docs/DESIGN_kudashi_input.md） ----
+    const byId = id => problems.find(p => p.id === id);
+
+    test('送り仮名: 候補生成は決定的（同じ引数なら同じ並び）', () => {
+      const p = byId('rongo-manabite');
+      const a = K.okuriChoices(problems, p, 0, 1);
+      const b = K.okuriChoices(problems, p, 0, 1);
+      eq(a.choices, b.choices);
+      eq(a.answer, b.answer);
+    });
+    test('送り仮名: 問えるカードに置き字は入らない', () => {
+      const p = byId('rongo-manabite');   // 「而」が置き字
+      const ask = K.askableOkuri(p.tokens);
+      ok(ask.every(x => p.tokens[x.i].role !== 'placed'), '置き字は問わない');
+      ok(ask.every(x => K.okuriOf(p.tokens[x.i], x.nth) !== ''), '送り仮名を持つものだけ');
+    });
+    test('送り仮名: 再読文字は1回目と2回目の2キーに分かれる', () => {
+      const p = byId('rongo-misei');      // 「未」が再読文字
+      const ask = K.askableOkuri(p.tokens);
+      const mi = ask.filter(x => p.tokens[x.i].c === '未');
+      eq(mi.map(x => x.nth), [1, 2]);
+      const c1 = K.okuriChoices(problems, p, mi[0].i, 1);
+      const c2 = K.okuriChoices(problems, p, mi[0].i, 2);
+      ok(c1.answer !== c2.answer, '1回目と2回目で正解が違う');
+    });
+    test('送り仮名: 問うカードは5枚までに絞る', () => {
+      for (const p of problems){
+        const n = K.pickAskable(p).length;
+        ok(n >= 0 && n <= 5, p.id + ' の出題枚数が ' + n + ' 枚');
+      }
+      const jocho = byId('jocho');
+      if (jocho) ok(K.askableOkuri(jocho.tokens).length > 5 && K.pickAskable(jocho).length === 5,
+        '問える枚数が多い問題でも5枚に絞られる');
+    });
+
+    // 【総当たり】この3本が本設計の中心的な保証
+    test('送り仮名【総当たり】候補に正解がちょうど1つ含まれる', () => {
+      for (const p of problems){
+        for (const { i, nth } of K.askableOkuri(p.tokens)){
+          const r = K.okuriChoices(problems, p, i, nth);
+          const hit = r.choices.filter(c => K.normalizeKana(c) === K.normalizeKana(r.answer)).length;
+          if (hit !== 1) throw new Error(p.id + ':' + i + ':' + nth + ' の正解が ' + hit + ' 個');
+        }
+      }
+    });
+    test('送り仮名【総当たり】候補は正規化しても重複しない', () => {
+      for (const p of problems){
+        for (const { i, nth } of K.askableOkuri(p.tokens)){
+          const norm = K.okuriChoices(problems, p, i, nth).choices.map(c => K.normalizeKana(c));
+          if (new Set(norm).size !== norm.length) throw new Error(p.id + ':' + i + ' に重複');
+        }
+      }
+    });
+    test('送り仮名【総当たり】偶然正解になる誤答肢が1つも無い', () => {
+      // L2 の誤答肢生成と同じ原則（読み順で偶然当たる肢を除く）を仮名の層に移したもの
+      for (const p of problems){
+        for (const { i, nth } of K.askableOkuri(p.tokens)){
+          const r = K.okuriChoices(problems, p, i, nth);
+          for (const c of r.choices){
+            if (K.normalizeKana(c) === K.normalizeKana(r.answer)) continue;
+            const inputs = {}; inputs[i + ':' + nth] = c;
+            const g = K.gradeReadings(p, inputs);
+            if (g.status !== 'wrong'){
+              throw new Error(p.id + ':' + i + ' の誤答肢「' + c + '」が ' + g.status + ' になる');
+            }
+          }
+        }
+      }
+    });
+
+    test('送り仮名: 正解どおりに入れると ok', () => {
+      const p = byId('rongo-manabite');
+      const inputs = {};
+      for (const { i, nth } of K.askableOkuri(p.tokens)) inputs[i + ':' + nth] = K.okuriOf(p.tokens[i], nth);
+      eq(K.gradeReadings(p, inputs).status, 'ok');
+    });
+    test('送り仮名: 未入力のカードはデータの値で埋まる', () => {
+      const p = byId('rongo-manabite');
+      const g = K.gradeReadings(p, {});   // 何も入れない
+      eq(g.status, 'ok');
+      eq(g.kakikudashi, p.kakikudashi);
+    });
+    test('送り仮名: 現代仮名遣いで書いても落とさない（カード単位で採点しない根拠）', () => {
+      // ukemi-utagau の「見」はデータが「ハレ」。カード単体では kanaEquals('はれ','われ')=false だが、
+      // 文全体で見れば ハ行転呼が効いて一致する。決定事項 U5（歴史的・現代の両方を正解にする）を守るため、
+      // 合否は必ず文全体で判定する。
+      // 返るのは ok ではなく **variant**（＝正解だが登録と表記が違う）。
+      // これは訓点モードの「レ点でも一二点でも読み順が合えば variant」と同じ扱いで、
+      // UI 側は「正解です。歴史的仮名遣いでは『疑はれ』と書きます」と併記できる＝そのほうが教材として良い
+      const p = byId('ukemi-utagau');
+      ok(!!p, 'ukemi-utagau がある');
+      const mi = p.tokens.findIndex(t => t.c === '見');
+      ok(!K.kanaEquals('はれ', 'われ'), 'カード単体では一致しない');
+      const inputs = {}; inputs[mi + ':1'] = 'ワレ';
+      const g = K.gradeReadings(p, inputs);
+      ok(g.status !== 'wrong', '現代仮名遣いを落とさない（実際は ' + g.status + '）');
+      eq(g.status, 'variant');
+    });
+    test('送り仮名: 1枚だけ違うと wrong になり、食い違い位置を返す', () => {
+      const p = byId('rongo-manabite');
+      const ask = K.askableOkuri(p.tokens);
+      const target = ask[0];
+      const inputs = {}; inputs[target.i + ':' + target.nth] = 'ゾ';   // まず正解にならない形
+      const g = K.gradeReadings(p, inputs);
+      eq(g.status, 'wrong');
+      ok(g.divergeAt >= 0, '食い違い位置が返る（実際は ' + g.divergeAt + '）');
+      eq(p.order[g.divergeAt], target.i, '食い違い位置は入れ替えたカード');
+    });
+    test('送り仮名: acceptable の別解は variant になる', () => {
+      const p = {
+        id: 'synth', source: { work: 'テスト', chapter: '合成' },
+        tokens: [tk('読', '二'), tk('書', '一')],
+        order: [1, 0], kakikudashi: '書を読む', acceptable: ['書をよむ']
+      };
+      p.tokens[0].yomi = 'よ'; p.tokens[0].okuri = 'ム';
+      p.tokens[1].yomi = 'しょ'; p.tokens[1].okuri = 'ヲ';
+      eq(K.gradeReadings(p, {}).status, 'ok');
+      // 「読む」を仮名書きした別解を acceptable が拾う
+      const alt = Object.assign({}, p, { kakikudashi: '書をXX' });
+      eq(K.matchesKakikudashi('書をよむ', p), true);
+      void alt;
+    });
+    test('送り仮名: 再読文字の2枚目に1枚目の読みを入れると wrong', () => {
+      const p = byId('rongo-misei');
+      const mi = p.tokens.findIndex(t => t.reread);
+      const inputs = {};
+      inputs[mi + ':2'] = p.tokens[mi].reread.first.okuri;   // 2枚目に1回目の送り仮名
+      eq(K.gradeReadings(p, inputs).status, 'wrong');
+    });
+    test('置き字: prevReadable が置き字を飛ばして直前の読み字を返す', () => {
+      const p = byId('rongo-manabite');            // 学・而(置き字)・不・思・則・罔
+      eq(K.prevReadable(p.tokens, 2), 0, '「不」の直前の読み字は「学」（「而」を飛ばす）');
+    });
+
+    // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
+    if (isNode){
+      test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
+        const fs = require('fs'), path = require('path');
+        const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html']];
+        for (const [js, html] of pairs){
+          const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
+          const htmlSrc = fs.readFileSync(path.join(__dirname, html), 'utf8');
+          const inJs = (jsSrc.match(/\?v=(\d+)/g) || []).map(s => s.slice(3));
+          const inHtml = (htmlSrc.match(/\?v=(\d+)/g) || []).map(s => s.slice(3));
+          const all = inJs.concat(inHtml);
+          if (!all.length) continue;
+          const uniq = [...new Set(all)];
+          if (uniq.length !== 1){
+            throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
+          }
+        }
+      });
+    }
+
     // ---- データ総当たり（二重帳簿・設計書 §4.2） ----
     for (const p of problems){
       test('データ ' + p.id + ': 訓点→読み順→書き下しの二重帳簿', () => {

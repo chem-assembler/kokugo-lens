@@ -104,6 +104,49 @@
   footer { padding: 0.8em 1em 1.5em; font-size: 0.75em; color: #998a6a;
            font-family: "Yu Gothic", sans-serif; }
   footer a { color: #6b5f48; }
+  /* ---- カード上の送り仮名ボタン（K2） ---- */
+  .card .reading {
+    position: absolute; right: 0.2em; top: 50%; transform: translateY(-50%);
+    font-family: "Yu Gothic", sans-serif; font-size: 0.6em;
+    min-width: 2.6em; padding: 0.1em 0.2em; line-height: 1.4;
+    border: 1px dashed var(--frame); border-radius: 0.3em;
+    background: #fffdf6; color: #6b5f48; cursor: pointer;
+  }
+  .card .reading.filled { border-style: solid; color: var(--ink); background: #eef3e9; }
+  .card .reading:hover { background: #f3ecdb; }
+  .card.needs-input { border-color: var(--accent); }
+
+  /* ---- ボトムシート ---- */
+  #sheet-back {
+    position: fixed; inset: 0; background: rgba(50,42,32,0.35); z-index: 900;
+  }
+  #sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 901;
+    background: var(--panel); border-top: 2px solid var(--frame);
+    border-radius: 0.8em 0.8em 0 0; padding: 0.7em 1em 1.1em;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.18);
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+    max-width: 40em; margin: 0 auto;
+  }
+  .sheet-head { display: flex; align-items: center; gap: 0.5em; font-size: 0.85em; color: #6b5f48; }
+  .sheet-head #sheet-title { flex: 1; text-align: center; }
+  .sheet-head .nav {
+    font-size: 1em; padding: 0.1em 0.7em; border-radius: 0.3em;
+    border: 1px solid var(--frame); background: #fff; cursor: pointer;
+  }
+  .sheet-head .nav.close { margin-left: 0.3em; }
+  .sheet-body { display: flex; align-items: center; gap: 1em; margin: 0.7em 0; flex-wrap: wrap; }
+  #sheet-char { font-family: "Yu Mincho", serif; font-size: 2.4em; line-height: 1; }
+  #sheet-choices { display: flex; gap: 0.4em; flex-wrap: wrap; flex: 1; }
+  #sheet-choices button {
+    font-family: "Yu Mincho", serif; font-size: 1.15em;
+    min-width: 3.4em; padding: 0.35em 0.7em;
+  }
+  #sheet-choices button.chosen { background: #eef3e9; border-color: #2e5d47; font-weight: bold; }
+  .sheet-foot { font-size: 0.8em; color: #6b5f48; border-top: 1px dotted var(--frame); padding-top: 0.5em; }
+  .sheet-foot .label { color: #998a6a; margin-right: 0.5em; }
+  #sheet-kudashi { font-family: "Yu Mincho", serif; font-size: 1.15em; }
+
   @media (max-width: 600px) {
     #boards { gap: 0.5em; }
     .board { min-width: 6.8em; padding: 0.4em; }
@@ -114,12 +157,18 @@
 <header>
   <h1>返り点でみる漢文｜書き下し練習</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v11</span>
+  <span class="version">v12</span>
 </header>
 
 <div id="toolbar">
   <label>問題:
     <select id="problem-select"></select>
+  </label>
+  <label>段:
+    <select id="step-select">
+      <option value="K1">K1 並べるだけ</option>
+      <option value="K2">K2 送り仮名も入れる</option>
+    </select>
   </label>
   <button id="btn-grade" class="primary">判定する</button>
   <button id="btn-reset">やり直す</button>
@@ -154,13 +203,32 @@
   <div id="meta"></div>
 </main>
 
+<!-- 送り仮名を入れるボトムシート（K2）。body 直下に置くので並べ替えの判定と干渉しない -->
+<div id="sheet-back" hidden></div>
+<div id="sheet" hidden role="dialog" aria-label="送り仮名を選ぶ">
+  <div class="sheet-head">
+    <button id="sheet-prev" class="nav" type="button" aria-label="前のカード">◀</button>
+    <span id="sheet-title"></span>
+    <button id="sheet-next" class="nav" type="button" aria-label="次のカード">▶</button>
+    <button id="sheet-close" class="nav close" type="button" aria-label="閉じる">×</button>
+  </div>
+  <div class="sheet-body">
+    <div id="sheet-char"></div>
+    <div id="sheet-choices"></div>
+  </div>
+  <div class="sheet-foot">
+    <span class="label">いまの書き下し</span>
+    <span id="sheet-kudashi"></span>
+  </div>
+</div>
+
 <footer>
   国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=11"></script>
-<script src="progress.js?v=11"></script>
-<script src="sortable-lite.js?v=11"></script>
-<script src="kudashi.js?v=11"></script>
+<script src="kanbun.js?v=12"></script>
+<script src="progress.js?v=12"></script>
+<script src="sortable-lite.js?v=12"></script>
+<script src="kudashi.js?v=12"></script>
 </body>
 </html>

@@ -19,11 +19,19 @@
   let showYomi = false;
   let graded = null;      // 直近の判定結果
 
+  // K2（送り仮名を入れる段）の状態
+  let step = 'K1';
+  let inputs = {};        // { 'i:nth': 送り仮名 }
+  let askList = [];       // この問題で問うカード [{i,nth}]（最大5枚）
+  let sheetKey = null;    // シートで開いているカード
+
   const isPlaced = t => t.role === 'placed';
   const expectedOrder = () => problem.order;
+  const isAskable = (i, nth) =>
+    step === 'K2' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=11')
+  fetch('texts.json?v=12')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -52,6 +60,70 @@
         + p.source.work + '「' + p.tokens.map(t => t.c).join('') + '」（難度 ' + K.difficulty(p) + '）';
     });
   }
+
+  // ---- K2: 送り仮名のボトムシート ----------------------------------------
+  const keyOf = a => a.i + ':' + a.nth;
+  const labelOf = k => {
+    const [i, nth] = k.split(':').map(Number);
+    const t = problem.tokens[i];
+    return t.c + (t.reread ? '（' + nth + '回目）' : '');
+  };
+
+  function openSheet(key){
+    sheetKey = key;
+    renderSheet();
+    $('sheet').hidden = false;
+    $('sheet-back').hidden = false;
+  }
+  function closeSheet(){
+    sheetKey = null;
+    $('sheet').hidden = true;
+    $('sheet-back').hidden = true;
+  }
+  function stepSheet(d){
+    const pos = askList.findIndex(a => keyOf(a) === sheetKey);
+    if (pos < 0) return;
+    const next = (pos + d + askList.length) % askList.length;
+    openSheet(keyOf(askList[next]));
+  }
+
+  function renderSheet(){
+    if (!sheetKey) return;
+    const [i, nth] = sheetKey.split(':').map(Number);
+    const pos = askList.findIndex(a => keyOf(a) === sheetKey);
+    $('sheet-title').textContent = '送り仮名を選ぶ（' + (pos + 1) + ' / ' + askList.length + '）';
+    $('sheet-char').textContent = labelOf(sheetKey);
+
+    const host = $('sheet-choices');
+    host.innerHTML = '';
+    const { choices } = K.okuriChoices(problems, problem, i, nth);
+    for (const c of choices){
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = c === '' ? '（なし）' : c;
+      if (inputs[sheetKey] === c) b.classList.add('chosen');
+      b.addEventListener('click', () => {
+        inputs[sheetKey] = c;
+        graded = null; hideResult();
+        refresh();
+        renderSheet();
+      });
+      host.appendChild(b);
+    }
+    // いま選んでいる送り仮名で書き下しがどうなるかを、その場で見せる
+    $('sheet-kudashi').textContent = K.gradeReadings(problem, inputs).kakikudashi;
+  }
+
+  $('sheet-close').addEventListener('click', closeSheet);
+  $('sheet-back').addEventListener('click', closeSheet);
+  $('sheet-prev').addEventListener('click', () => stepSheet(-1));
+  $('sheet-next').addEventListener('click', () => stepSheet(1));
+  document.addEventListener('keydown', e => {
+    if ($('sheet').hidden) return;
+    if (e.key === 'Escape') closeSheet();
+    if (e.key === 'ArrowLeft') stepSheet(-1);
+    if (e.key === 'ArrowRight') stepSheet(1);
+  });
 
   // ---- トレイ（3つとも同じグループなので相互に行き来できる） --------------
   function setupTrays(){
@@ -92,6 +164,19 @@
     y.className = 'yomi';
     card.appendChild(y);
 
+    // K2: 送り仮名を入れるボタン。
+    // **span ではなく button にする**のは、sortable-lite が pointerdown の時点で
+    // input/button/select/textarea/a を掴まないため。span のままだと
+    // ドラッグ直後に click が誤発火してシートが開いてしまう
+    if (isAskable(i, nth || 1)){
+      const r = document.createElement('button');
+      r.className = 'reading';
+      r.type = 'button';
+      r.dataset.key = i + ':' + (nth || 1);
+      r.addEventListener('click', ev => { ev.stopPropagation(); openSheet(r.dataset.key); });
+      card.appendChild(r);
+    }
+
     // 再読文字は2枚目を出す（「2回読む＝カードが2枚になる」を操作で理解させる）
     if (t.reread && (nth || 1) === 1){
       const dup = document.createElement('button');
@@ -114,18 +199,56 @@
   function loadProblem(idx){
     problem = problems[idx];
     graded = null;
+    inputs = {};
+    askList = (step === 'K2') ? K.pickAskable(problem) : [];
+    closeSheet();
     hideResult();
     $('tray-order').innerHTML = '';
     $('tray-drop').innerHTML = '';
     const src = $('tray-source');
     src.innerHTML = '';
     problem.tokens.forEach((t, i) => src.appendChild(makeCard(i, 1)));
+    updateHint();
     refresh();
+  }
+
+  function updateHint(){
+    const el = document.querySelector('main .hint');
+    if (!el) return;
+    el.innerHTML = (step === 'K2')
+      ? '<strong>訓点はありません。</strong>白文のカードを読む順に並べ、'
+        + '<strong>「送り仮名？」を押して送り仮名も選んでください</strong>（この問題では '
+        + askList.length + ' 枚ぶん）。<br>'
+        + '読まない字（置き字）は「読まない箱」へ。再読文字は ［＋］ でカードが2枚になります。'
+      : '<strong>訓点はありません。</strong>白文のカードを、読む順に「読む順」へ並べてください。'
+        + '読まない字（置き字）は「読まない箱」へ。<br>'
+        + '一字を二度読む再読文字は <strong>［＋］</strong> を押すとカードが2枚になります。'
+        + 'ドラッグで並べ替えられます（スマホは長押ししてから動かす）。';
   }
 
   // ---- 現在の並びを読む --------------------------------------------------
   const orderTrayIndices = () =>
     [...$('tray-order').querySelectorAll('.card')].map(c => +c.dataset.i);
+
+  // ユーザーが選んだ送り仮名を反映したトークン列（表示用。採点は kanbun.js 側で行う）
+  function withInputs(){
+    if (step !== 'K2') return problem.tokens;
+    return problem.tokens.map((t, i) => {
+      const c = Object.assign({}, t);
+      if (c.reread){
+        c.reread = Object.assign({}, c.reread);
+        [1, 2].forEach(n => {
+          const key = i + ':' + n;
+          if (!(key in inputs)) return;
+          const side = (n === 2) ? 'second' : 'first';
+          c.reread[side] = Object.assign({}, c.reread[side], { okuri: inputs[key] });
+        });
+      } else if ((i + ':1') in inputs){
+        c.okuri = inputs[i + ':1'];
+      }
+      return c;
+    });
+  }
 
   function refresh(){
     // 読む順トレイに番号を振り、読み仮名の表示を更新する
@@ -145,6 +268,17 @@
         else y = t.yomi || '';
       }
       c.querySelector('.yomi').textContent = y;
+
+      // K2: 送り仮名ボタンの表示と、未入力の強調
+      const btn = c.querySelector('.reading');
+      if (btn){
+        const v = inputs[btn.dataset.key];
+        btn.textContent = (v === undefined) ? '送り仮名？' : (v === '' ? '（なし）' : v);
+        btn.classList.toggle('filled', v !== undefined);
+        c.classList.toggle('needs-input', v === undefined);
+      } else {
+        c.classList.remove('needs-input');
+      }
     });
     renderMeta();
   }
@@ -183,6 +317,27 @@
     let k = 0;
     while (k < got.length && k < want.length && got[k] === want[k]) k++;
     if (k === got.length && k === want.length){
+      // 並びが正しければ、K2 では続けて送り仮名を採点する（並びが違う間は読みを見ない）
+      if (step === 'K2'){
+        const blanks = askList.filter(a => !(keyOf(a) in inputs));
+        if (blanks.length){
+          graded = { ok: false, divergeAt: -1,
+            message: '送り仮名がまだ ' + blanks.length + ' 枚ぶん決まっていません。'
+              + 'カードの「送り仮名？」を押して選んでください。' };
+          return paint();
+        }
+        const g = K.gradeReadings(problem, inputs);
+        if (g.status === 'wrong'){
+          graded = { ok: false, divergeAt: g.divergeAt,
+            message: '並べ方は正しいですが、送り仮名が違います。'
+              + (g.divergeAt >= 0 ? (g.divergeAt + 1) + '番目のカードを見直してください。' : '') };
+          return paint();
+        }
+        graded = { ok: true, variant: g.status === 'variant' };
+        PR.markClear(problem.id, 'K', Date.now());
+        refreshOptionLabels();
+        return paint();
+      }
       graded = { ok: true };
       PR.markClear(problem.id, 'K', Date.now());   // 学習履歴（訓点モードと共有）
       refreshOptionLabels();
@@ -207,13 +362,19 @@
     if (graded.ok){
       cards.forEach(c => c.classList.add('good'));
       r.className = 'ok';
-      r.innerHTML = '○ クリア！ 読み順が正解と一致しました。<span class="kudashi">'
+      const body = graded.variant
+        ? '○ クリア！ 現代仮名遣いで書かれていますが正解にしています。'
+          + '歴史的仮名遣いでは次のように書きます。'
+        : '○ クリア！ 読み順が正解と一致しました。';
+      r.innerHTML = body + '<span class="kudashi">'
         + K.toKakikudashi(problem.tokens, expectedOrder()) + '</span>';
     } else {
       if (graded.divergeAt >= 0 && cards[graded.divergeAt]) cards[graded.divergeAt].classList.add('bad');
       r.className = 'wrong';
-      // 途中まででも書き下しを出す（変な文が出ること自体がフィードバックになる）
-      const partial = K.toKakikudashi(problem.tokens, orderTrayIndices());
+      // 途中まででも書き下しを出す（変な文が出ること自体がフィードバックになる）。
+      // **ユーザーの並び順と、ユーザーが選んだ送り仮名の両方を反映する**。
+      // 正解の文を出してしまうと、「違う」と言われた本人が何を書いたのか確かめられない
+      const partial = K.toKakikudashi(withInputs(), orderTrayIndices());
       r.innerHTML = '× ' + graded.message
         + (partial ? '<span class="kudashi">' + partial + '</span>' : '');
     }
@@ -256,6 +417,10 @@
 
   // ---- ツールバー ---------------------------------------------------------
   $('problem-select').addEventListener('change', e => loadProblem(+e.target.value));
+  $('step-select').addEventListener('change', e => {
+    step = e.target.value;
+    loadProblem(+$('problem-select').value);
+  });
   $('btn-grade').addEventListener('click', () => { if (problem) grade(); });
   $('btn-reset').addEventListener('click', () => {
     if (!problem) return;
