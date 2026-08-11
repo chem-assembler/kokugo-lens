@@ -22,7 +22,7 @@
   const expectedOrder = () => problem.order;
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=6')
+  fetch('texts.json?v=7')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()

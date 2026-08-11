@@ -2,50 +2,193 @@
   "problems": [
     {
       "id": "rongo-manabite",
-      "source": { "work": "論語", "chapter": "為政" },
+      "source": {
+        "work": "論語",
+        "chapter": "為政"
+      },
       "tokens": [
-        { "c": "学", "yomi": "まな", "okuri": "ビテ" },
-        { "c": "而", "role": "placed" },
-        { "c": "不", "yomi": "", "okuri": "ザレバ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "思", "yomi": "おも", "okuri": "ハ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "則", "yomi": "すなは", "okuri": "チ" },
-        { "c": "罔", "yomi": "くら", "okuri": "シ" }
+        {
+          "c": "学",
+          "yomi": "まな",
+          "okuri": "ビテ"
+        },
+        {
+          "c": "而",
+          "role": "placed"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザレバ",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "思",
+          "yomi": "おも",
+          "okuri": "ハ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "則",
+          "yomi": "すなは",
+          "okuri": "チ"
+        },
+        {
+          "c": "罔",
+          "yomi": "くら",
+          "okuri": "シ"
+        }
       ],
-      "order": [0, 3, 2, 4, 5],
+      "order": [
+        0,
+        3,
+        2,
+        4,
+        5
+      ],
       "kakikudashi": "学びて思はざれば則ち罔し",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "学んでも自分で考えなければ、（道理は）はっきりしない。"
     },
     {
       "id": "rongo-omoite",
-      "source": { "work": "論語", "chapter": "為政" },
+      "source": {
+        "work": "論語",
+        "chapter": "為政"
+      },
       "tokens": [
-        { "c": "思", "yomi": "おも", "okuri": "ヒテ" },
-        { "c": "而", "role": "placed" },
-        { "c": "不", "yomi": "", "okuri": "ザレバ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "学", "yomi": "まな", "okuri": "バ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "則", "yomi": "すなは", "okuri": "チ" },
-        { "c": "殆", "yomi": "あやふ", "okuri": "シ" }
+        {
+          "c": "思",
+          "yomi": "おも",
+          "okuri": "ヒテ"
+        },
+        {
+          "c": "而",
+          "role": "placed"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザレバ",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "学",
+          "yomi": "まな",
+          "okuri": "バ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "則",
+          "yomi": "すなは",
+          "okuri": "チ"
+        },
+        {
+          "c": "殆",
+          "yomi": "あやふ",
+          "okuri": "シ"
+        }
       ],
-      "order": [0, 3, 2, 4, 5],
+      "order": [
+        0,
+        3,
+        2,
+        4,
+        5
+      ],
       "kakikudashi": "思ひて学ばざれば則ち殆し",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "考えるだけで学ばなければ、（独断に陥って）危険である。"
     },
     {
       "id": "rongo-tomo",
-      "source": { "work": "論語", "chapter": "学而" },
+      "source": {
+        "work": "論語",
+        "chapter": "学而"
+      },
       "tokens": [
-        { "c": "有", "yomi": "あ", "okuri": "リ", "mark": [{ "re": true }] },
-        { "c": "朋", "yomi": "とも" },
-        { "c": "自", "yomi": "", "okuri": "ヨリ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "遠", "yomi": "ゑん" },
-        { "c": "方", "yomi": "ぱう", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "来", "yomi": "きた", "okuri": "タル" }
+        {
+          "c": "有",
+          "yomi": "あ",
+          "okuri": "リ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "朋",
+          "yomi": "とも"
+        },
+        {
+          "c": "自",
+          "yomi": "",
+          "okuri": "ヨリ",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "遠",
+          "yomi": "ゑん"
+        },
+        {
+          "c": "方",
+          "yomi": "ぱう",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "来",
+          "yomi": "きた",
+          "okuri": "タル"
+        }
       ],
-      "order": [1, 0, 3, 4, 2, 5],
+      "order": [
+        1,
+        0,
+        3,
+        4,
+        2,
+        5
+      ],
       "kakikudashi": "朋有り遠方より来たる",
       "acceptable": [],
       "kuho": [],
@@ -53,31 +196,109 @@
     },
     {
       "id": "shungyo-1",
-      "source": { "work": "春暁", "chapter": "孟浩然" },
+      "source": {
+        "work": "春暁",
+        "chapter": "孟浩然"
+      },
       "tokens": [
-        { "c": "春", "yomi": "しゅん" },
-        { "c": "眠", "yomi": "みん" },
-        { "c": "不", "yomi": "", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "覚", "yomi": "おぼ", "okuri": "エ", "mark": [{ "re": true }] },
-        { "c": "暁", "yomi": "あかつき", "okuri": "ヲ" }
+        {
+          "c": "春",
+          "yomi": "しゅん"
+        },
+        {
+          "c": "眠",
+          "yomi": "みん"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ズ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "覚",
+          "yomi": "おぼ",
+          "okuri": "エ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "暁",
+          "yomi": "あかつき",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 1, 4, 3, 2],
+      "order": [
+        0,
+        1,
+        4,
+        3,
+        2
+      ],
       "kakikudashi": "春眠暁を覚えず",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "春の眠りは心地よく、夜が明けたのにも気づかない。"
     },
     {
       "id": "shungyo-2",
-      "source": { "work": "春暁", "chapter": "孟浩然" },
+      "source": {
+        "work": "春暁",
+        "chapter": "孟浩然"
+      },
       "tokens": [
-        { "c": "処", "yomi": "しょ" },
-        { "c": "処", "yomi": "しょ" },
-        { "c": "聞", "yomi": "き", "okuri": "ク", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "啼", "yomi": "てい" },
-        { "c": "鳥", "yomi": "てう", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "処",
+          "yomi": "しょ"
+        },
+        {
+          "c": "処",
+          "yomi": "しょ"
+        },
+        {
+          "c": "聞",
+          "yomi": "き",
+          "okuri": "ク",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "啼",
+          "yomi": "てい"
+        },
+        {
+          "c": "鳥",
+          "yomi": "てう",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 3, 4, 2],
+      "order": [
+        0,
+        1,
+        3,
+        4,
+        2
+      ],
       "kakikudashi": "処処啼鳥を聞く",
       "acceptable": [],
       "kuho": [],
@@ -85,15 +306,52 @@
     },
     {
       "id": "rongo-onko",
-      "source": { "work": "論語", "chapter": "為政" },
+      "source": {
+        "work": "論語",
+        "chapter": "為政"
+      },
       "tokens": [
-        { "c": "温", "yomi": "たづ", "okuri": "ネテ", "mark": [{ "re": true }] },
-        { "c": "故", "yomi": "ふる", "okuri": "キヲ" },
-        { "c": "而", "role": "placed" },
-        { "c": "知", "yomi": "し", "okuri": "ル", "mark": [{ "re": true }] },
-        { "c": "新", "yomi": "あたら", "okuri": "シキヲ" }
+        {
+          "c": "温",
+          "yomi": "たづ",
+          "okuri": "ネテ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "故",
+          "yomi": "ふる",
+          "okuri": "キヲ"
+        },
+        {
+          "c": "而",
+          "role": "placed"
+        },
+        {
+          "c": "知",
+          "yomi": "し",
+          "okuri": "ル",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "新",
+          "yomi": "あたら",
+          "okuri": "シキヲ"
+        }
       ],
-      "order": [1, 0, 4, 3],
+      "order": [
+        1,
+        0,
+        4,
+        3
+      ],
       "kakikudashi": "故きを温ねて新しきを知る",
       "acceptable": [],
       "kuho": [],
@@ -101,34 +359,132 @@
     },
     {
       "id": "hyakubun",
-      "source": { "work": "漢書", "chapter": "趙充国伝" },
+      "source": {
+        "work": "漢書",
+        "chapter": "趙充国伝"
+      },
       "tokens": [
-        { "c": "百", "yomi": "ひゃく" },
-        { "c": "聞", "yomi": "ぶん", "okuri": "ハ" },
-        { "c": "不", "yomi": "", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "如", "yomi": "し", "okuri": "カ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "一", "yomi": "いっ" },
-        { "c": "見", "yomi": "けん", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "百",
+          "yomi": "ひゃく"
+        },
+        {
+          "c": "聞",
+          "yomi": "ぶん",
+          "okuri": "ハ"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ズ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "如",
+          "yomi": "し",
+          "okuri": "カ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "一",
+          "yomi": "いっ"
+        },
+        {
+          "c": "見",
+          "yomi": "けん",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 4, 5, 3, 2],
+      "order": [
+        0,
+        1,
+        4,
+        5,
+        3,
+        2
+      ],
       "kakikudashi": "百聞は一見に如かず",
       "acceptable": [],
-      "kuho": ["hikaku"],
+      "kuho": [
+        "hikaku"
+      ],
       "meaning": "百回聞くよりも、一度実際に見るほうがよく分かる。"
     },
     {
       "id": "shonen-1",
-      "source": { "work": "偶成", "chapter": "伝 朱熹" },
+      "source": {
+        "work": "偶成",
+        "chapter": "伝 朱熹"
+      },
       "tokens": [
-        { "c": "少", "yomi": "せう" },
-        { "c": "年", "yomi": "ねん" },
-        { "c": "易", "yomi": "やす", "okuri": "ク", "mark": [{ "re": true }] },
-        { "c": "老", "yomi": "お", "okuri": "イ" },
-        { "c": "学", "yomi": "がく" },
-        { "c": "難", "yomi": "がた", "okuri": "シ", "mark": [{ "re": true }] },
-        { "c": "成", "yomi": "な", "okuri": "リ" }
+        {
+          "c": "少",
+          "yomi": "せう"
+        },
+        {
+          "c": "年",
+          "yomi": "ねん"
+        },
+        {
+          "c": "易",
+          "yomi": "やす",
+          "okuri": "ク",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "老",
+          "yomi": "お",
+          "okuri": "イ"
+        },
+        {
+          "c": "学",
+          "yomi": "がく"
+        },
+        {
+          "c": "難",
+          "yomi": "がた",
+          "okuri": "シ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "成",
+          "yomi": "な",
+          "okuri": "リ"
+        }
       ],
-      "order": [0, 1, 3, 2, 4, 6, 5],
+      "order": [
+        0,
+        1,
+        3,
+        2,
+        4,
+        6,
+        5
+      ],
       "kakikudashi": "少年老い易く学成り難し",
       "acceptable": [],
       "kuho": [],
@@ -137,37 +493,156 @@
     },
     {
       "id": "shonen-2",
-      "source": { "work": "偶成", "chapter": "伝 朱熹" },
+      "source": {
+        "work": "偶成",
+        "chapter": "伝 朱熹"
+      },
       "tokens": [
-        { "c": "一", "yomi": "いっ" },
-        { "c": "寸", "yomi": "すん", "okuri": "ノ" },
-        { "c": "光", "yomi": "くわう" },
-        { "c": "陰", "yomi": "いん" },
-        { "c": "不", "yomi": "", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "可", "yomi": "", "okuri": "ベカラ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "軽", "yomi": "かろ", "okuri": "ンズ" }
+        {
+          "c": "一",
+          "yomi": "いっ"
+        },
+        {
+          "c": "寸",
+          "yomi": "すん",
+          "okuri": "ノ"
+        },
+        {
+          "c": "光",
+          "yomi": "くわう"
+        },
+        {
+          "c": "陰",
+          "yomi": "いん"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ズ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "可",
+          "yomi": "",
+          "okuri": "ベカラ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "軽",
+          "yomi": "かろ",
+          "okuri": "ンズ"
+        }
       ],
-      "order": [0, 1, 2, 3, 6, 5, 4],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        5,
+        4
+      ],
       "kakikudashi": "一寸の光陰軽んずべからず",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "わずかな時間でも無駄にしてはならない。",
       "note": "「偶成」は朱熹の作として広く知られるが、一次典拠がなく、朱熹に仮託された詩と考えられている。"
     },
     {
       "id": "mujun-1",
-      "source": { "work": "韓非子", "chapter": "難一" },
+      "source": {
+        "work": "韓非子",
+        "chapter": "難一"
+      },
       "tokens": [
-        { "c": "楚", "yomi": "そ" },
-        { "c": "人", "yomi": "ひと", "okuri": "ニ" },
-        { "c": "有", "yomi": "あ", "okuri": "リ", "mark": [{ "lv": 2, "n": 2 }] },
-        { "c": "鬻", "yomi": "ひさ", "okuri": "グ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "盾", "yomi": "たて", "okuri": "ト" },
-        { "c": "与", "yomi": "と", "okuri": "ヲ", "kana": true, "mark": [{ "lv": 1, "n": 1 }, { "re": true }] },
-        { "c": "矛", "yomi": "ほこ" },
-        { "c": "者", "yomi": "もの", "mark": [{ "lv": 2, "n": 1 }] }
+        {
+          "c": "楚",
+          "yomi": "そ"
+        },
+        {
+          "c": "人",
+          "yomi": "ひと",
+          "okuri": "ニ"
+        },
+        {
+          "c": "有",
+          "yomi": "あ",
+          "okuri": "リ",
+          "mark": [
+            {
+              "lv": 2,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "鬻",
+          "yomi": "ひさ",
+          "okuri": "グ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "盾",
+          "yomi": "たて",
+          "okuri": "ト"
+        },
+        {
+          "c": "与",
+          "yomi": "と",
+          "okuri": "ヲ",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            },
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "矛",
+          "yomi": "ほこ"
+        },
+        {
+          "c": "者",
+          "yomi": "もの",
+          "mark": [
+            {
+              "lv": 2,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 4, 6, 5, 3, 7, 2],
+      "order": [
+        0,
+        1,
+        4,
+        6,
+        5,
+        3,
+        7,
+        2
+      ],
       "kakikudashi": "楚人に盾と矛とを鬻ぐ者有り",
       "acceptable": [],
       "kuho": [],
@@ -175,62 +650,239 @@
     },
     {
       "id": "mujun-2",
-      "source": { "work": "韓非子", "chapter": "難一" },
+      "source": {
+        "work": "韓非子",
+        "chapter": "難一"
+      },
       "tokens": [
-        { "c": "吾", "yomi": "わ", "okuri": "ガ" },
-        { "c": "盾", "yomi": "たて" },
-        { "c": "之", "yomi": "の", "kana": true },
-        { "c": "堅", "yomi": "かた", "okuri": "キコト" },
-        { "c": "莫", "yomi": "な", "okuri": "キナリ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "能", "yomi": "よ", "okuri": "ク" },
-        { "c": "陥", "yomi": "とほ", "okuri": "スモノ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "也", "role": "placed" }
+        {
+          "c": "吾",
+          "yomi": "わ",
+          "okuri": "ガ"
+        },
+        {
+          "c": "盾",
+          "yomi": "たて"
+        },
+        {
+          "c": "之",
+          "yomi": "の",
+          "kana": true
+        },
+        {
+          "c": "堅",
+          "yomi": "かた",
+          "okuri": "キコト"
+        },
+        {
+          "c": "莫",
+          "yomi": "な",
+          "okuri": "キナリ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "能",
+          "yomi": "よ",
+          "okuri": "ク"
+        },
+        {
+          "c": "陥",
+          "yomi": "とほ",
+          "okuri": "スモノ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "也",
+          "role": "placed"
+        }
       ],
-      "order": [0, 1, 2, 3, 5, 6, 4],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        4
+      ],
       "kakikudashi": "吾が盾の堅きこと能く陥すもの莫きなり",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "私の盾の堅いことといったら、突き通せるものはないのだ。"
     },
     {
       "id": "rongo-misei",
-      "source": { "work": "論語", "chapter": "先進" },
+      "source": {
+        "work": "論語",
+        "chapter": "先進"
+      },
       "tokens": [
-        { "c": "未", "reread": { "first": { "yomi": "いま", "okuri": "ダ" }, "second": { "yomi": "", "okuri": "ズ", "kana": true } }, "mark": [{ "re": true }] },
-        { "c": "知", "yomi": "し", "okuri": "ラ", "mark": [{ "re": true }] },
-        { "c": "生", "yomi": "せい", "okuri": "ヲ" }
+        {
+          "c": "未",
+          "reread": {
+            "first": {
+              "yomi": "いま",
+              "okuri": "ダ"
+            },
+            "second": {
+              "yomi": "",
+              "okuri": "ズ",
+              "kana": true
+            }
+          },
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "知",
+          "yomi": "し",
+          "okuri": "ラ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "生",
+          "yomi": "せい",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 2, 1, 0],
+      "order": [
+        0,
+        2,
+        1,
+        0
+      ],
       "kakikudashi": "未だ生を知らず",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "まだ生のことも分かっていない。"
     },
     {
       "id": "rongo-izukunzo",
-      "source": { "work": "論語", "chapter": "先進" },
+      "source": {
+        "work": "論語",
+        "chapter": "先進"
+      },
       "tokens": [
-        { "c": "焉", "yomi": "いづ", "okuri": "クンゾ" },
-        { "c": "知", "yomi": "し", "okuri": "ラン", "mark": [{ "re": true }] },
-        { "c": "死", "yomi": "し", "okuri": "ヲ" }
+        {
+          "c": "焉",
+          "yomi": "いづ",
+          "okuri": "クンゾ"
+        },
+        {
+          "c": "知",
+          "yomi": "し",
+          "okuri": "ラン",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "死",
+          "yomi": "し",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 2, 1],
+      "order": [
+        0,
+        2,
+        1
+      ],
       "kakikudashi": "焉くんぞ死を知らん",
       "acceptable": [],
-      "kuho": ["hango"],
+      "kuho": [
+        "hango"
+      ],
       "meaning": "どうして死のことが分かろうか（いや、分からない）。"
     },
     {
       "id": "kokyo-oni",
-      "source": { "work": "雑詩", "chapter": "王維" },
+      "source": {
+        "work": "雑詩",
+        "chapter": "王維"
+      },
       "tokens": [
-        { "c": "応", "reread": { "first": { "yomi": "まさ", "okuri": "ニ" }, "second": { "yomi": "", "okuri": "ベシ", "kana": true } }, "mark": [{ "re": true }] },
-        { "c": "知", "yomi": "し", "okuri": "ル", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "故", "yomi": "こ" },
-        { "c": "郷", "yomi": "きゃう", "okuri": "ノ" },
-        { "c": "事", "yomi": "こと", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "応",
+          "reread": {
+            "first": {
+              "yomi": "まさ",
+              "okuri": "ニ"
+            },
+            "second": {
+              "yomi": "",
+              "okuri": "ベシ",
+              "kana": true
+            }
+          },
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "知",
+          "yomi": "し",
+          "okuri": "ル",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "故",
+          "yomi": "こ"
+        },
+        {
+          "c": "郷",
+          "yomi": "きゃう",
+          "okuri": "ノ"
+        },
+        {
+          "c": "事",
+          "yomi": "こと",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 2, 3, 4, 1, 0],
+      "order": [
+        0,
+        2,
+        3,
+        4,
+        1,
+        0
+      ],
       "kakikudashi": "応に故郷の事を知るべし",
       "acceptable": [],
       "kuho": [],
@@ -238,230 +890,940 @@
     },
     {
       "id": "kobyu-choja",
-      "source": { "work": "戦国策", "chapter": "楚策" },
+      "source": {
+        "work": "戦国策",
+        "chapter": "楚策"
+      },
       "tokens": [
-        { "c": "天", "yomi": "てん" },
-        { "c": "帝", "yomi": "てい" },
-        { "c": "使", "yomi": "", "okuri": "シム", "kana": true, "mark": [{ "lv": 1, "n": 3 }] },
-        { "c": "我", "yomi": "われ", "okuri": "ヲシテ" },
-        { "c": "長", "yomi": "ちゃう", "okuri": "タラ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "百", "yomi": "ひゃく" },
-        { "c": "獣", "yomi": "じう", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "天",
+          "yomi": "てん"
+        },
+        {
+          "c": "帝",
+          "yomi": "てい"
+        },
+        {
+          "c": "使",
+          "yomi": "",
+          "okuri": "シム",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 3
+            }
+          ]
+        },
+        {
+          "c": "我",
+          "yomi": "われ",
+          "okuri": "ヲシテ"
+        },
+        {
+          "c": "長",
+          "yomi": "ちゃう",
+          "okuri": "タラ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "百",
+          "yomi": "ひゃく"
+        },
+        {
+          "c": "獣",
+          "yomi": "じう",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 3, 5, 6, 4, 2],
+      "order": [
+        0,
+        1,
+        3,
+        5,
+        6,
+        4,
+        2
+      ],
       "kakikudashi": "天帝我をして百獣に長たらしむ",
       "acceptable": [],
-      "kuho": ["shieki"],
+      "kuho": [
+        "shieki"
+      ],
       "meaning": "天帝は私を百獣の長とならせた。"
     },
     {
       "id": "rongo-kenkai",
-      "source": { "work": "論語", "chapter": "雍也" },
+      "source": {
+        "work": "論語",
+        "chapter": "雍也"
+      },
       "tokens": [
-        { "c": "賢", "yomi": "けん", "okuri": "ナル" },
-        { "c": "哉", "yomi": "かな", "kana": true },
-        { "c": "回", "yomi": "くわい" },
-        { "c": "也", "yomi": "や", "kana": true }
+        {
+          "c": "賢",
+          "yomi": "けん",
+          "okuri": "ナル"
+        },
+        {
+          "c": "哉",
+          "yomi": "かな",
+          "kana": true
+        },
+        {
+          "c": "回",
+          "yomi": "くわい"
+        },
+        {
+          "c": "也",
+          "yomi": "や",
+          "kana": true
+        }
       ],
-      "order": [0, 1, 2, 3],
+      "order": [
+        0,
+        1,
+        2,
+        3
+      ],
       "kakikudashi": "賢なるかな回や",
       "acceptable": [],
-      "kuho": ["eitan"],
+      "kuho": [
+        "eitan"
+      ],
       "meaning": "なんと賢いことだなあ、回は。"
     },
     {
       "id": "rongo-hakarite",
-      "source": { "work": "論語", "chapter": "学而" },
+      "source": {
+        "work": "論語",
+        "chapter": "学而"
+      },
       "tokens": [
-        { "c": "為", "yomi": "ため", "okuri": "ニ", "mark": [{ "re": true }] },
-        { "c": "人", "yomi": "ひと", "okuri": "ノ" },
-        { "c": "謀", "yomi": "はか", "okuri": "リテ" },
-        { "c": "而", "role": "placed" },
-        { "c": "不", "yomi": "", "okuri": "ザル", "kana": true, "mark": [{ "re": true }] },
-        { "c": "忠", "yomi": "ちゅう", "okuri": "ナラ" },
-        { "c": "乎", "yomi": "か", "kana": true }
+        {
+          "c": "為",
+          "yomi": "ため",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "人",
+          "yomi": "ひと",
+          "okuri": "ノ"
+        },
+        {
+          "c": "謀",
+          "yomi": "はか",
+          "okuri": "リテ"
+        },
+        {
+          "c": "而",
+          "role": "placed"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザル",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "忠",
+          "yomi": "ちゅう",
+          "okuri": "ナラ"
+        },
+        {
+          "c": "乎",
+          "yomi": "か",
+          "kana": true
+        }
       ],
-      "order": [1, 0, 2, 5, 4, 6],
+      "order": [
+        1,
+        0,
+        2,
+        5,
+        4,
+        6
+      ],
       "kakikudashi": "人の為に謀りて忠ならざるか",
       "acceptable": [],
-      "kuho": ["gimon", "hitei"],
+      "kuho": [
+        "gimon",
+        "hitei"
+      ],
       "meaning": "人のために考えてやって、真心を尽くさなかったのではないか。"
     },
     {
       "id": "rongo-sokutatsu",
-      "source": { "work": "論語", "chapter": "子路" },
+      "source": {
+        "work": "論語",
+        "chapter": "子路"
+      },
       "tokens": [
-        { "c": "欲", "yomi": "ほっ", "okuri": "スレバ", "mark": [{ "re": true }] },
-        { "c": "速", "yomi": "すみ", "okuri": "ヤカナラント" },
-        { "c": "則", "yomi": "すなは", "okuri": "チ" },
-        { "c": "不", "yomi": "", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "達", "yomi": "たっ", "okuri": "セ" }
+        {
+          "c": "欲",
+          "yomi": "ほっ",
+          "okuri": "スレバ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "速",
+          "yomi": "すみ",
+          "okuri": "ヤカナラント"
+        },
+        {
+          "c": "則",
+          "yomi": "すなは",
+          "okuri": "チ"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ズ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "達",
+          "yomi": "たっ",
+          "okuri": "セ"
+        }
       ],
-      "order": [1, 0, 2, 4, 3],
+      "order": [
+        1,
+        0,
+        2,
+        4,
+        3
+      ],
       "kakikudashi": "速やかならんと欲すれば則ち達せず",
       "acceptable": [],
-      "kuho": ["katei", "hitei"],
+      "kuho": [
+        "katei",
+        "hitei"
+      ],
       "meaning": "早く成果を出そうと焦ると、かえって目的を達成できない。"
     },
     {
       "id": "rongo-sugitaru",
-      "source": { "work": "論語", "chapter": "先進" },
+      "source": {
+        "work": "論語",
+        "chapter": "先進"
+      },
       "tokens": [
-        { "c": "過", "yomi": "す", "okuri": "ギタルハ" },
-        { "c": "猶", "reread": { "first": { "yomi": "な", "okuri": "ホ" }, "second": { "yomi": "", "okuri": "ゴトシ", "kana": true } }, "mark": [{ "re": true }] },
-        { "c": "不", "yomi": "", "okuri": "ザルガ", "kana": true, "mark": [{ "re": true }] },
-        { "c": "及", "yomi": "およ", "okuri": "バ" }
+        {
+          "c": "過",
+          "yomi": "す",
+          "okuri": "ギタルハ"
+        },
+        {
+          "c": "猶",
+          "reread": {
+            "first": {
+              "yomi": "な",
+              "okuri": "ホ"
+            },
+            "second": {
+              "yomi": "",
+              "okuri": "ゴトシ",
+              "kana": true
+            }
+          },
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザルガ",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "及",
+          "yomi": "およ",
+          "okuri": "バ"
+        }
       ],
-      "order": [0, 1, 3, 2, 1],
+      "order": [
+        0,
+        1,
+        3,
+        2,
+        1
+      ],
       "kakikudashi": "過ぎたるは猶ほ及ばざるがごとし",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "やり過ぎは、足りないのと同じようなものだ。"
     },
     {
       "id": "rongo-hodokosu",
-      "source": { "work": "論語", "chapter": "衛霊公" },
+      "source": {
+        "work": "論語",
+        "chapter": "衛霊公"
+      },
       "tokens": [
-        { "c": "己", "yomi": "おのれ", "okuri": "ノ" },
-        { "c": "所", "yomi": "ところ", "okuri": "ハ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "不", "yomi": "", "okuri": "ザル", "kana": true, "mark": [{ "re": true }] },
-        { "c": "欲", "yomi": "ほっ", "okuri": "セ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "勿", "yomi": "な", "okuri": "カレ", "mark": [{ "re": true }] },
-        { "c": "施", "yomi": "ほどこ", "okuri": "スコト", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "於", "role": "placed" },
-        { "c": "人", "yomi": "ひと", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "己",
+          "yomi": "おのれ",
+          "okuri": "ノ"
+        },
+        {
+          "c": "所",
+          "yomi": "ところ",
+          "okuri": "ハ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザル",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "欲",
+          "yomi": "ほっ",
+          "okuri": "セ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "勿",
+          "yomi": "な",
+          "okuri": "カレ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "施",
+          "yomi": "ほどこ",
+          "okuri": "スコト",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "於",
+          "role": "placed"
+        },
+        {
+          "c": "人",
+          "yomi": "ひと",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 3, 2, 1, 7, 5, 4],
+      "order": [
+        0,
+        3,
+        2,
+        1,
+        7,
+        5,
+        4
+      ],
       "kakikudashi": "己の欲せざる所は人に施すこと勿かれ",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "自分がされたくないことを、人にしてはならない。"
     },
     {
       "id": "moshi-hyappo",
-      "source": { "work": "孟子", "chapter": "梁恵王上" },
+      "source": {
+        "work": "孟子",
+        "chapter": "梁恵王上"
+      },
       "tokens": [
-        { "c": "直", "yomi": "た", "okuri": "ダ" },
-        { "c": "不", "yomi": "", "okuri": "ザル", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "百", "yomi": "ひゃっ" },
-        { "c": "歩", "yomi": "ぽ", "okuri": "ナラ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "耳", "yomi": "のみ", "kana": true }
+        {
+          "c": "直",
+          "yomi": "た",
+          "okuri": "ダ"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザル",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "百",
+          "yomi": "ひゃっ"
+        },
+        {
+          "c": "歩",
+          "yomi": "ぽ",
+          "okuri": "ナラ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "耳",
+          "yomi": "のみ",
+          "kana": true
+        }
       ],
-      "order": [0, 2, 3, 1, 4],
+      "order": [
+        0,
+        2,
+        3,
+        1,
+        4
+      ],
       "kakikudashi": "直だ百歩ならざるのみ",
       "acceptable": [],
-      "kuho": ["gentei", "hitei"],
+      "kuho": [
+        "gentei",
+        "hitei"
+      ],
       "meaning": "ただ百歩でないだけのことだ（逃げたことに変わりはない）。"
     },
     {
       "id": "shisetsu-fuhitsu",
-      "source": { "work": "師説", "chapter": "韓愈" },
+      "source": {
+        "work": "師説",
+        "chapter": "韓愈"
+      },
       "tokens": [
-        { "c": "師", "yomi": "し", "okuri": "ハ" },
-        { "c": "不", "yomi": "", "okuri": "ズ", "kana": true, "mark": [{ "lv": 1, "n": 3 }] },
-        { "c": "必", "yomi": "かなら", "okuri": "ズシモ" },
-        { "c": "賢", "yomi": "けん", "okuri": "ナラ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "於", "role": "placed" },
-        { "c": "弟", "yomi": "てい" },
-        { "c": "子", "yomi": "し", "okuri": "ヨリ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "師",
+          "yomi": "し",
+          "okuri": "ハ"
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ズ",
+          "kana": true,
+          "mark": [
+            {
+              "lv": 1,
+              "n": 3
+            }
+          ]
+        },
+        {
+          "c": "必",
+          "yomi": "かなら",
+          "okuri": "ズシモ"
+        },
+        {
+          "c": "賢",
+          "yomi": "けん",
+          "okuri": "ナラ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "於",
+          "role": "placed"
+        },
+        {
+          "c": "弟",
+          "yomi": "てい"
+        },
+        {
+          "c": "子",
+          "yomi": "し",
+          "okuri": "ヨリ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 2, 5, 6, 3, 1],
+      "order": [
+        0,
+        2,
+        5,
+        6,
+        3,
+        1
+      ],
       "kakikudashi": "師は必ずしも弟子より賢ならず",
       "acceptable": [],
-      "kuho": ["hitei", "hikaku"],
+      "kuho": [
+        "hitei",
+        "hikaku"
+      ],
       "meaning": "師が必ずしも弟子より優れているとは限らない。"
     },
     {
       "id": "sanko-momiji",
-      "source": { "work": "山行", "chapter": "杜牧" },
+      "source": {
+        "work": "山行",
+        "chapter": "杜牧"
+      },
       "tokens": [
-        { "c": "霜", "yomi": "さう" },
-        { "c": "葉", "yomi": "えふ", "okuri": "ハ" },
-        { "c": "紅", "yomi": "くれなゐ", "okuri": "ナリ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "於", "role": "placed" },
-        { "c": "二", "yomi": "に" },
-        { "c": "月", "yomi": "ぐわつ", "okuri": "ノ" },
-        { "c": "花", "yomi": "はな", "okuri": "ヨリモ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "霜",
+          "yomi": "さう"
+        },
+        {
+          "c": "葉",
+          "yomi": "えふ",
+          "okuri": "ハ"
+        },
+        {
+          "c": "紅",
+          "yomi": "くれなゐ",
+          "okuri": "ナリ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "於",
+          "role": "placed"
+        },
+        {
+          "c": "二",
+          "yomi": "に"
+        },
+        {
+          "c": "月",
+          "yomi": "ぐわつ",
+          "okuri": "ノ"
+        },
+        {
+          "c": "花",
+          "yomi": "はな",
+          "okuri": "ヨリモ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 4, 5, 6, 2],
+      "order": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        2
+      ],
       "kakikudashi": "霜葉は二月の花よりも紅なり",
       "acceptable": [],
-      "kuho": ["hikaku"],
+      "kuho": [
+        "hikaku"
+      ],
       "meaning": "霜で色づいた葉は、春の盛りの花よりも赤い。"
     },
     {
       "id": "soshi-taiho",
-      "source": { "work": "荘子", "chapter": "秋水" },
+      "source": {
+        "work": "荘子",
+        "chapter": "秋水"
+      },
       "tokens": [
-        { "c": "吾", "yomi": "われ" },
-        { "c": "長", "yomi": "なが", "okuri": "ク" },
-        { "c": "見", "yomi": "れん", "kana": true, "mark": [{ "re": true }] },
-        { "c": "笑", "yomi": "わら", "okuri": "ハ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "於", "role": "placed" },
-        { "c": "大", "yomi": "たい" },
-        { "c": "方", "yomi": "はう" },
-        { "c": "之", "yomi": "の", "kana": true },
-        { "c": "家", "yomi": "いへ", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "吾",
+          "yomi": "われ"
+        },
+        {
+          "c": "長",
+          "yomi": "なが",
+          "okuri": "ク"
+        },
+        {
+          "c": "見",
+          "yomi": "れん",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "笑",
+          "yomi": "わら",
+          "okuri": "ハ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "於",
+          "role": "placed"
+        },
+        {
+          "c": "大",
+          "yomi": "たい"
+        },
+        {
+          "c": "方",
+          "yomi": "はう"
+        },
+        {
+          "c": "之",
+          "yomi": "の",
+          "kana": true
+        },
+        {
+          "c": "家",
+          "yomi": "いへ",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 5, 6, 7, 8, 3, 2],
+      "order": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        3,
+        2
+      ],
       "kakikudashi": "吾長く大方の家に笑はれん",
       "acceptable": [],
-      "kuho": ["ukemi"],
+      "kuho": [
+        "ukemi"
+      ],
       "meaning": "私はいつまでも見識の広い人たちに笑われるところだった。"
     },
     {
       "id": "keiko-gyugo",
-      "source": { "work": "戦国策", "chapter": "韓策" },
+      "source": {
+        "work": "戦国策",
+        "chapter": "韓策"
+      },
       "tokens": [
-        { "c": "寧", "yomi": "むし", "okuri": "ロ" },
-        { "c": "為", "yomi": "な", "okuri": "ルトモ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "鶏", "yomi": "けい" },
-        { "c": "口", "yomi": "こう", "okuri": "ト", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "無", "yomi": "な", "okuri": "カレ", "mark": [{ "re": true }] },
-        { "c": "為", "yomi": "な", "okuri": "ル", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "牛", "yomi": "ぎう" },
-        { "c": "後", "yomi": "ご", "okuri": "ト", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "寧",
+          "yomi": "むし",
+          "okuri": "ロ"
+        },
+        {
+          "c": "為",
+          "yomi": "な",
+          "okuri": "ルトモ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "鶏",
+          "yomi": "けい"
+        },
+        {
+          "c": "口",
+          "yomi": "こう",
+          "okuri": "ト",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "無",
+          "yomi": "な",
+          "okuri": "カレ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "為",
+          "yomi": "な",
+          "okuri": "ル",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "牛",
+          "yomi": "ぎう"
+        },
+        {
+          "c": "後",
+          "yomi": "ご",
+          "okuri": "ト",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 2, 3, 1, 6, 7, 5, 4],
+      "order": [
+        0,
+        2,
+        3,
+        1,
+        6,
+        7,
+        5,
+        4
+      ],
       "kakikudashi": "寧ろ鶏口と為るとも牛後と為る無かれ",
       "acceptable": [],
-      "kuho": ["sentaku"],
+      "kuho": [
+        "sentaku"
+      ],
       "meaning": "大きな組織の尻についているより、小さな組織の長になるほうがよい。"
     },
     {
       "id": "senju-shiba",
-      "source": { "work": "戦国策", "chapter": "燕策" },
+      "source": {
+        "work": "戦国策",
+        "chapter": "燕策"
+      },
       "tokens": [
-        { "c": "死", "yomi": "し" },
-        { "c": "馬", "yomi": "ば", "okuri": "スラ" },
-        { "c": "且", "yomi": "か", "okuri": "ツ" },
-        { "c": "買", "yomi": "か", "okuri": "フ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "之", "yomi": "これ", "okuri": "ヲ" },
-        { "c": "五", "yomi": "ご" },
-        { "c": "百", "yomi": "ひゃっ" },
-        { "c": "金", "yomi": "きん", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "況", "yomi": "いは", "okuri": "ンヤ" },
-        { "c": "生", "yomi": "せい" },
-        { "c": "馬", "yomi": "ば", "okuri": "ヲ" },
-        { "c": "乎", "yomi": "や", "kana": true }
+        {
+          "c": "死",
+          "yomi": "し"
+        },
+        {
+          "c": "馬",
+          "yomi": "ば",
+          "okuri": "スラ"
+        },
+        {
+          "c": "且",
+          "yomi": "か",
+          "okuri": "ツ"
+        },
+        {
+          "c": "買",
+          "yomi": "か",
+          "okuri": "フ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "之",
+          "yomi": "これ",
+          "okuri": "ヲ"
+        },
+        {
+          "c": "五",
+          "yomi": "ご"
+        },
+        {
+          "c": "百",
+          "yomi": "ひゃっ"
+        },
+        {
+          "c": "金",
+          "yomi": "きん",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "況",
+          "yomi": "いは",
+          "okuri": "ンヤ"
+        },
+        {
+          "c": "生",
+          "yomi": "せい"
+        },
+        {
+          "c": "馬",
+          "yomi": "ば",
+          "okuri": "ヲ"
+        },
+        {
+          "c": "乎",
+          "yomi": "や",
+          "kana": true
+        }
       ],
-      "order": [0, 1, 2, 4, 5, 6, 7, 3, 8, 9, 10, 11],
+      "order": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        3,
+        8,
+        9,
+        10,
+        11
+      ],
       "kakikudashi": "死馬すら且つ之を五百金に買ふ況んや生馬をや",
       "acceptable": [],
-      "kuho": ["yokuyo"],
+      "kuho": [
+        "yokuyo"
+      ],
       "meaning": "死んだ馬でさえ五百金で買うのだ、まして生きた馬ならなおさらだ。"
     },
     {
       "id": "gyofu-en",
-      "source": { "work": "戦国策", "chapter": "燕策" },
+      "source": {
+        "work": "戦国策",
+        "chapter": "燕策"
+      },
       "tokens": [
-        { "c": "今", "yomi": "いま" },
-        { "c": "趙", "yomi": "てう" },
-        { "c": "且", "reread": { "first": { "yomi": "まさ", "okuri": "ニ" }, "second": { "yomi": "", "okuri": "ントス", "kana": true } }, "mark": [{ "re": true }] },
-        { "c": "伐", "yomi": "う", "okuri": "タ", "mark": [{ "re": true }] },
-        { "c": "燕", "yomi": "えん", "okuri": "ヲ" }
+        {
+          "c": "今",
+          "yomi": "いま"
+        },
+        {
+          "c": "趙",
+          "yomi": "てう"
+        },
+        {
+          "c": "且",
+          "reread": {
+            "first": {
+              "yomi": "まさ",
+              "okuri": "ニ"
+            },
+            "second": {
+              "yomi": "",
+              "okuri": "ントス",
+              "kana": true
+            }
+          },
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "伐",
+          "yomi": "う",
+          "okuri": "タ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "燕",
+          "yomi": "えん",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 1, 2, 4, 3, 2],
+      "order": [
+        0,
+        1,
+        2,
+        4,
+        3,
+        2
+      ],
       "kakikudashi": "今趙且に燕を伐たんとす",
       "acceptable": [],
       "kuho": [],
@@ -469,53 +1831,206 @@
     },
     {
       "id": "mujun-3",
-      "source": { "work": "韓非子", "chapter": "難一" },
+      "source": {
+        "work": "韓非子",
+        "chapter": "難一"
+      },
       "tokens": [
-        { "c": "於", "yomi": "お", "okuri": "イテ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "物", "yomi": "もの", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "無", "yomi": "な", "okuri": "キ", "mark": [{ "re": true }] },
-        { "c": "不", "yomi": "", "okuri": "ザル", "kana": true, "mark": [{ "re": true }] },
-        { "c": "陥", "yomi": "とほ", "okuri": "サ" },
-        { "c": "也", "yomi": "なり", "kana": true }
+        {
+          "c": "於",
+          "yomi": "お",
+          "okuri": "イテ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "物",
+          "yomi": "もの",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "無",
+          "yomi": "な",
+          "okuri": "キ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "不",
+          "yomi": "",
+          "okuri": "ザル",
+          "kana": true,
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "陥",
+          "yomi": "とほ",
+          "okuri": "サ"
+        },
+        {
+          "c": "也",
+          "yomi": "なり",
+          "kana": true
+        }
       ],
-      "order": [1, 0, 4, 3, 2, 5],
+      "order": [
+        1,
+        0,
+        4,
+        3,
+        2,
+        5
+      ],
       "kakikudashi": "物に於いて陥さざる無きなり",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "どんな物でも突き通せないものはないのだ。"
     },
     {
       "id": "keirin-1",
-      "source": { "work": "桂林荘雑詠示諸生", "chapter": "広瀬淡窓" },
+      "source": {
+        "work": "桂林荘雑詠示諸生",
+        "chapter": "広瀬淡窓"
+      },
       "tokens": [
-        { "c": "休", "yomi": "や", "okuri": "メヨ", "mark": [{ "re": true }] },
-        { "c": "道", "yomi": "い", "okuri": "フヲ" },
-        { "c": "他", "yomi": "た" },
-        { "c": "郷", "yomi": "きゃう" },
-        { "c": "多", "yomi": "おほ", "okuri": "シト", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "苦", "yomi": "く" },
-        { "c": "辛", "yomi": "しん", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "休",
+          "yomi": "や",
+          "okuri": "メヨ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "道",
+          "yomi": "い",
+          "okuri": "フヲ"
+        },
+        {
+          "c": "他",
+          "yomi": "た"
+        },
+        {
+          "c": "郷",
+          "yomi": "きゃう"
+        },
+        {
+          "c": "多",
+          "yomi": "おほ",
+          "okuri": "シト",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "苦",
+          "yomi": "く"
+        },
+        {
+          "c": "辛",
+          "yomi": "しん",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [1, 0, 2, 3, 5, 6, 4],
+      "order": [
+        1,
+        0,
+        2,
+        3,
+        5,
+        6,
+        4
+      ],
       "kakikudashi": "道ふを休めよ他郷苦辛多しと",
       "acceptable": [],
-      "kuho": ["hitei"],
+      "kuho": [
+        "hitei"
+      ],
       "meaning": "他郷での暮らしは苦労が多い、などと言うのはよしなさい。",
       "note": "日本漢文（江戸後期）。広瀬淡窓が日田に開いた私塾「桂林荘」で塾生に示した詩。「休」は「やめよ」と読む禁止の字で、「休む」ではない。"
     },
     {
       "id": "keirin-2",
-      "source": { "work": "桂林荘雑詠示諸生", "chapter": "広瀬淡窓" },
+      "source": {
+        "work": "桂林荘雑詠示諸生",
+        "chapter": "広瀬淡窓"
+      },
       "tokens": [
-        { "c": "同", "yomi": "どう" },
-        { "c": "袍", "yomi": "はう" },
-        { "c": "有", "yomi": "あ", "okuri": "リ", "mark": [{ "re": true }] },
-        { "c": "友", "yomi": "とも" },
-        { "c": "自", "yomi": "おのづか", "okuri": "ラ" },
-        { "c": "相", "yomi": "あひ" },
-        { "c": "親", "yomi": "した", "okuri": "シム" }
+        {
+          "c": "同",
+          "yomi": "どう"
+        },
+        {
+          "c": "袍",
+          "yomi": "はう"
+        },
+        {
+          "c": "有",
+          "yomi": "あ",
+          "okuri": "リ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "友",
+          "yomi": "とも"
+        },
+        {
+          "c": "自",
+          "yomi": "おのづか",
+          "okuri": "ラ"
+        },
+        {
+          "c": "相",
+          "yomi": "あひ"
+        },
+        {
+          "c": "親",
+          "yomi": "した",
+          "okuri": "シム"
+        }
       ],
-      "order": [0, 1, 3, 2, 4, 5, 6],
+      "order": [
+        0,
+        1,
+        3,
+        2,
+        4,
+        5,
+        6
+      ],
       "kakikudashi": "同袍友有り自ら相親しむ",
       "acceptable": [],
       "kuho": [],
@@ -524,17 +2039,58 @@
     },
     {
       "id": "keirin-3",
-      "source": { "work": "桂林荘雑詠示諸生", "chapter": "広瀬淡窓" },
+      "source": {
+        "work": "桂林荘雑詠示諸生",
+        "chapter": "広瀬淡窓"
+      },
       "tokens": [
-        { "c": "柴", "yomi": "さい" },
-        { "c": "扉", "yomi": "ひ" },
-        { "c": "暁", "yomi": "あかつき", "okuri": "ニ" },
-        { "c": "出", "yomi": "い", "okuri": "ヅレバ" },
-        { "c": "霜", "yomi": "しも" },
-        { "c": "如", "yomi": "ごと", "okuri": "シ", "mark": [{ "re": true }] },
-        { "c": "雪", "yomi": "ゆき", "okuri": "ノ" }
+        {
+          "c": "柴",
+          "yomi": "さい"
+        },
+        {
+          "c": "扉",
+          "yomi": "ひ"
+        },
+        {
+          "c": "暁",
+          "yomi": "あかつき",
+          "okuri": "ニ"
+        },
+        {
+          "c": "出",
+          "yomi": "い",
+          "okuri": "ヅレバ"
+        },
+        {
+          "c": "霜",
+          "yomi": "しも"
+        },
+        {
+          "c": "如",
+          "yomi": "ごと",
+          "okuri": "シ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "雪",
+          "yomi": "ゆき",
+          "okuri": "ノ"
+        }
       ],
-      "order": [0, 1, 2, 3, 4, 6, 5],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        5
+      ],
       "kakikudashi": "柴扉暁に出づれば霜雪の如し",
       "acceptable": [],
       "kuho": [],
@@ -543,17 +2099,72 @@
     },
     {
       "id": "keirin-4",
-      "source": { "work": "桂林荘雑詠示諸生", "chapter": "広瀬淡窓" },
+      "source": {
+        "work": "桂林荘雑詠示諸生",
+        "chapter": "広瀬淡窓"
+      },
       "tokens": [
-        { "c": "君", "yomi": "きみ", "okuri": "ハ" },
-        { "c": "汲", "yomi": "く", "okuri": "メ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "川", "yomi": "せん" },
-        { "c": "流", "yomi": "りう", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] },
-        { "c": "我", "yomi": "われ", "okuri": "ハ" },
-        { "c": "拾", "yomi": "ひろ", "okuri": "ハン", "mark": [{ "re": true }] },
-        { "c": "薪", "yomi": "たきぎ", "okuri": "ヲ" }
+        {
+          "c": "君",
+          "yomi": "きみ",
+          "okuri": "ハ"
+        },
+        {
+          "c": "汲",
+          "yomi": "く",
+          "okuri": "メ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "川",
+          "yomi": "せん"
+        },
+        {
+          "c": "流",
+          "yomi": "りう",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "我",
+          "yomi": "われ",
+          "okuri": "ハ"
+        },
+        {
+          "c": "拾",
+          "yomi": "ひろ",
+          "okuri": "ハン",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "薪",
+          "yomi": "たきぎ",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 2, 3, 1, 4, 6, 5],
+      "order": [
+        0,
+        2,
+        3,
+        1,
+        4,
+        6,
+        5
+      ],
       "kakikudashi": "君は川流を汲め我は薪を拾はん",
       "acceptable": [],
       "kuho": [],
@@ -562,17 +2173,56 @@
     },
     {
       "id": "kawanakajima-1",
-      "source": { "work": "題不識庵撃機山図", "chapter": "頼山陽" },
+      "source": {
+        "work": "題不識庵撃機山図",
+        "chapter": "頼山陽"
+      },
       "tokens": [
-        { "c": "鞭", "yomi": "べん" },
-        { "c": "声", "yomi": "せい" },
-        { "c": "粛", "yomi": "しゅく" },
-        { "c": "粛", "yomi": "しゅく" },
-        { "c": "夜", "yomi": "よる" },
-        { "c": "過", "yomi": "わた", "okuri": "ル", "mark": [{ "re": true }] },
-        { "c": "河", "yomi": "かは", "okuri": "ヲ" }
+        {
+          "c": "鞭",
+          "yomi": "べん"
+        },
+        {
+          "c": "声",
+          "yomi": "せい"
+        },
+        {
+          "c": "粛",
+          "yomi": "しゅく"
+        },
+        {
+          "c": "粛",
+          "yomi": "しゅく"
+        },
+        {
+          "c": "夜",
+          "yomi": "よる"
+        },
+        {
+          "c": "過",
+          "yomi": "わた",
+          "okuri": "ル",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "河",
+          "yomi": "かは",
+          "okuri": "ヲ"
+        }
       ],
-      "order": [0, 1, 2, 3, 4, 6, 5],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        5
+      ],
       "kakikudashi": "鞭声粛粛夜河を過る",
       "acceptable": [],
       "kuho": [],
@@ -581,17 +2231,66 @@
     },
     {
       "id": "kawanakajima-2",
-      "source": { "work": "題不識庵撃機山図", "chapter": "頼山陽" },
+      "source": {
+        "work": "題不識庵撃機山図",
+        "chapter": "頼山陽"
+      },
       "tokens": [
-        { "c": "暁", "yomi": "あかつき", "okuri": "ニ" },
-        { "c": "見", "yomi": "み", "okuri": "ル" },
-        { "c": "千", "yomi": "せん" },
-        { "c": "兵", "yomi": "ぺい", "okuri": "ノ" },
-        { "c": "擁", "yomi": "よう", "okuri": "スルヲ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "大", "yomi": "たい" },
-        { "c": "牙", "yomi": "が", "okuri": "ヲ" , "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "暁",
+          "yomi": "あかつき",
+          "okuri": "ニ"
+        },
+        {
+          "c": "見",
+          "yomi": "み",
+          "okuri": "ル"
+        },
+        {
+          "c": "千",
+          "yomi": "せん"
+        },
+        {
+          "c": "兵",
+          "yomi": "ぺい",
+          "okuri": "ノ"
+        },
+        {
+          "c": "擁",
+          "yomi": "よう",
+          "okuri": "スルヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "大",
+          "yomi": "たい"
+        },
+        {
+          "c": "牙",
+          "yomi": "が",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 2, 3, 5, 6, 4],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        4
+      ],
       "kakikudashi": "暁に見る千兵の大牙を擁するを",
       "acceptable": [],
       "kuho": [],
@@ -600,17 +2299,64 @@
     },
     {
       "id": "kawanakajima-3",
-      "source": { "work": "題不識庵撃機山図", "chapter": "頼山陽" },
+      "source": {
+        "work": "題不識庵撃機山図",
+        "chapter": "頼山陽"
+      },
       "tokens": [
-        { "c": "遺", "yomi": "ゐ" },
-        { "c": "恨", "yomi": "こん", "okuri": "ナリ" },
-        { "c": "十", "yomi": "じふ" },
-        { "c": "年", "yomi": "ねん" },
-        { "c": "磨", "yomi": "みが", "okuri": "キ", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "一", "yomi": "いっ" },
-        { "c": "剣", "yomi": "けん", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "遺",
+          "yomi": "ゐ"
+        },
+        {
+          "c": "恨",
+          "yomi": "こん",
+          "okuri": "ナリ"
+        },
+        {
+          "c": "十",
+          "yomi": "じふ"
+        },
+        {
+          "c": "年",
+          "yomi": "ねん"
+        },
+        {
+          "c": "磨",
+          "yomi": "みが",
+          "okuri": "キ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "一",
+          "yomi": "いっ"
+        },
+        {
+          "c": "剣",
+          "yomi": "けん",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 2, 3, 5, 6, 4],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        4
+      ],
       "kakikudashi": "遺恨なり十年一剣を磨き",
       "acceptable": [],
       "kuho": [],
@@ -619,22 +2365,391 @@
     },
     {
       "id": "kawanakajima-4",
-      "source": { "work": "題不識庵撃機山図", "chapter": "頼山陽" },
+      "source": {
+        "work": "題不識庵撃機山図",
+        "chapter": "頼山陽"
+      },
       "tokens": [
-        { "c": "流", "yomi": "りう" },
-        { "c": "星", "yomi": "せい" },
-        { "c": "光", "yomi": "くわう" },
-        { "c": "底", "yomi": "てい" },
-        { "c": "逸", "yomi": "いっ", "okuri": "ス", "mark": [{ "lv": 1, "n": 2 }] },
-        { "c": "長", "yomi": "ちゃう" },
-        { "c": "蛇", "yomi": "だ", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+        {
+          "c": "流",
+          "yomi": "りう"
+        },
+        {
+          "c": "星",
+          "yomi": "せい"
+        },
+        {
+          "c": "光",
+          "yomi": "くわう"
+        },
+        {
+          "c": "底",
+          "yomi": "てい"
+        },
+        {
+          "c": "逸",
+          "yomi": "いっ",
+          "okuri": "ス",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "長",
+          "yomi": "ちゃう"
+        },
+        {
+          "c": "蛇",
+          "yomi": "だ",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        }
       ],
-      "order": [0, 1, 2, 3, 5, 6, 4],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        4
+      ],
       "kakikudashi": "流星光底長蛇を逸す",
       "acceptable": [],
       "kuho": [],
       "meaning": "流れ星のような剣の光のもとで、大蛇（信玄）を取り逃がした。",
       "note": "日本漢文（江戸後期）。「長蛇を逸す」は惜しいところで大物を取り逃がす意の成句のもとになった句。"
+    },
+    {
+      "id": "gaishi-mamoru",
+      "source": {
+        "work": "日本外史",
+        "chapter": "頼山陽・巻之一"
+      },
+      "tokens": [
+        {
+          "c": "以",
+          "yomi": "もつ",
+          "okuri": "テ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "死",
+          "yomi": "し",
+          "okuri": "ヲ"
+        },
+        {
+          "c": "衛",
+          "yomi": "まも",
+          "okuri": "ルハ",
+          "mark": [
+            {
+              "re": true
+            }
+          ]
+        },
+        {
+          "c": "君",
+          "yomi": "きみ",
+          "okuri": "ヲ"
+        },
+        {
+          "c": "則",
+          "yomi": "すなは",
+          "okuri": "チ"
+        },
+        {
+          "c": "武",
+          "yomi": "ぶ"
+        },
+        {
+          "c": "人",
+          "yomi": "じん"
+        },
+        {
+          "c": "之",
+          "yomi": "の",
+          "kana": true
+        },
+        {
+          "c": "習",
+          "yomi": "なら",
+          "okuri": "ヒ"
+        },
+        {
+          "c": "耳",
+          "yomi": "のみ",
+          "kana": true
+        }
+      ],
+      "order": [
+        1,
+        0,
+        3,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "kakikudashi": "死を以て君を衛るは則ち武人の習ひのみ",
+      "acceptable": [],
+      "kuho": [
+        "gentei"
+      ],
+      "meaning": "命を捨てて主君を守るのは、武人として当たり前のことにすぎない。",
+      "note": "日本漢文（江戸後期）。頼山陽『日本外史』巻之一。平忠盛が身を守る備えをして殿上したことを咎められた際の、白河上皇のことば。文末の「耳」が限定を表す。"
+    },
+    {
+      "id": "gaishi-omomuku",
+      "source": {
+        "work": "日本外史",
+        "chapter": "頼山陽・巻之一"
+      },
+      "tokens": [
+        {
+          "c": "武",
+          "yomi": "ぶ"
+        },
+        {
+          "c": "臣",
+          "yomi": "しん"
+        },
+        {
+          "c": "赴",
+          "yomi": "おもむ",
+          "okuri": "クニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "天",
+          "yomi": "てん"
+        },
+        {
+          "c": "子",
+          "yomi": "し"
+        },
+        {
+          "c": "之",
+          "yomi": "の",
+          "kana": true
+        },
+        {
+          "c": "急",
+          "yomi": "きふ",
+          "okuri": "ニ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "何",
+          "yomi": "なん",
+          "okuri": "ゾ"
+        },
+        {
+          "c": "猶",
+          "yomi": "いう"
+        },
+        {
+          "c": "予",
+          "yomi": "よ",
+          "okuri": "セン"
+        },
+        {
+          "c": "為",
+          "yomi": "や",
+          "kana": true
+        }
+      ],
+      "order": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        2,
+        7,
+        8,
+        9,
+        10
+      ],
+      "kakikudashi": "武臣天子の急に赴くに何ぞ猶予せんや",
+      "acceptable": [],
+      "kuho": [
+        "hango"
+      ],
+      "meaning": "武士が天子の危急に駆けつけるのに、どうしてためらう必要があろうか。",
+      "note": "日本漢文（江戸後期）。平治の乱の急報を受けて父・清盛がためらったのに対する、平重盛のことば。「何〜為」で反語を作る。"
+    },
+    {
+      "id": "gaishi-imada",
+      "source": {
+        "work": "日本外史",
+        "chapter": "頼山陽・巻之一"
+      },
+      "tokens": [
+        {
+          "c": "未",
+          "reread": {
+            "first": {
+              "yomi": "いま",
+              "okuri": "ダ"
+            },
+            "second": {
+              "yomi": "",
+              "okuri": "ザル",
+              "kana": true
+            }
+          },
+          "mark": [
+            {
+              "lv": 1,
+              "n": 3
+            }
+          ]
+        },
+        {
+          "c": "嘗",
+          "yomi": "かつ",
+          "okuri": "テ"
+        },
+        {
+          "c": "別",
+          "yomi": "べつ",
+          "okuri": "ニ"
+        },
+        {
+          "c": "置",
+          "yomi": "お",
+          "okuri": "カ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 2
+            }
+          ]
+        },
+        {
+          "c": "将",
+          "yomi": "しやう"
+        },
+        {
+          "c": "帥",
+          "yomi": "すゐ",
+          "okuri": "ヲ",
+          "mark": [
+            {
+              "lv": 1,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "c": "也",
+          "yomi": "なり",
+          "kana": true
+        }
+      ],
+      "order": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        3,
+        0,
+        6
+      ],
+      "kakikudashi": "未だ嘗て別に将帥を置かざるなり",
+      "acceptable": [],
+      "kuho": [
+        "hitei"
+      ],
+      "meaning": "（昔の日本では）まだ一度も、別に将軍を置いたことはなかったのである。",
+      "note": "日本漢文（江戸後期）。武家が生まれる以前の朝廷を述べた一節。再読文字「未」と三二一点が同居する。"
+    },
+    {
+      "id": "gaishi-seija",
+      "source": {
+        "work": "日本外史",
+        "chapter": "頼山陽・巻之一"
+      },
+      "tokens": [
+        {
+          "c": "生",
+          "yomi": "せい"
+        },
+        {
+          "c": "者",
+          "yomi": "しや",
+          "okuri": "ハ"
+        },
+        {
+          "c": "必",
+          "yomi": "かなら",
+          "okuri": "ズ"
+        },
+        {
+          "c": "死",
+          "yomi": "し",
+          "okuri": "ス"
+        },
+        {
+          "c": "何",
+          "yomi": "なん",
+          "okuri": "ゾ"
+        },
+        {
+          "c": "独",
+          "yomi": "ひと",
+          "okuri": "リ"
+        },
+        {
+          "c": "我",
+          "yomi": "われ",
+          "okuri": "ノミナランヤ"
+        }
+      ],
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kakikudashi": "生者は必ず死す何ぞ独り我のみならんや",
+      "acceptable": [],
+      "kuho": [
+        "hango"
+      ],
+      "meaning": "生きている者は必ず死ぬ。どうして私だけが例外であろうか。",
+      "note": "日本漢文（江戸後期）。平清盛の臨終のことば。**返り点が1つも要らない文**で、上から順に読めばよい。返り点は必要なときにだけ打つ、という原則が分かる例。"
     }
   ]
 }

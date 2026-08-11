@@ -49,7 +49,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=6')
+  fetch('texts.json?v=7')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -90,6 +90,13 @@
     const marked = problem.tokens
       .map((t, i) => ({ t, i }))
       .filter(x => (x.t.mark || []).length && x.t.role !== 'placed');
+    // 返り点が1つも無い文（上から素直に読む文）は L2 の問題にできない。
+    // 「賢哉回也」のような例は実在するので、落ちずに理由を出して他のモードへ促す。
+    if (!marked.length){
+      blankIdx = -1;
+      choices = [];
+      return;
+    }
     blankIdx = marked[Math.floor(Math.random() * marked.length)].i;
     const correct = problem.tokens[blankIdx].mark;
     const pool = [
@@ -149,8 +156,11 @@
     }
     if (mode === 'L2'){
       const marks = problemMarks();
-      if (l2Attempt) marks[blankIdx] = l2Attempt.marks[blankIdx];
-      else if (!l2Solved) marks[blankIdx] = [];
+      // blankIdx < 0 ＝ 返り点が無い文。空欄を作らずそのまま見せる
+      if (blankIdx >= 0){
+        if (l2Attempt) marks[blankIdx] = l2Attempt.marks[blankIdx];
+        else if (!l2Solved) marks[blankIdx] = [];
+      }
       const order = l2Solved ? problem.order
         : K.readOrder(withMarks(marks));
       return { marks, order, badges: l2Solved, kudashiOrder: order };
@@ -256,6 +266,14 @@
   function renderChoices(){
     const keys = document.querySelector('#choices .keys');
     keys.innerHTML = '';
+    if (blankIdx < 0){
+      const p = document.createElement('span');
+      p.className = 'hint';
+      p.textContent = 'この文には返り点がありません（上から順に読む文です）。'
+        + 'L1 で読み順を確かめるか、別の問題を選んでください。';
+      keys.appendChild(p);
+      return;
+    }
     choices.forEach((c, ci) => {
       const b = document.createElement('button');
       b.textContent = c.label;
