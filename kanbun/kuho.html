@@ -100,6 +100,30 @@
   }
   #explain .row .v { flex: 1 1 auto; }
   #explain .note { margin: 0.6em 0 0; padding-top: 0.6em; border-top: 1px dotted var(--frame); }
+  /* 収録例。押すと訓点モードのその問題が開く */
+  #explain .examples {
+    margin: 0.6em 0 0; padding-top: 0.6em; border-top: 1px dotted var(--frame);
+    display: flex; flex-wrap: wrap; gap: 0.4em; align-items: stretch;
+  }
+  #explain .examples .label {
+    width: 100%; font-size: 0.85em; color: #877a5e;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+  #explain .examples a {
+    display: block; text-decoration: none; color: var(--ink);
+    border: 1px solid var(--frame); border-radius: 0.4em;
+    background: #fffdf6; padding: 0.35em 0.6em; line-height: 1.4;
+  }
+  #explain .examples a:hover { background: #f3ecdb; border-color: var(--accent); }
+  #explain .examples .haku { display: block; font-size: 1.05em; letter-spacing: 0.05em; }
+  #explain .examples .kd {
+    display: block; font-size: 0.8em; color: #6b5f48;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+  #explain .examples .src {
+    display: block; font-size: 0.72em; color: #a5987c;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
   #explain .rel {
     margin: 0.5em 0 0; font-size: 0.85em; color: #6b5f48;
     font-family: "Yu Gothic", "Meiryo", sans-serif;

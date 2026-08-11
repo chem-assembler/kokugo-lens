@@ -65,12 +65,22 @@
       });
       refreshOptionLabels();
       // 志望校の案内（guide.html）から ?mode=L3 のように指定して開ける
-      const want = new URLSearchParams(location.search).get('mode');
+      const params = new URLSearchParams(location.search);
+      const want = params.get('mode');
       if (want && [...$('mode-select').options].some(o => o.value === want)){
         mode = want;
         $('mode-select').value = want;
       }
-      loadProblem(0);
+      // 句法クイズの解説（kuho.html）から ?p=<問題ID> でその問題を開ける。
+      // 型の解説から実例の練習へ渡すための入口
+      let start = 0;
+      const wantP = params.get('p');
+      if (wantP){
+        const i = problems.findIndex(p => p.id === wantP);
+        if (i >= 0) start = i;
+      }
+      sel.value = String(start);
+      loadProblem(start);
     })
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
 

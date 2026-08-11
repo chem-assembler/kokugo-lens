@@ -20,6 +20,7 @@
   let CATS  = {};        // カテゴリキー -> 表示名
   let TYPES = [];        // 型の配列
   const byId = new Map();
+  const TEXTS = new Map(); // 問題ID -> { hakubun, kakikudashi, work }（収録例の表示用）
 
   let filterCat = 'all'; // 絞り込み中のカテゴリ
   let kindPref  = 'mix'; // 出題形式の指定
@@ -60,6 +61,20 @@
     .catch(e => {
       $('q-text').textContent = 'kuho.json の読み込みに失敗しました: ' + e;
     });
+
+  // 収録例を白文で見せるためだけに読む。失敗しても出題は続けられる（例が出ないだけ）
+  fetch('texts.json?v=18')
+    .then(r => r.json())
+    .then(data => {
+      (data.problems || []).forEach(p => {
+        TEXTS.set(p.id, {
+          hakubun: (p.tokens || []).map(t => t.c).join(''),
+          kakikudashi: p.kakikudashi || '',
+          work: (p.source || {}).work || ''
+        });
+      });
+    })
+    .catch(() => {});
 
   function buildSelects(){
     const cs = $('cat-select');
@@ -251,10 +266,30 @@
       ex.appendChild(p);
     }
     if ((t.examples || []).length){
-      const p = document.createElement('p');
-      p.className = 'rel';
-      p.textContent = '訓点モードの収録例: ' + t.examples.join('・');
-      ex.appendChild(p);
+      const box = document.createElement('div');
+      box.className = 'examples';
+      const lead = document.createElement('span');
+      lead.className = 'label';
+      lead.textContent = 'この型で練習できる問題';
+      box.appendChild(lead);
+      t.examples.forEach(id => {
+        const info = TEXTS.get(id);
+        const a = document.createElement('a');
+        a.href = 'index.html?p=' + encodeURIComponent(id);
+        if (info){
+          [['haku', info.hakubun], ['kd', info.kakikudashi], ['src', info.work]]
+            .forEach(pair => {
+              const s = document.createElement('span');
+              s.className = pair[0];
+              s.textContent = pair[1];
+              a.appendChild(s);
+            });
+        } else {
+          a.textContent = id;   // texts.json が読めなかったときの保険
+        }
+        box.appendChild(a);
+      });
+      ex.appendChild(box);
     }
   }
 
