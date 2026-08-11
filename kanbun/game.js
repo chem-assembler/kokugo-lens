@@ -52,7 +52,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=15')
+  fetch('texts.json?v=16')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -64,6 +64,12 @@
         sel.appendChild(opt);
       });
       refreshOptionLabels();
+      // 志望校の案内（guide.html）から ?mode=L3 のように指定して開ける
+      const want = new URLSearchParams(location.search).get('mode');
+      if (want && [...$('mode-select').options].some(o => o.value === want)){
+        mode = want;
+        $('mode-select').value = want;
+      }
       loadProblem(0);
     })
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });

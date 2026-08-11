@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返り点でみる漢文｜志望校から選ぶ | 国語レンズ</title>
+<meta name="description" content="志望校を選ぶと、漢文がどう出るか（返り点を書かせるのか、白文の書き下しか）と、このアプリのどこをやると効くかが分かります。共通テスト1979〜2026、主要7大学の年度別出典を実測した調査にもとづきます。">
+<style>
+  :root {
+    --ink: #322a20; --paper: #faf6ec; --panel: #fffdf6; --frame: #d8cdb4;
+    --accent: #b3410e; --badge: #1e6b5e; --ok: #1a7a2e; --ng: #b3231c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 0.8em;
+    padding: 0.6em 1em; background: #2e2618; color: #f5efdf;
+  }
+  header h1 { font-size: 1.15em; margin: 0; font-family: "Yu Mincho", serif; }
+  header .brand { font-size: 0.75em; color: #cfc4a6; }
+  header .version { margin-left: auto; font-size: 0.7em; color: #a89c7c; }
+
+  main { padding: 1em; max-width: 44em; margin: 0 auto; }
+  .lede { color: #6b5f48; line-height: 1.7; font-size: 0.9em; margin-bottom: 1.2em; }
+  .lede strong { color: var(--ink); }
+
+  #picker { margin-bottom: 1.2em; }
+  #picker label { font-size: 0.85em; color: #6b5f48; }
+  #uni-select { font-size: 1em; padding: 0.35em; max-width: 100%; margin-top: 0.3em; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.6em;
+    padding: 1em 1.1em; margin-bottom: 1em;
+  }
+  .card h2 {
+    font-size: 1.05em; margin: 0 0 0.2em; font-family: "Yu Mincho", serif;
+  }
+  .card .fac { font-size: 0.8em; color: #877a5e; margin-bottom: 0.8em; line-height: 1.6; }
+  .row { margin: 0.7em 0; line-height: 1.7; font-size: 0.88em; }
+  .row .k {
+    display: inline-block; min-width: 6.5em; color: #877a5e; font-size: 0.9em;
+    vertical-align: top;
+  }
+  .row .v { display: inline-block; max-width: calc(100% - 7em); }
+  .row.caution .v { color: #8a4a1e; }
+
+  .modes { display: flex; gap: 0.4em; flex-wrap: wrap; margin: 0.5em 0 0.2em; }
+  .modes a {
+    display: inline-block; text-decoration: none;
+    background: #2e5d47; color: #fff; border-radius: 0.4em;
+    padding: 0.35em 0.8em; font-size: 0.85em;
+  }
+  .modes a:hover { background: #38735a; }
+  .modes a.sub { background: #fff; color: var(--ink); border: 1px solid var(--frame); }
+  .modes a.sub:hover { background: #f3ecdb; }
+
+  .nokanbun li { margin-bottom: 0.4em; line-height: 1.6; font-size: 0.88em; }
+  .note {
+    font-size: 0.8em; color: #877a5e; line-height: 1.7;
+    border-top: 1px dotted var(--frame); padding-top: 0.7em; margin-top: 0.9em;
+  }
+  .src { font-size: 0.75em; color: #a5987c; margin-top: 0.5em; }
+  footer { padding: 0.8em 1em 1.5em; font-size: 0.75em; color: #998a6a; text-align: center; }
+  footer a { color: #6b5f48; }
+</style>
+</head>
+<body>
+<header>
+  <h1>志望校から選ぶ</h1>
+  <span class="brand">返り点でみる漢文｜国語レンズ</span>
+  <span class="version">v16</span>
+</header>
+
+<main>
+  <p class="lede">
+    <strong>同じ「漢文」でも、大学によって問われる操作が違います。</strong>
+    返り点を自分で書かせる大学もあれば、訓点を消した白文を書き下させる大学もあり、
+    そもそも漢文を出さない大学もあります。<br>
+    志望校を選ぶと、<strong>漢文がどう出るか</strong>と
+    <strong>このアプリのどこをやると効くか</strong>が分かります。
+  </p>
+
+  <div id="picker">
+    <label for="uni-select">志望校・試験</label><br>
+    <select id="uni-select"></select>
+  </div>
+
+  <div id="detail"></div>
+
+  <p class="note">
+    このページの内容は、共通テスト・センター試験（1979〜2026）と主要大学の年度別出典を
+    実際に調べた結果にもとづいています（推測では書いていません）。
+    ただし<strong>入試の制度は変わります。必ず自分の受ける方式の募集要項を確認してください。</strong>
+    とくに私立大は、同じ大学でも学部・日程によって漢文の有無が変わります。
+  </p>
+</main>
+
+<footer>
+  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>
+</footer>
+
+<script src="guide.js?v=16"></script>
+</body>
+</html>

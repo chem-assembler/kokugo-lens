@@ -31,7 +31,7 @@
     step === 'K2' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=15')
+  fetch('texts.json?v=16')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()

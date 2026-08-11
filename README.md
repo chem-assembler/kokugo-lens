@@ -21,6 +21,7 @@ SchoolLenz の第3の教科サブブランド。
 | `kanbun.js` | 中核ロジック（DOM 非依存）。読み順計算 `readOrder` / 書き下し生成 `toKakikudashi` / 採点 `grade` / 難易度 `difficulty` / 仮名正規化 |
 | `game.js` | 訓点モードの UI（縦書き描画・訓点パレット・ライブ書き下し・**4モード L1/L2/L3/L6**・誤答再生アニメ） |
 | `kuho.js` + `kuho.html` | 句法クイズ（3形式） |
+| `guide.js` + `guide.html` + `universities.json` | **志望校から選ぶ案内**。志望校を選ぶと「漢文がどう出るか」と「このアプリのどこをやると効くか」が出る。データは `docs/exam-kanbun-sources.md` の実測調査から起こしたもので、**推測は書かない**。`node kanbun/guide-check.js` が検査（遷移先の実在・モード名の一致・強調記法の閉じ・出題実績には調査範囲を添えているか） |
 | `kudashi.js` + `kudashi.html` | 書き下し練習（カードD&D）。**訓点を与えず白文だけで読み順を組む＝ L5 に対応**（東北大 第四問②・早稲田 文/法の形） |
 | `sortable-lite.js` | 並べ替え。**InfoLens から流用**し、掴む対象を `opts.itemSelector` で指定できるよう拡張 |
 | `progress.js` | **学習履歴**（DOM・localStorage 非依存）。訓点モード L1/L2/L3/L6 と書き下し練習(K)の**5モード**で1つの記録を共有する。`localStorage` が使えない環境ではメモリ上で動く |
