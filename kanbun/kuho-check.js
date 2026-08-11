@@ -98,6 +98,9 @@ types.forEach((t, idx) => {
 
   // 6・10〜12. examples の実在と、その実例がほんとうにこの型かどうか
   if (t.yomi !== undefined && !Array.isArray(t.yomi)) err(where + ': yomi が配列ではありません');
+  if (t.noMarker && !(Array.isArray(t.yomi) && t.yomi.length)){
+    err(where + ': noMarker の型は yomi が必要です（白文から見分けられないため）');
+  }
   (Array.isArray(t.examples) ? t.examples : []).forEach(id => {
     if (!textIds.has(id)){
       err(where + ': examples の「' + id + '」が texts.json にありません');
@@ -106,7 +109,9 @@ types.forEach((t, idx) => {
     const p = textById.get(id);
 
     // 10. 白文に標識が現れるか
-    const marks = Array.isArray(t.markers) ? t.markers : [];
+    // noMarker の型は「目印の字が無いこと自体が型」（使動用法など）。白文からは
+    // 見分けられないので、この検査は飛ばし、代わりに 11 の読みの照合を必須にする
+    const marks = t.noMarker ? [] : (Array.isArray(t.markers) ? t.markers : []);
     const haku = hakubun(p);
     if (marks.length && !marks.some(m => haku.indexOf(m) >= 0)){
       err(where + ': 実例「' + id + '」の白文「' + haku + '」に標識 ' +
