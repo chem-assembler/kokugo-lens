@@ -11,6 +11,7 @@
  */
 (function(){
   const K = window.Kanbun;
+  const PR = window.Progress;
   const $ = id => document.getElementById(id);
 
   let problems = [];
@@ -22,7 +23,7 @@
   const expectedOrder = () => problem.order;
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=8')
+  fetch('texts.json?v=9')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -31,13 +32,26 @@
       problems.forEach((p, idx) => {
         const opt = document.createElement('option');
         opt.value = idx;
-        opt.textContent = p.source.work + '「' + p.tokens.map(t => t.c).join('') + '」（難度 ' + K.difficulty(p) + '）';
         sel.appendChild(opt);
       });
+      refreshOptionLabels();
       setupTrays();
       loadProblem(0);
     })
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
+
+  // ---- 学習履歴（訓点モードと同じ localStorage を共有する） ----------------
+  // 印は訓点モードと同じ意味。◎=4モード全部 / ○=どれか / 無印=未着手。
+  // 「書き下し」列だけは、このページでクリアしたかどうかを ✓ で別に出す
+  function refreshOptionLabels(){
+    const sel = $('problem-select');
+    const MARK = { all: '◎ ', some: '○ ', none: '' };
+    problems.forEach((p, idx) => {
+      sel.options[idx].textContent = MARK[PR.stateOf(p.id)]
+        + (PR.isClear(p.id, 'K') ? '✓' : '　')
+        + p.source.work + '「' + p.tokens.map(t => t.c).join('') + '」（難度 ' + K.difficulty(p) + '）';
+    });
+  }
 
   // ---- トレイ（3つとも同じグループなので相互に行き来できる） --------------
   function setupTrays(){
@@ -170,6 +184,8 @@
     while (k < got.length && k < want.length && got[k] === want[k]) k++;
     if (k === got.length && k === want.length){
       graded = { ok: true };
+      PR.markClear(problem.id, 'K', Date.now());   // 学習履歴（訓点モードと共有）
+      refreshOptionLabels();
       return paint();
     }
     let message;

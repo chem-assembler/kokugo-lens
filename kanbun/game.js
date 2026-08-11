@@ -6,6 +6,7 @@
  */
 (function(){
   const K = window.Kanbun;
+  const PR = window.Progress;
   const $ = id => document.getElementById(id);
   const sameArray = (a, b) => a.length === b.length && a.every((v, i) => v === b[i]);
 
@@ -49,7 +50,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=8')
+  fetch('texts.json?v=9')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -57,14 +58,35 @@
       const sel = $('problem-select');
       problems.forEach((p, idx) => {
         const opt = document.createElement('option');
-        const plain = p.tokens.map(t => t.c).join('');
         opt.value = idx;
-        opt.textContent = p.source.work + '「' + plain + '」（難度 ' + K.difficulty(p) + '）';
         sel.appendChild(opt);
       });
+      refreshOptionLabels();
       loadProblem(0);
     })
     .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
+
+  // ---- 学習履歴の表示 ----------------------------------------------------
+  // 選択肢の頭に印を出す。◎=4モード全部クリア / ○=どれか / 無印=未着手
+  const STATE_MARK = { all: '◎ ', some: '○ ', none: '' };
+
+  function refreshOptionLabels(){
+    const sel = $('problem-select');
+    problems.forEach((p, idx) => {
+      const plain = p.tokens.map(t => t.c).join('');
+      sel.options[idx].textContent = STATE_MARK[PR.stateOf(p.id)]
+        + p.source.work + '「' + plain + '」（難度 ' + K.difficulty(p) + '）';
+    });
+  }
+
+  function renderProgress(){
+    if (!problems.length) return;
+    const s = PR.summary(problems);
+    const per = PR.MODES.map(m => PR.MODE_NAME[m] + ' ' + s.byMode[m]).join('　');
+    $('progress-text').innerHTML =
+      '学習の記録: <span class="done">' + s.touched + '</span> / ' + s.total + ' 問に着手'
+      + '（4モード全部クリア <span class="done">' + s.complete + '</span> 問）　' + per;
+  }
 
   function loadProblem(idx){
     problem = problems[idx];
@@ -74,6 +96,7 @@
     $('btn-answer').classList.remove('toggled');
     resetModeState();
     render();
+    renderProgress();
   }
 
   function resetModeState(){
@@ -133,6 +156,7 @@
     if (sameArray(order, problem.order)){
       l2Solved = true;
       l2Attempt = null;
+      recordClear('L2');
       showResult('ok', '○ クリア！ その訓点で読み順が正解と一致します。');
       render();
     } else {
@@ -325,6 +349,7 @@
         tapPos++;
         if (tapPos >= problem.order.length){
           l1Done = true;
+          recordClear('L1');
           showResult('ok', '○ 全部正しい順に読めました！');
         } else {
           hideResult();
@@ -381,9 +406,11 @@
     if (!problem || mode !== 'L3') return;
     lastResult = K.grade(userMarks, problem);
     if (lastResult.status === 'ok'){
+      recordClear('L3');
       showResult('ok', '○ クリア！ 読み順が正解と一致しました。');
       render();
     } else if (lastResult.status === 'variant'){
+      recordClear('L3');
       showResult('ok', '○ クリア！ 登録と違う打ち方ですが、読み順は正しい別解です（原則: 表記ではなく読み順で判定します）。');
       render();
     } else {
@@ -465,6 +492,35 @@
   });
   $('btn-replay-correct').addEventListener('click', () => {
     playOrder(problem.order, -1, true);
+  });
+
+  // ---- 学習履歴の記録 -----------------------------------------------------
+  // 「正解を見る」で答えを表示したあとのクリアは記録しない（自力で解いたときだけ数える）
+  function recordClear(mode){
+    if (showAnswer) return;
+    PR.markClear(problem.id, mode, Date.now());
+    refreshOptionLabels();
+    renderProgress();
+  }
+
+  $('btn-next-unclear').addEventListener('click', () => {
+    if (!problems.length) return;
+    const cur = +$('problem-select').value;
+    const next = PR.nextUnclear(problems, mode, cur);
+    if (next < 0){
+      showResult('info', '今のモード（' + PR.MODE_NAME[mode] + '）は全問クリア済みです。'
+        + '別のモードに切り替えるか、書き下し練習へ進んでください。');
+      return;
+    }
+    $('problem-select').value = String(next);
+    loadProblem(next);
+  });
+
+  $('btn-progress-reset').addEventListener('click', () => {
+    if (!confirm('この端末に保存された学習の記録をすべて消します。よろしいですか？')) return;
+    PR.reset();
+    refreshOptionLabels();
+    renderProgress();
   });
 
   // ---- ツールバー ---------------------------------------------------------

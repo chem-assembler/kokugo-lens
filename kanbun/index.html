@@ -46,6 +46,18 @@
   button.toggled { background: #e9dfc8; }
   button:disabled { opacity: 0.4; cursor: default; }
 
+  /* ---- 学習履歴の帯 ---- */
+  #progress-bar {
+    display: flex; align-items: center; gap: 0.7em; flex-wrap: wrap;
+    padding: 0.4em 1em; background: #f4eedd; border-bottom: 1px solid var(--frame);
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.78em; color: #6b5f48;
+  }
+  #progress-bar .done { color: var(--ok); font-weight: bold; }
+  button.tiny {
+    font-size: 0.9em; padding: 0.1em 0.6em; border-radius: 0.3em;
+    color: #8a7d63; background: transparent; border: 1px solid var(--frame);
+  }
+
   main { display: flex; gap: 1em; padding: 1em; align-items: flex-start; flex-wrap: wrap; }
 
   /* ---- 縦書きエリア（右=白文、左=書き下し） ---- */
@@ -153,7 +165,7 @@
 <header>
   <h1>返り点でみる漢文</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v8</span>
+  <span class="version">v9</span>
 </header>
 
 <div id="toolbar">
@@ -171,6 +183,12 @@
   <button id="btn-reset">リセット</button>
   <button id="btn-answer">正解を見る</button>
   <button id="btn-yomi">読み仮名</button>
+  <button id="btn-next-unclear">次の未クリアへ</button>
+</div>
+
+<div id="progress-bar">
+  <span id="progress-text"></span>
+  <button id="btn-progress-reset" class="tiny">記録を消す</button>
 </div>
 
 <main>
@@ -224,7 +242,8 @@
   国語レンズ（KokugoLenz）｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=8"></script>
-<script src="game.js?v=8"></script>
+<script src="kanbun.js?v=9"></script>
+<script src="progress.js?v=9"></script>
+<script src="game.js?v=9"></script>
 </body>
 </html>

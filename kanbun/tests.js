@@ -7,6 +7,7 @@
 (function(){
   const isNode = (typeof module !== 'undefined') && (typeof require === 'function');
   const K = isNode ? require('./kanbun.js') : window.Kanbun;
+  const P = isNode ? require('./progress.js') : window.Progress;
 
   const results = [];
   function test(name, fn){
@@ -137,6 +138,46 @@
       const easy = { tokens: [tk('読', 'レ'), tk('書')], kuho: [] };
       const hard = problems.find(p => p.id === 'mujun-1');
       ok(K.difficulty(easy) < K.difficulty(hard));
+    });
+
+    // ---- 学習履歴（progress.js） ----
+    // ブラウザでは実際の localStorage を触るので、テストの前後で必ず reset する
+    test('進捗: 記録前はすべて未着手', () => {
+      P.reset();
+      const ps = [{ id: 'test-a' }, { id: 'test-b' }];
+      eq(P.summary(ps), { total: 2, touched: 0, complete: 0,
+        byMode: { L1: 0, L2: 0, L3: 0, K: 0 } });
+      eq(P.stateOf('test-a'), 'none');
+      P.reset();
+    });
+    test('進捗: モードごとに記録され、4モード揃うと all', () => {
+      P.reset();
+      P.markClear('test-a', 'L1', 100);
+      eq(P.stateOf('test-a'), 'some');
+      ok(P.isClear('test-a', 'L1'), 'L1 はクリア済み');
+      ok(!P.isClear('test-a', 'L2'), 'L2 はまだ');
+      ['L2', 'L3', 'K'].forEach(m => P.markClear('test-a', m, 100));
+      eq(P.stateOf('test-a'), 'all');
+      P.reset();
+    });
+    test('進捗: 未知のモードは弾く', () => {
+      P.reset();
+      let threw = false;
+      try { P.markClear('test-a', 'L9', 0); } catch (e) { threw = true; }
+      ok(threw, '未知のモードで例外が出る');
+      P.reset();
+    });
+    test('進捗: 次の未クリアを一周して探す', () => {
+      P.reset();
+      const ps = [{ id: 't1' }, { id: 't2' }, { id: 't3' }];
+      eq(P.nextUnclear(ps, 'L1', 0), 1);
+      P.markClear('t2', 'L1', 100);
+      eq(P.nextUnclear(ps, 'L1', 0), 2, 't2 は済みなので t3 へ');
+      P.markClear('t3', 'L1', 100);
+      eq(P.nextUnclear(ps, 'L1', 0), 0, '末尾まで行ったら先頭へ回る');
+      P.markClear('t1', 'L1', 100);
+      eq(P.nextUnclear(ps, 'L1', 0), -1, '全部クリアなら -1');
+      P.reset();
     });
 
     // ---- データ総当たり（二重帳簿・設計書 §4.2） ----
