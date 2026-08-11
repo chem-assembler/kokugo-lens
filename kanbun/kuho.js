@@ -47,7 +47,7 @@
   const catName = key => CATS[key] || key;
 
   // ---- 読み込み -----------------------------------------------------------
-  fetch('kuho.json?v=16')
+  fetch('kuho.json?v=17')
     .then(r => r.json())
     .then(data => {
       CATS  = data.categories || {};

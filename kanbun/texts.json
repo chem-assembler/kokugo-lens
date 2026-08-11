@@ -353,7 +353,9 @@
         3
       ],
       "kakikudashi": "故きを温ねて新しきを知る",
-      "acceptable": [],
+      "acceptable": [
+        "故きを温めて新しきを知る"
+      ],
       "kuho": [],
       "meaning": "昔のことを研究して、そこから新しい知識を得る。"
     },
@@ -1285,7 +1287,9 @@
         4
       ],
       "kakikudashi": "己の欲せざる所は人に施すこと勿かれ",
-      "acceptable": [],
+      "acceptable": [
+        "己の欲せざる所は人に施す勿かれ"
+      ],
       "kuho": [
         "hitei"
       ],
@@ -1899,7 +1903,9 @@
         5
       ],
       "kakikudashi": "物に於いて陥さざる無きなり",
-      "acceptable": [],
+      "acceptable": [
+        "物に於て陥さざる無きなり"
+      ],
       "kuho": [
         "hitei"
       ],
@@ -4647,7 +4653,10 @@
         4
       ],
       "kakikudashi": "良宵の勝楽は同にせざるべからず",
-      "acceptable": [],
+      "acceptable": [
+        "良宵の勝楽は同じくせざるべからず",
+        "良宵の勝楽は同じうせざるべからず"
+      ],
       "kuho": [
         "hitei"
       ],

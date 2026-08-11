@@ -281,6 +281,7 @@
       const g = K.gradeReadings(p, inputs);
       ok(g.status !== 'wrong', '現代仮名遣いを落とさない（実際は ' + g.status + '）');
       eq(g.status, 'variant');
+      eq(g.via, 'kana', '表記だけの違いは via=kana（別解の via=acceptable と区別する）');
     });
     test('送り仮名: 1枚だけ違うと wrong になり、食い違い位置を返す', () => {
       const p = byId('rongo-manabite');
@@ -293,6 +294,9 @@
       eq(p.order[g.divergeAt], target.i, '食い違い位置は入れ替えたカード');
     });
     test('送り仮名: acceptable の別解は variant になる', () => {
+      // matchesKakikudashi 単体の挙動を見る合成データ。
+      // （実データの acceptable は validateProblem の形状検査を通す必要があり、
+      //   漢字を仮名書きした別解は登録できない＝K3 で到達できないため）
       const p = {
         id: 'synth', source: { work: 'テスト', chapter: '合成' },
         tokens: [tk('読', '二'), tk('書', '一')],
@@ -305,6 +309,50 @@
       const alt = Object.assign({}, p, { kakikudashi: '書をXX' });
       eq(K.matchesKakikudashi('書をよむ', p), true);
       void alt;
+    });
+    test('別解: 訓読の流派差（温ねて/温めて）は variant via=acceptable', () => {
+      // K3（自由入力）の核心。標準形と違う送り仮名でも、流派として正しい読みは落とさない。
+      const p = byId('rongo-onko');
+      const g = K.gradeReadings(p, { '0:1': 'メテ' });        // 温ネテ → 温めて
+      eq(g.status, 'variant');
+      eq(g.via, 'acceptable');
+      eq(g.kakikudashi, '故きを温めて新しきを知る');
+      // ひらがなで打っても同じ（K3 の入力欄はどちらも受ける）
+      eq(K.gradeReadings(p, { '0:1': 'めて' }).status, 'variant');
+      // でたらめは wrong のまま
+      eq(K.gradeReadings(p, { '0:1': 'ゾ' }).status, 'wrong');
+    });
+    test('別解: 登録した流派差が全部 variant で通る（施す勿かれ・同じくせ・於て）', () => {
+      const cases = [
+        ['rongo-hodokosu', { '5:1': 'ス' }],          // 施すこと勿かれ → 施す勿かれ
+        ['mq-ryosai-onaji', { '7:1': 'ジクセ' }],     // 同にせ → 同じくせ
+        ['mq-ryosai-onaji', { '7:1': 'ジウセ' }],     // 同にせ → 同じうせ（ウ音便）
+        ['mujun-3', { '0:1': 'テ' }]                  // 於いて → 於て
+      ];
+      for (const [id, inputs] of cases){
+        const g = K.gradeReadings(byId(id), inputs);
+        eq(g.status, 'variant', id + ' ' + JSON.stringify(inputs) + ' が ' + g.status);
+        eq(g.via, 'acceptable');
+      }
+    });
+    test('別解: validateProblem が壊れた acceptable を弾く', () => {
+      const mk = acc => {
+        const p = {
+          id: 'synth-acc', source: { work: 'テスト', chapter: '合成' },
+          tokens: [tk('読', '二'), tk('書', '一')],
+          order: [1, 0], kakikudashi: '書を読む', acceptable: acc
+        };
+        p.tokens[0].yomi = 'よ'; p.tokens[0].okuri = 'ム';
+        p.tokens[1].yomi = 'しょ'; p.tokens[1].okuri = 'ヲ';
+        return K.validateProblem(p);
+      };
+      eq(mk([]).length, 0, '空はよい');
+      eq(mk(['書は読まん']).length, 0, '送り仮名だけ違う別解はよい');
+      ok(mk(['書を読む']).length > 0, '標準形と同じものは弾く（登録不要）');
+      ok(mk(['書ヲ読ム']).length > 0, '標準形と仮名で同一視されるものも弾く');
+      ok(mk(['読み書きす']).length > 0, 'カードの並びと合わない語順は弾く');
+      ok(mk(['書をよむ']).length > 0, '漢字を仮名書きした別解は弾く（K3 で到達できない）');
+      ok(mk(['']).length > 0, '空文字列は弾く');
     });
     test('送り仮名: 再読文字の2枚目に1枚目の読みを入れると wrong', () => {
       const p = byId('rongo-misei');

@@ -368,7 +368,13 @@ const Kanbun = (() => {
     });
     const got = toKakikudashi(toks, problem.order);
     if (got === problem.kakikudashi) return { status: 'ok', kakikudashi: got };
-    if (matchesKakikudashi(got, problem)) return { status: 'variant', kakikudashi: got };
+    // variant の由来を分けて返す（UI の文言が変わる）:
+    //   kana       = 表記だけの違い（現代仮名遣いなど）。読み方は標準形と同じ
+    //   acceptable = 訓読の流派差として登録した別解（温ねて/温めて など）
+    if (kanaEquals(got, problem.kakikudashi)) return { status: 'variant', via: 'kana', kakikudashi: got };
+    if ((problem.acceptable || []).some(a => kanaEquals(got, a))){
+      return { status: 'variant', via: 'acceptable', kakikudashi: got };
+    }
     return { status: 'wrong', kakikudashi: got, divergeAt: firstDivergentCard(problem, inputs) };
   }
 
@@ -385,6 +391,29 @@ const Kanbun = (() => {
       if (!kanaEquals(inputs[key], okuriOf(t, nth))) return pos;
     }
     return -1;
+  }
+
+  // acceptable の別解が「カードの並びと漢字」に合っているか。
+  // 書き下し練習では語順と漢字はカードで固定されるので、別解が変えてよいのは
+  // 送り仮名（かな部分）だけ。読む順に漢字を拾った正規表現に落とし込んで照合する。
+  // これに通らない別解は K3 でどう入力しても到達できない＝データの誤り。
+  function acceptableShapeOk(p, s){
+    const seen = new Map();
+    let re = '^[\\u3041-\\u3096]*';
+    for (const i of p.order){
+      const t = p.tokens[i];
+      const nth = (seen.get(i) || 0) + 1;
+      seen.set(i, nth);
+      let kanji = null;
+      if (t.reread){
+        const r = nth === 2 ? t.reread.second : t.reread.first;
+        if (r && !r.kana) kanji = t.c;
+      } else if (!t.kana){
+        kanji = t.c;
+      }
+      if (kanji) re += kanji.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[\\u3041-\\u3096]*';
+    }
+    return new RegExp(re + '$').test(s);
   }
 
   // ---- 二重帳簿の検査（テスト・監査用） -----------------------------------
@@ -404,6 +433,23 @@ const Kanbun = (() => {
     cnt.forEach((c, i) => {
       if (c !== need[i]) errs.push('トークン' + i + '「' + p.tokens[i].c + '」の読み回数が ' + c + '（期待 ' + need[i] + '）');
     });
+    // acceptable（訓読の流派差の別解）。K3 の自由入力を受け止める唯一の仕組みなので、
+    // 壊れた別解・無意味な別解をここで止める
+    if (p.acceptable !== undefined){
+      if (!Array.isArray(p.acceptable)){
+        errs.push('acceptable が配列でない');
+      } else {
+        const seenAcc = new Set();
+        for (const a of p.acceptable){
+          if (typeof a !== 'string' || !a){ errs.push('acceptable に空要素がある'); continue; }
+          const na = normalizeKana(a);
+          if (seenAcc.has(na)) errs.push('acceptable が重複: ' + a);
+          seenAcc.add(na);
+          if (kanaEquals(a, p.kakikudashi)) errs.push('acceptable「' + a + '」は標準形と同一視される（登録不要）');
+          else if (!acceptableShapeOk(p, a)) errs.push('acceptable「' + a + '」がカードの並び・漢字と合わない（K3 で到達できない）');
+        }
+      }
+    }
     return errs;
   }
 

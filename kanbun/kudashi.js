@@ -19,19 +19,21 @@
   let showYomi = false;
   let graded = null;      // 直近の判定結果
 
-  // K2（送り仮名を入れる段）の状態
+  // K2（送り仮名を選ぶ段）/ K3（自由入力の段）の状態
   let step = 'K1';
+  let stepLocked = false; // ユーザーが段を手で選んだら、自動の出し分けをやめる
   let inputs = {};        // { 'i:nth': 送り仮名 }
   let askList = [];       // この問題で問うカード [{i,nth}]（最大5枚）
   let sheetKey = null;    // シートで開いているカード
+  let sheetHints = false; // K3: プリセット候補を開いているか（カードを移るたび閉じる）
 
   const isPlaced = t => t.role === 'placed';
   const expectedOrder = () => problem.order;
   const isAskable = (i, nth) =>
-    step === 'K2' && askList.some(a => a.i === i && a.nth === nth);
+    step !== 'K1' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=16')
+  fetch('texts.json?v=17')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -71,6 +73,7 @@
 
   function openSheet(key){
     sheetKey = key;
+    sheetHints = false;    // 候補はカードごとに開き直す（見ないで考えるのが既定）
     renderSheet();
     $('sheet').hidden = false;
     $('sheet-back').hidden = false;
@@ -87,15 +90,8 @@
     openSheet(keyOf(askList[next]));
   }
 
-  function renderSheet(){
-    if (!sheetKey) return;
-    const [i, nth] = sheetKey.split(':').map(Number);
-    const pos = askList.findIndex(a => keyOf(a) === sheetKey);
-    $('sheet-title').textContent = '送り仮名を選ぶ（' + (pos + 1) + ' / ' + askList.length + '）';
-    $('sheet-char').textContent = labelOf(sheetKey);
-
-    const host = $('sheet-choices');
-    host.innerHTML = '';
+  // K2 のプリセット候補ボタン群。K3 でも「候補を見る」の奥で同じものを使う
+  function appendChoices(host, i, nth){
     const { choices } = K.okuriChoices(problems, problem, i, nth);
     for (const c of choices){
       const b = document.createElement('button');
@@ -110,6 +106,67 @@
       });
       host.appendChild(b);
     }
+  }
+
+  function renderSheet(){
+    if (!sheetKey) return;
+    const [i, nth] = sheetKey.split(':').map(Number);
+    const pos = askList.findIndex(a => keyOf(a) === sheetKey);
+    $('sheet-title').textContent = (step === 'K3' ? '送り仮名を入力する（' : '送り仮名を選ぶ（')
+      + (pos + 1) + ' / ' + askList.length + '）';
+    $('sheet-char').textContent = labelOf(sheetKey);
+
+    const host = $('sheet-choices');
+    host.innerHTML = '';
+    if (step === 'K3'){
+      // K3: 自由入力。候補（K2 と同じプリセット）は「候補を見る」の奥に置く（設計 論点3）
+      const row = document.createElement('div');
+      row.className = 'free-row';
+      const inp = document.createElement('input');
+      inp.type = 'text';
+      inp.className = 'free';
+      inp.placeholder = 'カタカナかひらがな';
+      const cur = inputs[sheetKey];
+      inp.value = cur === undefined ? '' : cur;
+      const warn = document.createElement('span');
+      warn.className = 'warn';
+      const apply = () => {
+        const v = inp.value.replace(/\s+/g, '');
+        // 仮名以外は書き下しに混ざっても採点不能な文を作るだけなので、その場で知らせる
+        if (/[^ぁ-ゖァ-ヶー]/.test(v)){
+          warn.textContent = '仮名で入力してください（漢字・英数字は使えません）';
+          return;
+        }
+        warn.textContent = '';
+        inputs[sheetKey] = v;   // 空文字 ＝ 送り仮名なし
+        graded = null; hideResult();
+        refresh();
+        renderSheet();
+      };
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') apply(); });
+      const bApply = document.createElement('button');
+      bApply.type = 'button';
+      bApply.textContent = '決める';
+      bApply.addEventListener('click', apply);
+      const bNone = document.createElement('button');
+      bNone.type = 'button';
+      bNone.textContent = 'なし';
+      bNone.title = '送り仮名を付けない';
+      bNone.addEventListener('click', () => { inp.value = ''; apply(); });
+      const bHint = document.createElement('button');
+      bHint.type = 'button';
+      bHint.textContent = sheetHints ? '候補を隠す' : '候補を見る';
+      bHint.addEventListener('click', () => { sheetHints = !sheetHints; renderSheet(); });
+      row.appendChild(inp);
+      row.appendChild(bApply);
+      row.appendChild(bNone);
+      row.appendChild(bHint);
+      row.appendChild(warn);
+      host.appendChild(row);
+      if (sheetHints) appendChoices(host, i, nth);
+    } else {
+      appendChoices(host, i, nth);
+    }
     // いま選んでいる送り仮名で書き下しがどうなるかを、その場で見せる
     $('sheet-kudashi').textContent = K.gradeReadings(problem, inputs).kakikudashi;
   }
@@ -121,6 +178,8 @@
   document.addEventListener('keydown', e => {
     if ($('sheet').hidden) return;
     if (e.key === 'Escape') closeSheet();
+    // K3 の入力欄で ←→ を打つのはカーソル移動。カード送りに横取りしない
+    if (e.target && e.target.tagName === 'INPUT') return;
     if (e.key === 'ArrowLeft') stepSheet(-1);
     if (e.key === 'ArrowRight') stepSheet(1);
   });
@@ -198,9 +257,15 @@
 
   function loadProblem(idx){
     problem = problems[idx];
+    // 設計（論点3）: 段の既定値は「一度クリアした問題は次に開いたとき一段上がる」。
+    // ユーザーが段を手で選んだあとは、その選択を尊重して自動では変えない
+    if (!stepLocked){
+      step = PR.isClear(problem.id, 'K') ? 'K2' : 'K1';
+      $('step-select').value = step;
+    }
     graded = null;
     inputs = {};
-    askList = (step === 'K2') ? K.pickAskable(problem) : [];
+    askList = (step === 'K1') ? [] : K.pickAskable(problem);
     closeSheet();
     hideResult();
     $('tray-order').innerHTML = '';
@@ -215,7 +280,13 @@
   function updateHint(){
     const el = document.querySelector('main .hint');
     if (!el) return;
-    el.innerHTML = (step === 'K2')
+    el.innerHTML = (step === 'K3')
+      ? '<strong>訓点はありません。</strong>白文のカードを読む順に並べ、'
+        + '<strong>「送り仮名？」を押して送り仮名を自分で考えて入力してください</strong>（この問題では '
+        + askList.length + ' 枚ぶん。迷ったら「候補を見る」）。<br>'
+        + '読まない字（置き字）は「読まない箱」へ。再読文字は ［＋］ でカードが2枚になります。'
+        + '訓読の流派差として登録した別解も正解になります。'
+      : (step === 'K2')
       ? '<strong>訓点はありません。</strong>白文のカードを読む順に並べ、'
         + '<strong>「送り仮名？」を押して送り仮名も選んでください</strong>（この問題では '
         + askList.length + ' 枚ぶん）。<br>'
@@ -232,7 +303,7 @@
 
   // ユーザーが選んだ送り仮名を反映したトークン列（表示用。採点は kanbun.js 側で行う）
   function withInputs(){
-    if (step !== 'K2') return problem.tokens;
+    if (step === 'K1') return problem.tokens;
     return problem.tokens.map((t, i) => {
       const c = Object.assign({}, t);
       if (c.reread){
@@ -317,23 +388,28 @@
     let k = 0;
     while (k < got.length && k < want.length && got[k] === want[k]) k++;
     if (k === got.length && k === want.length){
-      // 並びが正しければ、K2 では続けて送り仮名を採点する（並びが違う間は読みを見ない）
-      if (step === 'K2'){
+      // 並びが正しければ、K2/K3 では続けて送り仮名を採点する（並びが違う間は読みを見ない）
+      if (step !== 'K1'){
         const blanks = askList.filter(a => !(keyOf(a) in inputs));
         if (blanks.length){
           graded = { ok: false, divergeAt: -1,
             message: '送り仮名がまだ ' + blanks.length + ' 枚ぶん決まっていません。'
-              + 'カードの「送り仮名？」を押して選んでください。' };
+              + 'カードの「送り仮名？」を押して' + (step === 'K3' ? '入力' : '選択') + 'してください。' };
           return paint();
         }
         const g = K.gradeReadings(problem, inputs);
         if (g.status === 'wrong'){
           graded = { ok: false, divergeAt: g.divergeAt,
             message: '並べ方は正しいですが、送り仮名が違います。'
-              + (g.divergeAt >= 0 ? (g.divergeAt + 1) + '番目のカードを見直してください。' : '') };
+              + (g.divergeAt >= 0 ? (g.divergeAt + 1) + '番目のカードを見直してください。' : '')
+              // K3 は自由入力なので、流派差の読みが未登録のせいで×になる可能性を正直に伝える
+              + (step === 'K3'
+                ? '<br><span class="aside">※ 訓読には流派差があります。自分の読みが正しいと思うときは'
+                  + '「正解を見る」で標準の形と見比べてください。</span>'
+                : '') };
           return paint();
         }
-        graded = { ok: true, variant: g.status === 'variant' };
+        graded = { ok: true, variant: g.status === 'variant', via: g.via };
         PR.markClear(problem.id, 'K', Date.now());
         refreshOptionLabels();
         return paint();
@@ -363,8 +439,11 @@
       cards.forEach(c => c.classList.add('good'));
       r.className = 'ok';
       const body = graded.variant
-        ? '○ クリア！ 現代仮名遣いで書かれていますが正解にしています。'
-          + '歴史的仮名遣いでは次のように書きます。'
+        ? (graded.via === 'acceptable'
+            ? '○ クリア！ 標準として登録している読み方とは別の、正しい読み方です'
+              + '（訓読の流派差）。標準の形は次のとおりです。'
+            : '○ クリア！ 現代仮名遣いで書かれていますが正解にしています。'
+              + '歴史的仮名遣いでは次のように書きます。')
         : '○ クリア！ 読み順が正解と一致しました。';
       r.innerHTML = body + '<span class="kudashi">'
         + K.toKakikudashi(problem.tokens, expectedOrder()) + '</span>';
@@ -419,6 +498,7 @@
   $('problem-select').addEventListener('change', e => loadProblem(+e.target.value));
   $('step-select').addEventListener('change', e => {
     step = e.target.value;
+    stepLocked = true;   // 手で選んだら、問題を替えても自動で段を変えない
     loadProblem(+$('problem-select').value);
   });
   $('btn-grade').addEventListener('click', () => { if (problem) grade(); });
