@@ -15,6 +15,14 @@
  *   7. blank が kakikudashi の部分文字列で、かつ1回だけ現れること（空欄が一意に決まる）
  *   8. blankNg が3件あり、互いに重複せず、正解の blank とも重ならないこと
  *   9. confuse の参照先 ID が実在し、自分自身を指していないこと
+ *  10. 実例の白文に、その型の標識（markers）がひとつ以上現れること
+ *  11. yomi を持つ型は、実例の書き下しにその読みがひとつ以上現れること
+ *  12. 実例の問題の kuho に、その型のカテゴリが含まれること（型→問題と問題→型の往復が合うこと）
+ *
+ * 10〜12 は「解説面に嘘の実例が出る」事故を止めるためにある（2026-08-12 追加）。
+ * 10 だけでは足りない。標識が一般的な1字だと偶然の一致をすり抜けるため（実際に
+ * 「胡蝶」の胡が疑問詞の「胡」と一致して、疑問でない文が何ゾの実例になっていた）、
+ * 誤りやすい型には yomi を持たせて書き下し側からも照合する。
  */
 const fs = require('fs');
 const path = require('path');
@@ -40,6 +48,8 @@ const here    = __dirname;
 const kuho    = readJson(path.join(here, 'kuho.json'));
 const texts   = readJson(path.join(here, 'texts.json'));
 const textIds = new Set((texts.problems || []).map(p => p.id));
+const textById = new Map((texts.problems || []).map(p => [p.id, p]));
+const hakubun = p => (p.tokens || []).map(k => k.c).join('');
 
 // ---- 2. カテゴリ集合 -------------------------------------------------------
 const catKeys = Object.keys(kuho.categories || {});
@@ -86,9 +96,35 @@ types.forEach((t, idx) => {
     countByCat[t.category] = (countByCat[t.category] || 0) + 1;
   }
 
-  // 6. examples の実在
+  // 6・10〜12. examples の実在と、その実例がほんとうにこの型かどうか
+  if (t.yomi !== undefined && !Array.isArray(t.yomi)) err(where + ': yomi が配列ではありません');
   (Array.isArray(t.examples) ? t.examples : []).forEach(id => {
-    if (!textIds.has(id)) err(where + ': examples の「' + id + '」が texts.json にありません');
+    if (!textIds.has(id)){
+      err(where + ': examples の「' + id + '」が texts.json にありません');
+      return;
+    }
+    const p = textById.get(id);
+
+    // 10. 白文に標識が現れるか
+    const marks = Array.isArray(t.markers) ? t.markers : [];
+    const haku = hakubun(p);
+    if (marks.length && !marks.some(m => haku.indexOf(m) >= 0)){
+      err(where + ': 実例「' + id + '」の白文「' + haku + '」に標識 ' +
+          marks.join('・') + ' がひとつも現れません');
+    }
+
+    // 11. 書き下しに読みが現れるか（標識の偶然の一致を弾く）
+    const yomi = Array.isArray(t.yomi) ? t.yomi : [];
+    const kd = String(p.kakikudashi || '');
+    if (yomi.length && !yomi.some(y => kd.indexOf(y) >= 0)){
+      err(where + ': 実例「' + id + '」の書き下し「' + kd + '」に読み ' +
+          yomi.join('・') + ' がひとつも現れません');
+    }
+
+    // 12. 問題側のカテゴリタグと合っているか
+    if ((Array.isArray(p.kuho) ? p.kuho : []).indexOf(t.category) < 0){
+      err(where + ': 実例「' + id + '」の kuho に「' + t.category + '」がありません');
+    }
   });
 
   // 7. blank は kakikudashi にちょうど1回出ること（○○ に置き換える位置が一意に決まる）
@@ -131,6 +167,11 @@ CATEGORIES.forEach(k => {
 const used = new Set();
 types.forEach(t => (t.examples || []).forEach(id => used.add(id)));
 console.log('  texts.json と結び付いた問題: ' + used.size + ' / ' + textIds.size + ' 件');
+const noEx = types.filter(t => !(t.examples || []).length);
+console.log('  実例のない型: ' + noEx.length + ' / ' + types.length + ' 型' +
+            (noEx.length ? '（' + noEx.map(t => t.id).join('・') + '）' : ''));
+console.log('  ※ 実例が無くても出題はできる（クイズは型データだけで動く）。' +
+            '無いのは訓点モードの練習へ渡す橋だけ');
 console.log('----');
 
 if (errors.length){

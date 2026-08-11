@@ -19,14 +19,14 @@
 </style>
 </head>
 <body>
-<h1>返り点でみる漢文 — 回帰テスト <span class="version">v17</span></h1>
+<h1>返り点でみる漢文 — 回帰テスト <span class="version">v18</span></h1>
 <div id="summary">実行中…</div>
 <ul id="list"></ul>
-<script src="kanbun.js?v=17"></script>
-<script src="progress.js?v=17"></script>
-<script src="tests.js?v=17"></script>
+<script src="kanbun.js?v=18"></script>
+<script src="progress.js?v=18"></script>
+<script src="tests.js?v=18"></script>
 <script>
-fetch('texts.json?v=17')
+fetch('texts.json?v=18')
   .then(r => r.json())
   .then(texts => {
     const rs = window.KanbunTests.run(texts.problems);

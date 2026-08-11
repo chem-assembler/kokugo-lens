@@ -30,7 +30,8 @@
       "examples": [
         "rongo-manabite",
         "rongo-omoite",
-        "shungyo-1"
+        "shungyo-1",
+        "rongo-sokutatsu"
       ],
       "blank": "ず",
       "blankNg": [
@@ -56,7 +57,8 @@
       "meaning": "まだAしていない。",
       "note": "「未」は一字を二度読む再読文字。一度目は副詞「いまだ」、二度目は打ち消しの「ず」として読む。「今はまだ」という含みがあり、単純否定より先の可能性を残す。",
       "examples": [
-        "rongo-misei"
+        "rongo-misei",
+        "gaishi-imada"
       ],
       "blank": "ず",
       "blankNg": [
@@ -66,6 +68,9 @@
       ],
       "confuse": [
         "hitei-fu"
+      ],
+      "yomi": [
+        "未だ"
       ]
     },
     {
@@ -94,6 +99,10 @@
       "confuse": [
         "hitei-nijuu",
         "hitei-kinshi"
+      ],
+      "yomi": [
+        "無",
+        "莫"
       ]
     },
     {
@@ -107,13 +116,17 @@
         "莫",
         "毋",
         "無",
-        "不可"
+        "不可",
+        "休"
       ],
       "kakikudashi": "Aスルコトなカレ",
       "meaning": "Aしてはいけない。",
       "note": "相手の行為を止める打ち消し。「不可」を使うと「Aすべきではない」という当為の禁止になる。存在の否定と字が重なるため、命令の相手がいるかどうかで判断する。",
       "examples": [
-        "shonen-2"
+        "shonen-2",
+        "rongo-hodokosu",
+        "rongo-tomotosuru",
+        "keirin-1"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -123,6 +136,14 @@
       ],
       "confuse": [
         "hitei-nashi"
+      ],
+      "yomi": [
+        "なかれ",
+        "勿かれ",
+        "無かれ",
+        "莫かれ",
+        "休め",
+        "べからず"
       ]
     },
     {
@@ -142,7 +163,9 @@
       "meaning": "Aしないものはない（必ずAする）。",
       "note": "打ち消しを二つ重ねると、打ち消し同士が打ち消し合って強い肯定になる。ふつうに肯定で言うより断定の力が強い、という点が学習のねらい。",
       "examples": [
-        "mujun-3"
+        "mujun-3",
+        "rongo-fubo",
+        "mq-ryosai-onaji"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -229,7 +252,8 @@
       "examples": [
         "kobyu-choja",
         "shieki-reiou",
-        "shieki-heki"
+        "shieki-heki",
+        "rongo-tami"
       ],
       "blank": "しむ",
       "blankNg": [
@@ -267,6 +291,11 @@
       ],
       "confuse": [
         "shieki-shimu"
+      ],
+      "yomi": [
+        "命じ",
+        "勧め",
+        "召し"
       ]
     },
     {
@@ -372,6 +401,10 @@
       ],
       "confuse": [
         "ukemi-ru"
+      ],
+      "yomi": [
+        "ところと為る",
+        "所と為る"
       ]
     },
     {
@@ -389,9 +422,7 @@
       "kakikudashi": "なんゾAスル",
       "meaning": "どうしてAするのか。",
       "note": "理由を素直にたずねる形。文末が連体形「〜する」で結ばれ、答えを求めている。同じ字で反語にもなるため、文末の形が見分けの決め手になる。",
-      "examples": [
-        "gimon-kocho"
-      ],
+      "examples": [],
       "blank": "なんゾ",
       "blankNg": [
         "あニ",
@@ -400,6 +431,12 @@
       ],
       "confuse": [
         "hango-nanzo"
+      ],
+      "yomi": [
+        "何ぞ",
+        "胡ぞ",
+        "奚ぞ",
+        "曷ぞ"
       ]
     },
     {
@@ -426,6 +463,10 @@
       ],
       "confuse": [
         "sentaku-izureka"
+      ],
+      "yomi": [
+        "誰",
+        "孰"
       ]
     },
     {
@@ -454,6 +495,45 @@
       ],
       "confuse": [
         "gimon-nanzo"
+      ],
+      "yomi": [
+        "如何",
+        "奈何",
+        "いかん"
+      ]
+    },
+    {
+      "id": "gimon-ka",
+      "category": "gimon",
+      "label": "文末の疑問",
+      "name": "文末の疑問（乎・与・邪）",
+      "pattern": "A 乎",
+      "markers": [
+        "乎",
+        "与",
+        "邪",
+        "歓",
+        "耶"
+      ],
+      "kakikudashi": "Aスルカ",
+      "meaning": "Aするのか。",
+      "note": "文末に置いて問いにする字。読まずに送り仮名の「か」として書き下す（仮名書きする字）。「何ゾ」のような疑問詞は要らず、字ひとつで問いになる。同じ字が反語にも使われるので、答えを求めていれば疑問、逆の意味を言いたいだけなら反語と見分ける。",
+      "blank": "カ",
+      "blankNg": [
+        "ンや",
+        "ずや",
+        "ノみ"
+      ],
+      "confuse": [
+        "hango-ani",
+        "gimon-nanzo"
+      ],
+      "examples": [
+        "gimon-kocho",
+        "rongo-hakarite"
+      ],
+      "yomi": [
+        "か"
       ]
     },
     {
@@ -473,7 +553,8 @@
       "note": "問いの形をとりながら、じつは強く打ち消している。文末の推量「ん」と疑問の助詞「や」がそろうのが目印。答えを求めていないので、返事を待つ疑問とは別物。",
       "examples": [
         "hango-ani",
-        "hango-senri"
+        "hango-senri",
+        "mq-mukei-ani"
       ],
       "blank": "ンや",
       "blankNg": [
@@ -483,6 +564,9 @@
       ],
       "confuse": [
         "eitan-anizuya"
+      ],
+      "yomi": [
+        "豈に"
       ]
     },
     {
@@ -512,6 +596,11 @@
       ],
       "confuse": [
         "gimon-nanzo"
+      ],
+      "yomi": [
+        "安くんぞ",
+        "焉くんぞ",
+        "悪くんぞ"
       ]
     },
     {
@@ -528,7 +617,11 @@
       "kakikudashi": "なんゾAセンや",
       "meaning": "どうしてAしようか、いやしない。",
       "note": "疑問の「何ゾ〜スル」と字づらは同じで、文末が「〜んや」になると反語になる。白文だけでは決まらず訓読で決まる、という漢文らしい対。",
-      "examples": [],
+      "examples": [
+        "gaishi-seija",
+        "mq-ryosai-koshu",
+        "gaishi-omomuku"
+      ],
       "blank": "センや",
       "blankNg": [
         "スルヤ",
@@ -537,6 +630,9 @@
       ],
       "confuse": [
         "gimon-nanzo"
+      ],
+      "yomi": [
+        "何ぞ"
       ]
     },
     {
@@ -554,7 +650,8 @@
       "note": "二つを並べて後ろに置いたほうを上とする形。「〜に如かず」と読み、下に来た語が優れているほう。どちらが上かを取り違えやすいので、訳と合わせて確認する。",
       "examples": [
         "hyakubun",
-        "hikaku-tenji"
+        "hikaku-tenji",
+        "rongo-tomotosuru"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -576,13 +673,16 @@
         "莫如",
         "莫若",
         "無如",
-        "無若"
+        "無若",
+        "莫過",
+        "無過"
       ],
       "kakikudashi": "Aニしクハなシ",
       "meaning": "Aに及ぶものはない（Aが一番だ）。",
       "note": "比較の形に存在の打ち消しを重ねて最上級を表す。「及ぶものがない」＝「それが最高だ」という言い回し。比較の「〜に如かず」と一字違いなので並べて覚える。",
       "examples": [
-        "hikaku-mushiku"
+        "hikaku-mushiku",
+        "mq-riennso-sugiru"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -623,6 +723,39 @@
       ]
     },
     {
+      "id": "hikaku-gotoshi",
+      "category": "hikaku",
+      "label": "比況",
+      "name": "比況（如・若・猶）",
+      "pattern": "A 如 B",
+      "markers": [
+        "如",
+        "若",
+        "猶"
+      ],
+      "kakikudashi": "AハBノごとシ",
+      "meaning": "AはBのようだ。",
+      "note": "「AはBのようだ」とたとえる形。「猶」は再読文字で「なホ〜ノごとシ」と二度読む。「如」「若」は比較の「不如」と字が同じなので、上に打ち消しが付いていないかで見分ける。",
+      "blank": "ごとシ",
+      "blankNg": [
+        "しカず",
+        "なカレ",
+        "ノみ"
+      ],
+      "confuse": [
+        "hikaku-shikazu",
+        "hikaku-shikuhanashi"
+      ],
+      "examples": [
+        "rongo-sugitaru",
+        "keirin-3"
+      ],
+      "yomi": [
+        "ごとし",
+        "如し"
+      ]
+    },
+    {
       "id": "sentaku-yoriha",
       "category": "sentaku",
       "label": "選択",
@@ -638,7 +771,8 @@
       "meaning": "Aするよりは、むしろBするほうがよい。",
       "note": "二つの選択肢を並べ、後ろのほうを選ばせる形。前半に「その〜んよりは」、後半に「むしろ」が来るのが目印。比較との違いは、選ぶ主体の意思が入ること。",
       "examples": [
-        "sentaku-ken"
+        "sentaku-ken",
+        "keiko-gyugo"
       ],
       "blank": "むしロ",
       "blankNg": [
@@ -648,6 +782,9 @@
       ],
       "confuse": [
         "sentaku-izureka"
+      ],
+      "yomi": [
+        "寧ろ"
       ]
     },
     {
@@ -775,7 +912,8 @@
       "meaning": "ただAだけだ。",
       "note": "上の副詞と文末の「のみ」が呼応して範囲を一つに絞る形。どちらか片方だけでも限定になるので、上下のどちらに目印があるかを確かめる。",
       "examples": [
-        "gentei-tada"
+        "gentei-tada",
+        "mq-gozasso-tada"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -786,6 +924,13 @@
       "confuse": [
         "gentei-ruika",
         "gentei-nomi"
+      ],
+      "yomi": [
+        "唯だ",
+        "惟だ",
+        "但だ",
+        "ただ",
+        "独り"
       ]
     },
     {
@@ -804,7 +949,8 @@
       "meaning": "Aするだけだ。",
       "note": "文末の字だけで限定と断定を同時に表す形。上に「唯」がなくても限定になる。置き字と間違えやすいが、これは読む字である点に注意。",
       "examples": [
-        "moshi-hyappo"
+        "moshi-hyappo",
+        "gaishi-mamoru"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -827,7 +973,11 @@
         "非唯",
         "不独",
         "非独",
-        "豈唯"
+        "豈唯",
+        "非徒",
+        "不徒",
+        "不惟",
+        "非惟"
       ],
       "kakikudashi": "たダニAノみナラず、まタB",
       "meaning": "AだけでなくBもだ。",
@@ -861,7 +1011,8 @@
       "meaning": "AでさえBなのだから、ましてCはなおさらだ。",
       "note": "程度の軽い例をまず低く置き（抑）、そのうえで本命を高く持ち上げる（揚）形。前半の「すら」と後半の「いはんや〜をや」が対になる。",
       "examples": [
-        "senju-shiba"
+        "senju-shiba",
+        "mq-gozasso-iwanya"
       ],
       "blank": "いはンヤ",
       "blankNg": [
@@ -871,6 +1022,9 @@
       ],
       "confuse": [
         "yokuyo-nao"
+      ],
+      "yomi": [
+        "況んや"
       ]
     },
     {
@@ -896,6 +1050,9 @@
       ],
       "confuse": [
         "yokuyo-iwanya"
+      ],
+      "yomi": [
+        "況んや"
       ]
     },
     {
@@ -921,6 +1078,9 @@
       ],
       "confuse": [
         "hango-ani"
+      ],
+      "yomi": [
+        "豈に"
       ]
     },
     {
@@ -947,6 +1107,9 @@
       ],
       "confuse": [
         "eitan-anizuya"
+      ],
+      "yomi": [
+        "亦"
       ]
     },
     {
@@ -963,9 +1126,7 @@
       "kakikudashi": "なんゾそレAスルや",
       "meaning": "なんとまあAすることよ。",
       "note": "疑問の形をとりながら、答えではなく驚きや感嘆を述べる形。理由を問う疑問の「何ゾ」と字が同じなので、間に「其」が挟まるかどうかを目印にする。",
-      "examples": [
-        "eitan-yukumono"
-      ],
+      "examples": [],
       "blank": "そレ",
       "blankNg": [
         "これ",
@@ -974,6 +1135,42 @@
       ],
       "confuse": [
         "gimon-nanzo"
+      ],
+      "yomi": [
+        "何ぞ其れ"
+      ]
+    },
+    {
+      "id": "eitan-kana",
+      "category": "eitan",
+      "label": "文末の詠嘆",
+      "name": "詠嘆（A 哉・A 夫）",
+      "pattern": "A 哉",
+      "markers": [
+        "哉",
+        "夫",
+        "矣"
+      ],
+      "kakikudashi": "Aナルかな",
+      "meaning": "Aだなあ。",
+      "note": "文末の「哉」「夫」を「かな」と読んで感動を表す。疑問・反語の「哉」と同じ字なので、問いになっていなければ詠嘆と見る。「賢なるかな回や」のように、言いたい語を前に出して主語を後ろに回す倒置の形をとることが多い。",
+      "blank": "かな",
+      "blankNg": [
+        "ンや",
+        "スルカ",
+        "ノみ"
+      ],
+      "confuse": [
+        "eitan-mata",
+        "hango-ani"
+      ],
+      "examples": [
+        "eitan-yukumono",
+        "rongo-kenkai",
+        "mq-ryosai-warau"
+      ],
+      "yomi": [
+        "かな"
       ]
     }
   ]
