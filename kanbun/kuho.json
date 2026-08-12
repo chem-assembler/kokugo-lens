@@ -63,7 +63,11 @@
         "bakusetsu-kau",
         "bakusetsu-shirazu",
         "shisetsu-tokezu",
-        "touka-iunitarazu"
+        "touka-iunitarazu",
+        "airen-arau",
+        "airen-hobikorazu",
+        "roshitsu-sen",
+        "baiyu-okina"
       ],
       "blank": "ず",
       "blankNg": [
@@ -95,7 +99,8 @@
         "chosan-imada",
         "suiko-imada",
         "kanpi-bishi",
-        "kanpeki-yakusoku"
+        "kanpeki-yakusoku",
+        "touka-yamai"
       ],
       "blank": "ず",
       "blankNg": [
@@ -145,7 +150,10 @@
         "bakusetsu-uma",
         "shisetsu-koreyue",
         "shisetsu-seijin",
-        "touka-gishin"
+        "touka-gishin",
+        "touka-tsu",
+        "roshitsu-koju",
+        "roshitsu-itokake"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -191,7 +199,8 @@
         "rongo-habakaru",
         "junshi-yamubekarazu",
         "koumon-isogi",
-        "shotan-nakare"
+        "shotan-nakare",
+        "airen-mochiasobu"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -282,7 +291,8 @@
         "mq-gusho-boko",
         "funkei-ryouko",
         "bakusetsu-tsune",
-        "shisetsu-shikazu"
+        "shisetsu-shikazu",
+        "touka-mayou"
       ],
       "blank": "ニハ",
       "blankNg": [
@@ -789,7 +799,8 @@
         "shotan-kaikei",
         "hakui-zehi",
         "gakuyo-itsuka",
-        "bakusetsu-shinni"
+        "bakusetsu-shinni",
+        "baiyu-shiruka"
       ],
       "yomi": [
         "か"
@@ -856,7 +867,8 @@
         "soshi-warewoshirazu",
         "koumon-shisura",
         "senju-ikeruuma",
-        "bakusetsu-izukunzo"
+        "bakusetsu-izukunzo",
+        "baiyu-izukunzo"
       ],
       "blank": "セン",
       "blankNg": [
@@ -954,7 +966,8 @@
         "rongo-urami",
         "rongo-naniomotte",
         "rongo-nanikaaran",
-        "gaika-hajizu"
+        "gaika-hajizu",
+        "baiyu-seinarazuya"
       ]
     },
     {
@@ -1276,7 +1289,10 @@
         "rongo-tadajinsha",
         "soshi-kondon",
         "kutsugen-kiyoshi",
-        "kutsugen-hanatare"
+        "kutsugen-hanatare",
+        "airen-kiku",
+        "roshitsu-kaoru",
+        "baiyu-unazuku"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1321,7 +1337,8 @@
         "mq-chihoku-uramu",
         "kiyu-nomi",
         "koumon-nomi",
-        "kenro-nomi"
+        "kenro-nomi",
+        "baiyu-nomi"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -1584,7 +1601,8 @@
         "mq-ryosai-warau",
         "gukou-hanahadashi",
         "rongo-otoroe",
-        "kenro-kanashii"
+        "kenro-kanashii",
+        "airen-mube"
       ],
       "yomi": [
         "かな"
