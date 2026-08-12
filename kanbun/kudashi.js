@@ -33,7 +33,7 @@
     step !== 'K1' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=45')
+  fetch('texts.json?v=46')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -470,7 +470,7 @@
     let html = '出典: ' + problem.source.work + '（' + problem.source.chapter + '）';
     if (graded && graded.ok){
       html += '<br>意味: ' + problem.meaning;
-      if (problem.note) html += '<br><span class="note">※ ' + problem.note + '</span>';
+      if (problem.note) html += '<br><span class="note">※ ' + K.noteHtml(problem.note) + '</span>';
     }
     $('meta').innerHTML = html;
   }

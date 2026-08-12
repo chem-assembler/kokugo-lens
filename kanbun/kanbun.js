@@ -453,7 +453,17 @@ const Kanbun = (() => {
     return errs;
   }
 
-  return { readOrder, toKakikudashi, tokenReading, grade, difficulty,
+  // ---- note の描画 -------------------------------------------------------
+  // note は innerHTML に差し込まれる。667問中55問が **強調** の書き方で書かれており、
+  // そのままではアスタリスクが画面に出てしまうので、ここで <strong> に変える。
+  // 併せて < > & を先に逃がす（今のデータには無いが、素の連結より安全な形にしておく）。
+  function noteHtml(note){
+    const esc = String(note == null ? '' : note)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return esc.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  return { readOrder, toKakikudashi, tokenReading, grade, difficulty, noteHtml,
            normalizeKana, kanaEquals, matchesKakikudashi, validateProblem,
            canonMarks, isPlaced, marksOf, numMarks, hasRe, isReread,
            prevReadable, nextReadable,

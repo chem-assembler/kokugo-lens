@@ -402,6 +402,19 @@
       });
     }
 
+    // note は innerHTML に差し込まれるので、**強調** がそのまま画面に出ていた（55問が該当）。
+    test('note: **強調** が <strong> になり、記号が画面に残らない', () => {
+      eq(K.noteHtml('ふつうの注記'), 'ふつうの注記');
+      eq(K.noteHtml('**返り点が1つも要らない文**で、上から順に読めばよい'),
+         '<strong>返り点が1つも要らない文</strong>で、上から順に読めばよい');
+      eq(K.noteHtml('**A**と**B**が同居'), '<strong>A</strong>と<strong>B</strong>が同居');
+      eq(K.noteHtml('<script>&'), '&lt;script&gt;&amp;');   // 先に逃がしてから強調に変える
+      eq(K.noteHtml(undefined), '');
+      for (const p of problems)
+        if (p.note && K.noteHtml(p.note).indexOf('**') >= 0)
+          throw new Error(p.id + ' の note にアスタリスクが残る');
+    });
+
     // 返り点の階層は内側から順に使う。上下点は一二点をまたぐときの印なので、
     // **一二点がひとつも無いのに上下点を使う**のは訓点として誤り。読み順は正しく出るため
     // 二重帳簿（validateProblem）を素通りし、実際に shiki-taiha-shingun が
