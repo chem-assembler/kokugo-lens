@@ -85,20 +85,33 @@ function deriveMarks(tokens, order){
     else if (groups.length) groups[groups.length - 1].rel.push(o);
     else return null;                       // 先頭から返るのはありえない
   }
+  // 番号つきの階層は**使い回せない場合がある**。ある階層で待っている字は、
+  // その階層の「一」が読まれた瞬間にまとめて解放される。だから、待っているあいだに
+  // 別の組の「一」が挟まると、そこで巻き添えで解放されてしまう。
+  // 「憂患に生き安楽に死するを知る」がまさにそれで、「知」を「生」と同じ一二点に置くと
+  // 「患」を読んだ時点で「生」といっしょに読まれてしまう。
+  // そこで、待つ区間（返り先 … 起点）が他の組の起点をまたぐ階層は使わない。
+  const spans = {};
+  const pick = (lo, t) => {
+    for (let lv = 1; lv <= 4; lv++){
+      const s = spans[lv] || (spans[lv] = []);
+      if (!s.some(x => (x.t > lo && x.t < t) || (x.lo < t && t < x.t))){ s.push({ lo, t }); return lv; }
+    }
+    return 0;                               // 甲乙丙より外は表示できない
+  };
   for (const g of groups){
-    let prev = g.t, lv = 1, i = 0;
+    let prev = g.t, i = 0;
     while (i < g.rel.length){
       const r = g.rel[i];
       if (r === prevReadable(prev)){        // 隣接＝レ点
         marks[r].push({ re: true }); prev = r; i++; continue;
       }
-      if (lv > 4) return null;              // 甲乙丙より外は表示できない
+      const run = [];                       // 1階層で送れるのは「二」「三」の2つまで
+      while (i < g.rel.length && run.length < 2) run.push(g.rel[i++]);
+      const lv = pick(Math.min.apply(null, run), prev);
+      if (!lv) return null;
       marks[prev].push({ lv, n: 1 });       // 返り先の起点が「一」
-      let k = 1;
-      while (i < g.rel.length && k < 3){
-        marks[g.rel[i]].push({ lv, n: ++k }); prev = g.rel[i]; i++;
-      }
-      lv++;
+      run.forEach((x, n) => { marks[x].push({ lv, n: n + 2 }); prev = x; });
     }
   }
   return marks;

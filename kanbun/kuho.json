@@ -43,7 +43,11 @@
         "rongo-togamezu",
         "rongo-kamon",
         "rongo-akazu",
-        "rongo-nori"
+        "rongo-nori",
+        "moshi-megurite",
+        "roushi-arasowazu",
+        "roushi-tenmou",
+        "roushi-hazukashime"
       ],
       "blank": "ず",
       "blankNg": [
@@ -112,7 +116,8 @@
         "gukou-shishison",
         "boufu-nizu",
         "rongo-shinnashi",
-        "rongo-yuunashi"
+        "rongo-yuunashi",
+        "moshi-zennarazu"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -321,7 +326,10 @@
         "mq-chihoku-uramu",
         "shisetsu-tareka",
         "sekiheki-iyashikumo",
-        "rongo-umarenagara"
+        "rongo-umarenagara",
+        "moshi-hei",
+        "moshi-hitoniarazu",
+        "roushi-michi"
       ]
     },
     {
@@ -674,7 +682,8 @@
         "shiki-ikanisen",
         "shiki-sui",
         "mq-gozasso-tada",
-        "mujun-ikan"
+        "mujun-ikan",
+        "moshi-warau"
       ],
       "blank": "いかんセン",
       "blankNg": [
@@ -827,7 +836,8 @@
         "gaishi-omomuku",
         "mq-etsubi-sukuu",
         "mq-gozasso-kokushi",
-        "gukou-shikamo"
+        "gukou-shikamo",
+        "moshi-koto"
       ],
       "blank": "センや",
       "blankNg": [
@@ -907,7 +917,8 @@
         "mq-zaien-senyo",
         "mq-zaien-keiki",
         "rongo-konomu",
-        "rongo-tanoshimu"
+        "rongo-tanoshimu",
+        "moshi-chinori"
       ],
       "blank": "しカず",
       "blankNg": [

@@ -49,7 +49,11 @@ const problems = JSON.parse(raw.toString('utf8')).problems || [];
 // ルビの重複に見えるが正しいもの。**送り仮名が助詞である場合だけ**ここに書く
 const ALLOW = {
   'mq-zaien-senyo:皮': '送り仮名の「は」は助詞。' +
-    '「皮（かは）は」で正しい'
+    '「皮（かは）は」で正しい',
+  'moshi-engi:魚': '送り仮名の「を」は助詞。' +
+    '「魚（うを）を」で正しい',
+  'moshi-kemono:獣': '送り仮名の「の」は助詞。' +
+    '「獣（けもの）の」で正しい'
 };
 
 const hira = s => String(s).replace(/[ァ-ヶ]/g,
