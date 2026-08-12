@@ -70,7 +70,12 @@
         "baiyu-okina",
         "baiyu-ana",
         "sekiheki-seifu",
-        "sekiheki-tsukizu"
+        "sekiheki-tsukizu",
+        "rokusai-1",
+        "chikurikan-3",
+        "kaikyo-3",
+        "jininja-4",
+        "seirinheki-2"
       ],
       "blank": "ず",
       "blankNg": [
@@ -105,7 +110,10 @@
         "kanpeki-yakusoku",
         "touka-yamai",
         "toriden-yusho",
-        "sekiheki-ikusha"
+        "sekiheki-ikusha",
+        "getsuya-4",
+        "bogaku-2",
+        "kangaku-3"
       ],
       "blank": "ず",
       "blankNg": [
@@ -159,7 +167,9 @@
         "touka-tsu",
         "roshitsu-koju",
         "roshitsu-itokake",
-        "sekiheki-mujinzou"
+        "sekiheki-mujinzou",
+        "sogenji-4",
+        "kaikyo-2"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -206,7 +216,10 @@
         "junshi-yamubekarazu",
         "koumon-isogi",
         "shotan-nakare",
-        "airen-mochiasobu"
+        "airen-mochiasobu",
+        "ryoshu-kan-3",
+        "kinruii-1",
+        "kinruii-4"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -748,7 +761,8 @@
         "mq-gozasso-tada",
         "mujun-ikan",
         "moshi-warau",
-        "gaika-gu"
+        "gaika-gu",
+        "bogaku-1"
       ],
       "blank": "いかんセン",
       "blankNg": [
@@ -918,7 +932,8 @@
         "moshi-koto",
         "koumon-nanzoji",
         "gaika-watari",
-        "toriden-gaei"
+        "toriden-gaei",
+        "ryoshu-shikan-3"
       ],
       "blank": "センや",
       "blankNg": [
@@ -1305,7 +1320,11 @@
         "airen-kiku",
         "roshitsu-kaoru",
         "baiyu-unazuku",
-        "sekiheki-seifu2"
+        "sekiheki-seifu2",
+        "kokakuro-4",
+        "chikurikan-1",
+        "kosetsu-4",
+        "jininja-3"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1323,7 +1342,8 @@
         "但だ",
         "ただ",
         "独り",
-        "特だ"
+        "特だ",
+        "只だ"
       ]
     },
     {
