@@ -38,7 +38,12 @@
         "chihi-hyakusen",
         "kokushu-fune",
         "suiko-oboezu",
-        "torou-ushiro"
+        "torou-ushiro",
+        "rongo-amaneku",
+        "rongo-togamezu",
+        "rongo-kamon",
+        "rongo-akazu",
+        "rongo-nori"
       ],
       "blank": "ず",
       "blankNg": [
@@ -105,7 +110,9 @@
         "mq-gusho-mou",
         "saio-nigeru",
         "gukou-shishison",
-        "boufu-nizu"
+        "boufu-nizu",
+        "rongo-shinnashi",
+        "rongo-yuunashi"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -147,7 +154,8 @@
         "keirin-1",
         "mq-gozasso-tanetsugi",
         "sekiheki-iyashikumo",
-        "kobyu-nakare"
+        "kobyu-nakare",
+        "rongo-habakaru"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -201,7 +209,8 @@
         "mq-gusho-mou",
         "mq-etsubi-sukuu",
         "mq-bunkan-bensezu",
-        "mq-riennso-ayamachi"
+        "mq-riennso-ayamachi",
+        "rongo-chikara"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -311,7 +320,8 @@
         "mq-chihoku-senja",
         "mq-chihoku-uramu",
         "shisetsu-tareka",
-        "sekiheki-iyashikumo"
+        "sekiheki-iyashikumo",
+        "rongo-umarenagara"
       ]
     },
     {
@@ -716,7 +726,8 @@
         "mq-riennso-oshimu",
         "kiyu-masani",
         "torou-nanji",
-        "sokou-taruka"
+        "sokou-taruka",
+        "rongo-majiwari"
       ],
       "yomi": [
         "か"
@@ -869,7 +880,10 @@
         "sekiheki-moutoku",
         "kobyu-hashiru",
         "saio-nanzo",
-        "kokushu-madoi"
+        "kokushu-madoi",
+        "rongo-urami",
+        "rongo-naniomotte",
+        "rongo-nanikaaran"
       ]
     },
     {
@@ -891,7 +905,9 @@
         "rongo-tomotosuru",
         "mq-riennso-tori",
         "mq-zaien-senyo",
-        "mq-zaien-keiki"
+        "mq-zaien-keiki",
+        "rongo-konomu",
+        "rongo-tanoshimu"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -1018,7 +1034,8 @@
       "examples": [
         "sentaku-ken",
         "keiko-gyugo",
-        "mq-mukei-mushiro"
+        "mq-mukei-mushiro",
+        "rongo-mo"
       ],
       "blank": "むしロ",
       "blankNg": [
@@ -1175,7 +1192,8 @@
         "mq-etsubi-roteki",
         "mq-gozasso-tanetsugi",
         "mq-riennso-ayamachi",
-        "saio-hitori"
+        "saio-hitori",
+        "rongo-tadajinsha"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1478,7 +1496,8 @@
         "eitan-yukumono",
         "rongo-kenkai",
         "mq-ryosai-warau",
-        "gukou-hanahadashi"
+        "gukou-hanahadashi",
+        "rongo-otoroe"
       ],
       "yomi": [
         "かな"
