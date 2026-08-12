@@ -74,7 +74,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=46')
+  fetch('texts.json?v=47')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -302,6 +302,15 @@
         kt.textContent = markSetLabel(marks) === 'なし' ? '' : markSetLabel(marks);
         cell.appendChild(kt);
       }
+      // 熟語返り（連読符）。二字で一語なので、返り点は先頭字にだけ付き、
+      // 二字は続けて読む。その「続けて読む」を示す短い縦棒を字と字の境に引く。
+      // 描けるのは隣り合う二字のときだけ（置き字を挟む join は tests.js が止める）
+      if (t.join && K.nextReadable(problem.tokens, i) === i + 1){
+        const j = document.createElement('span');
+        j.className = 'joiner';
+        j.title = '熟語返り（この二字は続けて読む）';
+        cell.appendChild(j);
+      }
       if (badge.has(i)){
         const b = document.createElement('span');
         b.className = 'order-badge';
@@ -333,12 +342,16 @@
     $('palette').style.display = isMarkMode() ? 'block' : 'none';
     $('choices').style.display = (mode === 'L2') ? 'block' : 'none';
     $('btn-grade').style.display = isMarkMode() ? 'inline-block' : 'none';
-    $('mode-hint').textContent = ({
+    // 連読符は打つものではなく最初から見えている印なので、どのモードでも同じ説明を足す
+    // （出るのは熟語返りを持つ問題だけ＝いまは4問）
+    const joinHint = problem.tokens.some(t => t.join)
+      ? '　字と字の間の朱い縦棒は熟語返り（連読符）。その二字は続けて読みます。' : '';
+    $('mode-hint').textContent = (({
       L1: '訓点に従って、読む順に字をタップしてください（再読文字は2回タップ）',
       L3: '字をタップして、打つ訓点を選んでください（もう一度押すと消えます）',
       L4: '返り点を打ち、「？」の字は送り仮名も選んでください（両方そろって正解）',
       L6: '上の書き下し文のとおりに読めるよう、返り点を打ってください（送り仮名は隠してあります）'
-    })[mode] || '';
+    })[mode] || '') + joinHint;
     if (mode === 'L2') renderChoices();
     renderOkuriPanel();
 

@@ -88,6 +88,12 @@ const E = (id, m) => errs.push(id + ': ' + m);
   if (p.note && (p.note.match(/\*\*/g) || []).length % 2 !== 0){
     E(id, 'note の ** が対になっていない（強調は **…** で閉じる）');
   }
+  // 連読符は隣り合う二字の境に縦棒を引いて描く。置き字を挟むと棒が引けない
+  p.tokens.forEach((t, i) => {
+    if (t.join && K.nextReadable(p.tokens, i) !== i + 1){
+      E(id, '「' + t.c + '」の join が隣の字を指していない（連読符を描けない）');
+    }
+  });
   try { K.difficulty(p); } catch (e){ E(id, 'difficulty が例外: ' + e.message); }
 });
 

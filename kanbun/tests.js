@@ -402,6 +402,19 @@
       });
     }
 
+    // 連読符は「字と字の境をまたぐ縦棒」として描く（game.js）。置き字を挟んで
+    // 離れた字に join すると棒の引きようがなく、画面と読み順が食い違う。
+    // いまのデータは4問5トークンとも隣り合っているので、その前提を固定する。
+    test('熟語返り: join の相手は隣の字（連読符を引ける形になっている）', () => {
+      for (const p of problems)
+        p.tokens.forEach((t, i) => {
+          if (!t.join) return;
+          const nx = K.nextReadable(p.tokens, i);
+          if (nx !== i + 1)
+            throw new Error(p.id + ' の「' + t.c + '」が離れた字に join している（' + i + '→' + nx + '）');
+        });
+    });
+
     // note は innerHTML に差し込まれるので、**強調** がそのまま画面に出ていた（55問が該当）。
     test('note: **強調** が <strong> になり、記号が画面に残らない', () => {
       eq(K.noteHtml('ふつうの注記'), 'ふつうの注記');
