@@ -75,7 +75,12 @@
         "chikurikan-3",
         "kaikyo-3",
         "jininja-4",
-        "seirinheki-2"
+        "seirinheki-2",
+        "rongo-madowazu",
+        "rongo-washite",
+        "rongo-doushite",
+        "rongo-hitoshikarazu",
+        "moshi-rinkoku"
       ],
       "blank": "ず",
       "blankNg": [
@@ -113,7 +118,9 @@
         "sekiheki-ikusha",
         "getsuya-4",
         "bogaku-2",
-        "kangaku-3"
+        "kangaku-3",
+        "rongo-tokuwo",
+        "rongo-tsukaezu"
       ],
       "blank": "ず",
       "blankNg": [
@@ -169,7 +176,10 @@
         "roshitsu-itokake",
         "sekiheki-mujinzou",
         "sogenji-4",
-        "kaikyo-2"
+        "kaikyo-2",
+        "rongo-enryo",
+        "rongo-shishi",
+        "rongo-tatazu"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -274,7 +284,8 @@
         "mq-etsubi-sukuu",
         "mq-bunkan-bensezu",
         "mq-riennso-ayamachi",
-        "rongo-chikara"
+        "rongo-chikara",
+        "rongo-koki"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -687,7 +698,8 @@
         "raiki-nanisure",
         "mq-zaien-tenshi",
         "kanpi-nanzo",
-        "gakuyo-kotonaru"
+        "gakuyo-kotonaru",
+        "torou-sonurasu"
       ],
       "blank": "なんゾ",
       "blankNg": [
@@ -890,7 +902,9 @@
         "koumon-shisura",
         "senju-ikeruuma",
         "bakusetsu-izukunzo",
-        "baiyu-izukunzo"
+        "baiyu-izukunzo",
+        "rongo-kosei",
+        "rongo-tsukaezu"
       ],
       "blank": "セン",
       "blankNg": [
@@ -933,7 +947,8 @@
         "koumon-nanzoji",
         "gaika-watari",
         "toriden-gaei",
-        "ryoshu-shikan-3"
+        "ryoshu-shikan-3",
+        "moshi-nanzokanarazu"
       ],
       "blank": "センや",
       "blankNg": [
@@ -993,7 +1008,8 @@
         "gaika-hajizu",
         "baiyu-seinarazuya",
         "sekiheki-somei",
-        "sekiheki-urayaman"
+        "sekiheki-urayaman",
+        "rongo-shishite"
       ]
     },
     {
@@ -1020,7 +1036,8 @@
         "rongo-tanoshimu",
         "moshi-chinori",
         "junshi-shuyu",
-        "shisetsu-shikazu"
+        "shisetsu-shikazu",
+        "rongo-manabuni"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -1123,7 +1140,8 @@
       "examples": [
         "rongo-sugitaru",
         "keirin-3",
-        "mq-chihoku-shoushou"
+        "mq-chihoku-shoushou",
+        "rongo-tokuwo"
       ],
       "yomi": [
         "ごとし",
@@ -1324,7 +1342,8 @@
         "kokakuro-4",
         "chikurikan-1",
         "kosetsu-4",
-        "jininja-3"
+        "jininja-3",
+        "rongo-jouchi"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1372,7 +1391,9 @@
         "koumon-nomi",
         "kenro-nomi",
         "baiyu-nomi",
-        "baiyu-warehata"
+        "baiyu-warehata",
+        "moshi-jingi",
+        "rongo-oi"
       ],
       "blank": "ノみ",
       "blankNg": [

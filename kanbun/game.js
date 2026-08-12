@@ -74,7 +74,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=42')
+  fetch('texts.json?v=43')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
