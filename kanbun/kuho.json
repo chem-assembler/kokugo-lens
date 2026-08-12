@@ -67,7 +67,10 @@
         "airen-arau",
         "airen-hobikorazu",
         "roshitsu-sen",
-        "baiyu-okina"
+        "baiyu-okina",
+        "baiyu-ana",
+        "sekiheki-seifu",
+        "sekiheki-tsukizu"
       ],
       "blank": "ず",
       "blankNg": [
@@ -100,7 +103,9 @@
         "suiko-imada",
         "kanpi-bishi",
         "kanpeki-yakusoku",
-        "touka-yamai"
+        "touka-yamai",
+        "toriden-yusho",
+        "sekiheki-ikusha"
       ],
       "blank": "ず",
       "blankNg": [
@@ -153,7 +158,8 @@
         "touka-gishin",
         "touka-tsu",
         "roshitsu-koju",
-        "roshitsu-itokake"
+        "roshitsu-itokake",
+        "sekiheki-mujinzou"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -413,7 +419,8 @@
         "mq-etsubi-kishin",
         "mq-chihoku-senja",
         "mujun-kotafuru",
-        "senju-senkin"
+        "senju-senkin",
+        "sekiheki-ippun"
       ]
     },
     {
@@ -534,7 +541,8 @@
       "meaning": "AをしてBさせる。",
       "note": "白文に使役の字がなくても、文脈から使役と判断して送り仮名「をして」と助動詞「しむ」を補う形。訓読する側が使役だと決める点が、助字のある形との違い。",
       "examples": [
-        "moshi-kokorozashi"
+        "moshi-kokorozashi",
+        "sekiheki-mau"
       ],
       "blank": "ヲシテ",
       "blankNg": [
@@ -909,7 +917,8 @@
         "gukou-shikamo",
         "moshi-koto",
         "koumon-nanzoji",
-        "gaika-watari"
+        "gaika-watari",
+        "toriden-gaei"
       ],
       "blank": "センや",
       "blankNg": [
@@ -967,7 +976,9 @@
         "rongo-naniomotte",
         "rongo-nanikaaran",
         "gaika-hajizu",
-        "baiyu-seinarazuya"
+        "baiyu-seinarazuya",
+        "sekiheki-somei",
+        "sekiheki-urayaman"
       ]
     },
     {
@@ -1188,7 +1199,8 @@
         "katei-moshi",
         "mq-bunkan-isogi",
         "mq-riennso-moshi",
-        "kanpi-fururu"
+        "kanpi-fururu",
+        "toriden-batsu"
       ],
       "blank": "もシ",
       "blankNg": [
@@ -1292,7 +1304,8 @@
         "kutsugen-hanatare",
         "airen-kiku",
         "roshitsu-kaoru",
-        "baiyu-unazuku"
+        "baiyu-unazuku",
+        "sekiheki-seifu2"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1338,7 +1351,8 @@
         "kiyu-nomi",
         "koumon-nomi",
         "kenro-nomi",
-        "baiyu-nomi"
+        "baiyu-nomi",
+        "baiyu-warehata"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -1433,7 +1447,8 @@
       "examples": [
         "senju-shiba",
         "mq-gozasso-iwanya",
-        "senju-iwanya"
+        "senju-iwanya",
+        "toriden-iwanya"
       ],
       "blank": "いはンヤ",
       "blankNg": [
