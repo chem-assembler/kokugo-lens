@@ -47,7 +47,10 @@
         "moshi-megurite",
         "roushi-arasowazu",
         "roushi-tenmou",
-        "roushi-hazukashime"
+        "roushi-hazukashime",
+        "roushi-shingen",
+        "junshi-kizamite",
+        "junshi-kinseki"
       ],
       "blank": "ず",
       "blankNg": [
@@ -77,7 +80,8 @@
         "gaishi-imada",
         "mq-ryosai-imada",
         "chosan-imada",
-        "suiko-imada"
+        "suiko-imada",
+        "kanpi-bishi"
       ],
       "blank": "ず",
       "blankNg": [
@@ -117,7 +121,10 @@
         "boufu-nizu",
         "rongo-shinnashi",
         "rongo-yuunashi",
-        "moshi-zennarazu"
+        "moshi-zennarazu",
+        "kanpi-gekirin",
+        "junshi-kiho",
+        "junshi-shoryu"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -160,7 +167,8 @@
         "mq-gozasso-tanetsugi",
         "sekiheki-iyashikumo",
         "kobyu-nakare",
-        "rongo-habakaru"
+        "rongo-habakaru",
+        "junshi-yamubekarazu"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -329,7 +337,9 @@
         "rongo-umarenagara",
         "moshi-hei",
         "moshi-hitoniarazu",
-        "roushi-michi"
+        "roushi-michi",
+        "kanpi-etsu",
+        "junshi-kariru"
       ]
     },
     {
@@ -610,7 +620,8 @@
       "note": "理由を素直にたずねる形。文末が連体形「〜する」で結ばれ、答えを求めている。同じ字で反語にもなるため、文末の形が見分けの決め手になる。",
       "examples": [
         "raiki-nanisure",
-        "mq-zaien-tenshi"
+        "mq-zaien-tenshi",
+        "kanpi-nanzo"
       ],
       "blank": "なんゾ",
       "blankNg": [
@@ -736,7 +747,8 @@
         "kiyu-masani",
         "torou-nanji",
         "sokou-taruka",
-        "rongo-majiwari"
+        "rongo-majiwari",
+        "soshi-kochonoyume"
       ],
       "yomi": [
         "か"
@@ -798,7 +810,9 @@
         "hango-gyuto",
         "mq-mukei-izukunzo",
         "mq-ryosai-ubau",
-        "dasoku-izukunzo"
+        "dasoku-izukunzo",
+        "soshi-uo",
+        "soshi-warewoshirazu"
       ],
       "blank": "セン",
       "blankNg": [
@@ -918,7 +932,8 @@
         "mq-zaien-keiki",
         "rongo-konomu",
         "rongo-tanoshimu",
-        "moshi-chinori"
+        "moshi-chinori",
+        "junshi-shuyu"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -979,7 +994,9 @@
       "examples": [
         "sanko-momiji",
         "shisetsu-fuhitsu",
-        "kasei-takeshi"
+        "kasei-takeshi",
+        "junshi-aoku",
+        "junshi-kori"
       ],
       "blank": "ヨリモ",
       "blankNg": [
@@ -1108,7 +1125,8 @@
       "examples": [
         "katei-moshi",
         "mq-bunkan-isogi",
-        "mq-riennso-moshi"
+        "mq-riennso-moshi",
+        "kanpi-fururu"
       ],
       "blank": "もシ",
       "blankNg": [
@@ -1204,7 +1222,8 @@
         "mq-gozasso-tanetsugi",
         "mq-riennso-ayamachi",
         "saio-hitori",
-        "rongo-tadajinsha"
+        "rongo-tadajinsha",
+        "soshi-kondon"
       ],
       "blank": "たダ",
       "blankNg": [
