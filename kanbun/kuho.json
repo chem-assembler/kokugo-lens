@@ -50,7 +50,10 @@
         "roushi-hazukashime",
         "roushi-shingen",
         "junshi-kizamite",
-        "junshi-kinseki"
+        "junshi-kinseki",
+        "koumon-kokorozashi",
+        "koumon-taikou",
+        "gaika-sui"
       ],
       "blank": "ず",
       "blankNg": [
@@ -168,7 +171,8 @@
         "sekiheki-iyashikumo",
         "kobyu-nakare",
         "rongo-habakaru",
-        "junshi-yamubekarazu"
+        "junshi-yamubekarazu",
+        "koumon-isogi"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -256,7 +260,8 @@
       "note": "打ち消しの字が副詞の上に来る形。打ち消しが副詞にかかるので「全部ではない」という部分的な打ち消しになる。書き下しでは「〜には」と「は」が入るのが目印。",
       "examples": [
         "shisetsu-fuhitsu",
-        "mq-gusho-boko"
+        "mq-gusho-boko",
+        "funkei-ryouko"
       ],
       "blank": "ニハ",
       "blankNg": [
@@ -694,7 +699,8 @@
         "shiki-sui",
         "mq-gozasso-tada",
         "mujun-ikan",
-        "moshi-warau"
+        "moshi-warau",
+        "gaika-gu"
       ],
       "blank": "いかんセン",
       "blankNg": [
@@ -748,7 +754,8 @@
         "torou-nanji",
         "sokou-taruka",
         "rongo-majiwari",
-        "soshi-kochonoyume"
+        "soshi-kochonoyume",
+        "koumon-mata"
       ],
       "yomi": [
         "か"
@@ -812,7 +819,8 @@
         "mq-ryosai-ubau",
         "dasoku-izukunzo",
         "soshi-uo",
-        "soshi-warewoshirazu"
+        "soshi-warewoshirazu",
+        "koumon-shisura"
       ],
       "blank": "セン",
       "blankNg": [
@@ -851,7 +859,9 @@
         "mq-etsubi-sukuu",
         "mq-gozasso-kokushi",
         "gukou-shikamo",
-        "moshi-koto"
+        "moshi-koto",
+        "koumon-nanzoji",
+        "gaika-watari"
       ],
       "blank": "センや",
       "blankNg": [
@@ -907,7 +917,8 @@
         "kokushu-madoi",
         "rongo-urami",
         "rongo-naniomotte",
-        "rongo-nanikaaran"
+        "rongo-nanikaaran",
+        "gaika-hajizu"
       ]
     },
     {
@@ -1266,7 +1277,8 @@
         "mq-mukei-masani",
         "mq-zaien-tenshi",
         "mq-chihoku-uramu",
-        "kiyu-nomi"
+        "kiyu-nomi",
+        "koumon-nomi"
       ],
       "blank": "ノみ",
       "blankNg": [

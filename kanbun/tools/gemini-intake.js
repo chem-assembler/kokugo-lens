@@ -178,7 +178,7 @@ function resplit(reading, kd){
 // ---- 取り込み ---------------------------------------------------------------
 const list = JSON.parse(fs.readFileSync(inFile, 'utf8'));
 const existing = new Set(texts.problems.map(p => p.tokens.map(t => t.c).join('')));
-const out = [], bad = [], soft = [], mended = [];
+const out = [], bad = [], soft = [], mended = [], suspect = [];
 
 for (const e of (Array.isArray(list) ? list : [list])){
   const id = (e && e.id) || '(id なし)';
@@ -268,6 +268,15 @@ for (const e of (Array.isArray(list) ? list : [list])){
   });
   if (!e.meaning || !String(e.meaning).trim()){ NG('meaning が空'); continue; }
 
+  // 読み仮名が送り仮名の頭と重なっていないか（来「きた」＋「タル」で「きたたる」）。
+  // **書き下しには出ないので割り直しでは直らない。** yomi-check.js が収録後に捕まえるが、
+  // ここで出しておけば収録前に直せる。助詞が続く形（魚「うを」＋「を」）は本物ではないので、
+  // 落とさずに知らせるだけにする
+  (e.reading || []).forEach(r => {
+    const yy = r.yomi || '', o = r.okuri || '';
+    if (yy && o && yy.slice(-1) === o[0]) suspect.push(id + ' ' + r.c + '「' + yy + '」＋「' + o + '」');
+  });
+
   const w = WHERE.get(id) || {};
   const rec = { id: '', source: { work: '', chapter: w.chapter || '' }, tokens, order,
                 kakikudashi: kd, acceptable: [], kuho, meaning: String(e.meaning).trim() };
@@ -292,6 +301,11 @@ out.concat(soft).forEach(p => p.tokens.forEach(t => {
   t.okuri = kata(t.okuri || ''); if (!t.okuri) delete t.okuri;
 }));
 
+if (suspect.length){
+  console.log('-- 読みと送りが重なっている疑い（' + suspect.length + '件・助詞が続く形なら正しい）--');
+  suspect.forEach(m => console.log('  ' + m));
+  console.log('');
+}
 if (mended.length){
   console.log('-- 送り仮名を割り直した行（' + mended.length + '件）--');
   mended.forEach(m => console.log('  ' + m));
