@@ -28,6 +28,10 @@
   let userMarks = [];
   let selected = -1;
   let lastResult = null;
+  // L4 の状態（返り点に加えて送り仮名も自分で入れる）
+  let askList = [];          // [{i, nth}] 送り仮名を伏せた字
+  let okuriInputs = {};      // 'i:nth' -> 選んだ送り仮名
+  let okuriResult = null;    // 送り仮名の判定結果（K.gradeReadings の戻り）
   // アニメの状態
   let animTimer = null;
 
@@ -45,14 +49,32 @@
       return c;
     });
   }
-  // 訓点を自分で打つ段。L3（白文＋送り仮名）と L6（書き下し文だけ）の2つ
-  const isMarkMode = () => mode === 'L3' || mode === 'L6';
+  // L4 のライブ書き下し用。まだ選んでいない送り仮名は空にして、穴が見えるようにする
+  function withOkuri(toks){
+    if (mode !== 'L4' || showAnswer || cleared()) return toks;
+    return toks.map((t, i) => {
+      const a = askedAt(i)[0];
+      if (!a) return t;
+      const v = okuriInputs[askKey(a)];
+      return Object.assign({}, t, { okuri: (v === undefined) ? '' : v });
+    });
+  }
+  // 訓点を自分で打つ段。L3（白文＋送り仮名）・L4（送り仮名も伏せる）・L6（書き下し文だけ）
+  const isMarkMode = () => mode === 'L3' || mode === 'L4' || mode === 'L6';
+  const askKey = a => a.i + ':' + a.nth;
+  // 送り仮名を伏せる字。再読文字は1つのセルに2つの読みが乗るが、訓点モードのセルは
+  // 1つ目の送り仮名しか描けないので、L4 では問わない（書き下し練習の K2/K3 が受け持つ）
+  function buildAskList(){
+    if (mode !== 'L4' || !problem) return [];
+    return K.pickAskable(problem).filter(a => !problem.tokens[a.i].reread);
+  }
+  const askedAt = i => askList.filter(a => a.i === i);
   const problemMarks = () => problem.tokens.map(t => t.mark || []);
   const expectedReads = () => problem.tokens.reduce(
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=19')
+  fetch('texts.json?v=20')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -122,6 +144,8 @@
     tapPos = 0; l1Done = false;
     l2Attempt = null; l2Solved = false;
     lastResult = null;
+    okuriInputs = {}; okuriResult = null;
+    askList = buildAskList();
     hideResult();
     if (mode === 'L2') setupL2();
   }
@@ -251,7 +275,15 @@
       // L6 は「書き下し文だけを見て訓点を復元する」課題なので送り仮名を隠す。
       // 送り仮名が見えていると読み順がほぼ割れてしまい、逆問題にならない
       const hideOkuri = (mode === 'L6' && !showAnswer && !cleared());
-      if (!hideOkuri && (t.okuri || (t.reread && t.reread.first.okuri))){
+      const asked = (mode === 'L4' && !showAnswer && !cleared()) ? askedAt(i) : [];
+      if (asked.length){
+        // L4 で問う字。まだ選んでいなければ「？」を出し、押すと候補が下に並ぶ
+        const chosen = okuriInputs[askKey(asked[0])];
+        const ok = document.createElement('span');
+        ok.className = 'okuri ask' + (chosen === undefined ? '' : ' filled');
+        ok.textContent = (chosen === undefined) ? '？' : (chosen || 'なし');
+        cell.appendChild(ok);
+      } else if (!hideOkuri && (t.okuri || (t.reread && t.reread.first.okuri))){
         const ok = document.createElement('span');
         ok.className = 'okuri';
         ok.textContent = t.reread ? t.reread.first.okuri : t.okuri;
@@ -281,7 +313,7 @@
     });
 
     // ライブ書き下し（間違った読み方でもそのまま出す = それ自体がフィードバック）
-    const toks = withMarks(st.marks);
+    const toks = withOkuri(withMarks(st.marks));
     const kud = K.toKakikudashi(toks, st.kudashiOrder);
     if (mode === 'L6'){
       // L6 は与えられた書き下し文が「問題文」。これに合うよう訓点を打つ
@@ -304,9 +336,11 @@
     $('mode-hint').textContent = ({
       L1: '訓点に従って、読む順に字をタップしてください（再読文字は2回タップ）',
       L3: '字をタップして、打つ訓点を選んでください（もう一度押すと消えます）',
+      L4: '返り点を打ち、「？」の字は送り仮名も選んでください（両方そろって正解）',
       L6: '上の書き下し文のとおりに読めるよう、返り点を打ってください（送り仮名は隠してあります）'
     })[mode] || '';
     if (mode === 'L2') renderChoices();
+    renderOkuriPanel();
 
     // 再生ボタンの活性
     const wrongOrder = currentWrongOrder();
@@ -336,10 +370,51 @@
     });
   }
 
+  // 送り仮名が標準形と違っても通った場合に、その事情を添える（書き下し練習の K3 と同じ扱い）
+  function okuriNote(){
+    if (!okuriResult || okuriResult.status !== 'variant') return '';
+    return (okuriResult.via === 'acceptable')
+      ? '（登録している標準の形とは別の、正しい読み方です。標準は「' + problem.kakikudashi + '」）'
+      : '（仮名遣いは標準の形と違いますが、同じ読みとして扱います）';
+  }
+
+  // L4: 選んだ字が送り仮名を問う字なら、その候補を並べる
+  function renderOkuriPanel(){
+    const panel = $('okuri-panel');
+    const ask = (mode === 'L4' && !showAnswer && !cleared() && selected >= 0)
+      ? askedAt(selected)[0] : null;
+    if (!ask){
+      panel.style.display = 'none';
+      return;
+    }
+    panel.style.display = 'block';
+    const t = problem.tokens[ask.i];
+    $('okuri-hint').textContent = '「' + t.c + '」に付く送り仮名はどれ？';
+    const keys = panel.querySelector('.keys');
+    keys.innerHTML = '';
+    const key = askKey(ask);
+    K.okuriChoices(problems, problem, ask.i, ask.nth).choices.forEach(v => {
+      const b = document.createElement('button');
+      b.textContent = (v === '') ? '（なし）' : v;
+      if (okuriInputs[key] !== undefined && K.kanaEquals(okuriInputs[key], v)) b.classList.add('chosen');
+      b.addEventListener('click', () => {
+        okuriInputs[key] = v;
+        okuriResult = null;
+        hideResult();
+        render();
+      });
+      keys.appendChild(b);
+    });
+  }
+
   function cleared(){
     if (mode === 'L1') return l1Done;
     if (mode === 'L2') return l2Solved;
-    return !!(lastResult && lastResult.status !== 'wrong');
+    const orderOk = !!(lastResult && lastResult.status !== 'wrong');
+    // L4 は読み順と送り仮名の両方がそろって初めてクリア。読み順だけで
+    // クリア扱いにすると、送り仮名の「？」が消えて直せなくなる
+    if (mode === 'L4') return orderOk && !!(okuriResult && okuriResult.status !== 'wrong');
+    return orderOk;
   }
   function currentWrongOrder(){
     if (mode === 'L2' && l2Attempt) return l2Attempt;
@@ -430,17 +505,39 @@
     });
   });
 
-  // ---- 判定（L3） ---------------------------------------------------------
+  // ---- 判定（L3 / L4 / L6） -----------------------------------------------
   $('btn-grade').addEventListener('click', () => {
     if (!problem || !isMarkMode()) return;
+    // L4 は送り仮名も自分で入れる段。空欄が残っていたら読み順の判定へ進まない
+    if (mode === 'L4'){
+      const blanks = askList.filter(a => okuriInputs[askKey(a)] === undefined);
+      if (blanks.length){
+        showResult('info', '送り仮名がまだ ' + blanks.length + ' か所えらばれていません。'
+          + '「？」の字をタップして選んでください。');
+        return;
+      }
+    }
     lastResult = K.grade(userMarks, problem);
+    // 読み順が合っていても送り仮名が違えば訓読は完成していない（L4 のねらい）
+    if (mode === 'L4' && lastResult.status !== 'wrong'){
+      okuriResult = K.gradeReadings(problem, okuriInputs);
+      if (okuriResult.status === 'wrong'){
+        showResult('wrong', '× 読み順は合っています。送り仮名が違います。'
+          + 'あなたの読み方: ' + okuriResult.kakikudashi);
+        render();
+        return;
+      }
+    }
     if (lastResult.status === 'ok'){
       recordClear(mode);
-      showResult('ok', '○ クリア！ 読み順が正解と一致しました。');
+      showResult('ok', (mode === 'L4')
+        ? '○ クリア！ 読み順も送り仮名も正解です。' + okuriNote()
+        : '○ クリア！ 読み順が正解と一致しました。');
       render();
     } else if (lastResult.status === 'variant'){
       recordClear(mode);
-      showResult('ok', '○ クリア！ 登録と違う打ち方ですが、読み順は正しい別解です（原則: 表記ではなく読み順で判定します）。');
+      showResult('ok', '○ クリア！ 登録と違う打ち方ですが、読み順は正しい別解です（原則: 表記ではなく読み順で判定します）。'
+        + (mode === 'L4' ? okuriNote() : ''));
       render();
     } else {
       showResult('wrong', '× ' + lastResult.message);

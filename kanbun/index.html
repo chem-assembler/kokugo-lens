@@ -141,6 +141,22 @@
     font-family: "Yu Mincho", serif; font-size: 1.1em; min-width: 2.4em; height: 2.2em;
     padding: 0 0.5em; color: var(--accent); font-weight: bold;
   }
+  /* L4 の送り仮名選び */
+  #okuri-panel { display: none; margin-top: 0.6em; }
+  #okuri-panel .keys { display: flex; flex-wrap: wrap; gap: 0.35em; }
+  #okuri-panel .keys button {
+    font-family: "Yu Mincho", serif; font-size: 1.1em; min-width: 3em; height: 2.2em;
+    padding: 0 0.6em;
+  }
+  #okuri-panel .keys button.chosen {
+    background: #eef3e9; border-color: #2e5d47; font-weight: bold;
+  }
+  /* 送り仮名が伏せてある字。押すと候補が出る */
+  .cell .okuri.ask {
+    border: 1px dashed var(--accent); border-radius: 0.3em;
+    padding: 0.05em 0.1em; cursor: pointer; color: var(--accent);
+  }
+  .cell .okuri.ask.filled { border-style: solid; color: var(--ink); background: #eef3e9; }
   #result {
     margin-top: 0.8em; padding: 0.8em; border-radius: 0.5em; display: none;
     line-height: 1.5;
@@ -165,7 +181,7 @@
 <header>
   <h1>返り点でみる漢文</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v19</span>
+  <span class="version">v20</span>
 </header>
 
 <div id="toolbar">
@@ -177,6 +193,7 @@
       <option value="L1">L1 読む順にタップ</option>
       <option value="L2">L2 訓点を1つ選ぶ</option>
       <option value="L3">L3 訓点を打つ</option>
+      <option value="L4">L4 訓点＋送り仮名</option>
       <option value="L6">L6 書き下しから訓点を復元（逆問題）</option>
     </select>
   </label>
@@ -230,6 +247,11 @@
       <div class="hint">「？」の位置に入る訓点はどれ？</div>
       <div class="keys"></div>
     </div>
+    <!-- L4 の送り仮名選び。字を選ぶと、その字に入る送り仮名の候補が出る -->
+    <div id="okuri-panel" class="panel">
+      <div class="hint" id="okuri-hint"></div>
+      <div class="keys"></div>
+    </div>
     <div id="result"></div>
     <div id="replay-bar">
       <button id="btn-replay" disabled>自分の読み順を再生</button>
@@ -243,8 +265,8 @@
   国語レンズ（KokugoLenz）｜<a href="guide.html">志望校から選ぶ</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=19"></script>
-<script src="progress.js?v=19"></script>
-<script src="game.js?v=19"></script>
+<script src="kanbun.js?v=20"></script>
+<script src="progress.js?v=20"></script>
+<script src="game.js?v=20"></script>
 </body>
 </html>

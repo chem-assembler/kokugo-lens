@@ -12,8 +12,10 @@
  */
 const Progress = (() => {
   const KEY = 'slz-koku-kanbun-v1';
-  const MODES = ['L1', 'L2', 'L3', 'L6', 'K'];   // L6 = 逆問題 / K = 書き下し練習（カード並べ替え）
-  const MODE_NAME = { L1: 'L1 タップ', L2: 'L2 4択', L3: 'L3 訓点', L6: 'L6 逆問題', K: '書き下し' };
+  // L4 = 訓点＋送り仮名 / L6 = 逆問題 / K = 書き下し練習（カード並べ替え）
+  const MODES = ['L1', 'L2', 'L3', 'L4', 'L6', 'K'];
+  const MODE_NAME = { L1: 'L1 タップ', L2: 'L2 4択', L3: 'L3 訓点',
+                      L4: 'L4 訓点＋送り', L6: 'L6 逆問題', K: '書き下し' };
 
   let mem = null;   // localStorage が使えないときの受け皿
 
