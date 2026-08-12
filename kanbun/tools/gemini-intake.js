@@ -279,9 +279,23 @@ for (const e of (Array.isArray(list) ? list : [list])){
   // **書き下しには出ないので割り直しでは直らない。** yomi-check.js が収録後に捕まえるが、
   // ここで出しておけば収録前に直せる。助詞が続く形（魚「うを」＋「を」）は本物ではないので、
   // 落とさずに知らせるだけにする
-  (e.reading || []).forEach(r => {
+  // 読み仮名が送り仮名を巻きこんでいないか（悲「かなしま」＋「しま」で「かなしましま」）。
+  // **書き下しには出ないので割り直しでは直らない。** 返ってくる yomi は
+  //   (a) その字だけの読み（正しい）と (b) 送り仮名まで込みの読み（誤り）
+  // が混ざっている。(b) は末尾が送り仮名と重なるので、そこを削れば (a) に戻せる。
+  // ただし**送り仮名が助詞1字のとき（魚「うを」＋「を」）は (a) でも重なる**ので触らない。
+  const JOSHI = ['を', 'の', 'に', 'は', 'と', 'も', 'へ', 'や', 'が'];
+  e.reading.forEach(r => {
     const yy = r.yomi || '', o = r.okuri || '';
-    if (yy && o && yy.slice(-1) === o[0]) suspect.push(id + ' ' + r.c + '「' + yy + '」＋「' + o + '」');
+    if (!yy || !o) return;
+    if (o.length === 1 && JOSHI.indexOf(o) >= 0) return;      // 助詞は重なって当たり前
+    for (let k = Math.min(yy.length, o.length); k >= 1; k--){
+      if (!yy.endsWith(o.slice(0, k))) continue;
+      const cut = yy.slice(0, yy.length - k);
+      if (cut){ mended.push(id + ' ' + r.c + ': 読みが送り仮名を巻きこんでいた「' + yy + '」→「' + cut + '」'); r.yomi = cut; }
+      else suspect.push(id + ' ' + r.c + '「' + yy + '」＋「' + o + '」（読みが送り仮名だけになる。人が入れ直す）');
+      break;
+    }
   });
 
   const w = WHERE.get(id) || {};

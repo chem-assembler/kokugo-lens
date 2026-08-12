@@ -56,7 +56,11 @@
         "gaika-sui",
         "torino-iwazu",
         "shotan-toga",
-        "hakui-toushoku"
+        "hakui-toushoku",
+        "gakuyo-yorokobazu",
+        "kenro-utazu",
+        "bakusetsu-shosezu",
+        "bakusetsu-kau"
       ],
       "blank": "ず",
       "blankNg": [
@@ -132,7 +136,10 @@
         "kanpi-gekirin",
         "junshi-kiho",
         "junshi-shoryu",
-        "hakui-tendou"
+        "hakui-tendou",
+        "kenro-roba",
+        "kenro-narau",
+        "bakusetsu-uma"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -267,7 +274,8 @@
       "examples": [
         "shisetsu-fuhitsu",
         "mq-gusho-boko",
-        "funkei-ryouko"
+        "funkei-ryouko",
+        "bakusetsu-tsune"
       ],
       "blank": "ニハ",
       "blankNg": [
@@ -639,7 +647,8 @@
       "examples": [
         "raiki-nanisure",
         "mq-zaien-tenshi",
-        "kanpi-nanzo"
+        "kanpi-nanzo",
+        "gakuyo-kotonaru"
       ],
       "blank": "なんゾ",
       "blankNg": [
@@ -770,7 +779,9 @@
         "soshi-kochonoyume",
         "koumon-mata",
         "shotan-kaikei",
-        "hakui-zehi"
+        "hakui-zehi",
+        "gakuyo-itsuka",
+        "bakusetsu-shinni"
       ],
       "yomi": [
         "か"
@@ -836,7 +847,8 @@
         "soshi-uo",
         "soshi-warewoshirazu",
         "koumon-shisura",
-        "senju-ikeruuma"
+        "senju-ikeruuma",
+        "bakusetsu-izukunzo"
       ],
       "blank": "セン",
       "blankNg": [
@@ -1213,7 +1225,9 @@
         "mq-ryosai-karu",
         "mq-gusho-hyakushu",
         "sekiheki-iyashikumo",
-        "gukou-iedomo"
+        "gukou-iedomo",
+        "kenro-torazaramashi",
+        "bakusetsu-hazukashime"
       ],
       "blank": "トいへどモ",
       "blankNg": [
@@ -1297,7 +1311,8 @@
         "mq-zaien-tenshi",
         "mq-chihoku-uramu",
         "kiyu-nomi",
-        "koumon-nomi"
+        "koumon-nomi",
+        "kenro-nomi"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -1559,7 +1574,8 @@
         "rongo-kenkai",
         "mq-ryosai-warau",
         "gukou-hanahadashi",
-        "rongo-otoroe"
+        "rongo-otoroe",
+        "kenro-kanashii"
       ],
       "yomi": [
         "かな"
