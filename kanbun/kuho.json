@@ -31,7 +31,8 @@
         "rongo-manabite",
         "rongo-omoite",
         "shungyo-1",
-        "rongo-sokutatsu"
+        "rongo-sokutatsu",
+        "jocho"
       ],
       "blank": "ず",
       "blankNg": [
@@ -58,7 +59,8 @@
       "note": "「未」は一字を二度読む再読文字。一度目は副詞「いまだ」、二度目は打ち消しの「ず」として読む。「今はまだ」という含みがあり、単純否定より先の可能性を残す。",
       "examples": [
         "rongo-misei",
-        "gaishi-imada"
+        "gaishi-imada",
+        "mq-ryosai-imada"
       ],
       "blank": "ず",
       "blankNg": [
@@ -82,13 +84,17 @@
       "markers": [
         "無",
         "莫",
-        "毋"
+        "毋",
+        "罔"
       ],
       "kakikudashi": "Aなシ",
       "meaning": "Aが存在しない。",
       "note": "ものごとが「ない」ことを言う打ち消し。下に動詞が来ると「Aするものはない」と訳す。同じ字が下に置かれると禁止になるので、位置と送り仮名で見分ける。",
       "examples": [
-        "mujun-2"
+        "mujun-2",
+        "mq-gusho-sawagu",
+        "mq-zaien-sasori",
+        "mq-gusho-mou"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -102,7 +108,8 @@
       ],
       "yomi": [
         "無",
-        "莫"
+        "莫",
+        "罔"
       ]
     },
     {
@@ -126,7 +133,8 @@
         "shonen-2",
         "rongo-hodokosu",
         "rongo-tomotosuru",
-        "keirin-1"
+        "keirin-1",
+        "mq-gozasso-tanetsugi"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -157,7 +165,13 @@
         "莫不",
         "非不",
         "不可不",
-        "未嘗不"
+        "未嘗不",
+        "無所不",
+        "罔不",
+        "不能不",
+        "不可以不",
+        "無無",
+        "未有不"
       ],
       "kakikudashi": "Aセざルハなシ",
       "meaning": "Aしないものはない（必ずAする）。",
@@ -165,7 +179,16 @@
       "examples": [
         "mujun-3",
         "rongo-fubo",
-        "mq-ryosai-onaji"
+        "mq-ryosai-onaji",
+        "mq-gusho-henshoku",
+        "mq-etsubi-toku",
+        "mq-etsubi-shinsen",
+        "mq-bunkan-hasshi",
+        "mq-gusho-arubeki",
+        "mq-gusho-mou",
+        "mq-etsubi-sukuu",
+        "mq-bunkan-bensezu",
+        "mq-riennso-ayamachi"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -190,13 +213,15 @@
         "不尽",
         "不倶",
         "不甚",
-        "不復"
+        "不復",
+        "未必"
       ],
       "kakikudashi": "つねニハAセず",
       "meaning": "いつもAするとは限らない。",
       "note": "打ち消しの字が副詞の上に来る形。打ち消しが副詞にかかるので「全部ではない」という部分的な打ち消しになる。書き下しでは「〜には」と「は」が入るのが目印。",
       "examples": [
-        "shisetsu-fuhitsu"
+        "shisetsu-fuhitsu",
+        "mq-gusho-boko"
       ],
       "blank": "ニハ",
       "blankNg": [
@@ -258,7 +283,9 @@
         "kobyu-choja",
         "shieki-reiou",
         "shieki-heki",
-        "rongo-tami"
+        "rongo-tami",
+        "mq-ryosai-tsukawasu",
+        "mq-gozasso-tanetsugi"
       ],
       "blank": "しむ",
       "blankNg": [
@@ -352,7 +379,8 @@
       "note": "動詞の上に受身の助字を置く形。書き下しでは助字を読まず、助動詞「る・らる」に変える。「見」は「みる」ではなく受身の目印である点に注意。",
       "examples": [
         "soshi-taiho",
-        "ukemi-utagau"
+        "ukemi-utagau",
+        "mq-riennso-myonichi"
       ],
       "blank": "らル",
       "blankNg": [
@@ -439,7 +467,8 @@
       "meaning": "どうしてAするのか。",
       "note": "理由を素直にたずねる形。文末が連体形「〜する」で結ばれ、答えを求めている。同じ字で反語にもなるため、文末の形が見分けの決め手になる。",
       "examples": [
-        "raiki-nanisure"
+        "raiki-nanisure",
+        "mq-zaien-tenshi"
       ],
       "blank": "なんゾ",
       "blankNg": [
@@ -455,7 +484,8 @@
         "胡ぞ",
         "奚ぞ",
         "曷ぞ",
-        "何為れぞ"
+        "何為れぞ",
+        "何を以て"
       ]
     },
     {
@@ -549,7 +579,9 @@
       ],
       "examples": [
         "gimon-kocho",
-        "rongo-hakarite"
+        "rongo-hakarite",
+        "mq-etsubi-yokai",
+        "mq-riennso-oshimu"
       ],
       "yomi": [
         "か"
@@ -573,7 +605,10 @@
       "examples": [
         "hango-ani",
         "hango-senri",
-        "mq-mukei-ani"
+        "mq-mukei-ani",
+        "mq-ryosai-karu",
+        "mq-bunkan-isogi",
+        "mq-riennso-moshi"
       ],
       "blank": "ンや",
       "blankNg": [
@@ -605,7 +640,9 @@
       "note": "不可能であることを問いの形で言い切る。文末が「ん」で終われば反語、「する」で終われば疑問になる。「焉」は文末では置き字になることもあるので位置を見る。",
       "examples": [
         "rongo-izukunzo",
-        "hango-gyuto"
+        "hango-gyuto",
+        "mq-mukei-izukunzo",
+        "mq-ryosai-ubau"
       ],
       "blank": "セン",
       "blankNg": [
@@ -619,7 +656,8 @@
       "yomi": [
         "安くんぞ",
         "焉くんぞ",
-        "悪くんぞ"
+        "悪くんぞ",
+        "寧ぞ"
       ]
     },
     {
@@ -639,7 +677,9 @@
       "examples": [
         "gaishi-seija",
         "mq-ryosai-koshu",
-        "gaishi-omomuku"
+        "gaishi-omomuku",
+        "mq-etsubi-sukuu",
+        "mq-gozasso-kokushi"
       ],
       "blank": "センや",
       "blankNg": [
@@ -670,7 +710,10 @@
       "examples": [
         "hyakubun",
         "hikaku-tenji",
-        "rongo-tomotosuru"
+        "rongo-tomotosuru",
+        "mq-riennso-tori",
+        "mq-zaien-senyo",
+        "mq-zaien-keiki"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -701,7 +744,8 @@
       "note": "比較の形に存在の打ち消しを重ねて最上級を表す。「及ぶものがない」＝「それが最高だ」という言い回し。比較の「〜に如かず」と一字違いなので並べて覚える。",
       "examples": [
         "hikaku-mushiku",
-        "mq-riennso-sugiru"
+        "mq-riennso-sugiru",
+        "mq-bunkan-honzou"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -767,11 +811,14 @@
       ],
       "examples": [
         "rongo-sugitaru",
-        "keirin-3"
+        "keirin-3",
+        "mq-chihoku-shoushou"
       ],
       "yomi": [
         "ごとし",
-        "如し"
+        "如し",
+        "ごとき",
+        "如き"
       ]
     },
     {
@@ -791,7 +838,8 @@
       "note": "二つの選択肢を並べ、後ろのほうを選ばせる形。前半に「その〜んよりは」、後半に「むしろ」が来るのが目印。比較との違いは、選ぶ主体の意思が入ること。",
       "examples": [
         "sentaku-ken",
-        "keiko-gyugo"
+        "keiko-gyugo",
+        "mq-mukei-mushiro"
       ],
       "blank": "むしロ",
       "blankNg": [
@@ -821,7 +869,8 @@
       "meaning": "AとBではどちらがよいか。",
       "note": "二つを並べて、どちらがまさるかを問う形。答えを求める点で疑問に近いが、選択肢が二つに限られているのが特徴。",
       "examples": [
-        "sentaku-izureka"
+        "sentaku-izureka",
+        "mq-gozasso-yoriha"
       ],
       "blank": "いづレゾ",
       "blankNg": [
@@ -849,7 +898,9 @@
       "meaning": "もしAならばBだ。",
       "note": "まだ起きていないことを仮に置く形。上に「もし」を補い、条件の句を未然形＋「ば」で結ぶ。「若」「如」は比況の「ごとし」とも読むので、下の送り仮名で決める。",
       "examples": [
-        "katei-moshi"
+        "katei-moshi",
+        "mq-bunkan-isogi",
+        "mq-riennso-moshi"
       ],
       "blank": "もシ",
       "blankNg": [
@@ -902,7 +953,10 @@
       "meaning": "AだけれどもBだ。",
       "note": "条件をいったん認めたうえで、逆の内容を続ける形。「雖」は返って読む字で、上に来る句をまとめて受ける。事実を認める場合と、たとえ話として仮に置く場合の両方がある。",
       "examples": [
-        "katei-iedomo"
+        "katei-iedomo",
+        "mq-zaien-kottou",
+        "mq-ryosai-karu",
+        "mq-gusho-hyakushu"
       ],
       "blank": "トいへどモ",
       "blankNg": [
@@ -925,14 +979,19 @@
         "惟",
         "但",
         "独",
-        "只"
+        "只",
+        "特"
       ],
       "kakikudashi": "たダAノみ",
       "meaning": "ただAだけだ。",
       "note": "上の副詞と文末の「のみ」が呼応して範囲を一つに絞る形。どちらか片方だけでも限定になるので、上下のどちらに目印があるかを確かめる。",
       "examples": [
         "gentei-tada",
-        "mq-gozasso-tada"
+        "mq-gozasso-tada",
+        "mq-etsubi-kishin",
+        "mq-etsubi-roteki",
+        "mq-gozasso-tanetsugi",
+        "mq-riennso-ayamachi"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -949,7 +1008,8 @@
         "惟だ",
         "但だ",
         "ただ",
-        "独り"
+        "独り",
+        "特だ"
       ]
     },
     {
@@ -969,7 +1029,11 @@
       "note": "文末の字だけで限定と断定を同時に表す形。上に「唯」がなくても限定になる。置き字と間違えやすいが、これは読む字である点に注意。",
       "examples": [
         "moshi-hyappo",
-        "gaishi-mamoru"
+        "gaishi-mamoru",
+        "mq-mukei-nomi",
+        "mq-mukei-masani",
+        "mq-zaien-tenshi",
+        "mq-chihoku-uramu"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -1114,13 +1178,16 @@
       "pattern": "不亦 A 乎",
       "markers": [
         "不亦",
-        "乎"
+        "乎",
+        "哉"
       ],
       "kakikudashi": "まタAナラずや",
       "meaning": "なんとAではないか（そうだろう）。",
       "note": "聞き手に同意を求めるような、やわらかい詠嘆。打ち消しの疑問形だが、実際には強い肯定を述べている。",
       "examples": [
-        "hango-mata"
+        "hango-mata",
+        "mq-gozasso-mube",
+        "mq-gozasso-madoi"
       ],
       "blank": "まタ",
       "blankNg": [
