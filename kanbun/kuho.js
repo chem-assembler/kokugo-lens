@@ -48,7 +48,7 @@
   const catName = key => CATS[key] || key;
 
   // ---- 読み込み -----------------------------------------------------------
-  fetch('kuho.json?v=48')
+  fetch('kuho.json?v=49')
     .then(r => r.json())
     .then(data => {
       CATS  = data.categories || {};
@@ -63,7 +63,7 @@
     });
 
   // 収録例を白文で見せるためだけに読む。失敗しても出題は続けられる（例が出ないだけ）
-  fetch('texts.json?v=48')
+  fetch('texts.json?v=49')
     .then(r => r.json())
     .then(data => {
       (data.problems || []).forEach(p => {
