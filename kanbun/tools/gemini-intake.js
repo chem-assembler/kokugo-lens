@@ -91,11 +91,18 @@ function deriveMarks(tokens, order){
   // 「憂患に生き安楽に死するを知る」がまさにそれで、「知」を「生」と同じ一二点に置くと
   // 「患」を読んだ時点で「生」といっしょに読まれてしまう。
   // そこで、待つ区間（返り先 … 起点）が他の組の起点をまたぐ階層は使わない。
-  const spans = {};
-  const pick = (lo, t) => {
+  // あわせて、**起点の字がその階層で待っている字であってはいけない**。
+  // 「強秦之所以不敢加兵於趙者…」で、「不」が一二三点の「三」で待っているのに
+  // そのまま「所以」を呼び戻す「一」も兼ねる形になり、番号が矛盾していた。
+  const spans = {}, held = {};
+  const pick = (run, t) => {
+    const lo = Math.min.apply(null, run);
     for (let lv = 1; lv <= 4; lv++){
       const s = spans[lv] || (spans[lv] = []);
-      if (!s.some(x => (x.t > lo && x.t < t) || (x.lo < t && t < x.t))){ s.push({ lo, t }); return lv; }
+      const h = held[lv] || (held[lv] = new Set());
+      if (h.has(t)) continue;
+      if (s.some(x => (x.t > lo && x.t < t) || (x.lo < t && t < x.t))) continue;
+      s.push({ lo, t }); run.forEach(x => h.add(x)); return lv;
     }
     return 0;                               // 甲乙丙より外は表示できない
   };
@@ -108,7 +115,7 @@ function deriveMarks(tokens, order){
       }
       const run = [];                       // 1階層で送れるのは「二」「三」の2つまで
       while (i < g.rel.length && run.length < 2) run.push(g.rel[i++]);
-      const lv = pick(Math.min.apply(null, run), prev);
+      const lv = pick(run, prev);
       if (!lv) return null;
       marks[prev].push({ lv, n: 1 });       // 返り先の起点が「一」
       run.forEach((x, n) => { marks[x].push({ lv, n: n + 2 }); prev = x; });

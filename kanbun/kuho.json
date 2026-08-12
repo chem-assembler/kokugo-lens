@@ -53,7 +53,10 @@
         "junshi-kinseki",
         "koumon-kokorozashi",
         "koumon-taikou",
-        "gaika-sui"
+        "gaika-sui",
+        "torino-iwazu",
+        "shotan-toga",
+        "hakui-toushoku"
       ],
       "blank": "ず",
       "blankNg": [
@@ -84,7 +87,8 @@
         "mq-ryosai-imada",
         "chosan-imada",
         "suiko-imada",
-        "kanpi-bishi"
+        "kanpi-bishi",
+        "kanpeki-yakusoku"
       ],
       "blank": "ず",
       "blankNg": [
@@ -127,7 +131,8 @@
         "moshi-zennarazu",
         "kanpi-gekirin",
         "junshi-kiho",
-        "junshi-shoryu"
+        "junshi-shoryu",
+        "hakui-tendou"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -172,7 +177,8 @@
         "kobyu-nakare",
         "rongo-habakaru",
         "junshi-yamubekarazu",
-        "koumon-isogi"
+        "koumon-isogi",
+        "shotan-nakare"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -381,7 +387,8 @@
       "examples": [
         "mq-etsubi-kishin",
         "mq-chihoku-senja",
-        "mujun-kotafuru"
+        "mujun-kotafuru",
+        "senju-senkin"
       ]
     },
     {
@@ -535,7 +542,11 @@
       "examples": [
         "soshi-taiho",
         "ukemi-utagau",
-        "mq-riennso-myonichi"
+        "mq-riennso-myonichi",
+        "kanpeki-azamukare",
+        "kanpo-owareki",
+        "senju-iwanya",
+        "kutsugen-hanatare"
       ],
       "blank": "らル",
       "blankNg": [
@@ -565,7 +576,9 @@
       "examples": [
         "ukemi-osamu",
         "ukemi-yashinaharu",
-        "sekiheki-moutoku"
+        "sekiheki-moutoku",
+        "kanpeki-azamukare",
+        "kanpo-owareki"
       ],
       "blank": "ニ",
       "blankNg": [
@@ -755,7 +768,9 @@
         "sokou-taruka",
         "rongo-majiwari",
         "soshi-kochonoyume",
-        "koumon-mata"
+        "koumon-mata",
+        "shotan-kaikei",
+        "hakui-zehi"
       ],
       "yomi": [
         "か"
@@ -820,7 +835,8 @@
         "dasoku-izukunzo",
         "soshi-uo",
         "soshi-warewoshirazu",
-        "koumon-shisura"
+        "koumon-shisura",
+        "senju-ikeruuma"
       ],
       "blank": "セン",
       "blankNg": [
@@ -1007,7 +1023,8 @@
         "shisetsu-fuhitsu",
         "kasei-takeshi",
         "junshi-aoku",
-        "junshi-kori"
+        "junshi-kori",
+        "senju-iwanya"
       ],
       "blank": "ヨリモ",
       "blankNg": [
@@ -1234,7 +1251,9 @@
         "mq-riennso-ayamachi",
         "saio-hitori",
         "rongo-tadajinsha",
-        "soshi-kondon"
+        "soshi-kondon",
+        "kutsugen-kiyoshi",
+        "kutsugen-hanatare"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1372,7 +1391,8 @@
       "note": "程度の軽い例をまず低く置き（抑）、そのうえで本命を高く持ち上げる（揚）形。前半の「すら」と後半の「いはんや〜をや」が対になる。",
       "examples": [
         "senju-shiba",
-        "mq-gozasso-iwanya"
+        "mq-gozasso-iwanya",
+        "senju-iwanya"
       ],
       "blank": "いはンヤ",
       "blankNg": [
