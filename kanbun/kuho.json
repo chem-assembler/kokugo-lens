@@ -134,7 +134,8 @@
         "rongo-hodokosu",
         "rongo-tomotosuru",
         "keirin-1",
-        "mq-gozasso-tanetsugi"
+        "mq-gozasso-tanetsugi",
+        "sekiheki-iyashikumo"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -296,7 +297,9 @@
       "examples": [
         "mq-mukei-izukunzo",
         "mq-chihoku-senja",
-        "mq-chihoku-uramu"
+        "mq-chihoku-uramu",
+        "shisetsu-tareka",
+        "sekiheki-iyashikumo"
       ]
     },
     {
@@ -513,7 +516,9 @@
       "meaning": "BにAされる。",
       "note": "置き字の下に動作の主が来ると受身になる。同じ「於」が場所・時・比較にもなるので、下に来る語が「する側の人」かどうかで見分ける。置き字自体は読まず、働きは前の字の送り仮名に現れる。",
       "examples": [
-        "ukemi-osamu"
+        "ukemi-osamu",
+        "ukemi-yashinaharu",
+        "sekiheki-moutoku"
       ],
       "blank": "ニ",
       "blankNg": [
@@ -607,7 +612,9 @@
       "meaning": "誰がAするのか。",
       "note": "動作をする人を問う形。「孰」は「たれか」とも「いづれか」とも読み、二つのうちどちらかを問うときは選択の形に近づく。",
       "examples": [
-        "sentaku-izureka"
+        "sentaku-izureka",
+        "shisetsu-tareka",
+        "shiki-izureka"
       ],
       "blank": "たれカ",
       "blankNg": [
@@ -639,7 +646,10 @@
       "meaning": "Aをどうしようか。",
       "note": "手段や処置を問う形。字の並びが逆の「何如」は状態や評価を問い「いかん」と読む。並び順で問う中身が変わる、という点が学習のねらい。",
       "examples": [
-        "gimon-ikan"
+        "gimon-ikan",
+        "shiki-ikanisen",
+        "shiki-sui",
+        "mq-gozasso-tada"
       ],
       "blank": "いかんセン",
       "blankNg": [
@@ -653,7 +663,8 @@
       "yomi": [
         "如何",
         "奈何",
-        "いかん"
+        "いかん",
+        "何如"
       ]
     },
     {
@@ -834,7 +845,8 @@
       "examples": [
         "mq-riennso-tori",
         "mq-gusho-warai",
-        "mq-gozasso-tareka"
+        "mq-gozasso-tareka",
+        "sekiheki-moutoku"
       ]
     },
     {
@@ -1013,7 +1025,8 @@
       "note": "二つを並べて、どちらがまさるかを問う形。答えを求める点で疑問に近いが、選択肢が二つに限られているのが特徴。",
       "examples": [
         "sentaku-izureka",
-        "mq-gozasso-yoriha"
+        "mq-gozasso-yoriha",
+        "shiki-izureka"
       ],
       "blank": "いづレゾ",
       "blankNg": [
@@ -1069,7 +1082,8 @@
       "meaning": "かりにもAするならばBだ。",
       "note": "「もし」より条件を強く限定して言う形。「かりそめにも」「少しでも」という含みがあり、後半に強い主張が続くことが多い。",
       "examples": [
-        "katei-iyashikumo"
+        "katei-iyashikumo",
+        "sekiheki-iyashikumo"
       ],
       "blank": "いやしクモ",
       "blankNg": [
@@ -1099,7 +1113,8 @@
         "katei-iedomo",
         "mq-zaien-kottou",
         "mq-ryosai-karu",
-        "mq-gusho-hyakushu"
+        "mq-gusho-hyakushu",
+        "sekiheki-iyashikumo"
       ],
       "blank": "トいへどモ",
       "blankNg": [
