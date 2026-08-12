@@ -534,7 +534,8 @@
       "meaning": "AにBするよう命じて、Bさせる。",
       "note": "使役の助字ではなく、命令や依頼を表す動詞そのものが使役の意味を担う形。動詞を訓読したうえで文末に「しむ」を添える。",
       "examples": [
-        "shiki-goshi"
+        "shiki-goshi",
+        "saden-shifu"
       ],
       "blank": "めいジテ",
       "blankNg": [
@@ -663,7 +664,8 @@
       "meaning": "AにBされる。",
       "note": "「為」と「所」が離れた位置で組になって受身を作る。書き下しの形が独特で、返り点も入り組みやすいので、型ごと覚えてしまうのが早い。",
       "examples": [
-        "mq-chihoku-taku"
+        "mq-chihoku-taku",
+        "shiki-sakinzureba"
       ],
       "blank": "ところトなル",
       "blankNg": [
@@ -1522,7 +1524,9 @@
       "meaning": "AですらBなのだから、ましてCは言うまでもない。",
       "note": "「猶」は比況では再読文字だが、この形では一度だけ「なほ」と読む副詞になる。同じ字でも型によって読み方が変わることを確かめる例。",
       "examples": [
-        "shiki-yojin"
+        "shiki-yojin",
+        "saden-mansou",
+        "kanpeki-fui"
       ],
       "blank": "スラ",
       "blankNg": [
