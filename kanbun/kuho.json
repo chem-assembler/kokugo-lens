@@ -350,7 +350,8 @@
       "meaning": "いつもAしない。",
       "note": "副詞が打ち消しの上に来る形。副詞が打ち消し全体にかかるので、例外なしの全面的な打ち消しになる。白文では字の並びだけが違い、書き下しでも「は」の有無しか差がないので、部分否定と並べて覚える。",
       "examples": [
-        "shiki-kanshi"
+        "shiki-kanshi",
+        "heigen-kanarazu"
       ],
       "blank": "ニ",
       "blankNg": [
@@ -362,7 +363,10 @@
         "hitei-bubun"
       ],
       "yomi": [
-        "常に"
+        "常に",
+        "必ず",
+        "尽く",
+        "倶に"
       ]
     },
     {
@@ -1474,7 +1478,8 @@
         "過ぎざ"
       ],
       "examples": [
-        "mq-gozasso-madoi"
+        "mq-gozasso-madoi",
+        "soshi-shoryo"
       ]
     },
     {
