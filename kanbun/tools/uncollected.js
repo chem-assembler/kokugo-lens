@@ -18,33 +18,8 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..', '..');
 const texts = JSON.parse(fs.readFileSync(path.join(ROOT, 'kanbun', 'texts.json'), 'utf8'));
 
-// ---- 台帳 §8.1 の対応表を読み取る -----------------------------------------
-const cat = fs.readFileSync(path.join(ROOT, 'docs', 'material-catalog.md'), 'utf8');
-const block = cat.slice(cat.indexOf('### 8.1'));
-const f1 = block.indexOf('```');
-const fence = block.slice(f1 + 3, block.indexOf('```', f1 + 3));
-const MAP = {};
-for (const m of fence.matchAll(/([一-鿿](?:\/[一-鿿])*)→([一-鿿])/g)){
-  m[1].split('/').forEach(old => { MAP[old] = m[2]; });
-}
-
-// ---- 台帳 §8.2 の異体字表も読み取る（照合のためだけに使う）----------------
-// §8.2 は「機械変換してはいけない」表なので、**保存するデータの変換には決して使わない**。
-// ここでやるのは「台帳の行と収録済みの白文を突き合わせる」照合だけで、
-// 収録側の字は台帳の判断どおりに人が決めて入れてある。
-// 判断欄に「統一推奨」「通例」と書いてある行だけを採る＝**決めていない字は機械が決めない**。
-// （「要判断」「どちらでもよい」のまま置いた行は収録済みでも未収録として数え続ける。
-//   これは不具合ではなく、決着を判断欄に書かせるための仕掛け）
-const b82 = cat.slice(cat.indexOf('### 8.2'), cat.indexOf('### 8.3'));
-for (const line of b82.split('\n')){
-  const c = line.split('|').map(x => x.trim());
-  if (c.length < 6 || !/^[一-鿿]$/.test(c[1]) || !/^[一-鿿]$/.test(c[2])) continue;
-  if (!/統一推奨|通例/.test(c[4])) continue;
-  MAP[c[1]] = c[2];
-}
-
-const norm = s => s.replace(/[，、。？！：；「」『』\s]/g, '')
-                   .replace(/./g, c => MAP[c] || c);
+// ---- 台帳から字体の対応表を読み取る（kyujitai.js に一本化）-----------------
+const { MAP, norm } = require('./kyujitai.js');
 
 const have = new Map(texts.problems.map(p => [p.tokens.map(t => t.c).join(''), p.id]));
 const which = process.argv[2] || 'catalog';
