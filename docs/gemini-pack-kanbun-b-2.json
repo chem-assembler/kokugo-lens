@@ -1,0 +1,591 @@
+[
+  {
+    "id": "B-04j",
+    "reading": [
+      { "c": "其", "yomi": "それ", "okuri": "", "kana": false },
+      { "c": "真", "yomi": "まこと", "okuri": "に", "kana": false },
+      { "c": "馬", "yomi": "うま", "okuri": "を", "kana": false },
+      { "c": "知", "yomi": "し", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "其れ真に馬を知らざるなり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "実は、本当のところ馬を見る目がない（見分けることができない）のである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05a",
+    "reading": [
+      { "c": "古", "yomi": "いにしへ", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "学", "yomi": "まな", "okuri": "ぶ", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "必", "yomi": "かなら", "okuri": "ず", "kana": false },
+      { "c": "師", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あり", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "古の学ぶ者は必ず師有り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "昔の学問をする者には、必ず導いてくれる師がいた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05b",
+    "reading": [
+      { "c": "師", "yomi": "しなる", "okuri": "", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "道", "yomi": "みち", "okuri": "を", "kana": false },
+      { "c": "伝", "yomi": "つた", "okuri": "へ", "kana": false },
+      { "c": "業", "yomi": "ぎょう", "okuri": "を", "kana": false },
+      { "c": "受", "yomi": "さづ", "okuri": "け", "kana": false },
+      { "c": "惑", "yomi": "まど", "okuri": "ひを", "kana": false },
+      { "c": "解", "yomi": "と", "okuri": "く", "kana": false },
+      { "c": "所", "yomi": "ゆゑ", "okuri": "", "kana": false },
+      { "c": "以", "yomi": "ん", "okuri": "なり", "kana": false }
+    ],
+    "kakikudashi": "師なる者は道を伝へ業をさづけ惑ひを解く所以なり",
+    "placed": ["也"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "師というものは、人の道を教え授け、学業を伝授し、疑問や迷いを解消するための存在なのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05d",
+    "reading": [
+      { "c": "惑", "yomi": "まど", "okuri": "ひて", "kana": false },
+      { "c": "師", "yomi": "し", "okuri": "に", "kana": false },
+      { "c": "従", "yomi": "したが", "okuri": "は", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざれば", "kana": true },
+      { "c": "其", "yomi": "その", "okuri": "の", "kana": false },
+      { "c": "惑", "yomi": "まど", "okuri": "ひたるを", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "す", "kana": false },
+      { "c": "終", "yomi": "つひ", "okuri": "に", "kana": false },
+      { "c": "解", "yomi": "と", "okuri": "け", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "じ", "kana": true }
+    ],
+    "kakikudashi": "惑ひて師に従はざれば其の惑ひたるを為す終に解けじ",
+    "placed": ["而", "也", "矣"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "疑問がありながら師について学ばなければ、その疑問は永久に解消されることがない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05e",
+    "reading": [
+      { "c": "夫", "yomi": "それ", "okuri": "", "kana": false },
+      { "c": "庸", "yomi": "いづ", "okuri": "くんぞ", "kana": false },
+      { "c": "其", "yomi": "その", "okuri": "の", "kana": false },
+      { "c": "年", "yomi": "とし", "okuri": "の", "kana": false },
+      { "c": "吾", "yomi": "われ", "okuri": "より", "kana": false },
+      { "c": "先", "yomi": "せん", "okuri": "", "kana": false },
+      { "c": "後", "yomi": "ご", "okuri": "に", "kana": false },
+      { "c": "生", "yomi": "うま", "okuri": "れしを", "kana": false },
+      { "c": "知", "yomi": "し", "okuri": "らむ", "kana": false },
+      { "c": "乎", "yomi": "や", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "夫れ庸ぞ其の年の吾より先後に生まれしを知らむや",
+    "placed": ["之", "於"],
+    "reread": [],
+    "kuho": ["hango"],
+    "meaning": "そもそも、その人が自分より年上か年下かなどどうして気にする必要があろうか（気にしない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05f",
+    "reading": [
+      { "c": "是", "yomi": "ここ", "okuri": "を", "kana": false },
+      { "c": "故", "yomi": "もち", "okuri": "て", "kana": false },
+      { "c": "貴", "yomi": "たっと", "okuri": "きと", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "く", "kana": false },
+      { "c": "賎", "yomi": "いやし", "okuri": "きと", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "く", "kana": false },
+      { "c": "長", "yomi": "ちょう", "okuri": "と", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "く", "kana": false },
+      { "c": "少", "yomi": "しょう", "okuri": "と", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "是故貴きと無く賎しきと無く長と無く少と無し",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "だからこそ身分が高いかも低いかも関係なく、年上か年下かも問わないのだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05g",
+    "reading": [
+      { "c": "道", "yomi": "みち", "okuri": "の", "kana": false },
+      { "c": "存", "yomi": "そん", "okuri": "する", "kana": false },
+      { "c": "所", "yomi": "ところ", "okuri": "は", "kana": false },
+      { "c": "師", "yomi": "し", "okuri": "の", "kana": false },
+      { "c": "存", "yomi": "そん", "okuri": "する", "kana": false },
+      { "c": "所", "yomi": "ところ", "okuri": "なり", "kana": false }
+    ],
+    "kakikudashi": "道の存する所は師の存する所なり",
+    "placed": ["之", "之", "也"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "人の道が存在する場所、そここそが師が存在する場所なのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05h",
+    "reading": [
+      { "c": "吾", "yomi": "われ", "okuri": "が", "kana": false },
+      { "c": "前", "yomi": "まえ", "okuri": "に", "kana": false },
+      { "c": "生", "yomi": "うま", "okuri": "れて", "kana": false },
+      { "c": "其", "yomi": "その", "okuri": "の", "kana": false },
+      { "c": "道", "yomi": "みち", "okuri": "を", "kana": false },
+      { "c": "聞", "yomi": "くこと", "okuri": "", "kana": false },
+      { "c": "固", "yomi": "もと", "okuri": "より", "kana": false },
+      { "c": "吾", "yomi": "われ", "okuri": "より", "kana": false },
+      { "c": "先", "yomi": "さきだ", "okuri": "つ", "kana": false }
+    ],
+    "kakikudashi": "吾が前に生まれて其の道を聞くこと固より吾より先だつ",
+    "placed": ["乎", "也", "乎"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "私より前に生まれて真理を学んでいるなら、当然自分より先を歩んでいるのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05i",
+    "reading": [
+      { "c": "嗟", "yomi": "ああ", "okuri": "", "kana": false },
+      { "c": "乎", "yomi": "かな", "okuri": "", "kana": true },
+      { "c": "師", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "道", "yomi": "だう", "okuri": "の", "kana": false },
+      { "c": "伝", "yomi": "つた", "okuri": "はら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざるや", "kana": true },
+      { "c": "久", "yomi": "ひさ", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "嗟乎師道の伝はらざるや久し",
+    "placed": ["之", "也", "矣"],
+    "reread": [],
+    "kuho": ["eitan"],
+    "meaning": "ああ、師について学ぶ正しい伝統が途絶えてから随分と長い年月が経ってしまったなあ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05j",
+    "reading": [
+      { "c": "其", "yomi": "その", "okuri": "の", "kana": false },
+      { "c": "身", "yomi": "み", "okuri": "に", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "師", "yomi": "しとするを", "okuri": "", "kana": false },
+      { "c": "恥", "yomi": "は", "okuri": "づ", "kana": false },
+      { "c": "惑", "yomi": "まよ", "okuri": "へるかな", "kana": false }
+    ],
+    "kakikudashi": "其の身に則ち師とするを恥づ惑へるかな",
+    "placed": ["於", "也", "焉", "矣"],
+    "reread": [],
+    "kuho": ["katei"],
+    "meaning": "自分自身のこととなると師につくことを恥ずかしがる、実に愚かで迷っていることだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05k",
+    "reading": [
+      { "c": "句", "yomi": "く", "okuri": "", "kana": false },
+      { "c": "読", "yomi": "とう", "okuri": "の", "kana": false },
+      { "c": "知", "yomi": "し", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "惑", "yomi": "まど", "okuri": "ひの", "kana": false },
+      { "c": "解", "yomi": "と", "okuri": "け", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true }
+    ],
+    "kakikudashi": "句読の知らざる惑ひの解けざる",
+    "placed": ["之", "之"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "文章の区切り方すら知らず、人生の根本的な疑問も解消されないままである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05l",
+    "reading": [
+      { "c": "吾", "yomi": "われ", "okuri": "", "kana": false },
+      { "c": "未", "yomi": "いま", "okuri": "だ", "kana": false },
+      { "c": "其", "yomi": "その", "okuri": "の", "kana": false },
+      { "c": "明", "yomi": "めい", "okuri": "なるを", "kana": false },
+      { "c": "見", "yomi": "み", "okuri": "", "kana": false },
+      { "c": "未", "yomi": "", "okuri": "ざるなり", "kana": true }
+    ],
+    "kakikudashi": "吾未だ其の明なるを見ざるなり",
+    "placed": ["也"],
+    "reread": ["未"],
+    "kuho": [],
+    "meaning": "私はそのような者たちが賢明だとは到底思えない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05m",
+    "reading": [
+      { "c": "聖", "yomi": "せい", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "じんに", "okuri": "", "kana": false },
+      { "c": "常", "yomi": "つね", "okuri": "の", "kana": false },
+      { "c": "師", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "聖人に常の師無し",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "優れた聖人には固定された特定の師匠など存在しない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05n",
+    "reading": [
+      { "c": "是", "yomi": "ここ", "okuri": "を", "kana": false },
+      { "c": "故", "yomi": "もち", "okuri": "て", "kana": false },
+      { "c": "弟", "yomi": "てい", "okuri": "", "kana": false },
+      { "c": "子", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "かなら", "okuri": "ずしも", "kana": false },
+      { "c": "必", "yomi": "", "okuri": "", "kana": true },
+      { "c": "師", "yomi": "しに", "okuri": "", "kana": false },
+      { "c": "如", "yomi": "しかずんば", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "あらず", "kana": true }
+    ],
+    "kakikudashi": "是故弟子必ずしも師に如かずんばあらず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei", "hikaku"],
+    "meaning": "だからこそ、弟子が必ずしも師匠に及ばないとは限らないのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-05p",
+    "reading": [
+      { "c": "道", "yomi": "みちを", "okuri": "", "kana": false },
+      { "c": "聞", "yomi": "くことに", "okuri": "", "kana": false },
+      { "c": "先", "yomi": "せん", "okuri": "", "kana": false },
+      { "c": "後", "yomi": "ご", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あり", "okuri": "", "kana": false },
+      { "c": "術", "yomi": "じゅつ", "okuri": "", "kana": false },
+      { "c": "業", "yomi": "ぎょうに", "okuri": "", "kana": false },
+      { "c": "専", "yomi": "せん", "okuri": "", "kana": false },
+      { "c": "攻", "yomi": "かう", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あり", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "道を聞くに先后有り術業に専攻有り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "学問の真理を修めるのには早い遅いがあり、学芸の専門分野にも人それぞれの専攻があるのだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06a",
+    "reading": [
+      { "c": "晋", "yomi": "しんの", "okuri": "", "kana": false },
+      { "c": "太", "yomi": "たい", "okuri": "", "kana": false },
+      { "c": "元", "yomi": "げん", "okuri": "", "kana": false },
+      { "c": "中", "yomi": "ちゅう", "okuri": "", "kana": false },
+      { "c": "武", "yomi": "ぶ", "okuri": "", "kana": false },
+      { "c": "陵", "yomi": "りょうの", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "ひと", "okuri": "", "kana": false },
+      { "c": "魚", "yomi": "うをを", "okuri": "", "kana": false },
+      { "c": "捕", "yomi": "とふるを", "okuri": "", "kana": false },
+      { "c": "為", "yomi": "なす", "okuri": "", "kana": false },
+      { "c": "業", "yomi": "ぎょうと", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "晋の太元中武陵の人魚を捕ふるを業と為す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "東晋の太元年間のこと、武陵の出身者で漁業を仕事にしている者がいた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06b",
+    "reading": [
+      { "c": "渓", "yomi": "たにに", "okuri": "", "kana": false },
+      { "c": "縁", "yomi": "よりて", "okuri": "", "kana": false },
+      { "c": "行", "yomi": "ゆきて", "okuri": "", "kana": false },
+      { "c": "路", "yomi": "みちの", "okuri": "", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "遠", "yomi": "えん", "okuri": "", "kana": false },
+      { "c": "近", "yomi": "きんを", "okuri": "", "kana": false },
+      { "c": "忘", "yomi": "わする", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "渓に縁りて行きて路の遠近を忘る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "谷川に沿って舟を進めていくうちに、道のりの遠近を忘れてしまった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06c",
+    "reading": [
+      { "c": "忽", "yomi": "たちまち", "okuri": "", "kana": false },
+      { "c": "桃", "yomi": "とう", "okuri": "", "kana": false },
+      { "c": "花", "yomi": "かの", "okuri": "", "kana": false },
+      { "c": "林", "yomi": "はやしに", "okuri": "", "kana": false },
+      { "c": "逢", "yomi": "あふ", "okuri": "", "kana": false },
+      { "c": "岸", "yomi": "きしを", "okuri": "", "kana": false },
+      { "c": "夾", "yomi": "はさむこと", "okuri": "", "kana": false },
+      { "c": "数", "yomi": "すう", "okuri": "", "kana": false },
+      { "c": "百", "yomi": "ひゃく", "okuri": "", "kana": false },
+      { "c": "歩", "yomi": "ほ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "忽ち桃花の林に逢ふ岸を夾むこと数百歩",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "突然桃の花が咲き誇る林に出会い、両岸を挟んで数百歩にわたって続いていた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06d",
+    "reading": [
+      { "c": "漁", "yomi": "ぎょ", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "じん", "okuri": "", "kana": false },
+      { "c": "甚", "yomi": "はなは", "okuri": "だ", "kana": false },
+      { "c": "之", "yomi": "これを", "okuri": "", "kana": false },
+      { "c": "異", "yomi": "あやしむ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "漁人甚だ之をあやしむ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "漁師はこれを大変不思議に思った。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06e",
+    "reading": [
+      { "c": "復", "yomi": "また", "okuri": "", "kana": false },
+      { "c": "前", "yomi": "すすみ", "okuri": "", "kana": false },
+      { "c": "行", "yomi": "ゆきて", "okuri": "", "kana": false },
+      { "c": "其", "yomi": "その", "okuri": "", "kana": false },
+      { "c": "林", "yomi": "はやしを", "okuri": "", "kana": false },
+      { "c": "窮", "yomi": "きはめんと", "okuri": "", "kana": false },
+      { "c": "欲", "yomi": "ほっす", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "復た前み行きて其の林を窮めんと欲す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "さらに奥へ進んで行き、その林の果てを見極めようとした。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06f",
+    "reading": [
+      { "c": "初", "yomi": "はじめは", "okuri": "", "kana": false },
+      { "c": "極", "yomi": "きはめて", "okuri": "", "kana": false },
+      { "c": "狭", "yomi": "せまく", "okuri": "", "kana": false },
+      { "c": "纔", "yomi": "わずかに", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "ひとを", "okuri": "", "kana": false },
+      { "c": "通", "yomi": "つうず", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "初めは極めて狭くわずかに人を通ず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "（洞窟の入口は）最初は非常に狭く、やっと人が通れるくらいであった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06g",
+    "reading": [
+      { "c": "豁", "yomi": "かつ", "okuri": "", "kana": false },
+      { "c": "然", "yomi": "ぜんとして", "okuri": "", "kana": false },
+      { "c": "開", "yomi": "かい", "okuri": "", "kana": false },
+      { "c": "朗", "yomi": "ろうす", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "豁然として開朗す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "パッと視野が開けて明るく広がった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06h",
+    "reading": [
+      { "c": "土", "yomi": "と", "okuri": "", "kana": false },
+      { "c": "地", "yomi": "ち", "okuri": "", "kana": false },
+      { "c": "平", "yomi": "へい", "okuri": "", "kana": false },
+      { "c": "曠", "yomi": "かうに", "okuri": "", "kana": false },
+      { "c": "屋", "yomi": "おく", "okuri": "", "kana": false },
+      { "c": "舎", "yomi": "しゃ", "okuri": "", "kana": false },
+      { "c": "厳", "yomi": "げんぜんたり", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "土地平曠に屋舎厳然たり",
+    "placed": ["然"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "土地は平らで広々としており、家々が整然と立ち並んでいた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06i",
+    "reading": [
+      { "c": "阡", "yomi": "せん", "okuri": "", "kana": false },
+      { "c": "陌", "yomi": "はく", "okuri": "", "kana": false },
+      { "c": "交", "yomi": "かう", "okuri": "", "kana": false },
+      { "c": "通", "yomi": "つうし", "okuri": "", "kana": false },
+      { "c": "鶏", "yomi": "けい", "okuri": "", "kana": false },
+      { "c": "犬", "yomi": "けん", "okuri": "", "kana": false },
+      { "c": "相", "yomi": "あい", "okuri": "", "kana": false },
+      { "c": "聞", "yomi": "きこゆ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "阡陌交通し鶏犬相聞ゆ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "田畑の道が縦横に通じ合い、鶏や犬の鳴き声が互いに聞こえ合っていた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06j",
+    "reading": [
+      { "c": "男", "yomi": "なん", "okuri": "", "kana": false },
+      { "c": "女", "yomi": "にょの", "okuri": "", "kana": false },
+      { "c": "衣", "yomi": "い", "okuri": "", "kana": false },
+      { "c": "着", "yomi": "ちゃく", "okuri": "", "kana": false },
+      { "c": "悉", "yomi": "ことごとく", "okuri": "", "kana": false },
+      { "c": "外", "yomi": "がい", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "じんの", "okuri": "", "kana": false },
+      { "c": "如", "yomi": "ごとし", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "男女の衣着悉く外人の如し",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "男女の身につけている衣服はみな世間の人々と同じようであった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06k",
+    "reading": [
+      { "c": "黄", "yomi": "くわう", "okuri": "", "kana": false },
+      { "c": "髪", "yomi": "はつ", "okuri": "", "kana": false },
+      { "c": "垂", "yomi": "すい", "okuri": "", "kana": false },
+      { "c": "髫", "yomi": "てう", "okuri": "", "kana": false },
+      { "c": "並", "yomi": "ならびに", "okuri": "", "kana": false },
+      { "c": "怡", "yomi": "いぜんとして", "okuri": "", "kana": false },
+      { "c": "自", "yomi": "みづから", "okuri": "", "kana": false },
+      { "c": "楽", "yomi": "たのしむ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "黄髪垂髫並びに怡然として自ら楽しむ",
+    "placed": ["然"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "老人から子供たちに至るまで皆なごやかで、楽しそうに過ごしていた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06l",
+    "reading": [
+      { "c": "問", "yomi": "とふ", "okuri": "", "kana": false },
+      { "c": "今", "yomi": "いま", "okuri": "", "kana": false },
+      { "c": "是", "yomi": "これ", "okuri": "", "kana": false },
+      { "c": "何", "yomi": "なにの", "okuri": "", "kana": false },
+      { "c": "世", "yomi": "よなるかを", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "問ふ今是れ何の世界なるかを",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "「今はいったい何の時代ですか」と尋ねた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06m",
+    "reading": [
+      { "c": "乃", "yomi": "すなはち", "okuri": "", "kana": false },
+      { "c": "漢", "yomi": "かんの", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あるを", "okuri": "", "kana": false },
+      { "c": "知", "yomi": "しらず", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "", "kana": true },
+      { "c": "無", "yomi": "む", "okuri": "", "kana": false },
+      { "c": "論", "yomi": "ろん", "okuri": "", "kana": false },
+      { "c": "魏", "yomi": "ぎ", "okuri": "", "kana": false },
+      { "c": "晋", "yomi": "しんをや", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "乃ち漢の有るを知らず無論魏晋をや",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "なんと漢の時代があったことすら知らず、まして魏や晋の時代など言うまでもないことであった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06n",
+    "reading": [
+      { "c": "外", "yomi": "がい", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "じんの", "okuri": "", "kana": false },
+      { "c": "為", "yomi": "ために", "okuri": "", "kana": false },
+      { "c": "道", "yomi": "ふに", "okuri": "", "kana": false },
+      { "c": "足", "yomi": "たら", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "外人の為に道ふに足らざるなり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "（ここは外部の人々に話してお伝えするような価値もない所です。）",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "B-06o",
+    "reading": [
+      { "c": "太", "yomi": "たい", "okuri": "", "kana": false },
+      { "c": "守", "yomi": "しゅ", "okuri": "", "kana": false },
+      { "c": "即", "yomi": "すなはち", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "ひとを", "okuri": "", "kana": false },
+      { "c": "遣", "yomi": "つかはして", "okuri": "", "kana": false },
+      { "c": "其", "yomi": "その", "okuri": "", "kana": false },
+      { "c": "往", "yomi": "ゆくに", "okuri": "", "kana": false },
+      { "c": "随", "yomi": "したがはしむ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "太守即ち人を遣はして其の往くに随はしむ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["shieki"],
+    "meaning": "太守はすぐに役人を派遣して、漁師の行く後をついていかせた。",
+    "confidence": "高",
+    "note": ""
+  }
+]

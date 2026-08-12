@@ -1,0 +1,660 @@
+[
+  {
+    "id": "S-77",
+    "reading": [
+      { "c": "信", "yomi": "しん", "okuri": "", "kana": false },
+      { "c": "言", "yomi": "げん", "okuri": "は", "kana": false },
+      { "c": "美", "yomi": "び", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ならず", "kana": true },
+      { "c": "美", "yomi": "び", "okuri": "", "kana": false },
+      { "c": "言", "yomi": "げん", "okuri": "は", "kana": false },
+      { "c": "信", "yomi": "しん", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ならず", "kana": true }
+    ],
+    "kakikudashi": "信言は美ならず美言は信ならず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "信実な言葉は美しく飾られておらず、美しい言葉は信実ではない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-58a",
+    "reading": [
+      { "c": "昔", "yomi": "むか", "okuri": "", "kana": false },
+      { "c": "者", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "荘", "yomi": "さう", "okuri": "", "kana": false },
+      { "c": "周", "yomi": "しう", "okuri": "", "kana": false },
+      { "c": "夢", "yomi": "ゆめ", "okuri": "に", "kana": false },
+      { "c": "胡", "yomi": "こ", "okuri": "", "kana": false },
+      { "c": "蝶", "yomi": "てふ", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "る", "kana": false }
+    ],
+    "kakikudashi": "昔者荘周夢に胡蝶と為る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "昔、荘周は夢の中で蝶になった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-58b",
+    "reading": [
+      { "c": "俄", "yomi": "が", "okuri": "", "kana": false },
+      { "c": "然", "yomi": "ぜん", "okuri": "として", "kana": false },
+      { "c": "覚", "yomi": "さ", "okuri": "むれば", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "蘧", "yomi": "きょ", "okuri": "", "kana": false },
+      { "c": "蘧", "yomi": "きょ", "okuri": "", "kana": false },
+      { "c": "然", "yomi": "ぜん", "okuri": "として", "kana": false },
+      { "c": "周", "yomi": "しう", "okuri": "", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "俄然として覚むれば則ち蘧蘧然として周なり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["katei"],
+    "meaning": "ハッと目が覚めると、なんとまごうかた無き自分自身（荘周）であった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-58c",
+    "reading": [
+      { "c": "胡", "yomi": "こ", "okuri": "", "kana": false },
+      { "c": "蝶", "yomi": "てふ", "okuri": "", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "夢", "yomi": "ゆめ", "okuri": "", "kana": false },
+      { "c": "周", "yomi": "しう", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "る", "kana": false },
+      { "c": "与", "yomi": "か", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "胡蝶の夢周と為るか",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "胡蝶の夢が荘周になったのであろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-58d",
+    "reading": [
+      { "c": "此", "yomi": "こ", "okuri": "れ", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "物", "yomi": "ぶつ", "okuri": "", "kana": false },
+      { "c": "化", "yomi": "か", "okuri": "と", "kana": false },
+      { "c": "謂", "yomi": "い", "okuri": "ふ", "kana": false }
+    ],
+    "kakikudashi": "此れ之を物化と謂ふ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "これを物化（万物の変化）と言うのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-59",
+    "reading": [
+      { "c": "此", "yomi": "これ", "okuri": "", "kana": false },
+      { "c": "独", "yomi": "ひとり", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あ", "okuri": "ること", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "し", "kana": false },
+      { "c": "嘗", "yomi": "こころ", "okuri": "", "kana": false },
+      { "c": "試", "yomi": "み", "okuri": "に", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "鑿", "yomi": "うが", "okuri": "たむ", "kana": false }
+    ],
+    "kakikudashi": "此れ独り有ること無し試みに之を鑿たむ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "この（渾沌）だけに穴が無い。ためしにこれに穴を開けてみよう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-59b",
+    "reading": [
+      { "c": "日", "yomi": "ひ", "okuri": "に", "kana": false },
+      { "c": "一", "yomi": "いっ", "okuri": "", "kana": false },
+      { "c": "竅", "yomi": "けう", "okuri": "を", "kana": false },
+      { "c": "鑿", "yomi": "うが", "okuri": "ち", "kana": false },
+      { "c": "七", "yomi": "しち", "okuri": "", "kana": false },
+      { "c": "日", "yomi": "にち", "okuri": "にして", "kana": false },
+      { "c": "渾", "yomi": "こん", "okuri": "", "kana": false },
+      { "c": "沌", "yomi": "とん", "okuri": "", "kana": false },
+      { "c": "死", "yomi": "し", "okuri": "す", "kana": false }
+    ],
+    "kakikudashi": "日に一竅を鑿ち七日にして渾沌死す",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "日にひとつの穴を開け、七日たったら渾沌は死んでしまった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-60b",
+    "reading": [
+      { "c": "井", "yomi": "せい", "okuri": "", "kana": false },
+      { "c": "蛙", "yomi": "あ", "okuri": "には", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "海", "yomi": "うみ", "okuri": "を", "kana": false },
+      { "c": "語", "yomi": "かた", "okuri": "る", "kana": false },
+      { "c": "可", "yomi": "べか", "okuri": "ら", "kana": true },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "虚", "yomi": "きょ", "okuri": "に", "kana": false },
+      { "c": "拘", "yomi": "こだわ", "okuri": "れば", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "井蛙には以て海を語るべからざる者は虚に拘はればなり",
+    "placed": ["於", "於"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "井戸のなかの蛙に海の話をすることができないのは、その住む場所に囚われているからである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-60c",
+    "reading": [
+      { "c": "夏", "yomi": "か", "okuri": "", "kana": false },
+      { "c": "虫", "yomi": "ちゅう", "okuri": "には", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "氷", "yomi": "こほり", "okuri": "を", "kana": false },
+      { "c": "語", "yomi": "かた", "okuri": "る", "kana": false },
+      { "c": "可", "yomi": "べか", "okuri": "ら", "kana": true },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "時", "yomi": "とき", "okuri": "に", "kana": false },
+      { "c": "篤", "yomi": "あつ", "okuri": "ければ", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "夏虫には以て氷を語るべからざる者は時間に篤ければなり",
+    "placed": ["於", "於"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "夏の虫に氷の話をすることができないのは、その生きる季節に限られているからである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-61",
+    "reading": [
+      { "c": "子", "yomi": "し", "okuri": "は", "kana": false },
+      { "c": "魚", "yomi": "うを", "okuri": "に", "kana": false },
+      { "c": "非", "yomi": "あら", "okuri": "ず", "kana": false },
+      { "c": "安", "yomi": "いづく", "okuri": "んぞ", "kana": false },
+      { "c": "魚", "yomi": "うを", "okuri": "", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "楽", "yomi": "たのしみ", "okuri": "を", "kana": false },
+      { "c": "知", "yomi": "し", "okuri": "らん", "kana": false }
+    ],
+    "kakikudashi": "子魚に非ず安くんぞ魚の楽を知らん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hango", "hitei"],
+    "meaning": "あなたは魚ではない。（それなのに）どうして魚の楽しみが分かろうか（いや、分からない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-61b",
+    "reading": [
+      { "c": "子", "yomi": "し", "okuri": "は", "kana": false },
+      { "c": "我", "yomi": "われ", "okuri": "に", "kana": false },
+      { "c": "非", "yomi": "あら", "okuri": "ず", "kana": false },
+      { "c": "安", "yomi": "いづく", "okuri": "んぞ", "kana": false },
+      { "c": "我", "yomi": "われ", "okuri": "の", "kana": false },
+      { "c": "魚", "yomi": "うを", "okuri": "", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "楽", "yomi": "たのしみ", "okuri": "を", "kana": false },
+      { "c": "知", "yomi": "し", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざるを", "kana": true },
+      { "c": "知", "yomi": "し", "okuri": "らん", "kana": false }
+    ],
+    "kakikudashi": "子我に非ず安くんぞ我の魚の楽を知らざるを知らん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hango", "hitei"],
+    "meaning": "あなたは私ではない。（だからといって）どうして私が魚の楽しみを知らないと分かろうか（いや、分からない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-63b",
+    "reading": [
+      { "c": "王", "yomi": "おう", "okuri": "は", "kana": false },
+      { "c": "和", "yomi": "わ", "okuri": "を", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "誑", "yomi": "けう", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "し", "kana": false },
+      { "c": "其", "yomi": "そ", "okuri": "の", "kana": false },
+      { "c": "左", "yomi": "さ", "okuri": "", "kana": false },
+      { "c": "足", "yomi": "そく", "okuri": "を", "kana": false },
+      { "c": "刖", "yomi": "さ", "okuri": "る", "kana": false }
+    ],
+    "kakikudashi": "王和を以て誑と為し其の左足を刖る",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "王は和（和氏）が偽りを捧げたと思い込み、その左足を切断した。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-63c",
+    "reading": [
+      { "c": "子", "yomi": "し", "okuri": "は", "kana": false },
+      { "c": "奚", "yomi": "なん", "okuri": "ぞ", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "哭", "yomi": "こく", "okuri": "すること", "kana": false },
+      { "c": "悲", "yomi": "かな", "okuri": "しき", "kana": false },
+      { "c": "也", "yomi": "や", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "子奚ぞ之を哭すること悲しきや",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "あなたはなぜそれほど悲しそうに泣いているのですか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-63d",
+    "reading": [
+      { "c": "吾", "yomi": "われ", "okuri": "は", "kana": false },
+      { "c": "刖", "yomi": "あしきる", "okuri": "を", "kana": false },
+      { "c": "悲", "yomi": "かな", "okuri": "しむに", "kana": false },
+      { "c": "非", "yomi": "あら", "okuri": "ざる", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "吾刖を悲しむに非ざるなり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "私は足を切られたことを悲しんでいるのではない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-65",
+    "reading": [
+      { "c": "若", "yomi": "もし", "okuri": "し", "kana": false },
+      { "c": "人", "yomi": "ひと", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "に", "kana": false },
+      { "c": "嬰", "yomi": "ふ", "okuri": "ふる", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あ", "okuri": "らば", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "必", "yomi": "かなら", "okuri": "ず", "kana": false },
+      { "c": "人", "yomi": "ひと", "okuri": "を", "kana": false },
+      { "c": "殺", "yomi": "ころ", "okuri": "す", "kana": false }
+    ],
+    "kakikudashi": "若し人のこれにふふる者有らば則ち必ず人を殺す",
+    "placed": [],
+    "reread": [],
+    "kuho": ["katei"],
+    "meaning": "もしこの（逆鱗に）触れる者がいれば、必ずその人を殺してしまう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-65b",
+    "reading": [
+      { "c": "夫", "yomi": "それ", "okuri": "れ", "kana": false },
+      { "c": "竜", "yomi": "りょう", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "虫", "yomi": "ちゅう", "okuri": "", "kana": false },
+      { "c": "為", "yomi": "た", "okuri": "る", "kana": false },
+      { "c": "也", "yomi": "や", "okuri": "", "kana": true },
+      { "c": "柔", "yomi": "じゅう", "okuri": "にして", "kana": false },
+      { "c": "狎", "yomi": "な", "okuri": "れて", "kana": false },
+      { "c": "騎", "yomi": "の", "okuri": "る", "kana": false },
+      { "c": "可", "yomi": "べ", "okuri": "き", "kana": true },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "夫れ竜の虫たるや柔にして狎れてのるべきなり",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "そもそも竜という生き物は、おとなしい時にはなれ親しんで乗ることもできる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-65c",
+    "reading": [
+      { "c": "説", "yomi": "と", "okuri": "く", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "能", "yomi": "よ", "okuri": "く", "kana": false },
+      { "c": "人", "yomi": "じん", "okuri": "", "kana": false },
+      { "c": "主", "yomi": "しゅ", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "逆", "yomi": "ぎゃく", "okuri": "", "kana": false },
+      { "c": "鱗", "yomi": "りん", "okuri": "に", "kana": false },
+      { "c": "嬰", "yomi": "ふ", "okuri": "ふる", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "くんば", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "幾", "yomi": "ちか", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "説く者能く人主の逆鱗に嬰ふること無くんば則ち幾し",
+    "placed": ["矣"],
+    "reread": [],
+    "kuho": ["hitei", "katei"],
+    "meaning": "遊説する者が君主の逆鱗に触れないでいられるならば、（成功に）近いといえる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-65d",
+    "reading": [
+      { "c": "故", "yomi": "ゆゑ", "okuri": "に", "kana": false },
+      { "c": "弥", "yomi": "び", "okuri": "", "kana": false },
+      { "c": "子", "yomi": "し", "okuri": "が", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "行", "yomi": "おこない", "okuri": "", "kana": false },
+      { "c": "未", "yomi": "いま", "okuri": "だ", "kana": false },
+      { "c": "初", "yomi": "はじめ", "okuri": "に", "kana": false },
+      { "c": "変", "yomi": "へん", "okuri": "ぜ", "kana": false },
+      { "c": "未", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "故に弥子が行ひ未だ初めに変ぜざるなり",
+    "placed": ["於"],
+    "reread": ["未"],
+    "kuho": ["hitei"],
+    "meaning": "だから、弥子瑕の行いは最初と少しも変わっていなかったのである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-65e",
+    "reading": [
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "前", "yomi": "まえ", "okuri": "には", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "所", "yomi": "ゆゑん", "okuri": "", "kana": false },
+      { "c": "以", "yomi": "に", "okuri": "して", "kana": false },
+      { "c": "賢", "yomi": "けん", "okuri": "と", "kana": false },
+      { "c": "見", "yomi": "み", "okuri": "はるる", "kana": false },
+      { "c": "後", "yomi": "のち", "okuri": "には", "kana": false },
+      { "c": "罪", "yomi": "つみ", "okuri": "を", "kana": false },
+      { "c": "獲", "yomi": "う", "okuri": "る", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false }
+    ],
+    "kakikudashi": "以前の賢と見はるる所以にして後に罪を獲る者は",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": ["ukemi"],
+    "meaning": "以前には賢者と見なされた理由によって、後には罪に問われることになったのは（君主の愛憎が変化したからだ）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66a",
+    "reading": [
+      { "c": "学", "yomi": "がく", "okuri": "は", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "已", "yomi": "や", "okuri": "む", "kana": false },
+      { "c": "可", "yomi": "べか", "okuri": "ら", "kana": true },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "学は以て已むべからず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "学問は途中でやめてはならない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66",
+    "reading": [
+      { "c": "青", "yomi": "あお", "okuri": "は", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "藍", "yomi": "あい", "okuri": "より", "kana": false },
+      { "c": "取", "yomi": "と", "okuri": "りて", "kana": false },
+      { "c": "藍", "yomi": "あい", "okuri": "よりも", "kana": false },
+      { "c": "青", "yomi": "あお", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "青は之を藍より取りて藍よりも青し",
+    "placed": ["於", "而", "於"],
+    "reread": [],
+    "kuho": ["hikaku"],
+    "meaning": "青色の染料は藍の草から取るが、（その青色は）もとの藍の草よりも青い。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66b",
+    "reading": [
+      { "c": "氷", "yomi": "こほり", "okuri": "は", "kana": false },
+      { "c": "水", "yomi": "みず", "okuri": "", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "すも", "kana": false },
+      { "c": "水", "yomi": "みず", "okuri": "より", "kana": false },
+      { "c": "寒", "yomi": "さむ", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "氷は水之を為すも水より寒し",
+    "placed": ["而", "於"],
+    "reread": [],
+    "kuho": ["hikaku"],
+    "meaning": "氷は水から作られるが、水よりも冷たい。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66c",
+    "reading": [
+      { "c": "木", "yomi": "き", "okuri": "", "kana": false },
+      { "c": "縄", "yomi": "なわ", "okuri": "を", "kana": false },
+      { "c": "受", "yomi": "う", "okuri": "くれば", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "直", "yomi": "ただ", "okuri": "しく", "kana": false },
+      { "c": "金", "yomi": "きん", "okuri": "", "kana": false },
+      { "c": "礪", "yomi": "とい", "okuri": "に", "kana": false },
+      { "c": "就", "yomi": "つ", "okuri": "けば", "kana": false },
+      { "c": "則", "yomi": "すなは", "okuri": "ち", "kana": false },
+      { "c": "利", "yomi": "と", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "木縄を受くれば則ち直く金礪に就けば則ち利し",
+    "placed": [],
+    "reread": [],
+    "kuho": ["katei"],
+    "meaning": "木は墨縄を当てて削ればまっすぐになり、金属は砥石で研げば鋭くなる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66d",
+    "reading": [
+      { "c": "須", "yomi": "しゅ", "okuri": "", "kana": false },
+      { "c": "臾", "yomi": "ゆ", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "学", "yomi": "まな", "okuri": "ぶ", "kana": false },
+      { "c": "所", "yomi": "ところ", "okuri": "に", "kana": false },
+      { "c": "如", "yomi": "し", "okuri": "か", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざる", "kana": true },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "須臾の学ぶ所に如かざるなり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hikaku"],
+    "meaning": "（一人で一日中考え抜くことも）ほんのわずかな時間勉強することには及ばない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66e",
+    "reading": [
+      { "c": "蹞", "yomi": "はん", "okuri": "", "kana": false },
+      { "c": "歩", "yomi": "ぽ", "okuri": "を", "kana": false },
+      { "c": "積", "yomi": "つ", "okuri": "ま", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざれば", "kana": true },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "千", "yomi": "せん", "okuri": "", "kana": false },
+      { "c": "里", "yomi": "り", "okuri": "を", "kana": false },
+      { "c": "致", "yomi": "いた", "okuri": "す", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "蹞歩を積まざれば以て千里を致す無し",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "半歩の積み重ねをしなければ、千里の遠くにたどり着くことはできない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66f",
+    "reading": [
+      { "c": "小", "yomi": "しょう", "okuri": "", "kana": false },
+      { "c": "流", "yomi": "りゅう", "okuri": "を", "kana": false },
+      { "c": "積", "yomi": "つ", "okuri": "ま", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざれば", "kana": true },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "江", "yomi": "こう", "okuri": "", "kana": false },
+      { "c": "海", "yomi": "かい", "okuri": "を", "kana": false },
+      { "c": "成", "yomi": "な", "okuri": "す", "kana": false },
+      { "c": "無", "yomi": "な", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "小流を積まざれば以て江海を成す無し",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "小さな小川の流れを集めなければ、大きな大河や海を形成することはできない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66g",
+    "reading": [
+      { "c": "鍥", "yomi": "きざ", "okuri": "りて", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "舎", "yomi": "す", "okuri": "つれば", "kana": false },
+      { "c": "朽", "yomi": "きゅう", "okuri": "", "kana": false },
+      { "c": "木", "yomi": "ぼく", "okuri": "も", "kana": false },
+      { "c": "折", "yomi": "お", "okuri": "れ", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "鍥りて之を舎つれば朽木も折れず",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "彫刻をしていて途中でやめてしまえば、腐った木でさえ折ることはできない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66h",
+    "reading": [
+      { "c": "鍥", "yomi": "きざ", "okuri": "りて", "kana": false },
+      { "c": "舎", "yomi": "す", "okuri": "て", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざれば", "kana": true },
+      { "c": "金", "yomi": "きん", "okuri": "", "kana": false },
+      { "c": "石", "yomi": "せき", "okuri": "も", "kana": false },
+      { "c": "鏤", "yomi": "ちりば", "okuri": "む", "kana": false },
+      { "c": "可", "yomi": "べ", "okuri": "し", "kana": true }
+    ],
+    "kakikudashi": "鍥りて舎てざれば金石も鏤むべし",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "途中でやめずに彫りつづければ、金属や宝石のような硬いものにも彫刻することができる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-66i",
+    "reading": [
+      { "c": "君", "yomi": "くん", "okuri": "", "kana": false },
+      { "c": "子", "yomi": "し", "okuri": "の", "kana": false },
+      { "c": "生", "yomi": "せい", "okuri": "は", "kana": false },
+      { "c": "異", "yomi": "こと", "okuri": "なるに", "kana": false },
+      { "c": "非", "yomi": "あら", "okuri": "ざる", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true },
+      { "c": "善", "yomi": "よく", "okuri": "", "kana": false },
+      { "c": "物", "yomi": "もの", "okuri": "に", "kana": false },
+      { "c": "仮", "yomi": "か", "okuri": "る", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "君子の生は異なるに非ざるなり善く物に仮るなり",
+    "placed": ["於"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "君子の生まれつきが人と違っているわけではない。道具や万物を上手に応用しているだけなのだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-67",
+    "reading": [
+      { "c": "人", "yomi": "ひと", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "性", "yomi": "せい", "okuri": "は", "kana": false },
+      { "c": "悪", "yomi": "あく", "okuri": "なり", "kana": false },
+      { "c": "其", "yomi": "そ", "okuri": "の", "kana": false },
+      { "c": "善", "yomi": "ぜん", "okuri": "なる", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "偽", "yomi": "ぎ", "okuri": "", "kana": false },
+      { "c": "也", "yomi": "なり", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "人の性は悪なり其の善なる者は偽なり",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "人間の生まれつきの性質は悪である。その善であるものは後天的な作為（努力）によるものである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-67b",
+    "reading": [
+      { "c": "必", "yomi": "かなら", "okuri": "ず", "kana": false },
+      { "c": "将", "yomi": "まさ", "okuri": "に", "kana": false },
+      { "c": "師", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "法", "yomi": "ほう", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "化", "yomi": "か", "okuri": "", "kana": false },
+      { "c": "礼", "yomi": "れい", "okuri": "", "kana": false },
+      { "c": "義", "yomi": "ぎ", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "道", "yomi": "みち", "okuri": "", "kana": false },
+      { "c": "有", "yomi": "あ", "okuri": "ら", "kana": false },
+      { "c": "将", "yomi": "", "okuri": "んとす", "kana": true }
+    ],
+    "kakikudashi": "必ず将に師法の化礼義之道有らんとす",
+    "placed": [],
+    "reread": ["将"],
+    "kuho": [],
+    "meaning": "必ずや師や手本の感化と、礼儀の道が存在することになるであろう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "S-67c",
+    "reading": [
+      { "c": "塗", "yomi": "と", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "人", "yomi": "ひと", "okuri": "は", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "禹", "yomi": "う", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "る", "kana": false },
+      { "c": "可", "yomi": "べ", "okuri": "し", "kana": true }
+    ],
+    "kakikudashi": "塗の人は以て禹と為るべし",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "道行くどんな平凡な人間でも、聖人である禹のようになることができる。",
+    "confidence": "高",
+    "note": ""
+  }
+]

@@ -1,0 +1,782 @@
+[
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "自", "yomi": "い", "okuri": "リテ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "銭", "yomi": "せん", "okuri": "ノ" },
+   { "c": "孔", "yomi": "あな", "okuri": "ヨリ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "入", "yomi": "い", "okuri": "リテ" },
+   { "c": "而", "role": "placed" },
+   { "c": "銭", "yomi": "せん", "okuri": "ハ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "湿", "yomi": "うるお", "okuri": "ハ" }
+  ],
+  "order": [ 1, 2, 0, 3, 5, 7, 6 ],
+  "kakikudashi": "銭の穴より入りて銭は湿はらず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "（油が）銭の穴を通って入ったが、銭は湿らなかった。",
+  "_catalog": "B-09i",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "我", "yomi": "われ", "okuri": "モ" },
+   { "c": "亦", "yomi": "また" },
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "他", "yomi": "た" },
+   { "c": "惟", "yomi": "ただ" },
+   { "c": "手", "yomi": "て", "okuri": "ノ" },
+   { "c": "熟", "yomi": "こな", "okuri": "レル" },
+   { "c": "爾", "yomi": "のみ", "kana": true }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 5, 6, 7 ],
+  "kakikudashi": "我も亦た他無し惟だ手の熟れるのみ",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "私にも特別な技があるわけではありません。ただ手が慣れているだけです。",
+  "_catalog": "B-09j",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "康", "yomi": "かう" },
+   { "c": "粛", "yomi": "しゅく" },
+   { "c": "笑", "yomi": "わら", "okuri": "ヒテ" },
+   { "c": "而", "role": "placed" },
+   { "c": "遣", "yomi": "や", "okuri": "ル", "mark": [{ "re": true }] },
+   { "c": "之", "yomi": "これ", "okuri": "ヲ" }
+  ],
+  "order": [ 0, 1, 2, 5, 4 ],
+  "kakikudashi": "康粛笑ひて之を遣る",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "康粛は苦笑いして彼を立ち去らせた。",
+  "_catalog": "B-09k",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "夫", "yomi": "そ", "okuri": "レ", "kana": true },
+   { "c": "天", "yomi": "てん" },
+   { "c": "地", "yomi": "ち", "okuri": "ハ" },
+   { "c": "者", "yomi": "は", "kana": true },
+   { "c": "万", "yomi": "ばん" },
+   { "c": "物", "yomi": "ぶつ", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "逆", "yomi": "げき" },
+   { "c": "旅", "yomi": "りょ", "okuri": "ナリ" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+  "kakikudashi": "それ天地は万物の逆旅なり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "そもそも天地というものは、あらゆる万物を迎え入れる宿である。",
+  "_catalog": "B-10a",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "光", "yomi": "こう" },
+   { "c": "陰", "yomi": "いん", "okuri": "ハ" },
+   { "c": "者", "yomi": "は", "kana": true },
+   { "c": "百", "yomi": "はく" },
+   { "c": "代", "yomi": "だい", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "過", "yomi": "か" },
+   { "c": "客", "yomi": "かく", "okuri": "ナリ" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
+  "kakikudashi": "光陰は百代の過客なり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "月日というものは、永遠に旅を続ける旅人のようなものだ。",
+  "_catalog": "B-10b",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "而", "yomi": "しか", "okuri": "シテ", "kana": true },
+   { "c": "浮", "yomi": "ふ" },
+   { "c": "生", "yomi": "せい", "okuri": "ハ" },
+   { "c": "若", "yomi": "ごと", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "夢", "yomi": "ゆめ", "okuri": "ノ" },
+   { "c": "為", "yomi": "な", "okuri": "スコト", "mark": [{ "re": true }] },
+   { "c": "歓", "yomi": "かん", "okuri": "ヲ" },
+   { "c": "幾", "yomi": "いく", "okuri": "バク", "kana": true },
+   { "c": "何", "yomi": "ぞ", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 4, 3, 6, 5, 7, 8 ],
+  "kakikudashi": "しかして浮生は夢のごとし歓を為すこといくばくぞ",
+  "acceptable": [],
+  "kuho": [ "gimon" ],
+  "meaning": "そして儚い人生は夢のようであり、楽しみを享受する時間はどれほどあろうか。",
+  "_catalog": "B-10c",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "古", "yomi": "こ" },
+   { "c": "人", "yomi": "じん" },
+   { "c": "秉", "yomi": "と", "okuri": "リテ", "mark": [{ "re": true }] },
+   { "c": "燭", "yomi": "しょく", "okuri": "ヲ" },
+   { "c": "夜", "yomi": "よる" },
+   { "c": "遊", "yomi": "あそ", "okuri": "ブハ" },
+   { "c": "良", "yomi": "まこと", "okuri": "ニ" },
+   { "c": "有", "yomi": "あ", "okuri": "ルナリ", "mark": [{ "re": true }] },
+   { "c": "以", "yomi": "ゆえ", "okuri": "ノ" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 5, 6, 8, 7, 9 ],
+  "kakikudashi": "古人燭を秉りて夜遊ぶは良に以の有るなり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "昔の人がろうそくを手に夜遊んだのも、まことに当然の理由があってのことである。",
+  "_catalog": "B-10d",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "不", "okuri": "ズンバ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "有", "yomi": "あ", "okuri": "ラズンバ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "佳", "yomi": "か" },
+   { "c": "詠", "yomi": "えい" },
+   { "c": "何", "yomi": "なん", "okuri": "ゾ", "kana": true },
+   { "c": "伸", "yomi": "のば", "okuri": "サン", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "雅", "yomi": "が" },
+   { "c": "懐", "yomi": "かい", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 2, 3, 1, 0, 4, 6, 7, 5 ],
+  "kakikudashi": "佳詠有らずんば何ぞ雅懐を伸ばさん",
+  "acceptable": [],
+  "kuho": [ "hango", "hitei" ],
+  "meaning": "すばらしい詩の詠唱がなければ、どうして風流な思いを述べ尽くすことができようか。",
+  "_catalog": "B-10e",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "如", "yomi": "もし", "kana": true },
+   { "c": "詩", "yomi": "し" },
+   { "c": "不", "okuri": "ズンバ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "成", "yomi": "な", "okuri": "ラズンバ" },
+   { "c": "罰", "yomi": "ばつ", "okuri": "ハ" },
+   { "c": "依", "yomi": "よ", "okuri": "ラン", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "金", "yomi": "きん" },
+   { "c": "谷", "yomi": "こく", "okuri": "ノ" },
+   { "c": "酒", "yomi": "しゅ" },
+   { "c": "数", "yomi": "すう", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 6, 7, 8, 9, 5 ],
+  "kakikudashi": "もし詩成らずんば罰は金谷の酒数に依らん",
+  "acceptable": [],
+  "kuho": [ "katei" ],
+  "meaning": "もし詩が完成しなければ、罰として金谷園の慣わしに従って酒三杯を飲ませよう。",
+  "_catalog": "B-10f",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "況", "yomi": "いわ", "okuri": "ンヤ", "kana": true },
+   { "c": "陽", "yomi": "よう" },
+   { "c": "春", "yomi": "しゅん", "okuri": "ノ" },
+   { "c": "召", "yomi": "め", "okuri": "スニ", "mark": [{ "re": true }] },
+   { "c": "我", "yomi": "われ", "okuri": "ヲ" },
+   { "c": "以", "yomi": "もっ", "okuri": "テスルヲヤ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "煙", "yomi": "えん" },
+   { "c": "景", "yomi": "けい", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 1, 2, 4, 3, 6, 7, 5 ],
+  "kakikudashi": "いわんや陽春の我を召すに煙景を以てするをや",
+  "acceptable": [],
+  "kuho": [ "yokuyo" ],
+  "meaning": "ましてうららかな春が、かすみたつ春景色で私たちを招いているのだから、なおさらである。",
+  "_catalog": "B-10g",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "幽", "yomi": "ゆう" },
+   { "c": "賞", "yomi": "しょう", "okuri": "ハ" },
+   {
+    "c": "未",
+    "reread": {
+     "first": { "yomi": "いま", "okuri": "ダ" },
+     "second": { "okuri": "ズ", "kana": true }
+    },
+    "mark": [{ "re": true }]
+   },
+   { "c": "已", "yomi": "や", "okuri": "マ" },
+   { "c": "高", "yomi": "こう" },
+   { "c": "談", "yomi": "だん", "okuri": "ハ" },
+   { "c": "転", "yomi": "うたた" },
+   { "c": "清", "yomi": "すがすが", "okuri": "シ" }
+  ],
+  "order": [ 0, 1, 2, 3, 2, 4, 5, 6, 7 ],
+  "kakikudashi": "幽賞未だ已まず高談転たすがすがし",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "静かな鑑賞はまだ終わらず、高尚な語らいは益々清らかになっていく。",
+  "_catalog": "B-10h",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "開", "yomi": "ひら", "okuri": "キテ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "瓊", "yomi": "けい" },
+   { "c": "筵", "yomi": "えん", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "以", "yomi": "もっ", "okuri": "テ" },
+   { "c": "坐", "yomi": "ざ", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "花", "yomi": "はな", "okuri": "ニ" },
+   { "c": "飛", "yomi": "とば", "okuri": "シテ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "羽", "yomi": "う" },
+   { "c": "觴", "yomi": "しょう", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "而", "role": "placed" },
+   { "c": "酔", "yomi": "よ", "okuri": "フ", "mark": [{ "re": true }] },
+   { "c": "月", "yomi": "つき", "okuri": "ニ" }
+  ],
+  "order": [ 1, 2, 0, 3, 5, 4, 7, 8, 6, 11, 10 ],
+  "kakikudashi": "瓊筵を開きて以て花に坐し羽觴を飛して月に酔ふ",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "美しい宴席を開いて花の中に座り、酒杯を巡らせて月下に酔いしれる。",
+  "_catalog": "B-10i",
+  "_section": "春夜宴桃李園序",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "壬", "yomi": "じん" },
+   { "c": "戌", "yomi": "じゅつ", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "秋", "yomi": "あき" },
+   { "c": "七", "yomi": "しち" },
+   { "c": "月", "yomi": "がつ" },
+   { "c": "既", "yomi": "き" },
+   { "c": "望", "yomi": "ぼう" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+  "kakikudashi": "壬戌の秋七月既望",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "みずのえいぬの年の秋、七月十六日の夜。",
+  "_catalog": "B-11a",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "清", "yomi": "せい" },
+   { "c": "風", "yomi": "ふう" },
+   { "c": "徐", "yomi": "おもむろ", "okuri": "ニ" },
+   { "c": "来", "yomi": "きた", "okuri": "リテ" },
+   { "c": "水", "yomi": "すい" },
+   { "c": "波", "yomi": "は" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "興", "yomi": "おこ", "okuri": "ラズ" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 7, 6 ],
+  "kakikudashi": "清風徐ろに来たりて水波興らず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "清らかな風が静かに吹き渡り、水面には波も立たない。",
+  "_catalog": "B-11b",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "月", "yomi": "つき" },
+   { "c": "出", "yomi": "い", "okuri": "デ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "於", "role": "placed" },
+   { "c": "東", "yomi": "とう" },
+   { "c": "山", "yomi": "さん", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "上", "yomi": "うえ", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 3, 4, 5, 6, 1 ],
+  "kakikudashi": "月東山の上に出で",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "月が東の山の上に出でて。",
+  "_catalog": "B-11c",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "徘", "yomi": "はい", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "徊", "yomi": "かい", "okuri": "ス" },
+   { "c": "於", "role": "placed" },
+   { "c": "斗", "yomi": "と" },
+   { "c": "牛", "yomi": "ぎゅう", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "間", "yomi": "あいだ", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 3, 4, 5, 6, 0, 1 ],
+  "kakikudashi": "斗牛の間に徘徊す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "（月が）斗宿と牛宿の間をゆるやかに巡っている。",
+  "_catalog": "B-11d",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "白", "yomi": "はく" },
+   { "c": "露", "yomi": "ろ" },
+   { "c": "横", "yomi": "よこた", "okuri": "ハリ", "mark": [{ "re": true }] },
+   { "c": "江", "yomi": "こう", "okuri": "ニ" },
+   { "c": "水", "yomi": "すい" },
+   { "c": "光", "yomi": "こう" },
+   { "c": "接", "yomi": "せっ", "okuri": "ス", "mark": [{ "re": true }] },
+   { "c": "天", "yomi": "てん", "okuri": "ニ" }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 5, 7, 6 ],
+  "kakikudashi": "白露江に横たはり水光天に接す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "白い川もやが長江の上に横たわり、水面の光は天にまで連なっている。",
+  "_catalog": "B-11e",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "浩", "yomi": "こう" },
+   { "c": "浩", "yomi": "こう", "okuri": "タル" },
+   { "c": "乎", "yomi": "かな", "kana": true },
+   { "c": "如", "yomi": "ごと", "okuri": "シ", "mark": [{ "lv": 2, "n": 2 }] },
+   { "c": "馮", "yomi": "ひょう", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "虚", "yomi": "きょ", "okuri": "ニ" },
+   { "c": "御", "yomi": "ぎょ", "okuri": "シテ", "mark": [{ "re": true }] },
+   { "c": "風", "yomi": "かぜ", "okuri": "ニ" },
+   { "c": "而", "role": "placed" },
+   { "c": "不", "okuri": "ザルガ", "kana": true, "mark": [{ "re": true }, { "lv": 2, "n": 1 }] },
+   { "c": "知", "yomi": "し", "okuri": "ラ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "其", "yomi": "そ", "okuri": "ノ" },
+   { "c": "所", "yomi": "ところ", "okuri": "ヲ", "mark": [{ "re": true }, { "lv": 1, "n": 1 }] },
+   { "c": "止", "yomi": "とど", "okuri": "マル" }
+  ],
+  "order": [ 0, 1, 2, 5, 4, 7, 6, 11, 13, 12, 10, 9, 3 ],
+  "kakikudashi": "浩浩かな虚に馮し風に御して其の止まる所を知らざるがごとし",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "広々として大空に身を任せ風に乗って進み、どこで止まるか分からないかのようだ。",
+  "_catalog": "B-11f",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "舞", "yomi": "ま", "okuri": "ハシメ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "幽", "yomi": "ゆう" },
+   { "c": "壑", "yomi": "がく", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "潜", "yomi": "せん" },
+   { "c": "蛟", "yomi": "こう", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "泣", "yomi": "な", "okuri": "カシム", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "孤", "yomi": "こ" },
+   { "c": "舟", "yomi": "しゅう", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "嫠", "yomi": "り" },
+   { "c": "婦", "yomi": "ふ", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6 ],
+  "kakikudashi": "幽壑の潜蛟を舞はしめ孤舟の嫠婦を泣かしむ",
+  "acceptable": [],
+  "kuho": [ "shieki" ],
+  "meaning": "深い谷の底に潜む竜を舞わせ、孤舟に眠る未亡人を泣かせるほどだ。",
+  "note": "使役字なしの使役動詞用法（舞はしめ・泣かしむ）。",
+  "_catalog": "B-11g",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "此", "yomi": "こ", "okuri": "レ" },
+   { "c": "非", "yomi": "あら", "okuri": "ズ", "mark": [{ "re": true }] },
+   { "c": "曹", "yomi": "そう" },
+   { "c": "孟", "yomi": "もう" },
+   { "c": "徳", "yomi": "とく", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "詩", "yomi": "し", "okuri": "ニ" },
+   { "c": "乎", "yomi": "や", "kana": true }
+  ],
+  "order": [ 0, 2, 3, 4, 5, 6, 1, 7 ],
+  "kakikudashi": "此れ曹孟徳の詩に非ずや",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "これは曹操（孟徳）の詠んだ詩ではないか。",
+  "_catalog": "B-11h",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "固", "yomi": "もと", "okuri": "ヨリ" },
+   { "c": "一", "yomi": "いっ" },
+   { "c": "世", "yomi": "せい", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "雄", "yomi": "ゆう", "okuri": "ナリ" },
+   { "c": "也", "yomi": "なり", "kana": true },
+   { "c": "而", "role": "placed" },
+   { "c": "今", "yomi": "いま" },
+   { "c": "安", "yomi": "いづ", "okuri": "クニカ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "在", "yomi": "あ", "okuri": "ル" },
+   { "c": "哉", "yomi": "かな", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 7, 8, 9, 10 ],
+  "kakikudashi": "固より一世の雄なり今いづくに在るかな",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "もとより一時代の英雄であったが、今どこにいるのだろうか（どこにもいやしない）。",
+  "_catalog": "B-11j",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "寄", "yomi": "よ", "okuri": "セ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "蜉", "yomi": "ふ" },
+   { "c": "蝣", "yomi": "ゆう", "okuri": "ヲ" },
+   { "c": "於", "role": "placed" },
+   { "c": "天", "yomi": "てん" },
+   { "c": "地", "yomi": "ち", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "渺", "yomi": "びょう", "okuri": "トシテ" },
+   { "c": "滄", "yomi": "そう" },
+   { "c": "海", "yomi": "かい", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "一", "yomi": "いち" },
+   { "c": "粟", "yomi": "ぞく", "okuri": "ノゴトシ" }
+  ],
+  "order": [ 1, 2, 4, 5, 0, 6, 7, 8, 9, 10, 11 ],
+  "kakikudashi": "蜉蝣を天地に寄せ渺として滄海の一粟のごとし",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "かげろうのような儚い命を広大な天地に託し、広々とした大海原に浮かぶ一粒のアワのように小さな存在である。",
+  "_catalog": "B-11k",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "哀", "yomi": "かな", "okuri": "シミ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "吾", "yomi": "わ", "okuri": "ガ" },
+   { "c": "生", "yomi": "せい", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "須", "yomi": "しゅ" },
+   { "c": "臾", "yomi": "ゆ", "okuri": "ナルヲ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "羨", "yomi": "うらや", "okuri": "ム", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "長", "yomi": "ちょう" },
+   { "c": "江", "yomi": "こう", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "無", "yomi": "む" },
+   { "c": "窮", "yomi": "きゅう", "okuri": "ナルヲ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6 ],
+  "kakikudashi": "吾が生の須臾なるを哀しみ長江の無窮なるを羨む",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "自分の人生の短さを悲しみ、長江の永遠に尽きない流れをうらやましく思う。",
+  "_catalog": "B-11l",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "逝", "yomi": "ゆ", "okuri": "ク" },
+   { "c": "者", "yomi": "もの", "okuri": "ハ" },
+   { "c": "如", "yomi": "ごと", "okuri": "クナルモ", "mark": [{ "re": true }] },
+   { "c": "斯", "yomi": "か", "okuri": "クノ" },
+   { "c": "而", "role": "placed" },
+   {
+    "c": "未",
+    "reread": {
+     "first": { "yomi": "いま", "okuri": "ダ" },
+     "second": { "okuri": "ザルナリ", "kana": true }
+    },
+    "mark": [{ "lv": 1, "n": 2 }]
+   },
+   { "c": "嘗", "yomi": "かつ", "okuri": "テ" },
+   { "c": "往", "yomi": "い", "okuri": "カ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 3, 2, 5, 6, 7, 5, 8 ],
+  "kakikudashi": "逝く者は斯くの如くなるも未だ嘗て往かざるなり",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "過ぎ去るものはこの流れる水のようであるが、完全に去ってしまうわけではないのだ。",
+  "_catalog": "B-11m",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "自", "yomi": "より", "okuri": "シテ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "其", "yomi": "そ", "okuri": "ノ" },
+   { "c": "変", "yomi": "へん", "okuri": "ズル" },
+   { "c": "者", "yomi": "もの", "okuri": "ヨリシテ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "而", "role": "placed" },
+   { "c": "観", "yomi": "み", "okuri": "レバ", "mark": [{ "re": true }] },
+   { "c": "之", "yomi": "これ", "okuri": "ヲ" },
+   { "c": "則", "yomi": "すなは", "okuri": "チ" },
+   { "c": "天", "yomi": "てん" },
+   { "c": "地", "yomi": "ち", "okuri": "モ" },
+   { "c": "曽", "yomi": "かつ", "okuri": "テ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "能", "yomi": "あた", "okuri": "ハ" },
+   { "c": "以", "yomi": "もっ", "okuri": "テスルコト", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "一", "yomi": "いっ" },
+   { "c": "瞬", "yomi": "しゅん", "okuri": "ヲ" }
+  ],
+  "order": [ 1, 2, 3, 0, 6, 5, 7, 8, 9, 10, 14, 15, 13, 12, 11 ],
+  "kakikudashi": "其の変ずる者よりして之を観れば則ち天地も曽て一瞬を以てすることあたはず",
+  "acceptable": [],
+  "kuho": [ "katei", "hitei" ],
+  "meaning": "変化するという観点から見れば、天地でさえ一瞬たりとも変化せずにとどまることはできない。",
+  "_catalog": "B-11n",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "而", "role": "placed" },
+   { "c": "又", "yomi": "また" },
+   { "c": "何", "yomi": "なに", "okuri": "ヲカ", "kana": true },
+   { "c": "羨", "yomi": "うらや", "okuri": "マンヤ" },
+   { "c": "乎", "yomi": "や", "kana": true }
+  ],
+  "order": [ 1, 2, 3, 4 ],
+  "kakikudashi": "またなにをか羨まんや",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "また、何をうらやむことがあろうか（いや、何も羨む必要はない）。",
+  "_catalog": "B-11o",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "惟", "yomi": "ただ" },
+   { "c": "江", "yomi": "こう" },
+   { "c": "上", "yomi": "じょう", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "清", "yomi": "せい" },
+   { "c": "風", "yomi": "ふう", "okuri": "ト" },
+   { "c": "与", "yomi": "と", "kana": true },
+   { "c": "山", "yomi": "さん" },
+   { "c": "間", "yomi": "かん", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "明", "yomi": "めい" },
+   { "c": "月", "yomi": "げつ", "okuri": "トノミ" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ],
+  "kakikudashi": "ただ江上の清風と山間の明月とのみ",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "ただ川の上の清らかな風と山間の澄んだ月だけは、いくらでも楽しむことができる。",
+  "_catalog": "B-11q",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "之", "yomi": "これ", "okuri": "ヲ", "mark": [{ "re": true }] },
+   { "c": "取", "yomi": "と", "okuri": "レドモ" },
+   { "c": "無", "yomi": "な", "okuri": "ク", "mark": [{ "re": true }] },
+   { "c": "禁", "yomi": "きん", "okuri": "ズル" },
+   { "c": "之", "yomi": "これ", "okuri": "ヲ", "mark": [{ "re": true }] },
+   { "c": "用", "yomi": "もち", "okuri": "フレドモ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "竭", "yomi": "つ", "okuri": "キ" }
+  ],
+  "order": [ 1, 0, 3, 2, 5, 4, 7, 6 ],
+  "kakikudashi": "之を取れども禁ずる無く之を用ふれども竭きず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "手に入れても誰もとがめず、どれほど使っても尽きることがない。",
+  "_catalog": "B-11r",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "是", "yomi": "こ", "okuri": "レ" },
+   { "c": "造", "yomi": "ぞう" },
+   { "c": "物", "yomi": "ぶつ", "okuri": "シ" },
+   { "c": "者", "yomi": "しゃ", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "無", "yomi": "む" },
+   { "c": "尽", "yomi": "じん" },
+   { "c": "蔵", "yomi": "ぞう", "okuri": "ナリ" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
+  "kakikudashi": "是れ造物者の無尽蔵なり",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "これこそ造物主が無制限に与えてくれた無限の宝庫である。",
+  "_catalog": "B-11s",
+  "_section": "前赤壁賦",
+  "_confidence": "高"
+ }
+]

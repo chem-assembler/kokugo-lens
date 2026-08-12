@@ -386,6 +386,22 @@
       });
     }
 
+    // ---- 収録済みの白文に旧字が残っていないか ----
+    // 台帳から素材を写すとき、対応表（§8.1）に抜けがあると旧字がそのまま入る。
+    // 実際に「啟」（S-28 不憤不啟不悱不発）が1件すり抜けた。表の抜けは別途
+    // 「字体欄の 舊→新 を集めて表と突き合わせる」検査で洗うが、こちらは
+    // **投入されたデータ側**を見張る（表を直しても既に入ったものは直らないため）。
+    if (isNode){
+      test('字体: 収録済みの白文に §8.1 の変換対象の旧字が残っていない', () => {
+        const { MAP } = require('./tools/kyujitai.js');
+        const bad = [];
+        for (const p of problems)
+          for (const t of p.tokens)
+            if (MAP[t.c]) bad.push(p.id + '「' + t.c + '」→' + MAP[t.c]);
+        if (bad.length) throw new Error(bad.join(' ／ '));
+      });
+    }
+
     // ---- データ総当たり（二重帳簿・設計書 §4.2） ----
     for (const p of problems){
       test('データ ' + p.id + ': 訓点→読み順→書き下しの二重帳簿', () => {

@@ -1,0 +1,773 @@
+[
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "尋", "yomi": "たづ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "向", "yomi": "むか", "okuri": "フノ" },
+   { "c": "所", "yomi": "ところ", "okuri": "ヲ", "mark": [{ "re": true }, { "lv": 1, "n": 1 }] },
+   { "c": "誌", "yomi": "し", "okuri": "スル" },
+   { "c": "遂", "yomi": "つひ", "okuri": "ニ" },
+   { "c": "迷", "yomi": "まよ", "okuri": "ヒテ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "復", "yomi": "ま", "okuri": "タ" },
+   { "c": "得", "yomi": "え", "mark": [{ "re": true }, { "lv": 1, "n": 1 }] },
+   { "c": "路", "yomi": "みち", "okuri": "ヲ" }
+  ],
+  "order": [ 1, 3, 2, 0, 4, 5, 7, 9, 8, 6 ],
+  "kakikudashi": "向ふの誌する所を尋ねて遂に迷ひて復た路を得ず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "かつて目印をつけた場所を捜したが、結局道に迷って、二度と道を見つけることができなかった。",
+  "_catalog": "B-06p",
+  "_section": "",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "未",
+    "reread": {
+     "first": { "yomi": "いま", "okuri": "ダ" },
+     "second": { "okuri": "ズシテ", "kana": true }
+    },
+    "mark": [{ "re": true }]
+   },
+   { "c": "果", "yomi": "はた", "okuri": "サ" },
+   { "c": "尋", "yomi": "つい", "okuri": "デ" },
+   { "c": "病", "yomi": "やま", "okuri": "ミテ" },
+   { "c": "終", "yomi": "おは", "okuri": "ル" }
+  ],
+  "order": [ 0, 1, 0, 2, 3, 4 ],
+  "kakikudashi": "未だ果たさずして尋で病みて終はる",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "（計画を）まだ果たさないうちに、まもなく病気になって亡くなった。",
+  "_catalog": "B-06q",
+  "_section": "",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "後", "yomi": "のち" },
+   { "c": "遂", "yomi": "つひ", "okuri": "ニ" },
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "問", "yomi": "と", "okuri": "フ", "mark": [{ "re": true }] },
+   { "c": "津", "yomi": "つ", "okuri": "ヲ" },
+   { "c": "者", "yomi": "もの", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 1, 4, 3, 5, 2 ],
+  "kakikudashi": "後遂に津を問ふ者無し",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "その後は、ついに渡し場を尋ねる者はいなくなった。",
+  "_catalog": "B-06r",
+  "_section": "",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "水", "yomi": "みづ" },
+   { "c": "陸", "yomi": "りく" },
+   { "c": "草", "yomi": "さう" },
+   { "c": "木", "yomi": "ぼく", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "花", "yomi": "はな" },
+   { "c": "可", "okuri": "キ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "愛", "yomi": "あい", "okuri": "ス" },
+   { "c": "者", "yomi": "もの" },
+   { "c": "甚", "yomi": "はなは", "okuri": "ダ" },
+   { "c": "蕃", "yomi": "おほ", "okuri": "シ" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 10 ],
+  "kakikudashi": "水陸草木の花愛すべき者甚だ蕃し",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "水や陸に咲く草木の花で、愛するに値するものは非常に多い。",
+  "_catalog": "B-07a",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "晋", "yomi": "しん", "okuri": "ノ" },
+   { "c": "陶", "yomi": "たう" },
+   { "c": "淵", "yomi": "えん" },
+   { "c": "明", "yomi": "めい" },
+   { "c": "独", "yomi": "ひと", "okuri": "リ" },
+   { "c": "愛", "yomi": "あい", "okuri": "ス", "mark": [{ "re": true }] },
+   { "c": "菊", "yomi": "きく", "okuri": "ヲ" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 6, 5 ],
+  "kakikudashi": "晋の陶淵明独り菊を愛す",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "晋の時代の陶淵明だけが、ただ一人菊の花を愛した。",
+  "_catalog": "B-07b",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "自", "yomi": "より", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "李", "yomi": "り" },
+   { "c": "唐", "yomi": "たう", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "来", "yomi": "きた", "okuri": "ツテ" },
+   { "c": "世", "yomi": "せ" },
+   { "c": "人", "yomi": "じん" },
+   { "c": "盛", "yomi": "さかん", "okuri": "ニ" },
+   { "c": "愛", "yomi": "あい", "okuri": "ス", "mark": [{ "re": true }] },
+   { "c": "牡", "yomi": "ぼ" },
+   { "c": "丹", "yomi": "たん", "okuri": "ヲ" }
+  ],
+  "order": [ 1, 2, 0, 3, 4, 5, 6, 8, 9, 7 ],
+  "kakikudashi": "李唐より来つて世人盛んに牡丹を愛す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "唐の時代以来、世の中の人々は盛んに牡丹を愛好している。",
+  "_catalog": "B-07c",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "予", "yomi": "よ" },
+   { "c": "独", "yomi": "ひと", "okuri": "リ" },
+   { "c": "愛", "yomi": "あい", "okuri": "ス", "mark": [{ "lv": 2, "n": 2 }] },
+   { "c": "蓮", "yomi": "れん", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "出", "yomi": "い", "okuri": "デテ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "淤", "yomi": "お" },
+   { "c": "泥", "yomi": "でい", "okuri": "ヨリ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "而", "role": "placed" },
+   { "c": "不", "okuri": "ザルヲ", "kana": true, "mark": [{ "re": true }, { "lv": 2, "n": 1 }] },
+   { "c": "染", "yomi": "そま", "okuri": "ラ" }
+  ],
+  "order": [ 0, 1, 3, 4, 6, 7, 5, 10, 9, 2 ],
+  "kakikudashi": "予独り蓮の淤泥より出でて染まらざるを愛す",
+  "acceptable": [],
+  "kuho": [ "gentei", "hitei" ],
+  "meaning": "私はただ、蓮が濁った泥から出て生えながら、その汚れに染まらないのを愛好する。",
+  "_catalog": "B-07d",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "濯", "yomi": "すす", "okuri": "ハレテ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "清", "yomi": "せい" },
+   { "c": "漣", "yomi": "れん", "okuri": "ニ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "而", "role": "placed" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "妖", "yomi": "あや", "okuri": "シカラ" }
+  ],
+  "order": [ 1, 2, 0, 5, 4 ],
+  "kakikudashi": "清漣に濯はれて妖しからず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "澄んだ水で洗われていながら、妖しい艶やかさがない。",
+  "_catalog": "B-07e",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "中", "yomi": "なか" },
+   { "c": "通", "yomi": "つう", "okuri": "ジ" },
+   { "c": "外", "yomi": "そと" },
+   { "c": "直", "yomi": "なお", "okuri": "ク" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "蔓", "yomi": "つるひ", "okuri": "ヅ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "枝", "yomi": "えだふ", "okuri": "サ" }
+  ],
+  "order": [ 0, 1, 2, 3, 5, 4, 7, 6 ],
+  "kakikudashi": "中通じ外直く蔓ひづ枝ふさず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "内部は貫通し外部はまっすぐで、つるを伸ばすことも枝分かれすることもない。",
+  "_catalog": "B-07f",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "可", "yomi": "べ", "okuri": "クシテ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "遠", "yomi": "とお", "okuri": "ク" },
+   { "c": "観", "yomi": "み", "okuri": "ル", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "而", "role": "placed" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "可", "yomi": "べ", "okuri": "カル", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "褻", "yomi": "せつ", "okuri": "ニ" },
+   { "c": "玩", "yomi": "もてあそ", "okuri": "ブ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "焉", "role": "placed" }
+  ],
+  "order": [ 1, 2, 0, 6, 7, 5, 4 ],
+  "kakikudashi": "遠く観る可くして褻に玩ぶべからず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "遠くから鑑賞することはできるが、近くでなれなれしく弄ぶことはできない。",
+  "_catalog": "B-07g",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "菊", "yomi": "きく", "okuri": "ハ" },
+   { "c": "花", "yomi": "はな" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "隠", "yomi": "いん" },
+   { "c": "逸", "yomi": "いつ", "okuri": "ナル" },
+   { "c": "者", "yomi": "もの" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6 ],
+  "kakikudashi": "菊は花の隠逸なる者なり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "菊は、花の中の隠者である。",
+  "_catalog": "B-07h",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "蓮", "yomi": "れん", "okuri": "ハ" },
+   { "c": "花", "yomi": "はな" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "君", "yomi": "くん" },
+   { "c": "子", "yomi": "し", "okuri": "ナル" },
+   { "c": "者", "yomi": "もの" },
+   { "c": "也", "yomi": "なり", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6 ],
+  "kakikudashi": "蓮は花の君子なる者なり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "蓮は、花の中の君子である。",
+  "_catalog": "B-07i",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "噫", "yomi": "ああ", "kana": true },
+   { "c": "菊", "yomi": "きく" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "愛", "yomi": "あい" },
+   { "c": "陶", "yomi": "たう", "okuri": "ノ" },
+   { "c": "後", "yomi": "のち" },
+   { "c": "鮮", "yomi": "すくな", "okuri": "ク" },
+   { "c": "有", "yomi": "あ", "okuri": "リ", "mark": [{ "re": true }] },
+   { "c": "聞", "yomi": "き", "okuri": "クコト" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 8, 7 ],
+  "kakikudashi": "噫菊の愛陶の後鮮く聞くこと有り",
+  "acceptable": [],
+  "kuho": [ "eitan" ],
+  "meaning": "ああ、菊を愛することは、陶淵明の後にはめったに聞くことがない。",
+  "_catalog": "B-07j",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "蓮", "yomi": "れん" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "愛", "yomi": "あい" },
+   { "c": "同", "yomi": "おな", "okuri": "ジキ", "mark": [{ "re": true }] },
+   { "c": "予", "yomi": "よ", "okuri": "ニ" },
+   { "c": "者", "yomi": "もの", "okuri": "ハ" },
+   { "c": "何", "yomi": "なに", "kana": true },
+   { "c": "人", "yomi": "びと", "okuri": "ゾ" }
+  ],
+  "order": [ 0, 1, 2, 4, 3, 5, 6, 7 ],
+  "kakikudashi": "蓮の愛予に同じき者はなに人ぞ",
+  "acceptable": [],
+  "kuho": [ "gimon" ],
+  "meaning": "蓮を愛すること、私と同じような人は誰がいるだろうか（ほとんどいない）。",
+  "_catalog": "B-07k",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "牡", "yomi": "ぼ" },
+   { "c": "丹", "yomi": "たん" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "愛", "yomi": "あい", "okuri": "ハ" },
+   { "c": "宜", "yomi": "むべな", "okuri": "ル", "kana": true },
+   { "c": "乎", "yomi": "かな", "kana": true },
+   { "c": "衆", "yomi": "おほ", "okuri": "キ" },
+   { "c": "矣", "yomi": "こと", "kana": true }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+  "kakikudashi": "牡丹の愛はむべなるかな衆きこと",
+  "acceptable": [],
+  "kuho": [ "eitan" ],
+  "meaning": "牡丹を愛することは、実に当然のことだ、大勢いるのも。",
+  "note": "「宜乎」は詠嘆の熟語（むべなるかな）。再読文字の「宜（よろしく〜べし）」ではない。",
+  "_catalog": "B-07l",
+  "_section": "愛蓮説",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "山", "yomi": "やま", "okuri": "ハ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "在", "yomi": "あら" },
+   { "c": "高", "yomi": "たか", "okuri": "キニ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "有", "yomi": "あ", "okuri": "レバ", "mark": [{ "re": true }] },
+   { "c": "仙", "yomi": "せん", "okuri": "ガ" },
+   { "c": "則", "yomi": "すなは", "okuri": "チ" },
+   { "c": "名", "yomi": "な", "okuri": "トシ" }
+  ],
+  "order": [ 0, 3, 2, 1, 5, 4, 6, 7 ],
+  "kakikudashi": "山は高きに在らず仙が有れば則ち名とし",
+  "acceptable": [],
+  "kuho": [ "hitei", "katei" ],
+  "meaning": "山は高くなくても、仙人が住んでいれば有名になる。",
+  "_catalog": "B-08a",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "水", "yomi": "みづ", "okuri": "ハ" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "在", "yomi": "あら" },
+   { "c": "深", "yomi": "ふか", "okuri": "キニ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "有", "yomi": "あ", "okuri": "レバ", "mark": [{ "re": true }] },
+   { "c": "竜", "yomi": "りう", "okuri": "ガ" },
+   { "c": "則", "yomi": "すなは", "okuri": "チ" },
+   { "c": "霊", "yomi": "れい", "okuri": "トシ" }
+  ],
+  "order": [ 0, 3, 2, 1, 5, 4, 6, 7 ],
+  "kakikudashi": "水は深きに在らず竜が有れば則ち霊とし",
+  "acceptable": [],
+  "kuho": [ "hitei", "katei" ],
+  "meaning": "水は深くなくても、竜が住んでいれば霊妙になる。",
+  "_catalog": "B-08b",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "斯", "yomi": "こ", "okuri": "レ" },
+   { "c": "是", "yomi": "こ", "okuri": "レ" },
+   { "c": "陋", "yomi": "ろう" },
+   { "c": "室", "yomi": "しつ", "okuri": "ナルモ" },
+   { "c": "惟", "yomi": "ただ" },
+   { "c": "吾", "yomi": "わ", "okuri": "ガ" },
+   { "c": "徳", "yomi": "とく", "okuri": "ノ" },
+   { "c": "馨", "yomi": "かぐは", "okuri": "シ" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+  "kakikudashi": "斯れ是れ陋室なるも惟だ吾が徳の馨し",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "ここは粗末な部屋であるが、ただ私の徳があるために香るようにすばらしい。",
+  "_catalog": "B-08c",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "苔", "yomi": "たい" },
+   { "c": "痕", "yomi": "こん" },
+   { "c": "上", "yomi": "のぼ", "okuri": "リテ", "mark": [{ "re": true }] },
+   { "c": "階", "yomi": "かい", "okuri": "ニ" },
+   { "c": "緑", "yomi": "みどり", "okuri": "ナリ" },
+   { "c": "草", "yomi": "さう" },
+   { "c": "色", "yomi": "しょく" },
+   { "c": "入", "yomi": "い", "okuri": "リテ", "mark": [{ "re": true }] },
+   { "c": "簾", "yomi": "れん", "okuri": "ニ" },
+   { "c": "青", "yomi": "あお", "okuri": "シ" }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 5, 6, 8, 7, 9 ],
+  "kakikudashi": "苔痕階に上りて緑なり草色簾に入りて青し",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "青ごけのあとがきざはしにのぼって青々と、青く茂った草の色がすだれにすけて室内にはいり青々としている。",
+  "_catalog": "B-08d",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "談", "yomi": "だん" },
+   { "c": "笑", "yomi": "せう", "okuri": "ニ" },
+   { "c": "有", "yomi": "あ", "okuri": "リ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "鴻", "yomi": "こう" },
+   { "c": "儒", "yomi": "じゅ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "往", "yomi": "おう" },
+   { "c": "来", "yomi": "らい", "okuri": "ニ" },
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "白", "yomi": "はく" },
+   { "c": "丁", "yomi": "てい", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 1, 3, 4, 2, 5, 6, 8, 9, 7 ],
+  "kakikudashi": "談笑に鴻儒有り往来に白丁無し",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "歓談する相手にはすぐれた学者がおり、行き来する人に無学な者はいない。",
+  "_catalog": "B-08e",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "無", "yomi": "な", "okuri": "ク", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "糸", "yomi": "し" },
+   { "c": "竹", "yomi": "ちく", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "乱", "yomi": "みだ", "okuri": "ス", "mark": [{ "re": true }, { "lv": 1, "n": 1 }] },
+   { "c": "耳", "yomi": "みみ", "okuri": "ヲ" },
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "案", "yomi": "あん" },
+   { "c": "牘", "yomi": "とく", "okuri": "ノ" },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "労", "yomi": "ろう", "okuri": "スル", "mark": [{ "re": true }, { "lv": 1, "n": 1 }] },
+   { "c": "形", "yomi": "けい", "okuri": "ヲ" }
+  ],
+  "order": [ 1, 2, 3, 5, 4, 0, 7, 8, 9, 11, 10, 6 ],
+  "kakikudashi": "糸竹の耳を乱す無く案牘の形を労する無し",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "耳障りな音楽（世俗の管弦）を聞くこともなく、身体を疲れさせる公文書の処理もない。",
+  "_catalog": "B-08f",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "孔", "yomi": "こう" },
+   { "c": "子", "yomi": "し" },
+   { "c": "云", "yomi": "い", "okuri": "フ" },
+   { "c": "何", "yomi": "なに", "okuri": "ノ", "kana": true, "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "陋", "yomi": "いや", "okuri": "シキカ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "之", "yomi": "の", "kana": true },
+   { "c": "有", "yomi": "あ", "okuri": "ランヤ", "mark": [{ "re": true }] }
+  ],
+  "order": [ 0, 1, 2, 4, 3, 5, 6 ],
+  "kakikudashi": "孔子云ふ何の陋しきかの有らんや",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "孔子も「どのような見苦しさがあろうか（いや、何の見苦しさもない）」と言っている。",
+  "_catalog": "B-08g",
+  "_section": "陋室銘",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "陳", "yomi": "ちん" },
+   { "c": "康", "yomi": "かう" },
+   { "c": "粛", "yomi": "しゅく" },
+   { "c": "公", "yomi": "こう" },
+   { "c": "堯", "yomi": "ぎょう" },
+   { "c": "咨", "yomi": "し", "okuri": "ハ" },
+   { "c": "善", "yomi": "よ", "okuri": "クシ", "mark": [{ "re": true }] },
+   { "c": "射", "yomi": "しゃ", "okuri": "ヲ" },
+   { "c": "当", "yomi": "とう" },
+   { "c": "世", "yomi": "せい", "okuri": "ニ" },
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "双", "yomi": "ならぶもの" }
+  ],
+  "order": [ 0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 11, 10 ],
+  "kakikudashi": "陳康粛公堯咨は射を善くし当世に双無し",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "陳康粛公堯咨は弓を射るのが得意で、その時代に肩を並べる者がいなかった。",
+  "_catalog": "B-09a",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "公", "yomi": "こう", "okuri": "モ" },
+   { "c": "亦", "yomi": "また" },
+   { "c": "以", "yomi": "もっ", "okuri": "テ", "mark": [{ "re": true }] },
+   { "c": "此", "yomi": "これ", "okuri": "ヲ" },
+   { "c": "自", "yomi": "みずか", "okuri": "ラ" },
+   { "c": "矜", "yomi": "ほこ", "okuri": "ル" }
+  ],
+  "order": [ 0, 1, 3, 2, 4, 5 ],
+  "kakikudashi": "公亦此を以て自ら矜る",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "公もまた、この腕前を誇りに思っていた。",
+  "_catalog": "B-09b",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "有", "yomi": "あ", "okuri": "リテ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "売", "yomi": "う", "okuri": "ル" },
+   { "c": "油", "yomi": "あぶら", "okuri": "ノ" },
+   { "c": "翁", "yomi": "おきな", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "釈", "yomi": "ゆる", "okuri": "キテ", "mark": [{ "re": true }] },
+   { "c": "担", "yomi": "におい", "okuri": "ヲ" },
+   { "c": "而", "role": "placed" },
+   { "c": "立", "yomi": "た", "okuri": "チ" },
+   { "c": "睨", "yomi": "にら", "okuri": "ムコト", "mark": [{ "re": true }] },
+   { "c": "之", "yomi": "これ", "okuri": "ヲ" },
+   { "c": "久", "yomi": "ひさ", "okuri": "シクシテ" },
+   { "c": "而", "role": "placed" },
+   { "c": "不", "okuri": "ズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "去", "yomi": "さ", "okuri": "ラ" }
+  ],
+  "order": [ 1, 2, 3, 0, 5, 4, 7, 9, 8, 10, 13, 12 ],
+  "kakikudashi": "油を売る翁有りて担を釈きて立ち之を睨むこと久しくして去らず",
+  "acceptable": [],
+  "kuho": [ "hitei" ],
+  "meaning": "油を売る老人が荷をおろして立ち、久しく彼の射撃を横目で見つめたまま立ち去らなかった。",
+  "_catalog": "B-09c",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "見", "yomi": "み", "okuri": "ルニ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "其", "yomi": "そ", "okuri": "ノ" },
+   { "c": "発", "yomi": "はっ", "okuri": "スルヲ", "mark": [{ "re": true }] },
+   { "c": "矢", "yomi": "や", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] },
+   { "c": "十", "yomi": "じゅう", "okuri": "ニ" },
+   { "c": "中", "yomi": "あた", "okuri": "ルモ", "mark": [{ "re": true }] },
+   { "c": "八", "yomi": "はち" },
+   { "c": "九", "yomi": "きゅう" },
+   { "c": "但", "yomi": "ただ" },
+   { "c": "微", "yomi": "かす", "okuri": "カニ" },
+   { "c": "頷", "yomi": "うなず", "okuri": "くだけなり", "mark": [{ "re": true }] },
+   { "c": "之", "yomi": "これ", "okuri": "ニ" }
+  ],
+  "order": [ 1, 3, 2, 0, 4, 6, 7, 5, 8, 9, 11, 10 ],
+  "kakikudashi": "其の矢を発するを見るに十に八九中るも但だ微かに之に頷くだけなり",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "彼が矢を射るのを見ると、十本のうち八九本が中るのだが、ただわずかにうなずくだけであった。",
+  "_catalog": "B-09d",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "汝", "yomi": "なんぢ", "okuri": "モ" },
+   { "c": "亦", "yomi": "また" },
+   { "c": "知", "yomi": "し", "okuri": "ル", "mark": [{ "re": true }] },
+   { "c": "射", "yomi": "しゃ", "okuri": "ヲ" },
+   { "c": "乎", "yomi": "か", "kana": true }
+  ],
+  "order": [ 0, 1, 3, 2, 4 ],
+  "kakikudashi": "汝も亦た射を知るか",
+  "acceptable": [],
+  "kuho": [ "gimon" ],
+  "meaning": "お前もまた、弓の射術の心得があるのか。",
+  "_catalog": "B-09e",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "吾", "yomi": "わ", "okuri": "ガ" },
+   { "c": "射", "yomi": "しゃ", "okuri": "ハ" },
+   { "c": "不", "okuri": "ラズ", "kana": true, "mark": [{ "re": true }] },
+   { "c": "亦", "yomi": "また" },
+   { "c": "精", "yomi": "せい", "okuri": "ナ" },
+   { "c": "乎", "yomi": "や", "kana": true }
+  ],
+  "order": [ 0, 1, 3, 4, 2, 5 ],
+  "kakikudashi": "吾が射亦た精ならずや",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "私の弓の技術は、なんとすばらしいではないか。",
+  "_catalog": "B-09f",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "無", "yomi": "な", "okuri": "シ", "mark": [{ "re": true }] },
+   { "c": "他", "yomi": "た" },
+   { "c": "但", "yomi": "ただ" },
+   { "c": "手", "yomi": "て", "okuri": "ノ" },
+   { "c": "熟", "yomi": "こな", "okuri": "レル" },
+   { "c": "爾", "yomi": "のみ", "kana": true }
+  ],
+  "order": [ 1, 0, 2, 3, 4, 5 ],
+  "kakikudashi": "他無し但だ手の熟れるのみ",
+  "acceptable": [],
+  "kuho": [ "gentei" ],
+  "meaning": "ほかでもありません、ただ手慣れているだけです。",
+  "note": "「但〜爾」は限定の二重標識。",
+  "_catalog": "B-09g",
+  "_section": "売油翁",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   { "c": "爾", "yomi": "なんぢ" },
+   { "c": "安", "yomi": "いづ", "okuri": "クンゾ", "kana": true },
+   { "c": "敢", "yomi": "あ", "okuri": "ヘテ", "kana": true },
+   { "c": "軽", "yomi": "かる", "okuri": "ンゼンヤ", "mark": [{ "lv": 1, "n": 2 }] },
+   { "c": "吾", "yomi": "わ", "okuri": "ガ" },
+   { "c": "射", "yomi": "しゃ", "okuri": "ヲ", "mark": [{ "lv": 1, "n": 1 }] }
+  ],
+  "order": [ 0, 1, 2, 4, 5, 3 ],
+  "kakikudashi": "爾いづくんぞあへて吾が射を軽んぜんや",
+  "acceptable": [],
+  "kuho": [ "hango" ],
+  "meaning": "お前はどうして私の射術をバカにすることができようか（いや、できない）。",
+  "_catalog": "B-09h",
+  "_section": "売油翁",
+  "_confidence": "高"
+ }
+]

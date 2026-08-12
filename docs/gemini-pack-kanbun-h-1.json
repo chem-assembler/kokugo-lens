@@ -1,0 +1,620 @@
+[
+  {
+    "id": "H-00a",
+    "reading": [
+      { "c": "沛", "yomi": "はい", "okuri": "", "kana": false },
+      { "c": "公", "yomi": "こう", "okuri": "は", "kana": false },
+      { "c": "関", "yomi": "かん", "okuri": "", "kana": false },
+      { "c": "中", "yomi": "ちゅう", "okuri": "に", "kana": false },
+      { "c": "王", "yomi": "おう", "okuri": "たら", "kana": false },
+      { "c": "欲", "yomi": "ほっ", "okuri": "す", "kana": false }
+    ],
+    "kakikudashi": "沛公関中に王たらんと欲す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "沛公（劉邦）は関中の王になろうと望んでいる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00b",
+    "reading": [
+      { "c": "此", "yomi": "こ", "okuri": "の", "kana": false },
+      { "c": "其", "yomi": "そ", "okuri": "の", "kana": false },
+      { "c": "志", "yomi": "こころざし", "okuri": "は", "kana": false },
+      { "c": "小", "yomi": "しょう", "okuri": "に", "kana": false },
+      { "c": "在", "yomi": "あ", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "此の其の志小に在らず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "この沛公の志は、小さなことにとどまってはいない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00c",
+    "reading": [
+      { "c": "急", "yomi": "いそ", "okuri": "ぎ", "kana": false },
+      { "c": "撃", "yomi": "う", "okuri": "ちて", "kana": false },
+      { "c": "失", "yomi": "うしな", "okuri": "ふこと", "kana": false },
+      { "c": "勿", "yomi": "な", "okuri": "かれ", "kana": false }
+    ],
+    "kakikudashi": "急ぎ撃ちて失ふことなかれ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "急いで攻撃して、好機を逃してはならない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00d",
+    "reading": [
+      { "c": "関", "yomi": "かん", "okuri": "を", "kana": false },
+      { "c": "距", "yomi": "ふせ", "okuri": "ぎて", "kana": false },
+      { "c": "諸", "yomi": "しょ", "okuri": "", "kana": false },
+      { "c": "侯", "yomi": "こう", "okuri": "を", "kana": false },
+      { "c": "内", "yomi": "い", "okuri": "いるること", "kana": false },
+      { "c": "毋", "yomi": "な", "okuri": "かれ", "kana": false }
+    ],
+    "kakikudashi": "関を距ぎて諸侯を内いるること毋かれ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "関所をふさいで、他の諸侯を中に入れてはならない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00f",
+    "reading": [
+      { "c": "大", "yomi": "たい", "okuri": "", "kana": false },
+      { "c": "王", "yomi": "おう", "okuri": "の", "kana": false },
+      { "c": "来", "yomi": "きた", "okuri": "る", "kana": false },
+      { "c": "何", "yomi": "なに", "okuri": "をか", "kana": false },
+      { "c": "操", "yomi": "たづさ", "okuri": "へたる", "kana": false }
+    ],
+    "kakikudashi": "大王来たる何をか操せる",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "大王様がここに来られるにあたって、持参されたものは何ですか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00g",
+    "reading": [
+      { "c": "沛", "yomi": "はい", "okuri": "", "kana": false },
+      { "c": "公", "yomi": "こう", "okuri": "は", "kana": false },
+      { "c": "安", "yomi": "いづく", "okuri": "にか", "kana": false },
+      { "c": "在", "yomi": "あ", "okuri": "る", "kana": false }
+    ],
+    "kakikudashi": "沛公安くにか在る",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "沛公はどこにいるのか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00h",
+    "reading": [
+      { "c": "客", "yomi": "かく", "okuri": "は", "kana": false },
+      { "c": "何", "yomi": "なに", "okuri": "をか", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "す", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "ぞ", "kana": false }
+    ],
+    "kakikudashi": "客は何を為す者ぞ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "その客は何者（どんなことをする人物）なのか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00i",
+    "reading": [
+      { "c": "壮", "yomi": "そう", "okuri": "", "kana": false },
+      { "c": "士", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "能", "yomi": "よ", "okuri": "く", "kana": false },
+      { "c": "復", "yomi": "また", "okuri": "た", "kana": false },
+      { "c": "飲", "yomi": "の", "okuri": "ん", "kana": false },
+      { "c": "乎", "yomi": "か", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "壮士能く復た飲んか",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "勇壮な士よ、まだ酒が飲めるか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00j",
+    "reading": [
+      { "c": "臣", "yomi": "しん", "okuri": "", "kana": false },
+      { "c": "死", "yomi": "し", "okuri": "すら", "kana": false },
+      { "c": "且", "yomi": "かつ", "okuri": "つ", "kana": false },
+      { "c": "避", "yomi": "さ", "okuri": "け", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true },
+      { "c": "卮", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "酒", "yomi": "しゅ", "okuri": "", "kana": false },
+      { "c": "安", "yomi": "いづく", "okuri": "んぞ", "kana": false },
+      { "c": "辞", "yomi": "じ", "okuri": "するに", "kana": false },
+      { "c": "足", "yomi": "た", "okuri": "らん", "kana": false }
+    ],
+    "kakikudashi": "臣死すら且つ避けず卮酒安くんぞ辞するに足らん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["yokuyo", "hango"],
+    "meaning": "私は死ぬことさえ避けようとしません、大杯の酒などどうして辞退するに足りましょうか（いや、辞退しません）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00k",
+    "reading": [
+      { "c": "此", "yomi": "これ", "okuri": "", "kana": false },
+      { "c": "亡", "yomi": "ぼう", "okuri": "", "kana": false },
+      { "c": "秦", "yomi": "しん", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "続", "yomi": "つづ", "okuri": "き", "kana": false },
+      { "c": "耳", "yomi": "のみ", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "此れ亡秦の続きのみ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "これは滅びた秦の悪政の続きを行っているにすぎない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00l",
+    "reading": [
+      { "c": "竪", "yomi": "じゅ", "okuri": "", "kana": false },
+      { "c": "子", "yomi": "し", "okuri": "は", "kana": false },
+      { "c": "与", "yomi": "とも", "okuri": "に", "kana": false },
+      { "c": "謀", "yomi": "はか", "okuri": "るに", "kana": false },
+      { "c": "足", "yomi": "た", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "竪子はともに謀るに足らず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "青二才（項羽）とは一緒に大事を相談する価値がない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00m",
+    "reading": [
+      { "c": "吾", "yomi": "わ", "okuri": "が", "kana": false },
+      { "c": "属", "yomi": "やから", "okuri": "は", "kana": false },
+      { "c": "今", "yomi": "いま", "okuri": "に", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "が", "kana": false },
+      { "c": "為", "yomi": "ため", "okuri": "に", "kana": false },
+      { "c": "虜", "yomi": "とりこ", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "らん", "kana": false }
+    ],
+    "kakikudashi": "吾属今之が為に虜とならん",
+    "placed": ["矣"],
+    "reread": [],
+    "kuho": ["ukemi"],
+    "meaning": "わが身内はみな、いまに彼の捕虜となってしまうであろう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-00n",
+    "reading": [
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "すこと", "kana": false },
+      { "c": "奈", "yomi": "いか", "okuri": "が", "kana": false },
+      { "c": "何", "yomi": "せん", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "之を為すこと奈何せん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "これに対してどう対処したらよいだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-01a",
+    "reading": [
+      { "c": "項", "yomi": "かう", "okuri": "", "kana": false },
+      { "c": "荘", "yomi": "さう", "okuri": "", "kana": false },
+      { "c": "剣", "yomi": "けん", "okuri": "を", "kana": false },
+      { "c": "抜", "yomi": "ぬ", "okuri": "きて", "kana": false },
+      { "c": "起", "yomi": "た", "okuri": "ちて", "kana": false },
+      { "c": "舞", "yomi": "ま", "okuri": "ふ", "kana": false },
+      { "c": "項", "yomi": "かう", "okuri": "", "kana": false },
+      { "c": "伯", "yomi": "はく", "okuri": "も", "kana": false },
+      { "c": "亦", "yomi": "また", "okuri": "", "kana": false },
+      { "c": "剣", "yomi": "けん", "okuri": "を", "kana": false },
+      { "c": "抜", "yomi": "ぬ", "okuri": "きて", "kana": false },
+      { "c": "起", "yomi": "た", "okuri": "ちて", "kana": false },
+      { "c": "舞", "yomi": "ま", "okuri": "ふ", "kana": false }
+    ],
+    "kakikudashi": "項荘剣を抜きて起ちて舞ふ項伯亦剣を抜きて起ちて舞ふ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "項荘が剣を抜いて立ち上がって舞うと、項伯もまた剣を抜いて立ち上がって舞った。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-01b",
+    "reading": [
+      { "c": "常", "yomi": "つね", "okuri": "に", "kana": false },
+      { "c": "身", "yomi": "み", "okuri": "を", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "沛", "yomi": "はい", "okuri": "", "kana": false },
+      { "c": "公", "yomi": "こう", "okuri": "を", "kana": false },
+      { "c": "翼", "yomi": "よく", "okuri": "", "kana": false },
+      { "c": "蔽", "yomi": "へい", "okuri": "す", "kana": false }
+    ],
+    "kakikudashi": "常に身を以て沛公を翼蔽す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "（項伯は）つねに自分の体をもって、つばさを広げるように沛公をかばい隠した。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-02a",
+    "reading": [
+      { "c": "大", "yomi": "たい", "okuri": "", "kana": false },
+      { "c": "行", "yomi": "かう", "okuri": "は", "kana": false },
+      { "c": "細", "yomi": "さい", "okuri": "", "kana": false },
+      { "c": "謹", "yomi": "きん", "okuri": "を", "kana": false },
+      { "c": "顧", "yomi": "かえりみ", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true },
+      { "c": "大", "yomi": "たい", "okuri": "", "kana": false },
+      { "c": "礼", "yomi": "れい", "okuri": "は", "kana": false },
+      { "c": "小", "yomi": "しょう", "okuri": "", "kana": false },
+      { "c": "譲", "yomi": "じょう", "okuri": "を", "kana": false },
+      { "c": "辞", "yomi": "じせ", "okuri": "", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "大行は細謹を顧みず大礼は小譲を辞せず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "大事業を行う者は細かい慎みを気にかけず、大きな礼儀を行う者は細かい譲り合いにこだわらない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-02b",
+    "reading": [
+      { "c": "今", "yomi": "いま", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "ひと", "okuri": "は", "kana": false },
+      { "c": "方", "yomi": "まさ", "okuri": "に", "kana": false },
+      { "c": "刀", "yomi": "とう", "okuri": "", "kana": false },
+      { "c": "俎", "yomi": "そ", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "り", "kana": false },
+      { "c": "我", "yomi": "われ", "okuri": "は", "kana": false },
+      { "c": "魚", "yomi": "ぎょ", "okuri": "", "kana": false },
+      { "c": "肉", "yomi": "にく", "okuri": "と", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "るが", "kana": false },
+      { "c": "如", "yomi": "ごとい", "okuri": "し", "kana": false }
+    ],
+    "kakikudashi": "今人方に刀俎と為り我魚肉と為るが如し",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "いま相手はまさに包丁とまな板であり、われわれは魚や肉の立場である（殺されるがままだ）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-01c",
+    "reading": [
+      { "c": "何", "yomi": "なん", "okuri": "ぞ", "kana": false },
+      { "c": "辞", "yomi": "じ", "okuri": "することを", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "さん", "kana": false }
+    ],
+    "kakikudashi": "何ぞ辞することを為ん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hango"],
+    "meaning": "どうして別れの挨拶などする必要があろうか（いや、必要ない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03a",
+    "reading": [
+      { "c": "項", "yomi": "かう", "okuri": "", "kana": false },
+      { "c": "王", "yomi": "おう", "okuri": "の", "kana": false },
+      { "c": "軍", "yomi": "ぐん", "okuri": "", "kana": false },
+      { "c": "垓", "yomi": "がい", "okuri": "", "kana": false },
+      { "c": "下", "yomi": "か", "okuri": "に", "kana": false },
+      { "c": "壁", "yomi": "へき", "okuri": "し", "kana": false },
+      { "c": "兵", "yomi": "へい", "okuri": "", "kana": false },
+      { "c": "少", "yomi": "すく", "okuri": "なく", "kana": false },
+      { "c": "食", "yomi": "しょく", "okuri": "", "kana": false },
+      { "c": "尽", "yomi": "つ", "okuri": "く", "kana": false }
+    ],
+    "kakikudashi": "項王の軍垓下に壁し兵少なく食尽く",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "項王の軍は垓下に砦を築いて立てこもったが、兵力は少なく食糧も尽きた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03b",
+    "reading": [
+      { "c": "夜", "yomi": "よる", "okuri": "", "kana": false },
+      { "c": "漢", "yomi": "かん", "okuri": "", "kana": false },
+      { "c": "軍", "yomi": "ぐん", "okuri": "の", "kana": false },
+      { "c": "四", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "面", "yomi": "めん", "okuri": "", "kana": false },
+      { "c": "皆", "yomi": "みな", "okuri": "", "kana": false },
+      { "c": "楚", "yomi": "そ", "okuri": "", "kana": false },
+      { "c": "歌", "yomi": "うた", "okuri": "するを", "kana": false },
+      { "c": "聞", "yomi": "き", "okuri": "く", "kana": false }
+    ],
+    "kakikudashi": "夜漢軍の四面皆楚歌するを聞く",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "夜、漢の軍隊が四方を取り囲んで、みな楚の国の歌を歌っているのを聞いた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03b2",
+    "reading": [
+      { "c": "是", "yomi": "これ", "okuri": "", "kana": false },
+      { "c": "何", "yomi": "なん", "okuri": "ぞ", "kana": false },
+      { "c": "楚", "yomi": "そ", "okuri": "", "kana": false },
+      { "c": "人", "yomi": "ひと", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "多", "yomi": "おお", "okuri": "き", "kana": false },
+      { "c": "也", "yomi": "や", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "是れ何ぞ楚人の多きや",
+    "placed": [],
+    "reread": [],
+    "kuho": ["eitan", "gimon"],
+    "meaning": "なんとまあ、楚の国の人がこんなにも多いことか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03c",
+    "reading": [
+      { "c": "力", "yomi": "ちから", "okuri": "", "kana": false },
+      { "c": "山", "yomi": "やま", "okuri": "を", "kana": false },
+      { "c": "抜", "yomi": "ぬ", "okuri": "き", "kana": false },
+      { "c": "気", "yomi": "き", "okuri": "", "kana": false },
+      { "c": "世", "yomi": "よ", "okuri": "を", "kana": false },
+      { "c": "蓋", "yomi": "おほ", "okuri": "ふ", "kana": false }
+    ],
+    "kakikudashi": "力山を抜き気世を蓋ふ",
+    "placed": ["兮"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "わが力は山を引き抜くほど強く、わが威気は世を圧倒するほどであった。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03c2",
+    "reading": [
+      { "c": "時", "yomi": "とき", "okuri": "", "kana": false },
+      { "c": "利", "yomi": "り", "okuri": "あらず", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true },
+      { "c": "騅", "yomi": "すい", "okuri": "", "kana": false },
+      { "c": "逝", "yomi": "ゆ", "okuri": "か", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ず", "kana": true }
+    ],
+    "kakikudashi": "時利あらず騅逝かず",
+    "placed": ["兮"],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "時運は自分に味方せず、愛馬の騅も進もうとしない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03d2",
+    "reading": [
+      { "c": "虞", "yomi": "ぐ", "okuri": "", "kana": false },
+      { "c": "兮", "yomi": "や", "okuri": "", "kana": true },
+      { "c": "虞", "yomi": "ぐ", "okuri": "", "kana": false },
+      { "c": "兮", "yomi": "や", "okuri": "", "kana": true },
+      { "c": "若", "yomi": "なんぢ", "okuri": "を", "kana": false },
+      { "c": "奈", "yomi": "いか", "okuri": "が", "kana": false },
+      { "c": "何", "yomi": "せん", "okuri": "", "kana": false }
+    ],
+    "kakikudashi": "虞や虞や若を奈何せん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "虞よ、虞よ、お前をどうしたらよいのだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03e",
+    "reading": [
+      { "c": "天", "yomi": "てん", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "我", "yomi": "われ", "okuri": "を", "kana": false },
+      { "c": "亡", "yomi": "ほろ", "okuri": "ぼすに", "kana": false },
+      { "c": "我", "yomi": "われ", "okuri": "", "kana": false },
+      { "c": "何", "yomi": "なん", "okuri": "ぞ", "kana": false },
+      { "c": "渡", "yomi": "わた", "okuri": "ることを", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "さん", "kana": false }
+    ],
+    "kakikudashi": "天の我を亡ぼすに我何ぞ渡ることを為ん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hango"],
+    "meaning": "天が私を滅ぼそうとしているのに、私はどうして（江を）渡ろうか（いや、渡らない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-03f",
+    "reading": [
+      { "c": "籍", "yomi": "せき", "okuri": "", "kana": false },
+      { "c": "独", "yomi": "ひとり", "okuri": "", "kana": false },
+      { "c": "心", "yomi": "こころ", "okuri": "に", "kana": false },
+      { "c": "愧", "yomi": "はじ", "okuri": "ぢ", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ざらん", "kana": true },
+      { "c": "乎", "yomi": "や", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "籍独り心に愧ぢざらんや",
+    "placed": ["於"],
+    "reread": [],
+    "kuho": ["hango", "hitei"],
+    "meaning": "私（項籍）は、自分の心に恥じないでいられようか（いや、深く恥じる）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04a",
+    "reading": [
+      { "c": "城", "yomi": "しろ", "okuri": "", "kana": false },
+      { "c": "趙", "yomi": "ちょう", "okuri": "に", "kana": false },
+      { "c": "入", "yomi": "い", "okuri": "り", "kana": false },
+      { "c": "璧", "yomi": "へき", "okuri": "", "kana": false },
+      { "c": "秦", "yomi": "しん", "okuri": "に", "kana": false },
+      { "c": "留", "yomi": "とど", "okuri": "まらば", "kana": false }
+    ],
+    "kakikudashi": "城趙に入り璧秦に留まらば",
+    "placed": ["而"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "（秦の）城が趙の所有となり、和氏の璧が秦にとどまるならば。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04b",
+    "reading": [
+      { "c": "城", "yomi": "しろ", "okuri": "", "kana": false },
+      { "c": "入", "yomi": "い", "okuri": "ら", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "ずんば", "kana": true },
+      { "c": "臣", "yomi": "しん", "okuri": "", "kana": false },
+      { "c": "請", "yomi": "こ", "okuri": "ふ", "kana": false },
+      { "c": "璧", "yomi": "へき", "okuri": "を", "kana": false },
+      { "c": "完", "yomi": "まった", "okuri": "くして", "kana": false },
+      { "c": "趙", "yomi": "ちょう", "okuri": "に", "kana": false },
+      { "c": "帰", "yomi": "かえ", "okuri": "さんと", "kana": false }
+    ],
+    "kakikudashi": "城入らずんば臣請ふ璧を全うして趙に帰さんと",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "（もし秦の）城が得られないならば、どうか私に璧を傷つけずに無事趙へ持ち帰らせてください。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04c",
+    "reading": [
+      { "c": "臣", "yomi": "しん", "okuri": "が", "kana": false },
+      { "c": "頭", "yomi": "こうべ", "okuri": "", "kana": false },
+      { "c": "今", "yomi": "いま", "okuri": "", "kana": false },
+      { "c": "璧", "yomi": "へき", "okuri": "と", "kana": false },
+      { "c": "与", "yomi": "とも", "okuri": "に", "kana": false },
+      { "c": "倶", "yomi": "とも", "okuri": "に", "kana": false },
+      { "c": "柱", "yomi": "はしら", "okuri": "に", "kana": false },
+      { "c": "砕", "yomi": "くだ", "okuri": "けん", "kana": false }
+    ],
+    "kakikudashi": "臣が頭今璧と与に倶に柱に砕けん",
+    "placed": ["於", "矣"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "私の頭はいま、宝玉とともに柱にたたきつけて粉々に砕いてしまいましょう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04d",
+    "reading": [
+      { "c": "吾", "yomi": "わ", "okuri": "が", "kana": false },
+      { "c": "此", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "為", "yomi": "な", "okuri": "す", "kana": false },
+      { "c": "所", "yomi": "ゆゑん", "okuri": "", "kana": false },
+      { "c": "以", "yomi": "の", "okuri": "", "kana": false },
+      { "c": "者", "yomi": "もの", "okuri": "は", "kana": false },
+      { "c": "以", "yomi": "もつ", "okuri": "て", "kana": false },
+      { "c": "国", "yomi": "こく", "okuri": "", "kana": false },
+      { "c": "家", "yomi": "か", "okuri": "の", "kana": false },
+      { "c": "之", "yomi": "の", "okuri": "", "kana": true },
+      { "c": "急", "yomi": "きゅう", "okuri": "を", "kana": false },
+      { "c": "先", "yomi": "さき", "okuri": "にして", "kana": false },
+      { "c": "私", "yomi": "し", "okuri": "", "kana": false },
+      { "c": "讐", "yomi": "しゅう", "okuri": "を", "kana": false },
+      { "c": "後", "yomi": "のち", "okuri": "とするなり", "kana": false }
+    ],
+    "kakikudashi": "吾が此を為す所以の者は以て国家の急を先にして私讐を後とするなり",
+    "placed": ["而", "也"],
+    "reread": [],
+    "kuho": [],
+    "meaning": "私がこのような（廉頗を避ける）行動を取る理由は、国家の危機を優先し、個人的な怨恨を後回しにしているからである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04g",
+    "reading": [
+      { "c": "我", "yomi": "われ", "okuri": "", "kana": false },
+      { "c": "相", "yomi": "しょう", "okuri": "", "kana": false },
+      { "c": "如", "yomi": "じょ", "okuri": "に", "kana": false },
+      { "c": "見", "yomi": "あ", "okuri": "はば", "kana": false },
+      { "c": "必", "yomi": "かなら", "okuri": "ず", "kana": false },
+      { "c": "之", "yomi": "これ", "okuri": "を", "kana": false },
+      { "c": "辱", "yomi": "はずかし", "okuri": "めむ", "kana": false }
+    ],
+    "kakikudashi": "我相如に見はば必ず之を辱めむ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "私が藺相如に会ったなら、必ず彼に恥をかかせてやる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "H-04j",
+    "reading": [
+      { "c": "今", "yomi": "いま", "okuri": "", "kana": false },
+      { "c": "両", "yomi": "りょう", "okuri": "", "kana": false },
+      { "c": "虎", "yomi": "とら", "okuri": "", "kana": false },
+      { "c": "共", "yomi": "とも", "okuri": "に", "kana": false },
+      { "c": "闘", "yomi": "たたか", "okuri": "はば", "kana": false },
+      { "c": "其", "yomi": "そ", "okuri": "の", "kana": false },
+      { "c": "勢", "yomi": "いきほ", "okuri": "ひ", "kana": false },
+      { "c": "倶", "yomi": "とも", "okuri": "には", "kana": false },
+      { "c": "生", "yomi": "い", "okuri": "き", "kana": false },
+      { "c": "不", "yomi": "", "okuri": "じ", "kana": true }
+    ],
+    "kakikudashi": "今両虎共に闘はば其の勢ひ倶には生きじ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "いま二匹の虎（廉頗と藺相如）が戦えば、その情勢として二人とも生き残ることはできない。",
+    "confidence": "高",
+    "note": ""
+  }
+]

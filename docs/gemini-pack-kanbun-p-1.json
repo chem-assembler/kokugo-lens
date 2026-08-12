@@ -1,0 +1,494 @@
+[
+  {
+    "id": "P-01-3",
+    "reading": [
+      { "c": "夜", "yomi": "や", "okuri": "" },
+      { "c": "来", "yomi": "らい", "okuri": "" },
+      { "c": "風", "yomi": "ふう", "okuri": "" },
+      { "c": "雨", "yomi": "う", "okuri": "の" },
+      { "c": "声", "yomi": "こえ", "okuri": "" }
+    ],
+    "kakikudashi": "夜来風雨の声",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "昨夜は風と雨の音が聞こえていた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-01-4",
+    "reading": [
+      { "c": "花", "yomi": "はな", "okuri": "" },
+      { "c": "落", "yomi": "お", "okuri": "つること" },
+      { "c": "知", "yomi": "し", "okuri": "る" },
+      { "c": "多", "yomi": "いく", "okuri": "ばく" },
+      { "c": "少", "yomi": "ぞ", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "花落つること知る多少ぞ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "花がどれほど落ちただろうか、分からない（きっとたくさん落ちたことだろう）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-02-1",
+    "reading": [
+      { "c": "牀", "yomi": "しょう", "okuri": "" },
+      { "c": "前", "yomi": "ぜん", "okuri": "の" },
+      { "c": "明", "yomi": "めい", "okuri": "" },
+      { "c": "月", "yomi": "げつ", "okuri": "の" },
+      { "c": "光", "yomi": "ひかり", "okuri": "" }
+    ],
+    "kakikudashi": "牀前の明月の光",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "寝床の前に差し込む明るい月の光。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-02-2",
+    "reading": [
+      { "c": "疑", "yomi": "うたが", "okuri": "ふ" },
+      { "c": "是", "yomi": "これ", "okuri": "は" },
+      { "c": "地", "yomi": "ち", "okuri": "" },
+      { "c": "上", "yomi": "じょう", "okuri": "の" },
+      { "c": "霜", "yomi": "しも", "okuri": "かと" }
+    ],
+    "kakikudashi": "疑ふ是は地上の霜かと",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "地面に降りた霜ではないかと疑うほどだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-02-3",
+    "reading": [
+      { "c": "頭", "yomi": "こうべ", "okuri": "を" },
+      { "c": "挙", "yomi": "あ", "okuri": "げて" },
+      { "c": "明", "yomi": "めい", "okuri": "" },
+      { "c": "月", "yomi": "げつ", "okuri": "を" },
+      { "c": "望", "yomi": "のぞ", "okuri": "む" }
+    ],
+    "kakikudashi": "頭を挙げて明月を望み",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "頭を上げて明るい月を仰ぎ見る。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-02-4",
+    "reading": [
+      { "c": "頭", "yomi": "こうべ", "okuri": "を" },
+      { "c": "低", "yomi": "た", "okuri": "れて" },
+      { "c": "故", "yomi": "こ", "okuri": "" },
+      { "c": "郷", "yomi": "きょう", "okuri": "を" },
+      { "c": "思", "yomi": "おも", "okuri": "ふ" }
+    ],
+    "kakikudashi": "頭を低れて故郷を思ふ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "うつむいて故郷のことを思い出す。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-06-1",
+    "reading": [
+      { "c": "故", "yomi": "こ", "okuri": "" },
+      { "c": "人", "yomi": "じん", "okuri": "" },
+      { "c": "西", "yomi": "にし", "okuri": "のかた" },
+      { "c": "黄", "yomi": "こう", "okuri": "" },
+      { "c": "鶴", "yomi": "かく", "okuri": "" },
+      { "c": "楼", "yomi": "ろう", "okuri": "を" },
+      { "c": "辞", "yomi": "じ", "okuri": "し" }
+    ],
+    "kakikudashi": "故人西のかた黄鶴楼を辞し",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "旧友が西の方角にある黄鶴楼に別れを告げて旅立った。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-06-2",
+    "reading": [
+      { "c": "煙", "yomi": "えん", "okuri": "" },
+      { "c": "花", "yomi": "か", "okuri": "" },
+      { "c": "三", "yomi": "さん", "okuri": "" },
+      { "c": "月", "yomi": "がつ", "okuri": "" },
+      { "c": "揚", "yomi": "よう", "okuri": "" },
+      { "c": "州", "yomi": "しゅう", "okuri": "に" },
+      { "c": "下", "yomi": "くだ", "okuri": "る" }
+    ],
+    "kakikudashi": "煙花三月揚州に下る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "花かすみ立つ春の三月、長江を下って揚州へと向かう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-06-3",
+    "reading": [
+      { "c": "孤", "yomi": "こ", "okuri": "" },
+      { "c": "帆", "yomi": "はん", "okuri": "の" },
+      { "c": "遠", "yomi": "えん", "okuri": "" },
+      { "c": "影", "yomi": "えい", "okuri": "" },
+      { "c": "碧", "yomi": "へき", "okuri": "" },
+      { "c": "空", "yomi": "くう", "okuri": "に" },
+      { "c": "尽", "yomi": "つ", "okuri": "き" }
+    ],
+    "kakikudashi": "孤帆の遠影碧空に尽き",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "ぽつんと浮かぶ一隻の船の遠い影も、青空の彼方に消えていき。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-06-4",
+    "reading": [
+      { "c": "唯", "yomi": "ただ", "okuri": "", "kana": true },
+      { "c": "長", "yomi": "ちょう", "okuri": "" },
+      { "c": "江", "yomi": "こう", "okuri": "の" },
+      { "c": "天", "yomi": "てん", "okuri": "" },
+      { "c": "際", "yomi": "さい", "okuri": "に" },
+      { "c": "流", "yomi": "なが", "okuri": "るるを" },
+      { "c": "見", "yomi": "み", "okuri": "る" }
+    ],
+    "kakikudashi": "ただ長江の天際に流るるを見る",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "ただ長江の水が天の彼方へと流れていくのを見るばかりである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-07-1",
+    "reading": [
+      { "c": "朝", "yomi": "あさ", "okuri": "に" },
+      { "c": "白", "yomi": "はく", "okuri": "" },
+      { "c": "帝", "yomi": "てい", "okuri": "" },
+      { "c": "彩", "yomi": "さい", "okuri": "" },
+      { "c": "雲", "yomi": "うん", "okuri": "の" },
+      { "c": "間", "yomi": "かん", "okuri": "を" },
+      { "c": "辞", "yomi": "じ", "okuri": "す" }
+    ],
+    "kakikudashi": "朝に白帝彩雲の間を辞す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "朝早く、朝焼けの雲に彩られた白帝城を出発する。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-07-2",
+    "reading": [
+      { "c": "千", "yomi": "せん", "okuri": "" },
+      { "c": "里", "yomi": "り", "okuri": "の" },
+      { "c": "江", "yomi": "こう", "okuri": "" },
+      { "c": "陵", "yomi": "りょう", "okuri": "" },
+      { "c": "一", "yomi": "いち", "okuri": "" },
+      { "c": "日", "yomi": "にち", "okuri": "にして" },
+      { "c": "還", "yomi": "かえ", "okuri": "る" }
+    ],
+    "kakikudashi": "千里の江陵一日にして還る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "千里も離れた江陵へ、一日でたどり着いてしまう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-07-3",
+    "reading": [
+      { "c": "両", "yomi": "りょう", "okuri": "" },
+      { "c": "岸", "yomi": "がん", "okuri": "の" },
+      { "c": "猿", "yomi": "えん", "okuri": "" },
+      { "c": "声", "yomi": "せい", "okuri": "" },
+      { "c": "啼", "yomi": "な", "okuri": "きて" },
+      { "c": "住", "yomi": "や", "okuri": "ま" },
+      { "c": "不", "yomi": "ず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "両岸の猿声啼きて住まず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "両岸の猿の鳴き声が絶え間なく鳴き続けているうちに。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-07-4",
+    "reading": [
+      { "c": "軽", "yomi": "けい", "okuri": "" },
+      { "c": "舟", "yomi": "しゅう", "okuri": "" },
+      { "c": "已", "yomi": "すで", "okuri": "に" },
+      { "c": "万", "yomi": "まん", "okuri": "" },
+      { "c": "重", "yomi": "じゅう", "okuri": "の" },
+      { "c": "山", "yomi": "やま", "okuri": "を" },
+      { "c": "過", "yomi": "す", "okuri": "ぐ" }
+    ],
+    "kakikudashi": "軽舟已に万重の山を過ぐ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "軽やかな小舟は、幾重にも重なる山々を通り過ぎて行った。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-1",
+    "reading": [
+      { "c": "国", "yomi": "くに", "okuri": "" },
+      { "c": "破", "yomi": "やぶ", "okuri": "れて" },
+      { "c": "山", "yomi": "さん", "okuri": "" },
+      { "c": "河", "yomi": "か", "okuri": "" },
+      { "c": "在", "yomi": "あ", "okuri": "り" }
+    ],
+    "kakikudashi": "国破れて山河在り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "国都は破壊されたが、自然の山河はそのまま残っている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-2",
+    "reading": [
+      { "c": "城", "yomi": "しろ", "okuri": "" },
+      { "c": "春", "yomi": "はる", "okuri": "にして" },
+      { "c": "草", "yomi": "そう", "okuri": "" },
+      { "c": "木", "yomi": "ぼく", "okuri": "" },
+      { "c": "深", "yomi": "ふか", "okuri": "し" }
+    ],
+    "kakikudashi": "城春にして草木深し",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "街に春が訪れ、草木が青々と茂っている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-3",
+    "reading": [
+      { "c": "時", "yomi": "とき", "okuri": "に" },
+      { "c": "感", "yomi": "かん", "okuri": "じては" },
+      { "c": "花", "yomi": "はな", "okuri": "にも" },
+      { "c": "涙", "yomi": "なみだ", "okuri": "を" },
+      { "c": "濺", "yomi": "そそ", "okuri": "ぎ" }
+    ],
+    "kakikudashi": "時に感じては花にも涙を濺ぎ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "世の乱れに感傷を覚えては、美しく咲く花を見ても涙を流し。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-4",
+    "reading": [
+      { "c": "別", "yomi": "わか", "okuri": "れを" },
+      { "c": "恨", "yomi": "うら", "okuri": "んでは" },
+      { "c": "鳥", "yomi": "とり", "okuri": "にも" },
+      { "c": "心", "yomi": "こころ", "okuri": "を" },
+      { "c": "驚", "yomi": "おどろ", "okuri": "かす" }
+    ],
+    "kakikudashi": "別れを恨んでは鳥にも心を驚かす",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "家族との別れを悲しんでは、鳴く鳥の声にもハッとして心を痛める。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-5",
+    "reading": [
+      { "c": "烽", "yomi": "ほう", "okuri": "" },
+      { "c": "火", "yomi": "か", "okuri": "" },
+      { "c": "三", "yomi": "さん", "okuri": "" },
+      { "c": "月", "yomi": "がつ", "okuri": "に" },
+      { "c": "連", "yomi": "つら", "okuri": "なり" }
+    ],
+    "kakikudashi": "烽火三月に連なり",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "戦争ののろしが三ヶ月もの間絶え間なく続き。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-6",
+    "reading": [
+      { "c": "家", "yomi": "か", "okuri": "" },
+      { "c": "書", "yomi": "しょ", "okuri": "" },
+      { "c": "万", "yomi": "まん", "okuri": "" },
+      { "c": "金", "yomi": "きん", "okuri": "に" },
+      { "c": "抵", "yomi": "あ", "okuri": "たる" }
+    ],
+    "kakikudashi": "家書万金に抵る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "家族からの便りは万金にも値するほど貴重である。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-7",
+    "reading": [
+      { "c": "白", "yomi": "はく", "okuri": "" },
+      { "c": "頭", "yomi": "とう", "okuri": "" },
+      { "c": "搔", "yomi": "か", "okuri": "けば" },
+      { "c": "更", "yomi": "さら", "okuri": "に" },
+      { "c": "短", "yomi": "みじか", "okuri": "し" }
+    ],
+    "kakikudashi": "白頭搔けば更に短く",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "白髪頭をかくと、薄くなってさらに短くなり。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-08-8",
+    "reading": [
+      { "c": "渾", "yomi": "すべ", "okuri": "て" },
+      { "c": "簪", "yomi": "かんざし", "okuri": "に" },
+      { "c": "勝", "yomi": "た", "okuri": "へ" },
+      { "c": "不", "yomi": "ざらん", "okuri": "", "kana": true },
+      { "c": "欲", "yomi": "ほっ", "okuri": "す" }
+    ],
+    "kakikudashi": "渾て簪に勝へざらんと欲す",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "まったくかんざしもさせないほどになってしまいそうだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-10-1",
+    "reading": [
+      { "c": "江", "yomi": "こう", "okuri": "" },
+      { "c": "碧", "yomi": "へき", "okuri": "にして" },
+      { "c": "鳥", "yomi": "とり", "okuri": "" },
+      { "c": "逾", "yomi": "いよいよ", "okuri": "" },
+      { "c": "白", "yomi": "しろ", "okuri": "し" }
+    ],
+    "kakikudashi": "江碧にして鳥逾白く",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hikaku"],
+    "meaning": "川の水は深く青く、水鳥の白さが一層際立っている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-10-2",
+    "reading": [
+      { "c": "山", "yomi": "やま", "okuri": "" },
+      { "c": "青", "yomi": "あお", "okuri": "くして" },
+      { "c": "花", "yomi": "はな", "okuri": "" },
+      { "c": "燃", "yomi": "え", "okuri": "んと" },
+      { "c": "欲", "yomi": "ほっ", "okuri": "す" }
+    ],
+    "kakikudashi": "山青くして花燃えんと欲す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "山は青々と茂り、赤い花は今にも燃えあがりそうだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-10-3",
+    "reading": [
+      { "c": "今", "yomi": "こん", "okuri": "" },
+      { "c": "春", "yomi": "しゅん", "okuri": "" },
+      { "c": "看", "yomi": "み", "okuri": "す" },
+      { "c": "又", "yomi": "また", "okuri": "" },
+      { "c": "過", "yomi": "す", "okuri": "ぐ" }
+    ],
+    "kakikudashi": "今春看す又過ぐ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "今年の春も見る見るうちにまた過ぎ去っていく。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-10-4",
+    "reading": [
+      { "c": "何", "yomi": "いづ", "okuri": "れの" },
+      { "c": "日", "yomi": "ひ", "okuri": "か" },
+      { "c": "是", "yomi": "これ", "okuri": "" },
+      { "c": "帰", "yomi": "き", "okuri": "" },
+      { "c": "年", "yomi": "ねん", "okuri": "ならん" }
+    ],
+    "kakikudashi": "何れの日か是帰年ならん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "一体いつの日になったら故郷に帰れる年が来るのだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-1",
+    "reading": [
+      { "c": "今", "yomi": "こん", "okuri": "" },
+      { "c": "夜", "yomi": "や", "okuri": "" },
+      { "c": "鄜", "yomi": "ふ", "okuri": "" },
+      { "c": "州", "yomi": "しゅう", "okuri": "の" },
+      { "c": "月", "yomi": "つき", "okuri": "" }
+    ],
+    "kakikudashi": "今夜鄜州の月",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "今夜、鄜州を照らしている月を。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-2",
+    "reading": [
+      { "c": "閨", "yomi": "けい", "okuri": "" },
+      { "c": "中", "yomi": "ちゅう", "okuri": "" },
+      { "c": "只", "yomi": "ただ", "okuri": "", "kana": true },
+      { "c": "独", "yomi": "ひとり", "okuri": "で" },
+      { "c": "看", "yomi": "み", "okuri": "るらん" }
+    ],
+    "kakikudashi": "閨中ただ独りで看るらん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "妻は部屋の中で、ただ一人で眺めていることだろう。",
+    "confidence": "高",
+    "note": ""
+  }
+]

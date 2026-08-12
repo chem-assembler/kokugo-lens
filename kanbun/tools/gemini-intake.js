@@ -116,9 +116,13 @@ for (const e of (Array.isArray(list) ? list : [list])){
   if (!haku){ NG('台帳に ID が無い（' + PREFIX + '系の課題表と照合）'); continue; }
   if (!Array.isArray(e.reading) || !e.reading.length){ NG('reading が無い'); continue; }
 
+  // 返ってきた字も台帳と同じ字体にそろえてから突き合わせる。
+  // 依頼パックは新字体で渡しているが、原典を見に行った結果を旧字で返してくることがある
+  // （爭／臺 など）。字体のずれで落とすのは筋が悪いので、照合の前にそろえる
   const chars = [...haku];
-  const placed = new Set(Array.isArray(e.placed) ? e.placed : []);
-  const reread = new Set(Array.isArray(e.reread) ? e.reread : []);
+  const placed = new Set((Array.isArray(e.placed) ? e.placed : []).map(norm));
+  const reread = new Set((Array.isArray(e.reread) ? e.reread : []).map(norm));
+  (Array.isArray(e.reading) ? e.reading : []).forEach(r => { if (r && r.c) r.c = norm(r.c); });
   for (const c of placed) if (!haku.includes(c)) NG('置き字「' + c + '」が白文「' + haku + '」に無い');
   for (const c of reread){
     if (!haku.includes(c)) NG('再読文字「' + c + '」が白文に無い');
@@ -165,7 +169,7 @@ for (const e of (Array.isArray(list) ? list : [list])){
     NG('組んだ訓点からの読み順 ' + JSON.stringify(got) + ' が reading の順 ' + JSON.stringify(order) + ' と違う'); continue;
   }
   const kd = K.toKakikudashi(tokens, order);
-  if (e.kakikudashi && kd !== e.kakikudashi){
+  if (e.kakikudashi && norm(kd) !== norm(e.kakikudashi)){   // 申告側の字体もそろえて比べる
     NG('reading から組んだ書き下し「' + kd + '」が申告「' + e.kakikudashi + '」と違う'); continue;
   }
   if (/[ァ-ヶ]/.test(kd)){ NG('書き下しにカタカナが残っている: ' + kd); continue; }

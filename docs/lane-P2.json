@@ -1,0 +1,1661 @@
+[
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "遙",
+    "yomi": "はる",
+    "okuri": "カニ"
+   },
+   {
+    "c": "憐",
+    "yomi": "あはれ",
+    "okuri": "ムヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "小",
+    "yomi": "しょう"
+   },
+   {
+    "c": "児",
+    "yomi": "じ"
+   },
+   {
+    "c": "女",
+    "yomi": "じょ",
+    "okuri": "ノ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   2,
+   3,
+   4,
+   1
+  ],
+  "kakikudashi": "遙かに小児女の憐むを",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "遥か遠くで、幼い子供たちが（親の心境を）まだ解さずかわいそうなのを想う。",
+  "_catalog": "P-13-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "未",
+    "reread": {
+     "first": {
+      "yomi": "いま",
+      "okuri": "ダ"
+     },
+     "second": {
+      "yomi": "ず",
+      "kana": true
+     }
+    },
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "解",
+    "yomi": "げ",
+    "okuri": "セ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 3
+     }
+    ]
+   },
+   {
+    "c": "憶",
+    "yomi": "おも",
+    "okuri": "フヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "長",
+    "yomi": "ちょう"
+   },
+   {
+    "c": "安",
+    "yomi": "あん",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   3,
+   4,
+   2,
+   1,
+   0
+  ],
+  "kakikudashi": "未だ長安を憶ふを解せず",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "長安の父を思い出すことも、まだ理解できないでいる。",
+  "_catalog": "P-13-4",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "香",
+    "yomi": "こう"
+   },
+   {
+    "c": "霧",
+    "yomi": "む",
+    "okuri": "ニ"
+   },
+   {
+    "c": "雲",
+    "yomi": "うん"
+   },
+   {
+    "c": "鬟",
+    "yomi": "かん"
+   },
+   {
+    "c": "湿",
+    "yomi": "ぬれ"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "香霧に雲鬟湿",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "香りのよい夜霧に、妻の美しい髪は湿り。",
+  "_catalog": "P-13-5",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "清",
+    "yomi": "せい"
+   },
+   {
+    "c": "輝",
+    "yomi": "き",
+    "okuri": "ニ"
+   },
+   {
+    "c": "玉",
+    "yomi": "ぎょく"
+   },
+   {
+    "c": "臂",
+    "yomi": "ひ"
+   },
+   {
+    "c": "寒",
+    "yomi": "つめた",
+    "okuri": "カラン"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "清輝に玉臂寒からん",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "清らかな月の光に、妻の白い腕も冷たくなっていることだろう。",
+  "_catalog": "P-13-6",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "何",
+    "yomi": "いづ",
+    "okuri": "レノ"
+   },
+   {
+    "c": "時",
+    "yomi": "とき",
+    "okuri": "ニカ"
+   },
+   {
+    "c": "倚",
+    "yomi": "よ",
+    "okuri": "リテ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "虚",
+    "yomi": "きょ"
+   },
+   {
+    "c": "幌",
+    "yomi": "こう",
+    "okuri": "ニ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "何れの時にか虚幌に倚りて",
+  "acceptable": [],
+  "kuho": [
+   "gimon"
+  ],
+  "meaning": "一体いつになったら薄い帳に寄りかかり。",
+  "_catalog": "P-13-7",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "双",
+    "yomi": "なら",
+    "okuri": "ビ"
+   },
+   {
+    "c": "照",
+    "yomi": "てら",
+    "okuri": "サレテ"
+   },
+   {
+    "c": "涙",
+    "yomi": "るい"
+   },
+   {
+    "c": "痕",
+    "yomi": "こん"
+   },
+   {
+    "c": "乾",
+    "yomi": "かわ",
+    "okuri": "カン"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "双び照されて涙痕乾かん",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "夫婦二人で月に照らされ、涙のあとが乾く日が来るのだろうか。",
+  "_catalog": "P-13-8",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "岱",
+    "yomi": "たい"
+   },
+   {
+    "c": "宗",
+    "yomi": "そう"
+   },
+   {
+    "c": "夫",
+    "yomi": "そ",
+    "okuri": "レ"
+   },
+   {
+    "c": "如",
+    "yomi": "いか",
+    "okuri": "ガ"
+   },
+   {
+    "c": "何",
+    "yomi": "せん",
+    "kana": true
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "岱宗夫れ如がせん",
+  "acceptable": [],
+  "kuho": [
+   "gimon"
+  ],
+  "meaning": "泰山とは、一体どのような素晴らしい山なのだろうか。",
+  "_catalog": "P-38-1",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "斉",
+    "yomi": "せい"
+   },
+   {
+    "c": "魯",
+    "yomi": "ろ"
+   },
+   {
+    "c": "青",
+    "yomi": "せい"
+   },
+   {
+    "c": "未",
+    "reread": {
+     "first": {
+      "yomi": "いま",
+      "okuri": "ダ"
+     },
+     "second": {
+      "yomi": "ず",
+      "kana": true
+     }
+    },
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "了",
+    "yomi": "をは",
+    "okuri": "ラズ"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   3
+  ],
+  "kakikudashi": "斉魯青未だ了らずず",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "斉と魯の国々にわたって青々とした山肌がどこまでも尽きない。",
+  "_catalog": "P-38-2",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "造",
+    "yomi": "ぞう"
+   },
+   {
+    "c": "化",
+    "yomi": "か"
+   },
+   {
+    "c": "鍾",
+    "yomi": "あつ",
+    "okuri": "メ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "神",
+    "yomi": "しん"
+   },
+   {
+    "c": "秀",
+    "yomi": "しゅう",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "造化神秀を鍾め",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "大自然は神々しく秀でた美しさをこの山に集め。",
+  "_catalog": "P-38-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "陰",
+    "yomi": "いん"
+   },
+   {
+    "c": "陽",
+    "yomi": "よう"
+   },
+   {
+    "c": "割",
+    "yomi": "さ",
+    "okuri": "ク",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "昏",
+    "yomi": "こん"
+   },
+   {
+    "c": "暁",
+    "yomi": "ぎょう",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "陰陽昏暁を割く",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "山の日向と日陰は、夕暮れと明け方の光と影をはっきりと分かち分けている。",
+  "_catalog": "P-38-4",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "盪",
+    "yomi": "うご",
+    "okuri": "カシテ",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "胸",
+    "yomi": "むね",
+    "okuri": "ヲ"
+   },
+   {
+    "c": "生",
+    "yomi": "しょう",
+    "okuri": "ジ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "曽",
+    "yomi": "そう"
+   },
+   {
+    "c": "雲",
+    "yomi": "うん",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   1,
+   0,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "胸を盪かして曽雲生じ",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "湧き上がる雲を見て胸は高鳴り。",
+  "_catalog": "P-38-5",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "決",
+    "yomi": "けっ",
+    "okuri": "シテ",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "眥",
+    "yomi": "まなじり",
+    "okuri": "ヲ"
+   },
+   {
+    "c": "入",
+    "yomi": "い",
+    "okuri": "ルヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "帰",
+    "yomi": "き"
+   },
+   {
+    "c": "鳥",
+    "yomi": "ちょう",
+    "okuri": "ノ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   1,
+   0,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "眥を決して帰鳥の入るを",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "目を見開いて、巣に帰る鳥が山に入っていくのを見る。",
+  "_catalog": "P-38-6",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "会",
+    "yomi": "かなら",
+    "okuri": "ズ"
+   },
+   {
+    "c": "当",
+    "reread": {
+     "first": {
+      "yomi": "まさ",
+      "okuri": "ニ"
+     },
+     "second": {
+      "yomi": "べし",
+      "kana": true
+     }
+    },
+    "mark": [
+     {
+      "lv": 1,
+      "n": 3
+     }
+    ]
+   },
+   {
+    "c": "凌",
+    "yomi": "しの",
+    "okuri": "グベシ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "絶",
+    "yomi": "ぜっ"
+   },
+   {
+    "c": "頂",
+    "yomi": "ちょう",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   3,
+   4,
+   2,
+   1
+  ],
+  "kakikudashi": "会ず当に絶頂を凌ぐべしべし",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "きっといつか頂上に登り詰めよう。",
+  "_catalog": "P-38-7",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "一",
+    "yomi": "いち"
+   },
+   {
+    "c": "覧",
+    "yomi": "らん"
+   },
+   {
+    "c": "衆",
+    "yomi": "しゅう"
+   },
+   {
+    "c": "山",
+    "yomi": "ざん",
+    "okuri": "ノ"
+   },
+   {
+    "c": "小",
+    "yomi": "ちい",
+    "okuri": "サキヲ"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "一覧衆山の小さきを",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "群がる山々がいかに小さいかを一望に収めよう。",
+  "_catalog": "P-38-8",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "葡",
+    "yomi": "ぶ"
+   },
+   {
+    "c": "萄",
+    "yomi": "とう",
+    "okuri": "ノ"
+   },
+   {
+    "c": "美",
+    "yomi": "び"
+   },
+   {
+    "c": "酒",
+    "yomi": "しゅ"
+   },
+   {
+    "c": "夜",
+    "yomi": "や"
+   },
+   {
+    "c": "光",
+    "yomi": "こう",
+    "okuri": "ノ"
+   },
+   {
+    "c": "杯",
+    "yomi": "はい"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "kakikudashi": "葡萄の美酒夜光の杯",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "葡萄の極上の酒と、夜光る玉の杯。",
+  "_catalog": "P-16-1",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "欲",
+    "yomi": "ほっ",
+    "okuri": "スレバ",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "飲",
+    "yomi": "の",
+    "okuri": "マント"
+   },
+   {
+    "c": "琵",
+    "yomi": "び"
+   },
+   {
+    "c": "琶",
+    "yomi": "わ"
+   },
+   {
+    "c": "馬",
+    "yomi": "ば"
+   },
+   {
+    "c": "上",
+    "yomi": "じょう",
+    "okuri": "ニ"
+   },
+   {
+    "c": "催",
+    "yomi": "うなが",
+    "okuri": "ス"
+   }
+  ],
+  "order": [
+   1,
+   0,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "kakikudashi": "飲まんと欲すれば琵琶馬上に催す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "飲もうとすると、馬の上で掻き鳴らす琵琶の音が陣立てを急き立てる。",
+  "_catalog": "P-16-2",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "酔",
+    "yomi": "よ",
+    "okuri": "ヒテ"
+   },
+   {
+    "c": "臥",
+    "yomi": "が",
+    "okuri": "ストモ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "沙",
+    "yomi": "さ"
+   },
+   {
+    "c": "場",
+    "yomi": "じょう",
+    "okuri": "ニ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   },
+   {
+    "c": "君",
+    "yomi": "きみ"
+   },
+   {
+    "c": "莫",
+    "yomi": "なか",
+    "okuri": "レ",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "笑",
+    "yomi": "わら",
+    "okuri": "フコト"
+   }
+  ],
+  "order": [
+   0,
+   2,
+   3,
+   1,
+   4,
+   6,
+   5
+  ],
+  "kakikudashi": "酔ひて沙場に臥すとも君笑ふこと莫れ",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "酔いつぶれて戦場に倒れ伏すことがあっても、どうか笑わないでくれ。",
+  "_catalog": "P-16-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "古",
+    "yomi": "こ"
+   },
+   {
+    "c": "来",
+    "yomi": "らい"
+   },
+   {
+    "c": "征",
+    "yomi": "せい"
+   },
+   {
+    "c": "戦",
+    "yomi": "せん"
+   },
+   {
+    "c": "幾",
+    "yomi": "いく"
+   },
+   {
+    "c": "人",
+    "yomi": "にん",
+    "okuri": "カ"
+   },
+   {
+    "c": "回",
+    "yomi": "かえ",
+    "okuri": "ル"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "kakikudashi": "古来征戦幾人か回る",
+  "acceptable": [],
+  "kuho": [
+   "hango"
+  ],
+  "meaning": "古来、戦争に行って生きて帰ってきた者が一体何人いただろうか（いや、ほとんどいない）。",
+  "_catalog": "P-16-4",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "渭",
+    "yomi": "い"
+   },
+   {
+    "c": "城",
+    "yomi": "じょう",
+    "okuri": "ノ"
+   },
+   {
+    "c": "朝",
+    "yomi": "ちょう"
+   },
+   {
+    "c": "雨",
+    "yomi": "う"
+   },
+   {
+    "c": "浥",
+    "yomi": "うるお",
+    "okuri": "シ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "軽",
+    "yomi": "けい"
+   },
+   {
+    "c": "塵",
+    "yomi": "じん",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   5,
+   6,
+   4
+  ],
+  "kakikudashi": "渭城の朝雨軽塵を浥し",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "渭城の朝の雨が舞い上がる舞塵を潤し。",
+  "_catalog": "P-19-1",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "客",
+    "yomi": "かく"
+   },
+   {
+    "c": "舎",
+    "yomi": "しゃ"
+   },
+   {
+    "c": "青",
+    "yomi": "せい"
+   },
+   {
+    "c": "青",
+    "yomi": "せい"
+   },
+   {
+    "c": "柳",
+    "yomi": "りゅう"
+   },
+   {
+    "c": "色",
+    "yomi": "しょく"
+   },
+   {
+    "c": "新",
+    "yomi": "あらた",
+    "okuri": "ナリ"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "kakikudashi": "客舎青青柳色新なり",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "宿屋のまわりは青々として、青柳の色も生き生きと新鮮に見える。",
+  "_catalog": "P-19-2",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "勧",
+    "yomi": "すす",
+    "okuri": "ム",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "君",
+    "yomi": "きみ",
+    "okuri": "ニ"
+   },
+   {
+    "c": "更",
+    "yomi": "さら",
+    "okuri": "ニ"
+   },
+   {
+    "c": "尽",
+    "yomi": "つく",
+    "okuri": "セ"
+   },
+   {
+    "c": "一",
+    "yomi": "いっ"
+   },
+   {
+    "c": "杯",
+    "yomi": "ぱい",
+    "okuri": "ノ"
+   },
+   {
+    "c": "酒",
+    "yomi": "さけ"
+   }
+  ],
+  "order": [
+   1,
+   0,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "kakikudashi": "君に勧む更に尽せ一杯の酒",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "さああなたに勧めます、もう一杯の酒を飲み干してください。",
+  "_catalog": "P-19-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "西",
+    "yomi": "にし"
+   },
+   {
+    "c": "出",
+    "yomi": "いづ",
+    "okuri": "レバ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "陽",
+    "yomi": "よう"
+   },
+   {
+    "c": "関",
+    "yomi": "かん",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   },
+   {
+    "c": "無",
+    "yomi": "な",
+    "okuri": "カラン",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "故",
+    "yomi": "こ"
+   },
+   {
+    "c": "人",
+    "yomi": "じん",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   2,
+   3,
+   1,
+   5,
+   6,
+   4
+  ],
+  "kakikudashi": "西陽関を出れば故人無からん",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "西の方、陽関を出てしまえば、もう旧友は誰もいないのだから。",
+  "_catalog": "P-19-4",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "空",
+    "yomi": "くう"
+   },
+   {
+    "c": "山",
+    "yomi": "ざん"
+   },
+   {
+    "c": "不",
+    "yomi": "ず",
+    "kana": true,
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "見",
+    "yomi": "み",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "人",
+    "yomi": "ひと",
+    "okuri": "ヲ"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   4,
+   3,
+   2
+  ],
+  "kakikudashi": "空山人を見ず",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "静まり返った山の中には、人の姿が見えない。",
+  "_catalog": "P-14-1",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "返",
+    "yomi": "へん"
+   },
+   {
+    "c": "景",
+    "yomi": "けい"
+   },
+   {
+    "c": "入",
+    "yomi": "い",
+    "okuri": "リ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "深",
+    "yomi": "しん"
+   },
+   {
+    "c": "林",
+    "yomi": "りん",
+    "okuri": "ニ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   1,
+   3,
+   4,
+   2
+  ],
+  "kakikudashi": "返景深林に入り",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "夕日の反射光が深い林の中に差し込み。",
+  "_catalog": "P-14-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "復",
+    "yomi": "ま",
+    "okuri": "タ"
+   },
+   {
+    "c": "照",
+    "yomi": "てら",
+    "okuri": "ス",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "青",
+    "yomi": "せい"
+   },
+   {
+    "c": "苔",
+    "yomi": "たい",
+    "okuri": "ノ"
+   },
+   {
+    "c": "上",
+    "yomi": "うえ",
+    "okuri": "ヲ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   2,
+   3,
+   4,
+   1
+  ],
+  "kakikudashi": "復た青苔の上を照す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "再び青苔の上を照らしている。",
+  "_catalog": "P-14-4",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "独",
+    "yomi": "ひと",
+    "okuri": "リ"
+   },
+   {
+    "c": "坐",
+    "yomi": "ざ",
+    "okuri": "ス",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 2
+     }
+    ]
+   },
+   {
+    "c": "幽",
+    "yomi": "ゆう"
+   },
+   {
+    "c": "篁",
+    "yomi": "こう",
+    "okuri": "ノ"
+   },
+   {
+    "c": "裏",
+    "yomi": "うち",
+    "okuri": "ニ",
+    "mark": [
+     {
+      "lv": 1,
+      "n": 1
+     }
+    ]
+   }
+  ],
+  "order": [
+   0,
+   2,
+   3,
+   4,
+   1
+  ],
+  "kakikudashi": "独り幽篁の裏に坐す",
+  "acceptable": [],
+  "kuho": [
+   "gentei"
+  ],
+  "meaning": "ただ一人、深い竹林の奥に腰を下ろしている。",
+  "_catalog": "P-15-1",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "弾",
+    "yomi": "だん",
+    "okuri": "ジテ",
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "琴",
+    "yomi": "こと",
+    "okuri": "ヲ"
+   },
+   {
+    "c": "復",
+    "yomi": "ま",
+    "okuri": "タ"
+   },
+   {
+    "c": "長",
+    "yomi": "ちょう"
+   },
+   {
+    "c": "嘯",
+    "yomi": "しょう",
+    "okuri": "ス"
+   }
+  ],
+  "order": [
+   1,
+   0,
+   2,
+   3,
+   4
+  ],
+  "kakikudashi": "琴を弾じて復た長嘯す",
+  "acceptable": [],
+  "kuho": [],
+  "meaning": "琴を弾き、また声を長く伸ばして歌う。",
+  "_catalog": "P-15-2",
+  "_section": "唐詩",
+  "_confidence": "高"
+ },
+ {
+  "id": "",
+  "source": {
+   "work": "",
+   "chapter": ""
+  },
+  "tokens": [
+   {
+    "c": "深",
+    "yomi": "しん"
+   },
+   {
+    "c": "林",
+    "yomi": "りん"
+   },
+   {
+    "c": "人",
+    "yomi": "ひと"
+   },
+   {
+    "c": "不",
+    "yomi": "らず",
+    "kana": true,
+    "mark": [
+     {
+      "re": true
+     }
+    ]
+   },
+   {
+    "c": "知",
+    "yomi": "し"
+   }
+  ],
+  "order": [
+   0,
+   1,
+   2,
+   4,
+   3
+  ],
+  "kakikudashi": "深林人知らず",
+  "acceptable": [],
+  "kuho": [
+   "hitei"
+  ],
+  "meaning": "深い竹林の中にいる私を、誰も知らない。",
+  "_catalog": "P-15-3",
+  "_section": "唐詩",
+  "_confidence": "高"
+ }
+]

@@ -1,0 +1,482 @@
+[
+  {
+    "id": "P-27-4",
+    "reading": [
+      { "c": "笑", "yomi": "わら", "okuri": "ひて" },
+      { "c": "問", "yomi": "と", "okuri": "ふ" },
+      { "c": "客", "yomi": "かく", "okuri": "" },
+      { "c": "何", "yomi": "いづ", "okuri": "れの" },
+      { "c": "処", "yomi": "ところ", "okuri": "より" },
+      { "c": "従", "yomi": "より", "okuri": "" },
+      { "c": "来", "yomi": "きた", "okuri": "ると" }
+    ],
+    "kakikudashi": "笑ひて問ふ客何処より来ると",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "にこにこ笑って「旅の方、どこから来られたのですか」と尋ねる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-28-1",
+    "reading": [
+      { "c": "松", "yomi": "しょう", "okuri": "" },
+      { "c": "下", "yomi": "か", "okuri": "に" },
+      { "c": "童", "yomi": "どう", "okuri": "" },
+      { "c": "子", "yomi": "じ", "okuri": "に" },
+      { "c": "問", "yomi": "と", "okuri": "ふ" }
+    ],
+    "kakikudashi": "松下に童子に問ふ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "松の木の下で、召使いの子供に尋ねると。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-28-2",
+    "reading": [
+      { "c": "言", "yomi": "い", "okuri": "ふ" },
+      { "c": "師", "yomi": "し", "okuri": "" },
+      { "c": "薬", "yomi": "くすり", "okuri": "を" },
+      { "c": "採", "yomi": "と", "okuri": "りに" },
+      { "c": "去", "yomi": "さ", "okuri": "れると" }
+    ],
+    "kakikudashi": "言ふ師薬を採りに去れると",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "「先生は薬草を摘みに出かけられました」と言う。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-28-3",
+    "reading": [
+      { "c": "只", "yomi": "ただ", "okuri": "", "kana": true },
+      { "c": "此", "yomi": "こ", "okuri": "の" },
+      { "c": "山", "yomi": "さん", "okuri": "" },
+      { "c": "中", "yomi": "ちゅう", "okuri": "に" },
+      { "c": "在", "yomi": "あ", "okuri": "り" }
+    ],
+    "kakikudashi": "ただ此の山中に在り",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "「ただこの山の中にいらっしゃるのですが」",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-28-4",
+    "reading": [
+      { "c": "雲", "yomi": "くも", "okuri": "" },
+      { "c": "深", "yomi": "ふか", "okuri": "くして" },
+      { "c": "処", "yomi": "ところ", "okuri": "を" },
+      { "c": "知", "yomi": "し", "okuri": "" },
+      { "c": "不", "yomi": "らず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "雲深くして処を知らず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "「雲が深くて、どこにいらっしゃるのか分かりません」。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-30-1",
+    "reading": [
+      { "c": "遠", "yomi": "とお", "okuri": "く" },
+      { "c": "寒", "yomi": "かん", "okuri": "" },
+      { "c": "山", "yomi": "ざん", "okuri": "に" },
+      { "c": "上", "yomi": "のぼ", "okuri": "れば" },
+      { "c": "石", "yomi": "せき", "okuri": "" },
+      { "c": "径", "yomi": "けい", "okuri": "" },
+      { "c": "斜", "yomi": "なな", "okuri": "めなり" }
+    ],
+    "kakikudashi": "遠く寒山に上れば石径斜めなり",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "遠く晩秋の寒々とした山に登っていくと、石のある細道が斜めにうねうねと伸びている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-30-2",
+    "reading": [
+      { "c": "白", "yomi": "はく", "okuri": "" },
+      { "c": "雲", "yomi": "うん", "okuri": "" },
+      { "c": "生", "yomi": "しょう", "okuri": "ずる" },
+      { "c": "処", "yomi": "ところ", "okuri": "" },
+      { "c": "人", "yomi": "じん", "okuri": "" },
+      { "c": "家", "yomi": "か", "okuri": "" },
+      { "c": "有", "yomi": "あ", "okuri": "り" }
+    ],
+    "kakikudashi": "白雲生ずる処人家有り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "白雲がわき起こるあたりに、民家がある。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-30-3",
+    "reading": [
+      { "c": "車", "yomi": "くるま", "okuri": "を" },
+      { "c": "停", "yomi": "と", "okuri": "めて" },
+      { "c": "坐", "yomi": "そぞ", "okuri": "ろに" },
+      { "c": "愛", "yomi": "あい", "okuri": "す" },
+      { "c": "楓", "yomi": "ふう", "okuri": "" },
+      { "c": "林", "yomi": "りん", "okuri": "の" },
+      { "c": "晩", "yomi": "くれ", "okuri": "を" }
+    ],
+    "kakikudashi": "車を停めて坐ろに愛す楓林の晩を",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "車を止めて、夕暮れのモミジの林の景色をじっくりと心ゆくまで鑑賞する。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-33-1",
+    "reading": [
+      { "c": "何", "yomi": "いづ", "okuri": "れの" },
+      { "c": "処", "yomi": "ところ", "okuri": "よりか" },
+      { "c": "秋", "yomi": "しゅう", "okuri": "" },
+      { "c": "風", "yomi": "ふう", "okuri": "" },
+      { "c": "至", "yomi": "いた", "okuri": "る" }
+    ],
+    "kakikudashi": "何処よりか秋風至る",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "一体どこから秋風が吹き渡ってくるのだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-33-2",
+    "reading": [
+      { "c": "蕭", "yomi": "しょう", "okuri": "" },
+      { "c": "蕭", "yomi": "しょう", "okuri": "として" },
+      { "c": "鴈", "yomi": "がん", "okuri": "" },
+      { "c": "群", "yomi": "ぐん", "okuri": "を" },
+      { "c": "送", "yomi": "おく", "okuri": "る" }
+    ],
+    "kakikudashi": "蕭蕭として鴈群を送る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "物寂しい音を立てて渡り鳥の群れを見送っている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-33-3",
+    "reading": [
+      { "c": "朝", "yomi": "ちょう", "okuri": "" },
+      { "c": "来", "yomi": "らい", "okuri": "" },
+      { "c": "庭", "yomi": "てい", "okuri": "" },
+      { "c": "樹", "yomi": "じゅ", "okuri": "に" },
+      { "c": "入", "yomi": "い", "okuri": "る" }
+    ],
+    "kakikudashi": "朝来庭樹に入る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "朝方になると庭の木々に吹き込んできた。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-33-4",
+    "reading": [
+      { "c": "孤", "yomi": "こ", "okuri": "" },
+      { "c": "客", "yomi": "かく", "okuri": "" },
+      { "c": "最", "yomi": "もっと", "okuri": "も" },
+      { "c": "先", "yomi": "さき", "okuri": "に" },
+      { "c": "聞", "yomi": "き", "okuri": "く" }
+    ],
+    "kakikudashi": "孤客最も先に聞く",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "旅先で孤独に身を置く私だけが、誰よりも真っ先にその秋風の音を聞くのだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-39-1",
+    "reading": [
+      { "c": "君", "yomi": "きみ", "okuri": "に" },
+      { "c": "勧", "yomi": "すす", "okuri": "む" },
+      { "c": "金", "yomi": "きん", "okuri": "" },
+      { "c": "縷", "yomi": "る", "okuri": "の" },
+      { "c": "衣", "yomi": "ころも", "okuri": "を" },
+      { "c": "惜", "yomi": "おし", "okuri": "むこと" },
+      { "c": "莫", "yomi": "なか", "okuri": "れ" }
+    ],
+    "kakikudashi": "君に勧む金縷の衣を惜しむこと莫かれ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "あなたに勧めます、金糸で織った晴れ着を惜しむことなどなさるな。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-39-2",
+    "reading": [
+      { "c": "君", "yomi": "きみ", "okuri": "に" },
+      { "c": "勧", "yomi": "すす", "okuri": "む" },
+      { "c": "少", "yomi": "しょう", "okuri": "" },
+      { "c": "年", "yomi": "ねん", "okuri": "の" },
+      { "c": "時", "yomi": "とき", "okuri": "を" },
+      { "c": "惜", "yomi": "おし", "okuri": "み" },
+      { "c": "取", "yomi": "と", "okuri": "れ" }
+    ],
+    "kakikudashi": "君に勧む少年の時を惜しみ取れ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "あなたに勧めます、若く光り輝く青春の時期を大事になさい。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-39-3",
+    "reading": [
+      { "c": "花", "yomi": "はな", "okuri": "" },
+      { "c": "開", "yomi": "ひら", "okuri": "かば" },
+      { "c": "折", "yomi": "お", "okuri": "るに" },
+      { "c": "堪", "yomi": "た", "okuri": "へば" },
+      { "c": "直", "yomi": "ただ", "okuri": "ちに" },
+      { "c": "須", "yomi": "まさ", "okuri": "に" },
+      { "c": "折", "yomi": "お", "okuri": "るべし" },
+      { "c": "須", "yomi": "べし", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "花開かば折るに堪へば直ちに須らく折るべし",
+    "placed": [],
+    "reread": ["須"],
+    "kuho": [],
+    "meaning": "花が咲いて折るにふさわしい時期なら、すぐに手折るべきだ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-39-4",
+    "reading": [
+      { "c": "花", "yomi": "はな", "okuri": "" },
+      { "c": "無", "yomi": "な", "okuri": "くして" },
+      { "c": "空", "yomi": "むな", "okuri": "しく" },
+      { "c": "枝", "yomi": "えだ", "okuri": "を" },
+      { "c": "折", "yomi": "お", "okuri": "るを" },
+      { "c": "待", "yomi": "ま", "okuri": "つこと" },
+      { "c": "莫", "yomi": "なか", "okuri": "れ" }
+    ],
+    "kakikudashi": "花無くして空しく枝を折るを待つこと莫かれ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "花が散ってしまい、むなしく枝だけを折るような事態を待ってはならない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-34-1",
+    "reading": [
+      { "c": "春", "yomi": "しゅん", "okuri": "" },
+      { "c": "宵", "yomi": "しょう", "okuri": "" },
+      { "c": "一", "yomi": "いっ", "okuri": "" },
+      { "c": "刻", "yomi": "こく", "okuri": "" },
+      { "c": "値", "yomi": "あた", "okuri": "ひす" },
+      { "c": "千", "yomi": "せん", "okuri": "" },
+      { "c": "金", "yomi": "きん", "okuri": "に" }
+    ],
+    "kakikudashi": "春宵一刻値千金に",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "春の夜のひとときは、千金にも相当する価値がある。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-34-2",
+    "reading": [
+      { "c": "花", "yomi": "はな", "okuri": "に" },
+      { "c": "有", "yomi": "あ", "okuri": "り" },
+      { "c": "清", "yomi": "せい", "okuri": "" },
+      { "c": "香", "yomi": "こう", "okuri": "" },
+      { "c": "月", "yomi": "つき", "okuri": "に" },
+      { "c": "有", "yomi": "あ", "okuri": "り" },
+      { "c": "陰", "yomi": "かげ", "okuri": "" }
+    ],
+    "kakikudashi": "花に清香有り月に陰有り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "花には清らかな香りがあり、月はおぼろげに霞んでいる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-34-3",
+    "reading": [
+      { "c": "歌", "yomi": "か", "okuri": "" },
+      { "c": "管", "yomi": "かん", "okuri": "の" },
+      { "c": "楼", "yomi": "ろう", "okuri": "" },
+      { "c": "台", "yomi": "だい", "okuri": "" },
+      { "c": "声", "yomi": "せい", "okuri": "" },
+      { "c": "細", "yomi": "さい", "okuri": "" },
+      { "c": "細", "yomi": "さい", "okuri": "" }
+    ],
+    "kakikudashi": "歌管の楼台声細細",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "歌や管楽器の演奏が行われていた高楼からも、今はその音が微かに聞こえるばかりである。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-34-4",
+    "reading": [
+      { "c": "鞦", "yomi": "しゅう", "okuri": "" },
+      { "c": "鞦", "yomi": "せん", "okuri": "の" },
+      { "c": "院", "yomi": "いん", "okuri": "" },
+      { "c": "落", "yomi": "らく", "okuri": "" },
+      { "c": "夜", "yomi": "よ", "okuri": "" },
+      { "c": "沉", "yomi": "ちん", "okuri": "" },
+      { "c": "沉", "yomi": "ちん", "okuri": "" }
+    ],
+    "kakikudashi": "鞦鞦の院落夜沈沈",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "ぶらんこのある中庭の夜は静まり返り、深々と更けていく。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-35-1",
+    "reading": [
+      { "c": "横", "yomi": "よこ", "okuri": "に" },
+      { "c": "看", "yomi": "み", "okuri": "れば" },
+      { "c": "嶺", "yomi": "れい", "okuri": "と" },
+      { "c": "成", "yomi": "な", "okuri": "り" },
+      { "c": "側", "yomi": "そび", "okuri": "らに" },
+      { "c": "峰", "yomi": "ほう", "okuri": "と" },
+      { "c": "成", "yomi": "な", "okuri": "る" }
+    ],
+    "kakikudashi": "横に見れば嶺と成り側には峰と成る",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "正面から見れば連なる山嶺に見え、横から見れば聳え立つ峰に見える。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-35-2",
+    "reading": [
+      { "c": "遠", "yomi": "えん", "okuri": "" },
+      { "c": "近", "yomi": "きん", "okuri": "" },
+      { "c": "高", "yomi": "こう", "okuri": "" },
+      { "c": "低", "yomi": "てい", "okuri": "" },
+      { "c": "各", "yomi": "おのおの", "okuri": "" },
+      { "c": "同", "yomi": "おな", "okuri": "じから" },
+      { "c": "不", "yomi": "ず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "遠近高低各不同じからず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "遠くから、近くから、高い所から、低い所から見るにつけ、それぞれ景色が異なっている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-35-3",
+    "reading": [
+      { "c": "廬", "yomi": "ろ", "okuri": "" },
+      { "c": "山", "yomi": "ざん", "okuri": "の" },
+      { "c": "真", "yomi": "しん", "okuri": "" },
+      { "c": "面", "yomi": "めん", "okuri": "" },
+      { "c": "目", "yomi": "ぼく", "okuri": "を" },
+      { "c": "識", "yomi": "し", "okuri": "ら" },
+      { "c": "不", "yomi": "ざるは", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "廬山の真面目を識らざるは",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "廬山の本当の姿が分からないのは。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-35-4",
+    "reading": [
+      { "c": "只", "yomi": "ただ", "okuri": "", "kana": true },
+      { "c": "身", "yomi": "み", "okuri": "の" },
+      { "c": "此", "yomi": "こ", "okuri": "の" },
+      { "c": "山", "yomi": "さん", "okuri": "" },
+      { "c": "中", "yomi": "ちゅう", "okuri": "に" },
+      { "c": "在", "yomi": "あ", "okuri": "るに" },
+      { "c": "縁", "yomi": "よ", "okuri": "ればなり" }
+    ],
+    "kakikudashi": "ただ身の此の山中に在るに縁ればなり",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "自分自身がこの廬山の中に没入してしまっているからにほかならない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-36-3",
+    "reading": [
+      { "c": "未", "yomi": "いま", "okuri": "だ" },
+      { "c": "池", "yomi": "ち", "okuri": "" },
+      { "c": "塘", "yomi": "とう", "okuri": "" },
+      { "c": "春", "yomi": "しゅん", "okuri": "" },
+      { "c": "草", "yomi": "そう", "okuri": "の" },
+      { "c": "夢", "yomi": "ゆめ", "okuri": "を" },
+      { "c": "覚", "yomi": "さ", "okuri": "め" },
+      { "c": "未", "yomi": "ざるに", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "未だ池塘春草の夢を覚めざるに",
+    "placed": [],
+    "reread": ["未"],
+    "kuho": ["hitei"],
+    "meaning": "池のほとりに春の草が萌え出るという春の夢から未だ醒めないうちに。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-36-4",
+    "reading": [
+      { "c": "階", "yomi": "かい", "okuri": "" },
+      { "c": "前", "yomi": "ぜん", "okuri": "の" },
+      { "c": "梧", "yomi": "ご", "okuri": "" },
+      { "c": "葉", "yomi": "よう", "okuri": "" },
+      { "c": "已", "yomi": "すで", "okuri": "に" },
+      { "c": "秋", "yomi": "しゅう", "okuri": "" },
+      { "c": "声", "yomi": "せい", "okuri": "" }
+    ],
+    "kakikudashi": "階前の梧葉已に秋声",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "きざはしの前の青桐の葉は、早くも秋の訪れを告げる風音を立てている。",
+    "confidence": "高",
+    "note": ""
+  }
+]

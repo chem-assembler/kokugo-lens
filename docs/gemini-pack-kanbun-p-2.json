@@ -1,0 +1,497 @@
+[
+  {
+    "id": "P-13-3",
+    "reading": [
+      { "c": "遙", "yomi": "はる", "okuri": "かに" },
+      { "c": "小", "yomi": "しょう", "okuri": "" },
+      { "c": "児", "yomi": "じ", "okuri": "" },
+      { "c": "女", "yomi": "じょ", "okuri": "の" },
+      { "c": "憐", "yomi": "あはれ", "okuri": "むを" }
+    ],
+    "kakikudashi": "遙かに小児女の憐れむを",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "遥か遠くで、幼い子供たちが（親の心境を）まだ解さずかわいそうなのを想う。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-4",
+    "reading": [
+      { "c": "未", "yomi": "いま", "okuri": "だ" },
+      { "c": "長", "yomi": "ちょう", "okuri": "" },
+      { "c": "安", "yomi": "あん", "okuri": "を" },
+      { "c": "憶", "yomi": "おも", "okuri": "ふを" },
+      { "c": "解", "yomi": "げ", "okuri": "せ" },
+      { "c": "未", "yomi": "ず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "未だ長安を憶ふを解せず",
+    "placed": [],
+    "reread": ["未"],
+    "kuho": ["hitei"],
+    "meaning": "長安の父を思い出すことも、まだ理解できないでいる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-5",
+    "reading": [
+      { "c": "香", "yomi": "こう", "okuri": "" },
+      { "c": "霧", "yomi": "む", "okuri": "に" },
+      { "c": "雲", "yomi": "うん", "okuri": "" },
+      { "c": "鬟", "yomi": "かん", "okuri": "" },
+      { "c": "湿", "yomi": "ぬれ", "okuri": "" }
+    ],
+    "kakikudashi": "香霧に雲鬟湿り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "香りのよい夜霧に、妻の美しい髪は湿り。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-6",
+    "reading": [
+      { "c": "清", "yomi": "せい", "okuri": "" },
+      { "c": "輝", "yomi": "き", "okuri": "に" },
+      { "c": "玉", "yomi": "ぎょく", "okuri": "" },
+      { "c": "臂", "yomi": "ひ", "okuri": "" },
+      { "c": "寒", "yomi": "つめた", "okuri": "からん" }
+    ],
+    "kakikudashi": "清輝に玉臂寒からん",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "清らかな月の光に、妻の白い腕も冷たくなっていることだろう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-7",
+    "reading": [
+      { "c": "何", "yomi": "いづ", "okuri": "れの" },
+      { "c": "時", "yomi": "とき", "okuri": "にか" },
+      { "c": "虚", "yomi": "きょ", "okuri": "" },
+      { "c": "幌", "yomi": "こう", "okuri": "に" },
+      { "c": "倚", "yomi": "よ", "okuri": "りて" }
+    ],
+    "kakikudashi": "何れの時にか虚幌に倚りて",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "一体いつになったら薄い帳に寄りかかり。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-13-8",
+    "reading": [
+      { "c": "双", "yomi": "なら", "okuri": "び" },
+      { "c": "照", "yomi": "てら", "okuri": "されて" },
+      { "c": "涙", "yomi": "るい", "okuri": "" },
+      { "c": "痕", "yomi": "こん", "okuri": "" },
+      { "c": "乾", "yomi": "かわ", "okuri": "かん" }
+    ],
+    "kakikudashi": "双び照らされて涙痕乾かん",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "夫婦二人で月に照らされ、涙のあとが乾く日が来るのだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-1",
+    "reading": [
+      { "c": "岱", "yomi": "たい", "okuri": "" },
+      { "c": "宗", "yomi": "そう", "okuri": "" },
+      { "c": "夫", "yomi": "そ", "okuri": "れ" },
+      { "c": "如", "yomi": "いか", "okuri": "が" },
+      { "c": "何", "yomi": "せん", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "岱宗夫れ如何せん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gimon"],
+    "meaning": "泰山とは、一体どのような素晴らしい山なのだろうか。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-2",
+    "reading": [
+      { "c": "斉", "yomi": "せい", "okuri": "" },
+      { "c": "魯", "yomi": "ろ", "okuri": "" },
+      { "c": "青", "yomi": "せい", "okuri": "" },
+      { "c": "未", "yomi": "いま", "okuri": "だ" },
+      { "c": "了", "yomi": "をは", "okuri": "らず" },
+      { "c": "未", "yomi": "ず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "斉魯青未だ了はらず",
+    "placed": [],
+    "reread": ["未"],
+    "kuho": ["hitei"],
+    "meaning": "斉と魯の国々にわたって青々とした山肌がどこまでも尽きない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-3",
+    "reading": [
+      { "c": "造", "yomi": "ぞう", "okuri": "" },
+      { "c": "化", "yomi": "か", "okuri": "" },
+      { "c": "神", "yomi": "しん", "okuri": "" },
+      { "c": "秀", "yomi": "しゅう", "okuri": "を" },
+      { "c": "鍾", "yomi": "あつ", "okuri": "め" }
+    ],
+    "kakikudashi": "造化神秀を鍾め",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "大自然は神々しく秀でた美しさをこの山に集め。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-4",
+    "reading": [
+      { "c": "陰", "yomi": "いん", "okuri": "" },
+      { "c": "陽", "yomi": "よう", "okuri": "" },
+      { "c": "昏", "yomi": "こん", "okuri": "" },
+      { "c": "暁", "yomi": "ぎょう", "okuri": "を" },
+      { "c": "割", "yomi": "さ", "okuri": "く" }
+    ],
+    "kakikudashi": "陰陽昏暁を割く",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "山の日向と日陰は、夕暮れと明け方の光と影をはっきりと分かち分けている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-5",
+    "reading": [
+      { "c": "胸", "yomi": "むね", "okuri": "を" },
+      { "c": "盪", "yomi": "うご", "okuri": "かして" },
+      { "c": "曾", "yomi": "そう", "okuri": "" },
+      { "c": "雲", "yomi": "うん", "okuri": "" },
+      { "c": "生", "yomi": "しょう", "okuri": "じ" }
+    ],
+    "kakikudashi": "胸を盪かして曾雲生じ",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "湧き上がる雲を見て胸は高鳴り。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-6",
+    "reading": [
+      { "c": "眥", "yomi": "まなじり", "okuri": "を" },
+      { "c": "決", "yomi": "けっ", "okuri": "して" },
+      { "c": "帰", "yomi": "き", "okuri": "" },
+      { "c": "鳥", "yomi": "ちょう", "okuri": "の" },
+      { "c": "入", "yomi": "い", "okuri": "るを" }
+    ],
+    "kakikudashi": "眥を決して帰鳥の入るを",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "目を見開いて、巣に帰る鳥が山に入っていくのを見る。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-7",
+    "reading": [
+      { "c": "会", "yomi": "かなら", "okuri": "ず" },
+      { "c": "当", "yomi": "まさ", "okuri": "に" },
+      { "c": "絶", "yomi": "ぜっ", "okuri": "" },
+      { "c": "頂", "yomi": "ちょう", "okuri": "を" },
+      { "c": "凌", "yomi": "しの", "okuri": "ぐべし" },
+      { "c": "当", "yomi": "べし", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "会ず当に絶頂を凌ぐべし",
+    "placed": [],
+    "reread": ["当"],
+    "kuho": [],
+    "meaning": "きっといつか頂上に登り詰めよう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-38-8",
+    "reading": [
+      { "c": "一", "yomi": "いち", "okuri": "" },
+      { "c": "覧", "yomi": "らん", "okuri": "" },
+      { "c": "衆", "yomi": "しゅう", "okuri": "" },
+      { "c": "山", "yomi": "ざん", "okuri": "の" },
+      { "c": "小", "yomi": "ちい", "okuri": "さきを" }
+    ],
+    "kakikudashi": "一覧衆山の小さきを",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "群がる山々がいかに小さいかを一望に収めよう。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-16-1",
+    "reading": [
+      { "c": "葡", "yomi": "ぶ", "okuri": "" },
+      { "c": "萄", "yomi": "とう", "okuri": "の" },
+      { "c": "美", "yomi": "び", "okuri": "" },
+      { "c": "酒", "yomi": "しゅ", "okuri": "" },
+      { "c": "夜", "yomi": "や", "okuri": "" },
+      { "c": "光", "yomi": "こう", "okuri": "の" },
+      { "c": "杯", "yomi": "はい", "okuri": "" }
+    ],
+    "kakikudashi": "葡萄の美酒夜光の杯",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "葡萄の極上の酒と、夜光る玉の杯。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-16-2",
+    "reading": [
+      { "c": "飲", "yomi": "の", "okuri": "まんと" },
+      { "c": "欲", "yomi": "ほっ", "okuri": "すれば" },
+      { "c": "琵", "yomi": "び", "okuri": "" },
+      { "c": "琶", "yomi": "わ", "okuri": "" },
+      { "c": "馬", "yomi": "ば", "okuri": "" },
+      { "c": "上", "yomi": "じょう", "okuri": "に" },
+      { "c": "催", "yomi": "うなが", "okuri": "す" }
+    ],
+    "kakikudashi": "飲まんと欲すれば琵琶馬上に催す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "飲もうとすると、馬の上で掻き鳴らす琵琶の音が陣立てを急き立てる。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-16-3",
+    "reading": [
+      { "c": "酔", "yomi": "よ", "okuri": "ひて" },
+      { "c": "沙", "yomi": "さ", "okuri": "" },
+      { "c": "場", "yomi": "じょう", "okuri": "に" },
+      { "c": "臥", "yomi": "が", "okuri": "すとも" },
+      { "c": "君", "yomi": "きみ", "okuri": "" },
+      { "c": "笑", "yomi": "わら", "okuri": "ふこと" },
+      { "c": "莫", "yomi": "なか", "okuri": "れ" }
+    ],
+    "kakikudashi": "酔ひて沙場に臥すとも君笑ふこと莫かれ",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "酔いつぶれて戦場に倒れ伏すことがあっても、どうか笑わないでくれ。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-16-4",
+    "reading": [
+      { "c": "古", "yomi": "こ", "okuri": "" },
+      { "c": "来", "yomi": "らい", "okuri": "" },
+      { "c": "征", "yomi": "せい", "okuri": "" },
+      { "c": "戦", "yomi": "せん", "okuri": "" },
+      { "c": "幾", "yomi": "いく", "okuri": "" },
+      { "c": "人", "yomi": "にん", "okuri": "か" },
+      { "c": "回", "yomi": "かえ", "okuri": "る" }
+    ],
+    "kakikudashi": "古来征戦幾人か回る",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hango"],
+    "meaning": "古来、戦争に行って生きて帰ってきた者が一体何人いただろうか（いや、ほとんどいない）。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-19-1",
+    "reading": [
+      { "c": "渭", "yomi": "い", "okuri": "" },
+      { "c": "城", "yomi": "じょう", "okuri": "の" },
+      { "c": "朝", "yomi": "ちょう", "okuri": "" },
+      { "c": "雨", "yomi": "う", "okuri": "" },
+      { "c": "軽", "yomi": "けい", "okuri": "" },
+      { "c": "塵", "yomi": "じん", "okuri": "を" },
+      { "c": "浥", "yomi": "うるお", "okuri": "し" }
+    ],
+    "kakikudashi": "渭城の朝雨軽塵を浥し",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "渭城の朝の雨が舞い上がる舞塵を潤し。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-19-2",
+    "reading": [
+      { "c": "客", "yomi": "かく", "okuri": "" },
+      { "c": "舎", "yomi": "しゃ", "okuri": "" },
+      { "c": "青", "yomi": "せい", "okuri": "" },
+      { "c": "青", "yomi": "せい", "okuri": "" },
+      { "c": "柳", "yomi": "りゅう", "okuri": "" },
+      { "c": "色", "yomi": "しょく", "okuri": "" },
+      { "c": "新", "yomi": "あらた", "okuri": "なり" }
+    ],
+    "kakikudashi": "客舎青青柳色新なり",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "宿屋のまわりは青々として、青柳の色も生き生きと新鮮に見える。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-19-3",
+    "reading": [
+      { "c": "君", "yomi": "きみ", "okuri": "に" },
+      { "c": "勧", "yomi": "すす", "okuri": "む" },
+      { "c": "更", "yomi": "さら", "okuri": "に" },
+      { "c": "尽", "yomi": "つく", "okuri": "せ" },
+      { "c": "一", "yomi": "いっ", "okuri": "" },
+      { "c": "杯", "yomi": "ぱい", "okuri": "の" },
+      { "c": "酒", "yomi": "さけ", "okuri": "" }
+    ],
+    "kakikudashi": "君に勧む更に尽くせ一杯の酒",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "さああなたに勧めます、もう一杯の酒を飲み干してください。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-19-4",
+    "reading": [
+      { "c": "西", "yomi": "にし", "okuri": "" },
+      { "c": "陽", "yomi": "よう", "okuri": "" },
+      { "c": "関", "yomi": "かん", "okuri": "を" },
+      { "c": "出", "yomi": "いづ", "okuri": "れば" },
+      { "c": "故", "yomi": "こ", "okuri": "" },
+      { "c": "人", "yomi": "じん", "okuri": "" },
+      { "c": "無", "yomi": "な", "okuri": "からん" }
+    ],
+    "kakikudashi": "西陽関を出づれば故人無からん",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "西の方、陽関を出てしまえば、もう旧友は誰もいないのだから。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-14-1",
+    "reading": [
+      { "c": "空", "yomi": "くう", "okuri": "" },
+      { "c": "山", "yomi": "ざん", "okuri": "" },
+      { "c": "人", "yomi": "ひと", "okuri": "を" },
+      { "c": "見", "yomi": "み", "okuri": "" },
+      { "c": "不", "yomi": "ず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "空山人を見ず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "静まり返った山の中には、人の姿が見えない。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-14-3",
+    "reading": [
+      { "c": "返", "yomi": "へん", "okuri": "" },
+      { "c": "景", "yomi": "けい", "okuri": "" },
+      { "c": "深", "yomi": "しん", "okuri": "" },
+      { "c": "林", "yomi": "りん", "okuri": "に" },
+      { "c": "入", "yomi": "い", "okuri": "り" }
+    ],
+    "kakikudashi": "返景深林に入り",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "夕日の反射光が深い林の中に差し込み。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-14-4",
+    "reading": [
+      { "c": "復", "yomi": "ま", "okuri": "た" },
+      { "c": "青", "yomi": "せい", "okuri": "" },
+      { "c": "苔", "yomi": "たい", "okuri": "の" },
+      { "c": "上", "yomi": "うえ", "okuri": "を" },
+      { "c": "照", "yomi": "てら", "okuri": "す" }
+    ],
+    "kakikudashi": "復た青苔の上を照らす",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "再び青苔の上を照らしている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-15-1",
+    "reading": [
+      { "c": "独", "yomi": "ひと", "okuri": "り" },
+      { "c": "幽", "yomi": "ゆう", "okuri": "" },
+      { "c": "篁", "yomi": "こう", "okuri": "の" },
+      { "c": "裏", "yomi": "うち", "okuri": "に" },
+      { "c": "坐", "yomi": "ざ", "okuri": "す" }
+    ],
+    "kakikudashi": "独り幽篁の裏に坐す",
+    "placed": [],
+    "reread": [],
+    "kuho": ["gentei"],
+    "meaning": "ただ一人、深い竹林の奥に腰を下ろしている。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-15-2",
+    "reading": [
+      { "c": "琴", "yomi": "こと", "okuri": "を" },
+      { "c": "弾", "yomi": "だん", "okuri": "じて" },
+      { "c": "復", "yomi": "ま", "okuri": "た" },
+      { "c": "長", "yomi": "ちょう", "okuri": "" },
+      { "c": "嘯", "yomi": "しょう", "okuri": "す" }
+    ],
+    "kakikudashi": "琴を弾じて復た長嘯す",
+    "placed": [],
+    "reread": [],
+    "kuho": [],
+    "meaning": "琴を弾き、また声を長く伸ばして歌う。",
+    "confidence": "高",
+    "note": ""
+  },
+  {
+    "id": "P-15-3",
+    "reading": [
+      { "c": "深", "yomi": "しん", "okuri": "" },
+      { "c": "林", "yomi": "りん", "okuri": "" },
+      { "c": "人", "yomi": "ひと", "okuri": "" },
+      { "c": "知", "yomi": "し", "okuri": "" },
+      { "c": "不", "yomi": "らず", "okuri": "", "kana": true }
+    ],
+    "kakikudashi": "深林人知らず",
+    "placed": [],
+    "reread": [],
+    "kuho": ["hitei"],
+    "meaning": "深い竹林の中にいる私を、誰も知らない。",
+    "confidence": "高",
+    "note": ""
+  }
+]

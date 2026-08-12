@@ -208,8 +208,15 @@ const HEAD = `# Gemini 依頼パック: 漢文の白文に「標準的な訓読�
 
 ## 出力の形
 
-**JSON配列だけ**を1つのコードブロックで返すこと。前後に説明文は要らない。
-課題表の全行を、**表の順に**、もれなく入れること。
+**JSON配列だけ**。課題表の全行を、**表の順に**、もれなく入れること。
+
+ファイルを書けるなら、この依頼元のリポジトリ（kokugo-lens）の
+**\`scratch/gemini-{{FILE}}.json\`** に書き出すこと。\`scratch/\` は追跡外なので置いて構わない。
+**\`docs/\` には置かないこと**（追跡下なので生の出力がコミットに混ざる）。
+書けない場合はコードブロックひとつで返す（前後の説明文は要らない）。
+
+返り点の組み立ては依頼元でやるので、**tokens・order・mark を作る必要はない**。
+作っても使わないので、\`reading\` を正しく作ることに手をかけてほしい。
 
 ---
 
@@ -231,9 +238,11 @@ for (let n = 0; n < total; n++){
 > 「台帳の手がかり」欄は**当方の下読みで、間違っていることがある**。
 > 実際に前後の文脈に当たって確かめること。手がかりと違う結論になったら \`note\` に書く。
 `;
-  const md = HEAD.replace(/\{\{N\}\}/g, String(n + 1)).replace(/\{\{T\}\}/g, String(total))
+  const base = PREFIX.toLowerCase() + '-' + (n + 1);
+  const md = HEAD.replace(/\{\{FILE\}\}/g, base)
+                 .replace(/\{\{N\}\}/g, String(n + 1)).replace(/\{\{T\}\}/g, String(total))
                  .replace(/\{\{CNT\}\}/g, String(part.length)) + body;
-  const f = path.join(outDir, 'gemini-pack-kanbun-' + PREFIX.toLowerCase() + '-' + (n + 1) + '.md');
+  const f = path.join(outDir, 'gemini-pack-kanbun-' + base + '.md');
   fs.writeFileSync(f, md, 'utf8');
   made.push(path.relative(ROOT, f) + '（' + part.length + '行）');
 }
