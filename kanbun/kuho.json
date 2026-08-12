@@ -265,6 +265,111 @@
       ]
     },
     {
+      "id": "hitei-arazu",
+      "category": "hitei",
+      "label": "断定の否定",
+      "name": "断定の否定（非・匪）",
+      "pattern": "非 A",
+      "markers": [
+        "非",
+        "匪"
+      ],
+      "kakikudashi": "Aニあらズ",
+      "meaning": "Aではない。",
+      "note": "「AはBだ」という断定そのものを打ち消す形。動作を打ち消す「不」、存在を打ち消す「無」とは打ち消す対象が違い、下には名詞や体言止めの句が来る。「非」は読まずに「〜にあらず」と送り仮名で書き下し、上の語には「に」を付けるのが目印。",
+      "blank": "あらズ",
+      "blankNg": [
+        "なシ",
+        "ず",
+        "なカレ"
+      ],
+      "confuse": [
+        "hitei-fu",
+        "hitei-nashi",
+        "hitei-nijuu"
+      ],
+      "yomi": [
+        "非ざ",
+        "非ず",
+        "あらず"
+      ],
+      "examples": [
+        "mq-mukei-izukunzo",
+        "mq-chihoku-senja",
+        "mq-chihoku-uramu"
+      ]
+    },
+    {
+      "id": "hitei-atawazu",
+      "category": "hitei",
+      "label": "不可能",
+      "name": "不可能（不能・不得）",
+      "pattern": "不能 A",
+      "markers": [
+        "不能",
+        "不得",
+        "弗能",
+        "不可得"
+      ],
+      "kakikudashi": "Aスルコトあたハず",
+      "meaning": "Aすることができない。",
+      "note": "「しない」ではなく「できない」を言う打ち消し。単純否定は行為そのものを打ち消すが、この形は能力や条件が足りないことを打ち消す。「能」は返って読み、下の動詞は「〜すること能はず」と連体形＋「こと」で受ける。上に「不」が重なる「不能不」は二重否定になり、意味が逆の強い肯定になるので字数を数える。",
+      "blank": "あたハず",
+      "blankNg": [
+        "ず",
+        "なシ",
+        "ベカラず"
+      ],
+      "confuse": [
+        "hitei-fu",
+        "hitei-kinshi",
+        "hitei-nijuu"
+      ],
+      "yomi": [
+        "能はず",
+        "能はざ",
+        "得ず"
+      ],
+      "examples": [
+        "mq-etsubi-kishin",
+        "mq-chihoku-senja"
+      ]
+    },
+    {
+      "id": "hitei-hizunba",
+      "category": "hitei",
+      "label": "否定条件",
+      "name": "否定条件（非A不B）",
+      "pattern": "非 A 不 B",
+      "markers": [
+        "非",
+        "匪"
+      ],
+      "kakikudashi": "AニあらズンバBセず",
+      "meaning": "Aでなければ、Bしない（BするのはAだけだ）。",
+      "note": "打ち消しを二つ使うが、「非」と「不」が離れて別々の述語にかかる点が二重否定と違う。前半が条件、後半が結果になり、全体としては「BするのはAに限る」という強い限定に近づく。「非不A」のように打ち消しが隣り合って一つの述語にかかれば二重否定、間に条件の句が挟まればこの形と見分ける。",
+      "blank": "あらズンバ",
+      "blankNg": [
+        "なクンバ",
+        "トいへどモ",
+        "あらズ"
+      ],
+      "confuse": [
+        "hitei-arazu",
+        "hitei-nijuu",
+        "katei-moshi"
+      ],
+      "yomi": [
+        "非ずんば",
+        "非ざれば",
+        "あらずんば",
+        "あらざれば"
+      ],
+      "examples": [
+        "mq-chihoku-senja"
+      ]
+    },
+    {
       "id": "shieki-shimu",
       "category": "shieki",
       "label": "使役",
@@ -575,7 +680,8 @@
       ],
       "confuse": [
         "hango-ani",
-        "gimon-nanzo"
+        "gimon-nanzo",
+        "hango-nya"
       ],
       "examples": [
         "gimon-kocho",
@@ -692,6 +798,43 @@
       ],
       "yomi": [
         "何ぞ"
+      ]
+    },
+    {
+      "id": "hango-nya",
+      "category": "hango",
+      "label": "文末の反語",
+      "name": "文末の反語（〜ンや・〜ずや）",
+      "pattern": "A 乎",
+      "markers": [
+        "乎",
+        "哉",
+        "邪",
+        "耶",
+        "也"
+      ],
+      "kakikudashi": "Aセンや",
+      "meaning": "Aするだろうか、いや、Aしない。",
+      "note": "「豈」「何ゾ」のような疑問詞がなくても、文末の助字と読み方だけで反語になる形。白文の字づらは疑問・詠嘆とまったく同じで、決め手は書き下しの終わり方にある。「〜んや（〜ずや）」なら反語、「〜か」なら疑問、「〜かな」なら詠嘆。ただし上に「豈不」「不亦」が付く「〜ずや」は詠嘆に寄るので、文頭も合わせて見る。",
+      "blank": "ンや",
+      "blankNg": [
+        "カ",
+        "かな",
+        "ノみ"
+      ],
+      "confuse": [
+        "gimon-ka",
+        "eitan-kana",
+        "hango-ani"
+      ],
+      "yomi": [
+        "んや",
+        "ずや"
+      ],
+      "examples": [
+        "mq-riennso-tori",
+        "mq-gusho-warai",
+        "mq-gozasso-tareka"
       ]
     },
     {
@@ -1079,6 +1222,38 @@
       ]
     },
     {
+      "id": "gentei-sugizu",
+      "category": "gentei",
+      "label": "限定",
+      "name": "限定（不過 〜ニすギず）",
+      "pattern": "不過 A",
+      "markers": [
+        "不過",
+        "不外"
+      ],
+      "kakikudashi": "Aスルニすギず",
+      "meaning": "Aするだけのことだ（Aに過ぎない）。",
+      "note": "打ち消しの形で範囲の上限を示す限定。「それ以上ではない」と言うので、値打ちを低く見積もる言い方になりやすく、文末の「のみ」と重ねて使われることもある。同じ「過」でも上に「莫」「無」が来る「莫過」は「〜に及ぶものはない」＝最上で意味が正反対になるため、上に付く打ち消しの字で見分ける。",
+      "blank": "すギず",
+      "blankNg": [
+        "すグ",
+        "ノみナラず",
+        "しカず"
+      ],
+      "confuse": [
+        "gentei-nomi",
+        "gentei-tada",
+        "hikaku-shikuhanashi"
+      ],
+      "yomi": [
+        "過ぎず",
+        "過ぎざ"
+      ],
+      "examples": [
+        "mq-gozasso-madoi"
+      ]
+    },
+    {
       "id": "yokuyo-iwanya",
       "category": "yokuyo",
       "label": "抑揚",
@@ -1254,7 +1429,8 @@
       ],
       "confuse": [
         "eitan-mata",
-        "hango-ani"
+        "hango-ani",
+        "hango-nya"
       ],
       "examples": [
         "eitan-yukumono",
