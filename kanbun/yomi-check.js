@@ -50,6 +50,10 @@ const problems = JSON.parse(raw.toString('utf8')).problems || [];
 const ALLOW = {
   'mq-zaien-senyo:皮': '送り仮名の「は」は助詞。' +
     '「皮（かは）は」で正しい',
+  'touka-tani:渓': '送り仮名の「に」は助詞。' +
+    '「渓（たに）に」で正しい',
+  'touka-gyo:魚': '送り仮名の「を」は助詞。' +
+    '「魚（うを）を」で正しい',
   'moshi-engi:魚': '送り仮名の「を」は助詞。' +
     '「魚（うを）を」で正しい',
   'moshi-kemono:獣': '送り仮名の「の」は助詞。' +

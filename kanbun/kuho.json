@@ -60,7 +60,10 @@
         "gakuyo-yorokobazu",
         "kenro-utazu",
         "bakusetsu-shosezu",
-        "bakusetsu-kau"
+        "bakusetsu-kau",
+        "bakusetsu-shirazu",
+        "shisetsu-tokezu",
+        "touka-iunitarazu"
       ],
       "blank": "ず",
       "blankNg": [
@@ -139,7 +142,10 @@
         "hakui-tendou",
         "kenro-roba",
         "kenro-narau",
-        "bakusetsu-uma"
+        "bakusetsu-uma",
+        "shisetsu-koreyue",
+        "shisetsu-seijin",
+        "touka-gishin"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -275,7 +281,8 @@
         "shisetsu-fuhitsu",
         "mq-gusho-boko",
         "funkei-ryouko",
-        "bakusetsu-tsune"
+        "bakusetsu-tsune",
+        "shisetsu-shikazu"
       ],
       "blank": "ニハ",
       "blankNg": [
@@ -455,7 +462,8 @@
         "rongo-tami",
         "mq-ryosai-tsukawasu",
         "mq-gozasso-tanetsugi",
-        "kasei-shikou"
+        "kasei-shikou",
+        "touka-tsukawasu"
       ],
       "blank": "しむ",
       "blankNg": [
@@ -972,7 +980,8 @@
         "rongo-konomu",
         "rongo-tanoshimu",
         "moshi-chinori",
-        "junshi-shuyu"
+        "junshi-shuyu",
+        "shisetsu-shikazu"
       ],
       "blank": "しカず",
       "blankNg": [
