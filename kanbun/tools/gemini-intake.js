@@ -104,10 +104,68 @@ function deriveMarks(tokens, order){
   return marks;
 }
 
+// ---- 送り仮名を書き下しから割り直す ----------------------------------------
+// いちばん多い落ち方は「申告した書き下しは定訓として正しいのに、それを字ごとに割った
+// reading の送り仮名がずれている」（1文字落とす・重ねる・隣の字に付ける）。
+// 割り方は書き下しから一意に決まる（漢字が錨になる）ので、機械で割り直せる。
+//   ・kana:false の字 … 書き下しに「その漢字」が現れ、続くかなが送り仮名
+//   ・kana:true の字 … 次の漢字の手前までのかながその字の読み
+// **読み仮名（yomi）は書き下しに出ないので直せない。** ここで直るのは送り仮名だけで、
+// 読みの誤りは yomi-check.js に任せる。
+// 順序・かなで書くかどうかの判断が違っていれば割り直しは失敗する（＝黙って通らない）。
+// **kana フラグも申告を信じない。**「その字が書き下しに漢字で出ているか」で決める
+// （勿かれ／なかれ・与に／ともに・耳／のみ のように、かなで書いておきながら kana:false を
+// 立てている行が多い）。
+//
+// **かなで書く字の送り仮名は奪わない。** 「説かず」の「か」が動詞の未然形で「ず」が「不」だ、
+// という切れ目は書き下しには出ていない＝機械には決められない。だからかなで書く字は
+// 申告の読みを**尻から**当て、残りを漢字の字の送り仮名にする。
+// 当たらなければ割り直しをあきらめる（＝人が見る行として落とす）。
+const KANJI = /[㐀-鿿]/;
+const allKana = s => !KANJI.test(s);
+function resplit(reading, kd){
+  // 1) 書き下しに漢字で出る字を、左から貪欲に決める
+  let p = 0;
+  const at = reading.map(r => {
+    const e = kd.indexOf(r.c, p);
+    if (e >= 0 && allKana(kd.slice(p, e))){ p = e + 1; return e; }
+    return -1;
+  });
+  // 2) 漢字で区切り、あいだのかなを配る
+  const text = new Array(reading.length).fill(null);
+  let cur = 0, i = 0;
+  while (i < reading.length){
+    if (at[i] >= 0 && cur !== at[i]) return null;   // 漢字の直前にかなが余る＝割り切れない
+    const start = at[i] >= 0 ? at[i] + 1 : cur;
+    let j = i + 1;
+    while (j < reading.length && at[j] < 0) j++;
+    const end = j < reading.length ? at[j] : kd.length;
+    let seg = kd.slice(start, end);
+    if (!allKana(seg)) return null;
+    const tail = [];
+    for (let k = j - 1; k > i; k--){                // 後ろのかな字は申告どおり尻から当てる
+      const t = (reading[k].yomi || '') + (reading[k].okuri || '');
+      if (!t || !seg.endsWith(t)) return null;
+      seg = seg.slice(0, seg.length - t.length);
+      tail.unshift(t);
+    }
+    text[i] = seg;
+    tail.forEach((t, n) => { text[i + 1 + n] = t; });
+    cur = end; i = j;
+  }
+  if (cur !== kd.length || text.some(t => t === null)) return null;
+  return reading.map((r, i) => {
+    if (at[i] >= 0) return Object.assign({}, r, { kana: false, okuri: text[i] });
+    // かなで書く字は読みと送りの境目が書き下しに出ない。申告の読みが頭にあればそれを残す
+    const keep = r.yomi && text[i].indexOf(r.yomi) === 0 ? r.yomi : '';
+    return Object.assign({}, r, { kana: true, yomi: keep, okuri: text[i].slice(keep.length) });
+  });
+}
+
 // ---- 取り込み ---------------------------------------------------------------
 const list = JSON.parse(fs.readFileSync(inFile, 'utf8'));
 const existing = new Set(texts.problems.map(p => p.tokens.map(t => t.c).join('')));
-const out = [], bad = [], soft = [];
+const out = [], bad = [], soft = [], mended = [];
 
 for (const e of (Array.isArray(list) ? list : [list])){
   const id = (e && e.id) || '(id なし)';
@@ -123,6 +181,17 @@ for (const e of (Array.isArray(list) ? list : [list])){
   const placed = new Set((Array.isArray(e.placed) ? e.placed : []).map(norm));
   const reread = new Set((Array.isArray(e.reread) ? e.reread : []).map(norm));
   (Array.isArray(e.reading) ? e.reading : []).forEach(r => { if (r && r.c) r.c = norm(r.c); });
+
+  // 送り仮名の割り方は書き下しから決まるので、割り直せるなら割り直す（上の resplit を参照）。
+  // 正しく割れている行に当てても同じ結果になるので、常に通してよい
+  if (e.kakikudashi){
+    const fixed = resplit(e.reading, norm(e.kakikudashi));
+    if (fixed){
+      const n = fixed.filter((r, i) => r.okuri !== (e.reading[i].okuri || '')).length;
+      if (n) mended.push(id + ': 送り仮名を書き下しから割り直した（' + n + '字）');
+      e.reading = fixed;
+    }
+  }
   for (const c of placed) if (!haku.includes(c)) NG('置き字「' + c + '」が白文「' + haku + '」に無い');
   for (const c of reread){
     if (!haku.includes(c)) NG('再読文字「' + c + '」が白文に無い');
@@ -139,7 +208,14 @@ for (const e of (Array.isArray(list) ? list : [list])){
     let at = -1;
     if (reread.has(r.c) && seenRe.has(r.c)) at = seenRe.get(r.c);           // 再読の2回目は同じ字
     else at = chars.findIndex((c, i) => c === r.c && !used.has(i) && !placed.has(c));
-    if (at < 0){ NG('reading の「' + r.c + '」が白文「' + haku + '」に見当たらない（置き字か、余分な字）'); broke = true; break; }
+    if (at < 0){
+      // 白文の余った字を並べる。**字体の対応表の抜けはここで炙り出す**
+      // （返ってきた「氷」に対して白文が「冰」のまま、など。実際に6字見つかった）
+      const left = chars.filter((c, i) => !used.has(i) && !placed.has(c)).join('');
+      NG('reading の「' + r.c + '」が白文「' + haku + '」に見当たらない。' +
+         'まだ読んでいない字は「' + left + '」（字体の対応表の抜けでないか確かめる）');
+      broke = true; break;
+    }
     used.add(at); order.push(at);
     if (reread.has(r.c)) seenRe.set(r.c, at);
     const t = tokens[at];
@@ -203,6 +279,11 @@ out.concat(soft).forEach(p => p.tokens.forEach(t => {
   t.okuri = kata(t.okuri || ''); if (!t.okuri) delete t.okuri;
 }));
 
+if (mended.length){
+  console.log('-- 送り仮名を割り直した行（' + mended.length + '件）--');
+  mended.forEach(m => console.log('  ' + m));
+  console.log('');
+}
 console.log(path.basename(inFile) + ': ' + (Array.isArray(list) ? list.length : 1) + ' 件 → 通過 ' + out.length +
             ' / 保留 ' + soft.length + ' / 不備 ' + bad.length);
 out.forEach(p => console.log('  ' + p._catalog.padEnd(8) + p.tokens.map(t => t.c).join('') + ' → ' + p.kakikudashi));
