@@ -27,13 +27,24 @@ const K = require(path.join(ROOT, 'kanbun', 'kanbun.js'));
 const { norm, catalogText: cat } = require('./kyujitai.js');
 const texts = JSON.parse(fs.readFileSync(path.join(ROOT, 'kanbun', 'texts.json'), 'utf8'));
 
-const [inFile, PREFIX0, outFile] = process.argv.slice(2);
+const args = process.argv.slice(2).filter(a => a !== '--all');
 const withAll = process.argv.indexOf('--all') >= 0;
-if (!inFile || !PREFIX0 || !outFile){
-  console.error('使い方: node kanbun/tools/gemini-intake.js <Geminiの出力.json> <接頭> <出力先.json> [--all]');
+const inFile = args[0];
+if (!inFile){
+  console.error('使い方: node kanbun/tools/gemini-intake.js <Geminiの出力.json> [接頭] [出力先.json] [--all]');
+  console.error('  接頭と出力先は省略できる（ファイル名 gemini-s-2.json から S と scratch/lane-S-2.json を導く）');
   process.exit(2);
 }
-const PREFIX = PREFIX0.toUpperCase();
+// ファイル名から束を読み取る（gemini-s-2.json / s2.json / lane-b-1.json などを許す）
+const stem = path.basename(inFile).replace(/\.json$/i, '');
+const guess = stem.match(/(?:^|[-_])([KSHPB])[-_]?(\d+)?$/i) || stem.match(/^([kshpb])/i);
+const PREFIX = (args[1] || (guess && guess[1]) || '').toUpperCase();
+const outFile = args[2] || path.join(path.dirname(inFile),
+  'lane-' + PREFIX + (guess && guess[2] ? '-' + guess[2] : '') + '.json');
+if (!/^[KSHPB]$/.test(PREFIX)){
+  console.error('接頭（K/S/H/P/B）がファイル名から読み取れませんでした。2番目の引数で渡してください');
+  process.exit(2);
+}
 const CATS = ['hitei','shieki','ukemi','gimon','hango','hikaku','sentaku','katei','gentei','yokuyo','eitan'];
 const REREAD9 = '未将且当応宜須猶由盍';
 
