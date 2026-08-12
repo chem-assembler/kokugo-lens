@@ -32,7 +32,13 @@
         "rongo-omoite",
         "shungyo-1",
         "rongo-sokutatsu",
-        "jocho"
+        "jocho",
+        "mujun-kotafuru",
+        "kobyu-shirazu",
+        "chihi-hyakusen",
+        "kokushu-fune",
+        "suiko-oboezu",
+        "torou-ushiro"
       ],
       "blank": "ず",
       "blankNg": [
@@ -60,7 +66,9 @@
       "examples": [
         "rongo-misei",
         "gaishi-imada",
-        "mq-ryosai-imada"
+        "mq-ryosai-imada",
+        "chosan-imada",
+        "suiko-imada"
       ],
       "blank": "ず",
       "blankNg": [
@@ -94,7 +102,10 @@
         "mujun-2",
         "mq-gusho-sawagu",
         "mq-zaien-sasori",
-        "mq-gusho-mou"
+        "mq-gusho-mou",
+        "saio-nigeru",
+        "gukou-shishison",
+        "boufu-nizu"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -135,7 +146,8 @@
         "rongo-tomotosuru",
         "keirin-1",
         "mq-gozasso-tanetsugi",
-        "sekiheki-iyashikumo"
+        "sekiheki-iyashikumo",
+        "kobyu-nakare"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -335,7 +347,8 @@
       ],
       "examples": [
         "mq-etsubi-kishin",
-        "mq-chihoku-senja"
+        "mq-chihoku-senja",
+        "mujun-kotafuru"
       ]
     },
     {
@@ -393,7 +406,8 @@
         "shieki-heki",
         "rongo-tami",
         "mq-ryosai-tsukawasu",
-        "mq-gozasso-tanetsugi"
+        "mq-gozasso-tanetsugi",
+        "kasei-shikou"
       ],
       "blank": "しむ",
       "blankNg": [
@@ -649,7 +663,8 @@
         "gimon-ikan",
         "shiki-ikanisen",
         "shiki-sui",
-        "mq-gozasso-tada"
+        "mq-gozasso-tada",
+        "mujun-ikan"
       ],
       "blank": "いかんセン",
       "blankNg": [
@@ -698,7 +713,10 @@
         "gimon-kocho",
         "rongo-hakarite",
         "mq-etsubi-yokai",
-        "mq-riennso-oshimu"
+        "mq-riennso-oshimu",
+        "kiyu-masani",
+        "torou-nanji",
+        "sokou-taruka"
       ],
       "yomi": [
         "か"
@@ -759,7 +777,8 @@
         "rongo-izukunzo",
         "hango-gyuto",
         "mq-mukei-izukunzo",
-        "mq-ryosai-ubau"
+        "mq-ryosai-ubau",
+        "dasoku-izukunzo"
       ],
       "blank": "セン",
       "blankNg": [
@@ -796,7 +815,8 @@
         "mq-ryosai-koshu",
         "gaishi-omomuku",
         "mq-etsubi-sukuu",
-        "mq-gozasso-kokushi"
+        "mq-gozasso-kokushi",
+        "gukou-shikamo"
       ],
       "blank": "センや",
       "blankNg": [
@@ -846,7 +866,10 @@
         "mq-riennso-tori",
         "mq-gusho-warai",
         "mq-gozasso-tareka",
-        "sekiheki-moutoku"
+        "sekiheki-moutoku",
+        "kobyu-hashiru",
+        "saio-nanzo",
+        "kokushu-madoi"
       ]
     },
     {
@@ -928,7 +951,8 @@
       "note": "置き字の下に比べる相手が来る形。上に形容詞・形容動詞が来ると比較になりやすい。同じ字が受身にも場所にもなるので、上下の語の品詞で見分ける。",
       "examples": [
         "sanko-momiji",
-        "shisetsu-fuhitsu"
+        "shisetsu-fuhitsu",
+        "kasei-takeshi"
       ],
       "blank": "ヨリモ",
       "blankNg": [
@@ -1114,7 +1138,8 @@
         "mq-zaien-kottou",
         "mq-ryosai-karu",
         "mq-gusho-hyakushu",
-        "sekiheki-iyashikumo"
+        "sekiheki-iyashikumo",
+        "gukou-iedomo"
       ],
       "blank": "トいへどモ",
       "blankNg": [
@@ -1149,7 +1174,8 @@
         "mq-etsubi-kishin",
         "mq-etsubi-roteki",
         "mq-gozasso-tanetsugi",
-        "mq-riennso-ayamachi"
+        "mq-riennso-ayamachi",
+        "saio-hitori"
       ],
       "blank": "たダ",
       "blankNg": [
@@ -1191,7 +1217,8 @@
         "mq-mukei-nomi",
         "mq-mukei-masani",
         "mq-zaien-tenshi",
-        "mq-chihoku-uramu"
+        "mq-chihoku-uramu",
+        "kiyu-nomi"
       ],
       "blank": "ノみ",
       "blankNg": [
@@ -1450,7 +1477,8 @@
       "examples": [
         "eitan-yukumono",
         "rongo-kenkai",
-        "mq-ryosai-warau"
+        "mq-ryosai-warau",
+        "gukou-hanahadashi"
       ],
       "yomi": [
         "かな"
