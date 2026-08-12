@@ -1,4 +1,4 @@
-# 「返り点でみる漢文」これから何をするか（2026-08-13・v44 時点）
+# 「返り点でみる漢文」これから何をするか（2026-08-13・v46 時点）
 
 台材の消化が終わった直後に書いた計画。**この文書だけを読んで作業を始められる**ように、
 現在地・やること・落とし穴・コマンドをすべて書いてある。
@@ -8,7 +8,7 @@
 **数字は README の記憶ではなく、いつも機械で出し直すこと。**
 
 ```bash
-node kanbun/tests.js            # 711/711（回帰テスト。合格が収録の絶対条件）
+node kanbun/tests.js            # 713/713（回帰テスト。合格が収録の絶対条件）
 node kanbun/kuho-check.js       # 型と実例の往復。結び付いた問題数もここに出る
 node kanbun/yomi-check.js       # 読み仮名。二重帳簿の死角を見る唯一の検査
 node kanbun/tools/uncollected.js catalog   # 台帳の残り
@@ -54,14 +54,16 @@ node kanbun/tools/uncollected.js catalog   # 台帳の残り
 | `shiki-taiha-sogun` | 大破楚軍 | 楚軍を大破す |
 | `shiki-taiha-shingun` | 大破秦軍於東阿 | 秦軍を東阿に大破す |
 
-> **`shiki-taiha-shingun` の返り点は要検討。** 大=下（lv2 n3）・阿=上（lv2 n1）で、
-> **内側に一二点がひとつも無いのに上下点を使っている**。上下点は一二点をまたぐときに使う印なので、
-> ここは 阿=一・大=二 が定石。note も「上下点と置き字が同居する上級の形」と書いているので、
-> 直すなら note ごと。**機械検査は素通りする**（`kanbun.js` は階層のとびを見ない）。
-> 全667問でこの1件だけ。次のコマンドで洗える:
-> ```bash
-> node -e "const d=require('./kanbun/texts.json');const num=t=>(t.mark||[]).filter(m=>typeof m.lv==='number');for(const p of d.problems){const s=new Set();p.tokens.forEach(t=>num(t).forEach(m=>s.add(m.lv)));for(const lv of s)if(lv>1&&!s.has(lv-1))console.log(p.id)}"
-> ```
+> **`shiki-taiha-shingun` の返り点は誤りだった → 直した（v45）。** 大=下（lv2 n3）・阿=上（lv2 n1）で、
+> **内側に一二点がひとつも無いのに上下点を使っていた**。上下点は一二点をまたぐときの印なので、
+> 阿=一・大=二 が定石。note の「上下点と置き字が同居する上級の形」も書き換え、難度は 7.8 → 5.8 になった。
+> 読み順は上下点でも正しく出るため**二重帳簿は素通りしていた**。全667問でこの1件だけ。
+> 同じ抜けを塞ぐ検査を `tests.js`（収録済み全問）と `tools/lane-verify.js`（収録前）に入れてある。
+
+> **`join`（連読符）はデータにあるが画面には描かれない。** `game.js` はセルに漢字・訓点・順番の印しか
+> 出しておらず、ハイフンを引く処理がどこにも無い。つまり「大破秦軍」は
+> **`大二 破ス 秦 軍ヲ一` としか見えず、なぜ大→破と続けて読むのかが画面から分からない**。
+> 熟語返りを厚くする前に、まずこれを描くほうが先かもしれない（データを増やしても見えないため）。
 
 手順は `lane-verify.js` → `lane-merge.js` → 実機 L1 で完答、といつもどおり。
 
@@ -142,11 +144,11 @@ node kanbun/tools/uncollected.js catalog   # 台帳の残り
 5. **返り点は `gemini-intake.js` が組む。外に組ませない。**
    階層の割り当てに2度不備が出ており（待っている字が別の組の「一」で巻き添え解放される／
    起点が待機中の字を兼ねる）、どちらもエンジンの規則を知らないと踏む
-6. **`note` に Markdown の `**` を書かない（2026-08-13 追記）。**
-   `game.js:430` は note を `innerHTML` にそのまま差し込むので、**アスタリスクが画面にそのまま出る**。
-   すでに **641件中55件**が `**` 入りで、生徒にはただの記号として見えている。
-   同じ理由で、note に内部の問題 id（`funkei-ryouko` など）も書かない。
-   洗い出し: `node -e "const d=require('./kanbun/texts.json');console.log(d.problems.filter(p=>p.note&&p.note.includes('**')).map(p=>p.id).join('\n'))"`
+6. **`note` の `**` はもう画面に出ない（2026-08-13・v46 で対処済み）。**
+   それまでは `innerHTML` に素の文字列を差し込んでいたので、55問でアスタリスクが
+   そのまま表示されていた。いまは `Kanbun.noteHtml()` が `<strong>` に変える。
+   **強調は `**…**` で閉じること**（閉じ忘れは `lane-verify.js` が止める）。
+   なお **note に内部の問題 id を書かない**（生徒に `funkei-ryouko` は意味を持たない）。
 
 ## 道具（`kanbun/tools/`）
 
