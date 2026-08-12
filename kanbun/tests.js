@@ -402,6 +402,22 @@
       });
     }
 
+    // 返り点の階層は内側から順に使う。上下点は一二点をまたぐときの印なので、
+    // **一二点がひとつも無いのに上下点を使う**のは訓点として誤り。読み順は正しく出るため
+    // 二重帳簿（validateProblem）を素通りし、実際に shiki-taiha-shingun が
+    // 「大＝下・阿＝上」で入っていた（一二点で足りる形だった。2026-08-13 に修正）。
+    test('返り点: 内側の階層を飛ばして外側の階層を使っていない', () => {
+      const bad = [];
+      for (const p of problems){
+        const lvs = new Set();
+        for (const t of p.tokens)
+          for (const m of (t.mark || [])) if (typeof m.lv === 'number') lvs.add(m.lv);
+        for (const lv of lvs)
+          if (lv > 1 && !lvs.has(lv - 1)) bad.push(p.id + '（lv' + lv + ' があるのに lv' + (lv - 1) + ' が無い）');
+      }
+      if (bad.length) throw new Error(bad.join(' ／ '));
+    });
+
     // ---- データ総当たり（二重帳簿・設計書 §4.2） ----
     for (const p of problems){
       test('データ ' + p.id + ': 訓点→読み順→書き下しの二重帳簿', () => {

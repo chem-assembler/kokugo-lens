@@ -78,6 +78,16 @@ const E = (id, m) => errs.push(id + ': ' + m);
     if (CATS.indexOf(g) < 0) E(id, '知らない句法タグ「' + g + '」');
   });
   if (/[ァ-ヶ]/.test(p.kakikudashi)) E(id, '書き下しにカタカナが残っている');
+  // 上下点は一二点をまたぐときの印。内側が空のまま外側を使うのは訓点として誤りだが、
+  // 読み順は正しく出るので上の二重帳簿を素通りする（shiki-taiha-shingun が実際にそうだった）
+  const lvs = new Set();
+  p.tokens.forEach(t => (t.mark || []).forEach(m => { if (typeof m.lv === 'number') lvs.add(m.lv); }));
+  [...lvs].forEach(lv => {
+    if (lv > 1 && !lvs.has(lv - 1)) E(id, 'lv' + lv + ' を使っているのに内側の lv' + (lv - 1) + ' が無い');
+  });
+  if (p.note && (p.note.match(/\*\*/g) || []).length % 2 !== 0){
+    E(id, 'note の ** が対になっていない（強調は **…** で閉じる）');
+  }
   try { K.difficulty(p); } catch (e){ E(id, 'difficulty が例外: ' + e.message); }
 });
 
