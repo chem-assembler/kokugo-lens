@@ -12,11 +12,11 @@
   // モード名 → 遷移先。訓点モードは ?mode= で直接その段を開く
   const LINK = {
     L1: 'index.html?mode=L1', L2: 'index.html?mode=L2',
-    L3: 'index.html?mode=L3', L6: 'index.html?mode=L6',
+    L3: 'index.html?mode=L3', L4: 'index.html?mode=L4', L6: 'index.html?mode=L6',
     K:  'kudashi.html', kuho: 'kuho.html', qa: '../qa/'
   };
 
-  fetch('universities.json?v=20')
+  fetch('universities.json?v=21')
     .then(r => r.json())
     .then(d => {
       DATA = d;

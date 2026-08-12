@@ -15,7 +15,7 @@ const warn = [];
 
 // 遷移先が実在するファイルか（リンク切れを配らない）
 const LINK_FILE = {
-  L1: 'index.html', L2: 'index.html', L3: 'index.html', L6: 'index.html',
+  L1: 'index.html', L2: 'index.html', L3: 'index.html', L4: 'index.html', L6: 'index.html',
   K: 'kudashi.html', kuho: 'kuho.html', qa: '../qa/index.html'
 };
 // 訓点モードのセレクタに実在する値か
