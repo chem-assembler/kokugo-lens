@@ -67,6 +67,23 @@ for (const p of d.patterns || []){
   }
 }
 
+// ---- 生の文面に Markdown の記法を混ぜない ----
+// app.js は q / a / supplement / options をすべて esc() に通してから差し込む。
+// つまり **強調** と書くとアスタリスクがそのまま画面に出る。
+// 漢文アプリ側の note で実際に55問やらかしていた（2026-08-13・kanbun v46 で対処）ので、
+// こちらは混ざる前に止める。
+for (const p of d.patterns || []){
+  for (const v of p.variants || []){
+    const texts = [v.q, v.a, v.supplement].concat(v.options || []);
+    for (const s of texts){
+      if (typeof s === 'string' && s.indexOf('**') >= 0){
+        errs.push(p.code + ': 文面に Markdown の ** が入っている（esc される＝画面にそのまま出る）');
+        break;
+      }
+    }
+  }
+}
+
 // ---- 単元ごとの件数（習得マップが空にならないか） ----
 console.log('一問一答（漢文）台帳の検査');
 console.log('  収録 ' + (d.patterns || []).length + ' 項目 / ' + (d.units || []).length + ' 単元');
