@@ -370,7 +370,8 @@
     if (isNode){
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
-        const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html']];
+        const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'],
+                       ['rec.js', 'index.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
           const htmlSrc = fs.readFileSync(path.join(__dirname, html), 'utf8');

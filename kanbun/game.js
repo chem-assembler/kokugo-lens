@@ -74,7 +74,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=52')
+  fetch('texts.json?v=53')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -688,4 +688,32 @@
     $('btn-yomi').classList.toggle('toggled', showYomi);
     render();
   });
+
+  // ---- 録画モード（rec.js）の受け口 ---------------------------------------
+  // ?rec= が無くても定義してよい（読むだけの窓と、セレクトを動かす3つの操作しかない）。
+  // なぜ要るか: #problem-select の option.value は texts.json を難度順に並べ替えた
+  // あとの配列添字で、option に問題ID が入っていない。つまり DOM だけでは
+  // 「百聞不如一見を開く」ことができず、添字は問題が増えるたびに動く。
+  // それ以外（セル・パレット・判定・再生）はセレクタで指せるので公開しない。
+  // 名前を window.game にしないこと。収録CLI が window.game を見つけると
+  // computeMolecularFormula()（化学のメソッド）を呼びに来て、撮り終えた直後に落ちる。
+  window.kanbunApp = {
+    get ready(){ return problems.length > 0; },
+    get problems(){ return problems; },
+    get problem(){ return problem; },
+    get mode(){ return mode; },
+    loadProblemById(id){
+      const i = problems.findIndex(p => p.id === id);
+      if (i < 0) throw new Error('問題が見つかりません: ' + id);
+      $('problem-select').value = String(i);
+      loadProblem(i);
+    },
+    setMode(m){
+      const sel = $('mode-select');
+      if (![...sel.options].some(o => o.value === m)) throw new Error('モードがありません: ' + m);
+      sel.value = m;
+      sel.dispatchEvent(new Event('change'));
+    },
+    setShowYomi(on){ if (showYomi !== on) $('btn-yomi').click(); }
+  };
 })();

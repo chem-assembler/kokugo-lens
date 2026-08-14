@@ -1,0 +1,36 @@
+[
+  {
+    "id": "kaeriten-hyakubun",
+    "title": "V-K1: 百聞は一見に如かず — 漢文は上から順に読まない",
+    "note": "L1（読む順にタップ）。操作はタップだけなので、実収録の1本目に向く。所要は speed=1 で 20 秒前後の見込み（実測したら書き直す）。expect: 'ok' は「読み順を最後まで正しくたどる台本」の宣言で、verify_demos.js が L1 の判定を真似て確かめる。",
+    "expect": "ok",
+    "state": { "problem": "hyakubun", "mode": "L1" },
+    "steps": [
+      {
+        "caption": "百聞不如一見。この6字、上から読める？",
+        "actions": [{ "type": "wait", "ms": 1600 }],
+        "hold": 700
+      },
+      {
+        "caption": "まず「百」「聞」。ここまでは上から。",
+        "actions": [{ "type": "read", "count": 2 }],
+        "hold": 900
+      },
+      {
+        "caption": "でも次は「不」ではない。レ点と一二点が、読む順を下から戻す。",
+        "actions": [{ "type": "wait", "ms": 1400 }],
+        "hold": 600
+      },
+      {
+        "caption": "一 → 見 → 如 → 不。左の書き下しが伸びていく。",
+        "actions": [{ "type": "read", "from": 2, "pause": 620 }],
+        "hold": 1400
+      },
+      {
+        "caption": "百聞は一見に如かず。返り点は「戻って読め」の合図。",
+        "actions": [{ "type": "wait", "ms": 800 }],
+        "hold": 2200
+      }
+    ]
+  }
+]

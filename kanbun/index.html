@@ -181,13 +181,59 @@
     #stage { max-height: none; width: 100%; }
     #side { max-width: none; }
   }
+
+  /* ======================================================================
+     録画モード（?rec= のときだけ付く .recording / rec-* クラス）
+     通常利用ではここは一切当たらない。設計は chem 側 DESIGN_recording_mode.md
+     ====================================================================== */
+
+  /* 映したくないものを消して、白文・訓点・書き下しを主役にする。
+     #toolbar は label（問題・モードのセレクト）だけ隠してボタンは残す。
+     全部隠すと #btn-grade の矩形がゼロになり、ゴーストカーソルが左上へ飛ぶ */
+  .recording header,
+  .recording footer,
+  .recording #progress-bar,
+  .recording #toolbar label { display: none !important; }
+  .recording #toolbar { border-bottom: none; background: transparent; }
+
+  #rec-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 3000; }
+  #rec-cursor {
+    position: fixed; left: 50%; top: 50%; width: 22px; height: 22px;
+    border-radius: 50%; transform: translate(-50%, -50%);
+    background: rgba(179, 65, 14, 0.3); border: 2px solid var(--accent);
+    box-shadow: 0 0 14px rgba(179, 65, 14, 0.7); z-index: 3002;
+  }
+  #rec-cursor.touch { width: 34px; height: 34px; }
+  .rec-no-cursor #rec-cursor { display: none; }
+
+  #rec-caption {
+    position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+    width: calc(100% - 40px); max-width: 680px; padding: 0.7em 1em;
+    border-radius: 10px; background: rgba(46, 38, 24, 0.94); color: #f5efdf;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 0.95em; line-height: 1.6; text-align: left; z-index: 3003;
+  }
+  #rec-caption.empty { display: none; }
+  .rec-no-caption #rec-caption { display: none; }
+
+  /* 縦型（9:16・810×1440）。ブレークポイントが 700px なので自動では当たらない。
+     横並びのままだと下に 800px 前後の余白が残るので、ここで1列に畳む */
+  .rec-short main { flex-direction: column; }
+  .rec-short #stage { max-height: none; width: 100%; }
+  .rec-short #side { max-width: none; }
+  /* 音無しで見られる前提。字幕は大きく中央に */
+  .rec-short #rec-caption {
+    bottom: 8%; max-width: none; width: calc(100% - 32px);
+    padding: 0.8em 1em; border-radius: 14px; font-size: 1.5em;
+    font-weight: 700; line-height: 1.45; text-align: center;
+  }
 </style>
 </head>
 <body>
 <header>
   <h1>返り点でみる漢文</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v52</span>
+  <span class="version">v53</span>
 </header>
 
 <div id="toolbar">
@@ -271,8 +317,10 @@
   国語レンズ（KokugoLenz）｜<a href="guide.html">志望校から選ぶ</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=52"></script>
-<script src="progress.js?v=52"></script>
-<script src="game.js?v=52"></script>
+<script src="kanbun.js?v=53"></script>
+<script src="progress.js?v=53"></script>
+<script src="game.js?v=53"></script>
+<!-- 録画モード。?rec= が無ければ即 return する（game.js の後に読む） -->
+<script src="rec.js?v=53"></script>
 </body>
 </html>

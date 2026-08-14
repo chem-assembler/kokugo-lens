@@ -29,6 +29,7 @@ SchoolLenz の第3の教科サブブランド。
 | `kuho.json` | 句形の型データ（43型・11カテゴリ）。**全43型に例文あり・問題側は 315/666**。`node kanbun/kuho-check.js` が検査（実例が本当にその型か＝白文の標識・書き下しの読み・カテゴリタグの往復まで見る） |
 | `tools/` | **問題を量産するときの道具**（2026-08-12 新設）。`uncollected.js`（台帳の未収録行を数える）／`lane-verify.js`（起草した問題データを収録前に二重帳簿で検査）／`lane-merge.js`（レーンをまたぐ事故を検査して収録）／`link-verify.js`（型と問題の結び付け案を検査して収録）。**手順は `docs/HOWTO_add_problems.md`** |
 | `yomi-check.js` | **読み仮名（`yomi`）の検査**（2026-08-12 新設）。`node kanbun/yomi-check.js`。既存の二重帳簿は `toKakikudashi` が `c + okuri` しか使わないため **`yomi` に対して盲**で、読みを壊してもテストが緑のまま通っていた。実際に洗ったところ**7件の誤り**が出た（ルビの重複4件・送り仮名なしの「亦」を「ま」としていた3件）。**捕まえるのは型に当てはまる誤りだけで、任意の読み間違いは捕まえない**（限界はファイル冒頭に明記） |
+| `rec.js` + `demos.json` + `verify_demos.js` | **録画モード**（2026-08-15・v53 新設）。`?rec=<デモID>` があるときだけ動く自動再生層で、SNS 用の短尺素材を無人で撮る。**パラメータが無ければ即 return する**ので通常利用には影響しない。収録CLI は chem の `tools/record/record.mjs` をそのまま使う（`--base` を差し替えるだけ）。アクションは8種で**座標を1つも使わない**（字の番号・訓点キー・セレクタで指す）。`node kanbun/verify_demos.js` が台本と `texts.json` の整合を見る ＝ 参照先の実在に加え、**台本の操作を積み上げて `K.grade()` に通し、狙いどおり ok / wrong になるかまで**確かめる（誤答デモがちゃんと間違いになるか、を機械で言える）。手順と実装記録は `docs/PLAN_kanbun_recording.md` |
 | `test.html` + `tests.js` | 回帰テスト。**コミット前に全合格必須**。`node kanbun/tests.js` でも走る |
 
 ## 題材選定の資料 `docs/`
