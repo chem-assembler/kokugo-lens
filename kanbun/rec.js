@@ -243,7 +243,6 @@
     }
 
     async play(demo){
-      this.applyState(demo.state);
       await this.sleep(400);
       for (const step of demo.steps || []){
         this.setCaption(step.caption);
@@ -262,7 +261,7 @@
 
     let demos = [];
     try {
-      const res = await fetch(new URL('demos.json?v=54', window.location.href).href, { cache: 'no-cache' });
+      const res = await fetch(new URL('demos.json?v=55', window.location.href).href, { cache: 'no-cache' });
       if (res.ok) demos = await res.json();
     } catch (e){
       console.warn('[rec] demos.json のロードに失敗:', e);
@@ -275,6 +274,10 @@
     }
 
     const player = new RecPlayer(app, speed);
+    // 頭出しは delay を待つ前に済ませる。あとに回すと、収録の最初の1〜2秒に
+    // **既定で開く問題（難度がいちばん低いもの）がそのまま映る**。
+    // v54 で実収録して見つけた。短尺は最初の1秒が勝負なので致命的
+    player.applyState(demo.state);
     await new Promise(r => setTimeout(r, delay));
     window.__recState = 'playing';
     console.log('[rec] playing ' + demoId);
