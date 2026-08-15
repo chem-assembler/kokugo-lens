@@ -10,6 +10,10 @@ SchoolLenz の第3の教科サブブランド。
 - **`/kanbun/`** … 返り点でみる漢文（第1弾アプリ）
 - **`/qa/`** … 一問一答（漢文）。**chem の `/qa/` エンジンをそのまま流用**し、
   台帳（`questions.json`）だけ漢文用に差し替えた。`node qa/check.js` が台帳を検査する
+- **`video-scripts/`** … 短尺動画の作業場（2026-08-15 新設）。**台本メモ・ナレーション原稿・
+  投稿文だけを版に入れ、音（`audio/`）と動画（`out/`）は入れない**。ルート配信なので
+  置いたものはそのまま公開物になるため。収録CLI は chem の `tools/record/` をそのまま使う
+  （`--base` を差し替えるだけ）。詳しくは `video-scripts/README.md`
 - `DESIGN_kanbun.md` … 設計書（決定事項・データモデル・アルゴリズム・実装順序の正）
 - `PUBLISH_CHECKLIST.md` … 公開手順（GitHub Pages ＋ koku.schoollenz.com）
 - `docs/` … 題材選定の資料（下記）

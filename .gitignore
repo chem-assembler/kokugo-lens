@@ -6,3 +6,12 @@ scratch/
 
 # Windows で `> /dev/null` を書くとできてしまう空ファイル
 nul
+
+# 動画の作業場（video-scripts/）。**テキストだけを版に入れ、音と動画は入れない**。
+# 理由: KokugoLens は GitHub Pages の**ルート配信**なので、置いたものはそのまま公開物になる。
+# 台本メモ・ナレーション原稿・投稿文（.md / narration/*.json / meta/*.json）は版に入れる
+# ＝ 何をどう撮ったかが後から読めることに価値がある。
+# 一方 audio/ は生成した wav と DOVA の BGM、out/ は収録した webm と完成 mp4 で、
+# どちらも版に入れる意味が無いうえ、リポジトリを重くして勝手に配信されてしまう。
+video-scripts/audio/
+video-scripts/out/
