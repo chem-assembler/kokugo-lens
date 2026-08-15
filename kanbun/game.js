@@ -74,7 +74,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=53')
+  fetch('texts.json?v=54')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -326,10 +326,15 @@
     const kud = K.toKakikudashi(toks, st.kudashiOrder);
     if (mode === 'L6'){
       // L6 は与えられた書き下し文が「問題文」。これに合うよう訓点を打つ
+      $('kudashi-live').classList.remove('placeholder');
       $('kudashi-live').textContent = problem.kakikudashi;
       $('kudashi-col').querySelector('.label').textContent = 'この書き下しになるよう訓点を打つ';
     } else {
       $('kudashi-col').querySelector('.label').textContent = '書き下し（あなたの読み方から自動生成）';
+      // まだ1字も読んでいないときに出るのは書き下しではなく操作の案内。
+      // 印を付けておくと、録画モードの CSS がこれだけを落とせる（縦書きで
+      // 長く伸びて、見せたい書き下しそのものと画の上で張り合うため）
+      $('kudashi-live').classList.toggle('placeholder', !kud);
       $('kudashi-live').textContent = kud ||
         (mode === 'L1' ? '（読む順に字をタップすると書き下しが伸びていきます）'
                        : '（訓点を打つとここに書き下しが出ます）');

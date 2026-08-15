@@ -563,3 +563,57 @@ node tools/record/mux.mjs --video=video-scripts/out/kaeriten-hyakubun-short.webm
 > カーソルの追従は「インライン `left: 737.32px / top: 193.656px`」が
 > 「不」の中心 `(737, 194)` と一致することで確かめた（描画位置は初期値のまま止まる）。
 > **構図の目視は C2 でペインを出してから行う。**
+
+---
+
+## 12. C2 の実装記録（2026-08-15・v54）【事実】
+
+**実収録が通ったので、以後は「本物のコマ」を見て直せる。**
+Browser ペインは非表示だとフレームを合成しないので当てにしない。代わりに:
+
+```bash
+# KokugoLens のルートで静的サーバー、chem のルートで収録
+node tools/record/record.mjs --demo=kaeriten-hyakubun --format=short --base=http://localhost:8151/kanbun/
+# コマを取り出す（ffmpeg は imageio-ffmpeg のもの）
+"$(python -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')" \
+  -i video-scripts/out/kaeriten-hyakubun-short.webm \
+  -vf "select='eq(n\,40)+eq(n\,430)',scale=540:-1" -vsync 0 frame_%02d.png -y
+```
+
+実収録の実測: **19.84秒 / 810×1440 / 25fps / vp8**。`state=done`・操作5件。
+
+### 12-1. v53 のコマで見えた問題（すべて実物で確認）
+
+1. **白文が右上の隅に小さくかたまり、紙の左9割が白いまま。** 縦書きは右端から始まるのに
+   `#stage` が横いっぱいに広がるため。**計算では出ず、コマを見て初めて分かった。**
+2. **`#stage` の下に約800px の空白。**
+3. **動画に不要なボタンが4つ映っていた**（リセット・正解を見る・読み仮名・次の未クリアへ）。
+4. **字が小さい。** 1080×1920 に伸ばしても手のひらでは読めない。
+5. **カーソル（34px の塗り丸）が字を塗りつぶしていた。**
+
+### 12-2. 直した内容
+
+| 直し | 中身 |
+|---|---|
+| 列を中央へ | `.rec-short #stage { justify-content: center; align-items: center }`。**vertical-rl の flex は主軸が左右・交差軸が上下**なので、この2つがそのまま左右・上下の中央寄せになる |
+| 紙を縦に使う | `min-height: 60em` |
+| 字を大きく | `#sentence` 2.2em ／ `#kudashi-col` 1.6em ／ `#result` 1.25em |
+| ボタンを隠す | `.recording` で `#btn-reset` `#btn-answer` `#btn-yomi` `#btn-next-unclear` `#replay-bar`。**`#btn-grade` だけは残す**（隠すと矩形ゼロでカーソルが左上へ飛ぶ）。読み仮名は `setShowYomi` が直に `click()` するので隠れていても効く |
+| カーソルを輪に | `.rec-short` で 48px・塗りの不透明度 0.1 |
+
+### 12-3. 直した結果さらに見つかった2つ（v53 では別の物に隠れていた）
+
+- **書き下し列の案内文が主役を食う。** ラベル「書き下し（あなたの読み方から自動生成）」と、
+  まだ1字も読んでいないときの「（読む順に字をタップすると…）」が、**縦書きで長く伸びて
+  見せたい書き下しそのものと張り合っていた**。字を大きくしたことで初めて目立った。
+  → `game.js` が `#kudashi-live` に **`.placeholder` を付ける**ようにし、CSS で落とす。
+  ラベルは `.rec-short` で落とす。**「録画かどうか」を game.js に判断させない**ための印
+- **演技が始まるまでの1〜2秒、文字の無い黒帯が映っていた。**
+  `#rec-caption.empty { display: none }` はあったが、**生成時に `empty` を付けていなかった**。
+  → `buildOverlay` で最初から付ける
+
+### 12-4. 残っている粗（急がないもの）
+
+- 書き下し列は空でも枠幅と点線の境を取るので、**白文がわずかに中央より右**に寄る
+- `#stage` の上下にまだ余白がある（1行6字なので当然だが、字数の多い問題では詰まる）
+- **L3/L4 は `#palette` が `#side` に入るぶん縦が伸びる。** C3 で L3 の台本を撮ってから見る

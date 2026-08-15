@@ -194,7 +194,15 @@
   .recording footer,
   .recording #progress-bar,
   .recording #toolbar label { display: none !important; }
-  .recording #toolbar { border-bottom: none; background: transparent; }
+  .recording #toolbar { border-bottom: none; background: transparent; padding: 0.3em 1em; }
+  /* 台本が押すのは判定だけ。ほかのボタンは画に映って気が散るので隠す。
+     #btn-grade だけは残す（隠すと矩形がゼロになり、ゴーストカーソルが左上へ飛ぶ）。
+     読み仮名は kanbunApp.setShowYomi が直に click() するので、隠れていても効く */
+  .recording #btn-reset,
+  .recording #btn-answer,
+  .recording #btn-yomi,
+  .recording #btn-next-unclear,
+  .recording #replay-bar { display: none !important; }
 
   #rec-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 3000; }
   #rec-cursor {
@@ -218,9 +226,28 @@
 
   /* 縦型（9:16・810×1440）。ブレークポイントが 700px なので自動では当たらない。
      横並びのままだと下に 800px 前後の余白が残るので、ここで1列に畳む */
-  .rec-short main { flex-direction: column; }
-  .rec-short #stage { max-height: none; width: 100%; }
+  .rec-short main { flex-direction: column; padding: 0.8em; }
   .rec-short #side { max-width: none; }
+  /* 1列にしただけでは、紙の左9割と下 800px が白いまま残る（v53 の実収録で確認）。
+     縦書きの列は右端から始まるので、紙を縦に使って列を中央へ寄せる。
+     vertical-rl の flex は主軸が左右・交差軸が上下なので、
+     justify-content が左右・align-items が上下の中央寄せになる */
+  .rec-short #stage {
+    max-height: none; width: 100%; min-height: 60em;
+    justify-content: center; align-items: center;
+  }
+  /* 810×1440 で撮って 1080×1920 に伸ばし、手のひらで見る。字はこの倍率が要る */
+  .rec-short #sentence { font-size: 2.2em; }
+  .rec-short #kudashi-col { font-size: 1.6em; max-width: 9em; }
+  /* 「書き下し（あなたの読み方から自動生成）」というラベルと、まだ何も読んでいない
+     ときの操作案内は、どちらも縦に長く伸びて**見せたい書き下しそのものと張り合う**。
+     字幕が同じことを言うので落とす（game.js が .placeholder を付ける） */
+  .rec-short #kudashi-col .label,
+  .recording #kudashi-live.placeholder { display: none; }
+  .rec-short #result { font-size: 1.25em; }
+  .rec-short #meta { font-size: 1.05em; }
+  /* 34px の丸は 88px のセルの上では字を塗りつぶしてしまう。輪だけ見せる */
+  .rec-short #rec-cursor { width: 48px; height: 48px; background: rgba(179, 65, 14, 0.1); }
   /* 音無しで見られる前提。字幕は大きく中央に */
   .rec-short #rec-caption {
     bottom: 8%; max-width: none; width: calc(100% - 32px);
@@ -233,7 +260,7 @@
 <header>
   <h1>返り点でみる漢文</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v53</span>
+  <span class="version">v54</span>
 </header>
 
 <div id="toolbar">
@@ -317,10 +344,10 @@
   国語レンズ（KokugoLenz）｜<a href="guide.html">志望校から選ぶ</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=53"></script>
-<script src="progress.js?v=53"></script>
-<script src="game.js?v=53"></script>
+<script src="kanbun.js?v=54"></script>
+<script src="progress.js?v=54"></script>
+<script src="game.js?v=54"></script>
 <!-- 録画モード。?rec= が無ければ即 return する（game.js の後に読む） -->
-<script src="rec.js?v=53"></script>
+<script src="rec.js?v=54"></script>
 </body>
 </html>

@@ -70,6 +70,9 @@
       if (cursorKind === 'touch') cursor.classList.add('touch');
       const caption = document.createElement('div');
       caption.id = 'rec-caption';
+      // 最初の字幕が来るまでは出さない。付けておかないと、演技が始まるまでの
+      // 1〜2秒のあいだ「文字の無い黒帯」が映る（v54 の実収録で見つけた）
+      caption.className = 'empty';
       ov.appendChild(cursor);
       ov.appendChild(caption);
       document.body.appendChild(ov);
@@ -259,7 +262,7 @@
 
     let demos = [];
     try {
-      const res = await fetch(new URL('demos.json?v=53', window.location.href).href, { cache: 'no-cache' });
+      const res = await fetch(new URL('demos.json?v=54', window.location.href).href, { cache: 'no-cache' });
       if (res.ok) demos = await res.json();
     } catch (e){
       console.warn('[rec] demos.json のロードに失敗:', e);
