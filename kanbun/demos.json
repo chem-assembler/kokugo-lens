@@ -2,34 +2,34 @@
   {
     "id": "kaeriten-hyakubun",
     "title": "V-K1: 百聞は一見に如かず — 漢文は上から順に読まない",
-    "note": "L1（読む順にタップ）。操作はタップだけなので、実収録の1本目に向く。実測 19.84秒（v54）→ 間を詰めて 17秒台（v55）。読み終わりが12秒で、そこから6秒も静止画だったため、step4 の hold と step5 を削った。expect: 'ok' は「読み順を最後まで正しくたどる台本」の宣言で、verify_demos.js が L1 の判定を真似て確かめる。",
+    "note": "L1（読む順にタップ）。操作はタップだけなので実収録の1本目に向く。尺は 19.84秒（v53）→ 16.52秒（v55・無音）→ ナレーションに合わせて組み直し（v56）。**各ステップは narration/V-K1.json の1行と1対1**にしてあり、hold は「その行の秒数 ＋ 行間の無音0.6秒 − 操作の実測コスト」で決めた。操作の実測コストは1タップあたり pause+390ms（v54 の events.json から算出）。expect: 'ok' は「読み順を最後まで正しくたどる台本」の宣言で、verify_demos.js が L1 の判定を真似て確かめる。",
     "expect": "ok",
     "state": { "problem": "hyakubun", "mode": "L1" },
     "steps": [
       {
         "caption": "百聞不如一見。この6字、上から読める？",
         "actions": [{ "type": "wait", "ms": 1100 }],
-        "hold": 500
+        "hold": 3300
       },
       {
         "caption": "まず「百」「聞」。ここまでは上から。",
-        "actions": [{ "type": "read", "count": 2 }],
-        "hold": 900
+        "actions": [{ "type": "read", "count": 2, "pause": 900 }],
+        "hold": 1300
       },
       {
         "caption": "でも次は「不」ではない。レ点と一二点が、読む順を下から戻す。",
         "actions": [{ "type": "wait", "ms": 1400 }],
-        "hold": 600
+        "hold": 4900
       },
       {
         "caption": "一 → 見 → 如 → 不。左の書き下しが伸びていく。",
-        "actions": [{ "type": "read", "from": 2, "pause": 620 }],
-        "hold": 700
+        "actions": [{ "type": "read", "from": 2, "pause": 1000 }],
+        "hold": 1400
       },
       {
-        "caption": "百聞は一見に如かず。返り点は「戻って読め」の合図。",
+        "caption": "百聞は一見に如かず。",
         "actions": [{ "type": "wait", "ms": 300 }],
-        "hold": 1500
+        "hold": 4200
       }
     ]
   }

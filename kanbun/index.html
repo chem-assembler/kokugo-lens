@@ -249,8 +249,12 @@
   /* 34px の丸は 88px のセルの上では字を塗りつぶしてしまう。輪だけ見せる */
   .rec-short #rec-cursor { width: 48px; height: 48px; background: rgba(179, 65, 14, 0.1); }
   /* 音無しで見られる前提。字幕は大きく中央に */
+  /* 下から 14%。8% だと2つとぶつかる:
+     (1) mux.mjs が焼き込むクレジットが h*0.885（＝下から11.5%）に来る
+     (2) Instagram や TikTok のプレイヤーは下部をUIで覆う
+     どちらも実物で確かめた（v57 の完成 mp4 で字幕とクレジットが重なっていた） */
   .rec-short #rec-caption {
-    bottom: 8%; max-width: none; width: calc(100% - 32px);
+    bottom: 14%; max-width: none; width: calc(100% - 32px);
     padding: 0.8em 1em; border-radius: 14px; font-size: 1.5em;
     font-weight: 700; line-height: 1.45; text-align: center;
   }
@@ -260,7 +264,7 @@
 <header>
   <h1>返り点でみる漢文</h1>
   <span class="brand">国語レンズ｜KokugoLenz</span>
-  <span class="version">v55</span>
+  <span class="version">v58</span>
 </header>
 
 <div id="toolbar">
@@ -344,10 +348,10 @@
   国語レンズ（KokugoLenz）｜<a href="guide.html">志望校から選ぶ</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a>｜<a href="test.html">回帰テスト</a>
 </footer>
 
-<script src="kanbun.js?v=55"></script>
-<script src="progress.js?v=55"></script>
-<script src="game.js?v=55"></script>
+<script src="kanbun.js?v=58"></script>
+<script src="progress.js?v=58"></script>
+<script src="game.js?v=58"></script>
 <!-- 録画モード。?rec= が無ければ即 return する（game.js の後に読む） -->
-<script src="rec.js?v=55"></script>
+<script src="rec.js?v=58"></script>
 </body>
 </html>

@@ -148,6 +148,12 @@
       await this.ensureVisible(el);
       await this.moveCursor(el);
       this.pulse();
+      // **効果音はここで鳴る。** アクション単位の記録（doAction 側）とは別に、
+      // 実際に指が触れた1回ずつを 'click' として残す。理由は2つ:
+      //  ・mux.mjs は ['click','clickBond','button','undo'] の型にしか SE を置かない
+      //  ・read は4回タップしても doAction の記録は1件なので、それだけでは1回しか鳴らない
+      // アクション単位の記録は先頭に残るので、--trim=auto の頭合わせは狂わない
+      if (window.__recOnAction) window.__recOnAction('click');
       el.click();
       await this.sleep(after);
     }
@@ -261,7 +267,7 @@
 
     let demos = [];
     try {
-      const res = await fetch(new URL('demos.json?v=55', window.location.href).href, { cache: 'no-cache' });
+      const res = await fetch(new URL('demos.json?v=58', window.location.href).href, { cache: 'no-cache' });
       if (res.ok) demos = await res.json();
     } catch (e){
       console.warn('[rec] demos.json のロードに失敗:', e);
