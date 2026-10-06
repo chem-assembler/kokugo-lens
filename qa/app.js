@@ -645,7 +645,7 @@ function slTrack(name, params) {
   window.QaEngine.backFrom = function () { return backFrom; };
   window.QaEngine.BACK_APP_NAME = BACK_APP_NAME;
 
-  fetch('questions.json?v=14')
+  fetch('questions.json?v=15')
     .then(function (r) { if (!r.ok) throw new Error('load failed: ' + r.status); return r.json(); })
     .then(function (json) { DATA = json; renderHome(); landOnCode(); })
     .catch(function (err) {
