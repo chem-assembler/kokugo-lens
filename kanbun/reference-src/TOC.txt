@@ -1,3 +1,4 @@
 # 科目・編・節・ページ（タブ4列）。並びは ORDER.txt と一致させる。
 kanbun	読む手順	序	intro
 kanbun	読む手順	1章 語順	word-order
+kanbun	読む手順	2章 訓点	kunten

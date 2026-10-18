@@ -1,3 +1,4 @@
 # 索引と生成物の順。docs/DESIGN_reference.md §2 の章順。
 intro
 word-order
+kunten
