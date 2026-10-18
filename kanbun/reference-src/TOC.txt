@@ -10,3 +10,4 @@ kanbun	読む手順	7章 仮定	condition
 kanbun	読む手順	8章 比較と選択	comparison
 kanbun	読む手順	9章 限定・抑揚・累加	limitation
 kanbun	読む手順	10章 語の使い方一覧	vocabulary
+kanbun	読む手順	11章 文章を読む	reading
