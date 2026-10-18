@@ -368,6 +368,18 @@
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
+      // 生成器はファイルの過不足も見るので Node で呼ぶ。ブラウザに別実装を持たない。
+      test('参考書: 原稿・参照先・生成物と、壊した原稿の検出が一致する', () => {
+        const path = require('path');
+        const { execFileSync } = require('child_process');
+        const root = path.join(__dirname, '..');
+        for (const args of [
+          ['tools/gen-reference.mjs', '--check'],
+          ['tools/reference-md-check.js'],
+          ['tools/reference-check.mjs']
+        ]) execFileSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 30000 });
+      });
+
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'],
