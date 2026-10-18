@@ -9,3 +9,4 @@ passive-causative
 condition
 comparison
 limitation
+vocabulary
