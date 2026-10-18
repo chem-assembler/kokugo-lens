@@ -34,4 +34,3 @@ title: 句法を確かめる
 anchor: step-5
 title: 現代語訳につなぐ
 :::
-

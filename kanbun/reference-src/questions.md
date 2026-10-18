@@ -78,4 +78,3 @@ codes:
   - hango-nya
   - kbn.kuho.hango-nya
 :::
-

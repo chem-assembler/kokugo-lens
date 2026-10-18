@@ -57,4 +57,3 @@ codes:
   - sentaku-izureka
   - kbn.kuho.sentaku-izureka
 :::
-

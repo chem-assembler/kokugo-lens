@@ -34,4 +34,3 @@ title: 返って読む語を見つける
 anchor: order-5
 title: 前に出た目的語を捉える
 :::
-

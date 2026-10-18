@@ -46,4 +46,3 @@ codes:
   - eitan-kana
   - kbn.kuho.eitan-kana
 :::
-

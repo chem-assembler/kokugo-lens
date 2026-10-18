@@ -288,4 +288,3 @@ title: 欲
 codes:
   - kbn.goi.hossu
 :::
-

@@ -82,4 +82,3 @@ codes:
 anchor: exam
 title: 志望校の出題形式に合わせる
 :::
-

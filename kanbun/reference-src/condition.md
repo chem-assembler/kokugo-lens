@@ -33,4 +33,3 @@ codes:
   - katei-iedomo
   - kbn.kuho.katei-iedomo
 :::
-

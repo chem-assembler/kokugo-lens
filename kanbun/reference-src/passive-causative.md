@@ -57,4 +57,3 @@ codes:
   - ukemi-tokoro
   - kbn.kuho.ukemi-tokoro
 :::
-

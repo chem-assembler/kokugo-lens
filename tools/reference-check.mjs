@@ -21,7 +21,7 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kanbun-ref-check-'));
 const write = (f, s) => fs.writeFileSync(path.join(tmp, f), s);
 const read = f => fs.readFileSync(path.join(tmp, f), 'utf8');
 const edit = (f, fn) => write(f, fn(read(f)));
-const add = (id, block) => edit(src + id + '.md', s => s + block + '\n\n');
+const add = (id, block) => edit(src + id + '.md', s => s.trimEnd() + '\n\n' + block + '\n');
 const section = (anchor, code) => ':::section\nanchor: ' + anchor + '\ntitle: 検査用の見出し\ncodes:\n  - ' + code + '\n:::';
 const link = (to, sec = '') => ':::link\nto: ' + to + '\n' + (sec ? 'sec: ' + sec + '\n' : '') + 'text: 行き先を確かめましょう。\n:::';
 function reset() {
