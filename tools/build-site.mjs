@@ -20,7 +20,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const EXCLUDE_DIRS = ['docs', 'video-scripts', 'tools'];   // どの階層でも、この名前のフォルダの中は外す
+const EXCLUDE_DIRS = ['docs', 'video-scripts', 'tools', 'reference-src'];   // 原稿・索引は配信せず、生成した reference.json を配る
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, '_site');
