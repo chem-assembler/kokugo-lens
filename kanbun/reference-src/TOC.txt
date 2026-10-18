@@ -5,3 +5,4 @@ kanbun	読む手順	2章 訓点	kunten
 kanbun	読む手順	3章 否定	hitei
 kanbun	読む手順	4章 疑問と反語	questions
 kanbun	読む手順	5章 詠嘆	exclamation
+kanbun	読む手順	6章 受身と使役	passive-causative

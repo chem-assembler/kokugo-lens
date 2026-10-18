@@ -5,3 +5,4 @@ kunten
 hitei
 questions
 exclamation
+passive-causative
