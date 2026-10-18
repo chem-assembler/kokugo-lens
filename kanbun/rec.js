@@ -267,7 +267,7 @@
 
     let demos = [];
     try {
-      const res = await fetch(new URL('demos.json?v=79', window.location.href).href, { cache: 'no-cache' });
+      const res = await fetch(new URL('demos.json?v=80', window.location.href).href, { cache: 'no-cache' });
       if (res.ok) demos = await res.json();
     } catch (e){
       console.warn('[rec] demos.json のロードに失敗:', e);

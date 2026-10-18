@@ -8,3 +8,4 @@ exclamation
 passive-causative
 condition
 comparison
+limitation
