@@ -6,3 +6,4 @@ hitei
 questions
 exclamation
 passive-causative
+condition
