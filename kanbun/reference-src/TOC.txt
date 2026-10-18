@@ -7,3 +7,4 @@ kanbun	読む手順	4章 疑問と反語	questions
 kanbun	読む手順	5章 詠嘆	exclamation
 kanbun	読む手順	6章 受身と使役	passive-causative
 kanbun	読む手順	7章 仮定	condition
+kanbun	読む手順	8章 比較と選択	comparison

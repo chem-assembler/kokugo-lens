@@ -7,3 +7,4 @@ questions
 exclamation
 passive-causative
 condition
+comparison
