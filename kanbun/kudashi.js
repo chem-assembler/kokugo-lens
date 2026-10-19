@@ -33,7 +33,7 @@
     step !== 'K1' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=85')
+  fetch('texts.json?v=86')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -214,6 +214,14 @@
     k.className = 'kanji';
     k.textContent = t.c;
     card.appendChild(k);
+    // 句読点は白文トレイだけに表示する。読む順へ動かしても採点には混ぜない。
+    // 再読文字の2枚目には、白文の句読点を複製しない。
+    if (t.p && (nth || 1) === 1){
+      const punct = document.createElement('span');
+      punct.className = 'punct';
+      punct.textContent = t.p;
+      card.appendChild(punct);
+    }
 
     const seq = document.createElement('span');
     seq.className = 'seq';

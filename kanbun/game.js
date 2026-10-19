@@ -74,7 +74,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=85')
+  fetch('texts.json?v=86')
     .then(r => r.json())
     .then(data => {
       problems = data.problems.slice()
@@ -262,6 +262,12 @@
       kanji.className = 'kanji';
       kanji.textContent = t.c;
       cell.appendChild(kanji);
+      if (t.p){
+        const punct = document.createElement('span');
+        punct.className = 'punct';
+        punct.textContent = t.p;
+        cell.appendChild(punct);
+      }
 
       if (showYomi){
         const y = t.reread ? (t.reread.first.yomi || '') : (t.yomi || '');
