@@ -432,6 +432,10 @@
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
+      test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {
+        require('child_process').execFileSync(process.execPath,
+          [require('path').join(__dirname, 'yomi-rules-tests.js')], {encoding:'utf8'});
+      });
       // 生成器はファイルの過不足も見るので Node で呼ぶ。ブラウザに別実装を持たない。
       test('参考書: 原稿・参照先・生成物と、壊した原稿の検出が一致する', () => {
         const path = require('path');

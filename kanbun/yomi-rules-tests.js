@@ -27,4 +27,8 @@ assert(run([{c:'如',yomi:'いか'},{c:'何',yomi:'せん',okuri:'セン'}]).err
 const separated = run([{c:'以',yomi:'もつ',okuri:'テ'},{c:'為',yomi:'な',okuri:'ス'},{c:'神',yomi:'かみ',okuri:'ト'}],[0,2,1]);
 assert.equal(separated.errors.length,0); assert.equal(separated.candidates.length,1); count++;
 assert.equal(run([{c:'以',yomi:'おも'},{c:'為',yomi:'へらく'}]).errors.length,0); count++;
+assert(run([{c:'中',yomi:'ちゅう'}]).errors.length); count++;
+assert.equal(run([{c:'中',yomi:'ちう'}]).errors.length,0); count++;
+assert(run([{c:'上',okuri:'ウエニ'}]).errors.length); count++;
+assert.equal(run([{c:'愛',yomi:'あい'}]).errors.length,0); count++;
 console.log('歴史的仮名づかい・熟語の否定対照など '+count+' 件合格');
