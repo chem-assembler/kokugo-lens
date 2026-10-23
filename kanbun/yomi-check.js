@@ -24,10 +24,13 @@
  *      正しいと確かめたものは下の ALLOW に理由つきで書いて通す
  *   3. 置き字（role:'placed'）に yomi/okuri/mark が付いていないこと
  *   4. 仮名書きする字（kana:true）は yomi が空で okuri を持つこと
+ *   5. 歴史的仮名づかい。yomi-rules.js の基本字表にある形は不備とし、
+ *      表にない字・送り仮名の疑わしい形は候補として一覧に出す（止めない）
+ *   6. 熟語の読みの割り当て。二字の yomi+okuri を読み順と照合する
  *
  * ## この検査の限界（承知して使うこと）
  *
- * 捕まえられるのは**上の4つの型に当てはまる誤りだけ**で、任意の読み間違いは捕まえない。
+ * 捕まえられるのは上の型と表に当てはまる誤りで、任意の読み間違いは捕まえない。
  * 実際、「学」の yomi を「まな→まなん」と壊してもこの検査は通る（送り仮名「ビテ」と
  * 重ならないため）。**読みが正しいかどうかは、最後は人が140本を読むしかない。**
  * この検査は「一度直した誤りが再発しないこと」を保証するものであって、
@@ -45,6 +48,7 @@ if (raw.length >= 3 && raw[0] === 0xEF && raw[1] === 0xBB && raw[2] === 0xBF){
   process.exit(1);
 }
 const problems = JSON.parse(raw.toString('utf8')).problems || [];
+const readingChecks = require('./yomi-rules.js').checkReadings(problems);
 
 // ルビの重複に見えるが正しいもの。**送り仮名が助詞である場合だけ**ここに書く
 const ALLOW = {
@@ -63,7 +67,7 @@ const ALLOW = {
 const hira = s => String(s).replace(/[ァ-ヶ]/g,
   c => String.fromCharCode(c.charCodeAt(0) - 0x60));
 
-const errs = [];
+const errs = readingChecks.errors.slice();
 const warns = [];
 let tokens = 0, withYomi = 0;
 
@@ -124,6 +128,8 @@ problems.forEach(p => {
 console.log('読み仮名の検査');
 console.log('  ' + problems.length + ' 問 / ' + tokens + ' トークン / 読みを持つ ' + withYomi + ' 件');
 warns.forEach(m => console.log('  許容 ' + m));
+readingChecks.candidates.forEach(c => console.log('  候補 ' + c.id + ' [' + c.index + ']「' + c.c + '」 ' + c.field + '「' + c.value + '」: ' + c.reason));
+console.log('  候補 ' + readingChecks.candidates.length + ' 件（候補だけでは不合格にしません）');
 console.log('----');
 if (errs.length){
   errs.forEach(m => console.error('NG ' + m));
