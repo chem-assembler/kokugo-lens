@@ -31,4 +31,7 @@ assert(run([{c:'中',yomi:'ちゅう'}]).errors.length); count++;
 assert.equal(run([{c:'中',yomi:'ちう'}]).errors.length,0); count++;
 assert(run([{c:'上',okuri:'ウエニ'}]).errors.length); count++;
 assert.equal(run([{c:'愛',yomi:'あい'}]).errors.length,0); count++;
+assert(run([{c:'相',okuri:'アイ'}]).errors.length); count++;
+assert(run([{c:'自',reread:{first:{yomi:'みづか'},second:{okuri:'ミズカラ',kana:true}}}]).errors.length); count++;
+assert.equal(run([{c:'陽',yomi:'やう'}]).errors.length,0); count++;
 console.log('歴史的仮名づかい・熟語の否定対照など '+count+' 件合格');
