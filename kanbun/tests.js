@@ -8,6 +8,7 @@
   const isNode = (typeof module !== 'undefined') && (typeof require === 'function');
   const K = isNode ? require('./kanbun.js') : window.Kanbun;
   const P = isNode ? require('./progress.js') : window.Progress;
+  const PC = isNode ? require('./punct-check.js') : window.KanbunPunct;
 
   const results = [];
   function test(name, fn){
@@ -34,6 +35,69 @@
   }
 
   function run(problems){
+
+    // ---- 白文の句読点（読み順・採点とは独立） ----
+    test('句読点: p は省略するか読点・句点を1つ持つ', () => {
+      for (const p of problems) for (const t of p.tokens){
+        if (!Object.prototype.hasOwnProperty.call(t, 'p')) continue;
+        ok(typeof t.p === 'string' && /^[、。]$/.test(t.p), p.id + '「' + t.c + '」');
+      }
+    });
+    test('句読点: punct-check の形の検査を全問に通す', () => {
+      eq(PC.checkValues(problems), []);
+    });
+    test('句読点: 不正な p と、明示した空値を検出する', () => {
+      eq(PC.checkValues([{ id: 'ok', tokens: [tk('甲'), tk('乙', null, {p:'、'}), tk('丙', null, {p:'。'})] }]), []);
+      for (const value of ['', null, undefined, false, 1, [], {}, '，', '、。']){
+        const bad = { id:'bad', tokens:[tk('甲', null, {p:value})] };
+        const errors = PC.checkValues([bad]);
+        eq(errors.length, 1);
+        eq([errors[0].id, errors[0].index], ['bad', 0]);
+      }
+    });
+    test('句読点: 返読の途中の読点・句点を検出する', () => {
+      for (const p of ['、', '。']){
+        const problem = { tokens:[tk('読', '二'), tk('漢', null, {p}), tk('文', '一')] };
+        eq(PC.findCrossings(problem), [{step:2, from:2, to:0, boundaries:[{index:1, p}]}]);
+      }
+    });
+    test('句読点: 戻り先の直後は境界、戻り元の直後は越えない', () => {
+      eq(PC.findCrossings({tokens:[tk('読', '二', {p:'、'}), tk('書', '一')]}).length, 1);
+      eq(PC.findCrossings({tokens:[tk('読', '二'), tk('書', '一', {p:'。'})]}), []);
+      eq(PC.findCrossings({tokens:[tk('甲', null, {p:'、'}), tk('乙', null, {p:'。'})]}), []);
+    });
+    test('句読点: 熟語返りは後続字と続けて読み、外の境界だけを調べる', () => {
+      const tokens = [tk('撃', '二', {join:true}), tk('破'), tk('敵'), tk('軍', '一', {p:'。'})];
+      eq(PC.findCrossings({tokens}), []);
+      tokens[2].p = '、';
+      eq(PC.findCrossings({tokens}), [{step:2, from:3, to:0, boundaries:[{index:2, p:'、'}]}]);
+    });
+    test('句読点: 再読文字の1回目を誤検出せず、2回目の返読を検査する', () => {
+      const tokens = [tk('未', '二', {reread:{first:{}, second:{}}}), tk('嘗'), tk('見', '一', {p:'。'})];
+      eq(PC.findCrossings({tokens}), []);
+      tokens[1].p = '、';
+      eq(PC.findCrossings({tokens}), [{step:3, from:2, to:0, boundaries:[{index:1, p:'、'}]}]);
+    });
+    test('句読点: 読まない置き字に付いた境界も検査する', () => {
+      const tokens = [tk('読', '二'), tk('之', null, {role:'placed', p:'、'}), tk('書', '一', {p:'。'})];
+      eq(PC.findCrossings({tokens}), [{step:1, from:2, to:0, boundaries:[{index:1, p:'、'}]}]);
+    });
+    test('句読点: 複数の境界を返り点から調べ、order の帳簿には頼らない', () => {
+      const tokens = [tk('読', '二', {p:'、'}), tk('漢', null, {p:'。'}), tk('文', '一')];
+      const report = PC.check([{id:'probe', tokens, order:[0,1,2], kakikudashi:'検査用'}]);
+      eq(report.errors, []);
+      eq(report.crossings[0].plain, '読、漢。文');
+      eq(report.crossings[0].jumps[0].boundaries, [{index:0,p:'、'}, {index:1,p:'。'}]);
+    });
+    test('句読点: 鴻門之会は節内で返り、句読点は生成・採点に影響しない', () => {
+      const p = problems.find(p => p.id === 'koumon-toso');
+      eq(PC.findCrossings(p), []);
+      const without = {...p, tokens:p.tokens.map(t=>{const c={...t}; delete c.p; return c;})};
+      eq(K.readOrder(p.tokens), K.readOrder(without.tokens));
+      eq(K.toKakikudashi(p.tokens, p.order), p.kakikudashi);
+      eq(K.grade(p.tokens.map(t=>t.mark || []), p), K.grade(without.tokens.map(t=>t.mark || []), without));
+      eq(K.matchesKakikudashi(p.kakikudashi, p), true);
+    });
 
     // ---- readOrder 単体（設計書 §4.1 の検算例＋各機構） ----
     test('一二: 読二書一', () => {
