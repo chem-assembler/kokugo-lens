@@ -149,12 +149,14 @@
     };
     try {
       const [pages, texts, kuho, qa] = await Promise.all([
-        load('reference.json?v=97'), load('texts.json?v=97'), load('kuho.json?v=97'), load('../qa/questions.json')
+        load('reference.json?v=98'), load('texts.json?v=98'), load('kuho.json?v=98'), load('../qa/questions.json')
       ]);
       const book = new ReferenceBook(pages, texts.problems, kuho.types, qa.patterns);
       const params = new URLSearchParams(location.search);
       const context = {};
       for (const key of ['from', 'p', 'mode']) if (params.get(key)) context[key] = params.get(key);
+      const homeQuery = new URLSearchParams(context).toString();
+      doc.getElementById('ref-home').href = 'reference.html' + (homeQuery ? '?' + homeQuery : '');
       doc.getElementById('chapter-list').innerHTML = book.indexHtml(context);
       const target = book.sectionByCode(params.get('code'));
       const requested = params.get('page');

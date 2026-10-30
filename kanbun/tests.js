@@ -96,6 +96,9 @@
         const target = book.sectionByCode(type.id);
         ok(target, type.id);
         ok(book.pageHtml(target.page).includes('id="' + R.anchorId(target.section.anchor) + '"'), type.id);
+        const linked = problems.filter(p => (p.kuho || []).includes(type.id)).map(p => p.id).sort();
+        eq(linked, type.examples.slice().sort(), type.id + ' の双方向の対応');
+        ok(linked.length > 0, type.id + ' の練習問題が空でない');
       }
       for (const page of book.pages) for (const block of page.blocks.filter(b => b.kind === 'link' && !b.soon)) {
         const target = book.pageById(block.to);
@@ -132,6 +135,12 @@
       let threw = false;
       try { new R.ReferenceBook(pages, [], []); } catch (_) { threw = true; }
       ok(threw, '型を複数の節に置くと検出する');
+    });
+    test('参考書: 型 id を足しても、既存のカテゴリによる難度は変わらない', () => {
+      for (const p of problems) {
+        const categories = (p.kuho || []).filter(c => Object.prototype.hasOwnProperty.call(data.kuho.categories, c));
+        eq(K.difficulty(p), K.difficulty(Object.assign({}, p, {kuho:categories})), p.id);
+      }
     });
 
     // ---- 白文の句読点（読み順・採点とは独立） ----
@@ -545,23 +554,52 @@
           ['tools/reference-check.mjs']
         ]) execFileSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 30000 });
       });
+      test('参考書: 型と問題を結ぶ道具が両側を更新する', () => {
+        const fs = require('fs'), path = require('path'), os = require('os');
+        const {execFileSync} = require('child_process');
+        const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kanbun-links-'));
+        try {
+          fs.mkdirSync(path.join(tmp, 'kanbun/tools'), {recursive:true});
+          const tool = path.join(tmp, 'kanbun/tools/link-verify.js');
+          fs.copyFileSync(path.join(__dirname, 'tools/link-verify.js'), tool);
+          const write = (f, data) => fs.writeFileSync(path.join(tmp, f), JSON.stringify(data));
+          write('kanbun/kuho.json', {types:[{id:'type', name:'検査の型', category:'hitei', markers:['不'], examples:[]}]});
+          write('kanbun/texts.json', {problems:[{id:'sample', tokens:[{c:'不'}], kuho:['hitei'], kakikudashi:'ず'}]});
+          write('plan.json', {type:['sample']});
+          execFileSync(process.execPath, [tool, path.join(tmp, 'plan.json'), '--write'], {encoding:'utf8'});
+          const read = f => JSON.parse(fs.readFileSync(path.join(tmp, f), 'utf8'));
+          eq(read('kanbun/kuho.json').types[0].examples, ['sample']);
+          eq(read('kanbun/texts.json').problems[0].kuho, ['hitei', 'type']);
+        } finally {
+          const target = fs.realpathSync(tmp), tempRoot = fs.realpathSync(os.tmpdir());
+          if (path.dirname(target) !== tempRoot || !path.basename(target).startsWith('kanbun-links-')) throw new Error('検査用フォルダーの削除先が想定外です');
+          fs.rmSync(target, {recursive:true});
+        }
+      });
 
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
-        const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'],
+        const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
                        ['rec.js', 'index.html'], ['reference.js', 'reference.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+        const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
           const htmlSrc = fs.readFileSync(path.join(__dirname, html), 'utf8');
           const inJs = (jsSrc.match(/\?v=(\d+)/g) || []).map(s => s.slice(3));
           const inHtml = (htmlSrc.match(/\?v=(\d+)/g) || []).map(s => s.slice(3));
           const all = inJs.concat(inHtml);
+          all.forEach(v => versions.add(v));
           if (!all.length) continue;
           const uniq = [...new Set(all)];
           if (uniq.length !== 1){
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html']) {
+          const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
+          for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
+        }
+        eq(versions.size, 1, '漢文の全ページの版と表示を揃える');
       });
     }
 
@@ -634,6 +672,113 @@
     return results;
   }
 
+  // 実ページを1枚ずつ開く。iframe を非表示にはせず、携帯幅で描画する。
+  async function runBrowser(problems, data){
+    const rs = [];
+    let savedProgress = null, canRestore = false;
+    try { savedProgress = localStorage.getItem(P.KEY); canRestore = true; } catch (_) { /* 保存できない環境でも検査する */ }
+    const frame = document.createElement('iframe');
+    frame.title = '参考書と問題の往復を確かめる';
+    frame.style.cssText = 'position:absolute;left:-10000px;width:375px;height:812px;border:0;';
+    document.body.appendChild(frame);
+    const wait = async fn => {
+      const until = Date.now() + 20000;
+      while (Date.now() < until) {
+        if (fn()) return;
+        await new Promise(resolve => setTimeout(resolve, 30));
+      }
+      throw new Error('画面の読み込みが終わりませんでした: ' + frame.src);
+    };
+    const open = async (url, ready) => {
+      await new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('ページを開けません: ' + url)), 20000);
+        frame.onload = () => { clearTimeout(timer); resolve(); };
+        frame.src = url;
+      });
+      await wait(() => ready(frame.contentWindow));
+      return frame.contentWindow;
+    };
+    const refReady = w => w.document.documentElement.dataset.referenceReady === 'true';
+    const gameReady = w => w.kanbunApp && w.kanbunApp.ready;
+    const check = async (name, fn) => {
+      try { await fn(); rs.push({name, ok:true}); }
+      catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
+    };
+    try {
+      await check('参考書の画面: 型 id から節へ着地し、375px幅で読める', async () => {
+        const w = await open('reference.html?code=hitei-fu', refReady);
+        eq(w.location.hash, '#ref-sec-hitei-fu');
+        eq(new URLSearchParams(w.location.search).get('page'), 'hitei');
+        ok(w.document.getElementById('ref-sec-hitei-fu'));
+        ok(w.document.documentElement.scrollWidth <= w.innerWidth, 'ページの横はみ出し');
+        const details = w.document.querySelector('.section-exercises');
+        details.open = true;
+        ok(details.querySelector('a[href*="from=reference"]'), '練習問題がある');
+      });
+      await check('参考書の画面: クリア後の全型チップから解説へ進み、元の問題へ戻れる', async () => {
+        const ids = new Set(data.kuho.types.map(t => t.id));
+        const p = problems.find(p => (p.kuho || []).filter(c => ids.has(c)).length > 1);
+        ok(p, '複数の型を持つ実際の問題を使う');
+        let w = await open('index.html?p=' + p.id + '&mode=L1', gameReady);
+        eq(w.document.querySelectorAll('.reference-links a').length, 0, '解答前にチップを出さない');
+        for (const i of p.order) w.document.querySelector('.cell[data-i="' + i + '"]').click();
+        const chips = Array.from(w.document.querySelectorAll('.reference-links a'));
+        eq(chips.map(a => a.dataset.kuho), p.kuho.filter(c => ids.has(c)));
+        const chipHrefs = chips.map(a => a.href);
+        for (const href of chipHrefs) {
+          w = await open(href, refReady);
+          const code = new URL(href).searchParams.get('code');
+          const section = w.kanbunReference.book.sectionByCode(code);
+          eq(w.location.hash, '#' + R.anchorId(section.section.anchor));
+          ok(w.document.getElementById('ref-back').hidden === false);
+          const back = new URL(w.document.querySelector('#ref-back a').href);
+          eq(back.searchParams.get('p'), p.id);
+          eq(back.searchParams.get('mode'), 'L1');
+        }
+        const back = w.document.querySelector('#ref-back a').href;
+        w = await open(back, gameReady);
+        eq(w.kanbunApp.problem.id, p.id);
+        eq(w.kanbunApp.mode, 'L1');
+        ok(w.document.getElementById('reference-back').hidden, 'from の名乗りがなければ帯を出さない');
+      });
+      await check('参考書の画面: 例文と節末から問題へ進み、読んでいた節に戻れる', async () => {
+        let w = await open('reference.html?page=vocabulary', refReady);
+        const example = w.document.querySelector('[data-example]');
+        const id = example.dataset.example;
+        const href = example.querySelector('.practice-link').href;
+        const query = new URL(href).searchParams;
+        eq(query.get('from'), 'reference');
+        w = await open(href, gameReady);
+        eq(w.kanbunApp.problem.id, id);
+        ok(!w.document.getElementById('reference-back').hidden);
+        w = await open(w.document.querySelector('#reference-back a').href, refReady);
+        eq(w.location.hash, '#ref-sec-' + query.get('sec'));
+        ok(w.document.getElementById(w.location.hash.slice(1)));
+        w = await open('reference.html?code=hitei-fu', refReady);
+        const exerciseHref = w.document.querySelector('.section-exercises a[href*="from=reference"]').href;
+        w = await open(exerciseHref, gameReady);
+        eq(w.kanbunApp.problem.id, new URL(exerciseHref).searchParams.get('p'));
+        ok(!w.document.getElementById('reference-back').hidden);
+      });
+      await check('参考書の画面: 未知のコード・章でも目次へ戻れ、別の来訪者に帯を出さない', async () => {
+        for (const q of ['?code=missing', '?page=missing']) {
+          const w = await open('reference.html' + q, refReady);
+          ok(!w.document.getElementById('ref-notice').hidden);
+          eq(w.document.querySelectorAll('.chapter-index a').length, data.pages.length);
+        }
+        const w = await open('index.html?p=rongo-manabite&page=hitei&from=other', gameReady);
+        ok(w.document.getElementById('reference-back').hidden);
+      });
+    } finally {
+      frame.remove();
+      if (canRestore) {
+        if (savedProgress === null) localStorage.removeItem(P.KEY);
+        else localStorage.setItem(P.KEY, savedProgress);
+      }
+    }
+    return rs;
+  }
+
   if (isNode){
     const fs = require('fs'), path = require('path');
     const texts = JSON.parse(fs.readFileSync(path.join(__dirname, 'texts.json'), 'utf8'));
@@ -644,6 +789,6 @@
     console.log(rs.length + ' 件中 ' + (rs.length - fails.length) + ' 件合格 / ' + fails.length + ' 件失敗');
     process.exit(fails.length ? 1 : 0);
   } else {
-    window.KanbunTests = { run };
+    window.KanbunTests = { run, runBrowser };
   }
 })();

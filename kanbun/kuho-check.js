@@ -17,7 +17,8 @@
  *   9. confuse の参照先 ID が実在し、自分自身を指していないこと
  *  10. 実例の白文に、その型の標識（markers）がひとつ以上現れること
  *  11. yomi を持つ型は、実例の書き下しにその読みがひとつ以上現れること
- *  12. 実例の問題の kuho に、その型のカテゴリが含まれること（型→問題と問題→型の往復が合うこと）
+ *  12. 実例の問題の kuho に、その型のカテゴリと型 id が含まれること
+ *  13. 問題の型 id と examples が双方向に一致し、未知・重複タグがないこと
  *
  * 10〜12 は「解説面に嘘の実例が出る」事故を止めるためにある（2026-08-12 追加）。
  * 10 だけでは足りない。標識が一般的な1字だと偶然の一致をすり抜けるため（実際に
@@ -130,6 +131,9 @@ types.forEach((t, idx) => {
     if ((Array.isArray(p.kuho) ? p.kuho : []).indexOf(t.category) < 0){
       err(where + ': 実例「' + id + '」の kuho に「' + t.category + '」がありません');
     }
+    if (!(p.kuho || []).includes(t.id)){
+      err(where + ': 実例「' + id + '」の kuho に型 id「' + t.id + '」がありません');
+    }
   });
 
   // 7. blank は kakikudashi にちょうど1回出ること（○○ に置き換える位置が一意に決まる）
@@ -154,6 +158,17 @@ types.forEach((t, idx) => {
 });
 
 // confuse の参照先は全 id が出そろってから確かめる
+const typeById = new Map(types.map(t => [t.id, t]));
+for (const p of texts.problems){
+  const tags = p.kuho || [];
+  if (new Set(tags).size !== tags.length) err(p.id + ': kuho のタグが重複しています');
+  for (const tag of tags){
+    if (CATEGORIES.includes(tag)) continue;
+    const type = typeById.get(tag);
+    if (!type) err(p.id + ': 未知の kuho タグ「' + tag + '」です');
+    else if (!type.examples.includes(p.id)) err(p.id + ': 型「' + tag + '」の examples に対応がありません');
+  }
+}
 types.forEach((t, idx) => {
   (Array.isArray(t.confuse) ? t.confuse : []).forEach(id => {
     if (!seenId.has(id)){

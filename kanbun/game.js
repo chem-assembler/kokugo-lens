@@ -11,6 +11,7 @@
   const sameArray = (a, b) => a.length === b.length && a.every((v, i) => v === b[i]);
 
   let problems = [];
+  let referenceTypes = new Map();
   let problem = null;
   let mode = 'L1';
   let showAnswer = false;
@@ -74,9 +75,12 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=97')
-    .then(r => r.json())
-    .then(data => {
+  Promise.all(['texts.json?v=98', 'kuho.json?v=98'].map(url => fetch(url).then(r => {
+    if (!r.ok) throw new Error(url + ' HTTP ' + r.status);
+    return r.json();
+  })))
+    .then(([data, kuho]) => {
+      referenceTypes = new Map(kuho.types.map(type => [type.id, type]));
       problems = data.problems.slice()
         .sort((a, b) => K.difficulty(a) - K.difficulty(b));
       const sel = $('problem-select');
@@ -88,6 +92,7 @@
       refreshOptionLabels();
       // 志望校の案内（guide.html）から ?mode=L3 のように指定して開ける
       const params = new URLSearchParams(location.search);
+      renderReferenceBack(params);
       const want = params.get('mode');
       if (want && [...$('mode-select').options].some(o => o.value === want)){
         mode = want;
@@ -104,7 +109,24 @@
       sel.value = String(start);
       loadProblem(start);
     })
-    .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
+    .catch(e => {
+      $('meta').textContent = '問題を読み込めませんでした。ページを開き直してみてください。';
+      console.error(e);
+    });
+
+  // 来た章と節だけを受け取る。参考書の章立てはここに持たない。
+  function renderReferenceBack(params){
+    const band = $('reference-back');
+    if (params.get('from') !== 'reference' || !params.get('page')) return;
+    const q = new URLSearchParams({page:params.get('page')});
+    const sec = params.get('sec');
+    const a = document.createElement('a');
+    a.href = 'reference.html?' + q + (sec ? '#ref-sec-' + encodeURIComponent(sec) : '');
+    a.textContent = '読んでいた節に戻る';
+    band.textContent = '参考書から来ました。 ';
+    band.appendChild(a);
+    band.hidden = false;
+  }
 
   // ---- 学習履歴の表示 ----------------------------------------------------
   // 選択肢の頭に印を出す。◎=全モード制覇 / ○=どれか / 無印=未着手
@@ -454,6 +476,25 @@
       if (problem.note) html += '<br><span class="note">※ ' + K.noteHtml(problem.note) + '</span>';
     }
     $('meta').innerHTML = html;
+    if (cleared()){
+      const types = (problem.kuho || []).map(code => referenceTypes.get(code)).filter(Boolean);
+      if (!types.length) return;
+      const links = document.createElement('nav');
+      links.className = 'reference-links';
+      links.setAttribute('aria-label', 'この問題の句法の解説');
+      const label = document.createElement('p');
+      label.textContent = '📖 この句法を読む';
+      links.appendChild(label);
+      for (const type of types){
+        const a = document.createElement('a');
+        // 着地する節は reference.js が型 id から解決する。
+        a.href = 'reference.html?' + new URLSearchParams({code:type.id, from:'kanbun', p:problem.id, mode});
+        a.dataset.kuho = type.id;
+        a.textContent = type.name || type.label;
+        links.appendChild(a);
+      }
+      $('meta').appendChild(links);
+    }
   }
 
   function showResult(cls, text){

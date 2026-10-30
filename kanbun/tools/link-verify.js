@@ -28,6 +28,7 @@ const KANBUN = path.join(__dirname, '..');
 const kuhoPath = path.join(KANBUN, 'kuho.json');
 const kuho = JSON.parse(fs.readFileSync(kuhoPath, 'utf8'));
 const texts = JSON.parse(fs.readFileSync(path.join(KANBUN, 'texts.json'), 'utf8'));
+const textsPath = path.join(KANBUN, 'texts.json');
 
 const file = process.argv[2];
 const write = process.argv.indexOf('--write') >= 0;
@@ -92,9 +93,14 @@ console.log('不備なし');
 if (write){
   for (const [tid, ids] of Object.entries(plan)){
     const t = typeById.get(tid);
-    (ids || []).forEach(pid => { if (!t.examples.includes(pid)) t.examples.push(pid); });
+    (ids || []).forEach(pid => {
+      if (!t.examples.includes(pid)) t.examples.push(pid);
+      const p = probById.get(pid);
+      if (!p.kuho.includes(tid)) p.kuho.push(tid);
+    });
   }
   fs.writeFileSync(kuhoPath, JSON.stringify(kuho, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(textsPath, JSON.stringify(texts, null, 2) + '\n', 'utf8');
   const used = new Set(kuho.types.flatMap(t => t.examples || []));
   console.log('kuho.json に収録した（結び付いた問題 ' + used.size + ' / ' + texts.problems.length + '）');
 } else {
