@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>漢文の参考書｜国語レンズ</title>
+<style>
+  :root { --ink:#322a20; --paper:#faf6ec; --panel:#fffdf6; --frame:#d8cdb4; --accent:#b3410e; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif; line-height:1.9; }
+  a { color:#265f4a; text-underline-offset:.2em; overflow-wrap:anywhere; }
+  a:hover { color:var(--accent); }
+  a:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline:3px solid #b3410e; outline-offset:3px; }
+  .site-header { padding:.65em 1em; background:#2e2618; color:#f5efdf; display:flex; flex-wrap:wrap; align-items:baseline; gap:.7em; font-family:"Yu Gothic","Meiryo",sans-serif; }
+  .site-header a { color:inherit; }
+  .version { margin-left:auto; color:#cfc4a6; font-size:.75em; }
+  .site-nav { display:flex; flex-wrap:wrap; gap:.5em 1.2em; padding:.6em 1em; border-bottom:1px solid var(--frame); font:.85em/1.8 "Yu Gothic","Meiryo",sans-serif; }
+  .reading-layout { display:grid; grid-template-columns:16em minmax(0,48em); gap:2em; max-width:71em; margin:auto; padding:1.5em 1em 4em; align-items:start; }
+  .chapter-nav { position:sticky; top:1em; max-height:calc(100vh - 2em); overflow:auto; padding:.8em; border:1px solid var(--frame); border-radius:.5em; background:var(--panel); font:.85em/1.8 "Yu Gothic","Meiryo",sans-serif; }
+  .chapter-nav summary { cursor:pointer; font-weight:bold; padding:.3em; }
+  .chapter-nav ol, .chapter-index { list-style:none; margin:.5em 0; padding:0; }
+  .chapter-nav a, .chapter-index a { display:block; padding:.5em; text-decoration:none; border-radius:.3em; }
+  .chapter-nav a[aria-current] { background:#e7eee1; font-weight:bold; }
+  .chapter-label { display:inline-block; min-width:3.5em; font-size:.85em; color:#776a52; }
+  main { min-width:0; }
+  h1 { font-size:1.8em; line-height:1.5; margin:.2em 0 .7em; }
+  h2 { font-size:1.28em; line-height:1.6; }
+  h3 { font-size:1.05em; }
+  p { margin:.8em 0; }
+  .chapter-heading > p:first-child { color:#776a52; margin:0; }
+  .chapter-index a { border-bottom:1px solid var(--frame); }
+  .section-toc { padding:.6em 1.2em; border-left:3px solid var(--frame); font:.9em/1.9 "Yu Gothic","Meiryo",sans-serif; }
+  .section-toc summary { cursor:pointer; font-weight:bold; padding:.4em 0; }
+  .section-toc ul { padding-left:1.2em; columns:2; column-gap:2em; }
+  .section-toc li { break-inside:avoid; padding:.2em 0; }
+  .ref-section { scroll-margin-top:1em; margin:2.5em 0; padding-top:.1em; }
+  .ref-section > h2 { padding-bottom:.4em; border-bottom:1px solid var(--frame); }
+  .ref-example { margin:1.5em 0; padding:1.2em; background:var(--panel); border:1px solid var(--frame); border-radius:.5em; }
+  figcaption { color:#776a52; font-size:.85em; }
+  .ref-hakubun { overflow-wrap:anywhere; }
+  .ref-hakubun b { margin-right:.6em; font-size:.8em; color:#776a52; }
+  .ref-kunten-scroll { overflow-x:auto; max-width:100%; padding:.6em 0; }
+  .ref-kunten { writing-mode:vertical-rl; height:18em; margin-left:auto; font-size:1.15em; line-height:1; }
+  .ref-cell { display:inline-block; position:relative; width:3.8em; height:2.9em; }
+  .ref-kanji { position:absolute; left:50%; top:0; transform:translateX(-50%); font-size:1.5em; line-height:1.5; }
+  .ref-punct { position:absolute; left:1.7em; top:2em; font-size:.8em; }
+  .ref-yomi, .ref-okuri { position:absolute; left:calc(50% + 1.7em); writing-mode:vertical-rl; font-size:.48em; }
+  .ref-yomi { top:.2em; color:#776a52; }
+  .ref-okuri { top:3.3em; }
+  .ref-yomi.second, .ref-okuri.second { left:calc(50% - 2.7em); }
+  .ref-mark { position:absolute; top:2.4em; left:.6em; color:var(--accent); font-size:.65em; font-weight:bold; }
+  .ref-join { position:absolute; left:.5em; top:2.4em; width:.1em; height:.8em; background:var(--accent); }
+  dl { margin:1em 0; }
+  dt { font-size:.8em; color:#776a52; }
+  dd { margin:0 0 .7em; overflow-wrap:anywhere; }
+  .practice-link { display:inline-block; padding:.25em .8em; border:1px solid #9cb29e; border-radius:.4em; }
+  .ref-table-scroll { overflow-x:auto; max-width:100%; margin:1.2em 0; }
+  table { width:100%; border-collapse:collapse; font-size:.9em; line-height:1.8; }
+  caption { text-align:left; font-weight:bold; padding:.4em; }
+  th, td { min-width:7em; padding:.6em; border:1px solid var(--frame); vertical-align:top; }
+  th { background:#eee7d7; }
+  .ref-callout, .ref-mistake { margin:1.3em 0; padding:.6em 1em; border-left:4px solid #9cb29e; background:#f0f3e9; }
+  .ref-mistake, .tone-caution, .tone-confusing { border-color:#bc7851; background:#fbefe3; }
+  .ref-wrong { color:#785b4f; }
+  .ref-mistake b { margin-right:.4em; }
+  .ref-contrast { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.7em; margin:1.3em 0; }
+  .ref-contrast > div { padding:.4em .9em; background:var(--panel); border:1px solid var(--frame); border-radius:.4em; }
+  .contrast-why { grid-column:1 / -1; margin:.2em 0; }
+  .section-exercises { padding:.6em .8em; margin-top:1.5em; background:#eeeede; border-radius:.4em; font:.9em/1.8 "Yu Gothic","Meiryo",sans-serif; }
+  .section-exercises summary { cursor:pointer; padding:.3em; color:#265f4a; }
+  .section-exercises ul { padding-left:1.3em; }
+  .section-exercises li { margin:.5em 0; }
+  .section-exercises a { display:inline-block; padding:.2em 0; }
+  .section-exercises small { display:block; color:#776a52; }
+  .chapter-turn { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1em; border-top:1px solid var(--frame); padding-top:1em; }
+  .back-band, #ref-notice { padding:.7em 1em; background:#e7eee1; border-bottom:1px solid var(--frame); font:.9em/1.8 "Yu Gothic","Meiryo",sans-serif; }
+  .back-band a { margin-left:.7em; }
+  [hidden] { display:none !important; }
+  @media (max-width:760px) {
+    .reading-layout { display:block; padding:1em .85em 3em; }
+    .chapter-nav { position:static; max-height:none; margin-bottom:1.5em; }
+    .chapter-nav details:not([open]) { margin:0; }
+    .section-toc ul { columns:1; }
+    .ref-contrast { grid-template-columns:minmax(0,1fr); }
+    .ref-example { padding:.85em; }
+    h1 { font-size:1.5em; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header"><a href="index.html">返り点でみる漢文</a><span>漢文の参考書</span><span class="version">v97</span></header>
+<nav class="site-nav" aria-label="漢文の学習"><a href="index.html">訓点の問題</a><a href="kudashi.html">書き下し練習</a><a href="kuho.html">句法クイズ</a><a href="../qa/">一問一答</a><a href="guide.html">志望校から選ぶ</a></nav>
+<div id="ref-back" class="back-band" hidden></div>
+<p id="ref-notice" role="status" hidden></p>
+<div class="reading-layout">
+  <aside class="chapter-nav"><details id="chapter-menu"><summary>参考書の目次</summary><nav aria-label="参考書の章"><ol id="chapter-list"></ol></nav></details></aside>
+  <main id="ref-content" aria-live="polite"><p>参考書を読み込んでいます。</p></main>
+</div>
+<script>if (matchMedia('(min-width:761px)').matches) document.getElementById('chapter-menu').open = true;</script>
+<script src="reference.js?v=97"></script>
+</body>
+</html>

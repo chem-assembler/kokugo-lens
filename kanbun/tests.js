@@ -9,6 +9,7 @@
   const K = isNode ? require('./kanbun.js') : window.Kanbun;
   const P = isNode ? require('./progress.js') : window.Progress;
   const PC = isNode ? require('./punct-check.js') : window.KanbunPunct;
+  const R = isNode ? require('./reference.js') : window.KanbunReference;
 
   const results = [];
   function test(name, fn){
@@ -34,7 +35,104 @@
     return t;
   }
 
-  function run(problems){
+  function run(problems, referenceData){
+    results.length = 0;
+    const data = referenceData || (isNode ? {
+      pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json')
+    } : null);
+    if (!data) throw new Error('参考書の検査データがありません');
+    const book = new R.ReferenceBook(data.pages, problems, data.kuho.types, data.qa.patterns);
+
+    test('参考書: 目次から12章すべてへ進める', () => {
+      eq(book.pages.length, 12);
+      const html = book.indexHtml();
+      for (const page of book.pages) ok(html.includes('page=' + page.id), page.id);
+    });
+    for (const page of book.pages) {
+      test('参考書 ' + page.id + ': 全節と節末の問題を描ける', () => {
+        const html = book.pageHtml(page);
+        for (const section of page.blocks.filter(b => b.kind === 'section')) {
+          ok(html.includes('id="' + R.anchorId(section.anchor) + '"'), section.anchor);
+          for (const code of section.codes || []) {
+            eq(book.sectionByCode(code).section.anchor, section.anchor, code);
+            if (book.patterns.has(code)) ok(html.includes('code=' + encodeURIComponent(code)), code);
+          }
+          const expected = problems.filter(p => (p.kuho || []).some(c =>
+            book.types.has(c) && (section.codes || []).includes(c))).map(p => p.id);
+          eq(book.sectionProblems(section).map(p => p.id), expected, section.anchor);
+          for (const id of expected) ok(html.includes('p=' + id + '&amp;from=reference&amp;page=' + page.id), id);
+        }
+        if (!isNode) {
+          const box = document.createElement('div');
+          box.innerHTML = html;
+          eq(box.querySelectorAll('.ref-section').length, page.blocks.filter(b => b.kind === 'section').length);
+          for (const a of box.querySelectorAll('.section-toc a')) {
+            ok(box.querySelector(new URL(a.href).hash), a.href);
+          }
+        }
+      });
+      for (const block of page.blocks.filter(b => b.kind === 'example')) {
+        test('参考書の例 ' + page.id + '/' + block.id + ': 白文・訓点・書き下し・意味を問題から描く', () => {
+          const p = problems.find(p => p.id === block.id);
+          ok(p, block.id);
+          const html = book.exampleHtml(block.id, page);
+          for (const text of [R.hakubun(p), p.kakikudashi, p.meaning]) ok(html.includes(R.inline(text)), text);
+          eq((html.match(/class="ref-cell"/g) || []).length, p.tokens.length);
+          for (const t of p.tokens) if (t.mark && t.mark.length) ok(html.includes(R.marksText(t.mark)), p.id);
+          ok(html.includes('この問題を解く'));
+          if (!isNode) {
+            const box = document.createElement('div');
+            box.innerHTML = html;
+            eq(box.querySelector('figure').dataset.example, p.id);
+            eq(box.querySelector('.ref-hakubun').textContent, '白文 ' + R.hakubun(p));
+            eq(Array.from(box.querySelectorAll('dd')).map(el => el.textContent), [p.kakikudashi, p.meaning]);
+            eq(Array.from(box.querySelectorAll('.ref-kanji')).map(el => el.textContent).join(''), p.tokens.map(t => t.c).join(''));
+          }
+        });
+      }
+    }
+    test('参考書: 全句法の型は実在する節へ解決でき、リンクの anchor が実在する', () => {
+      for (const type of data.kuho.types) {
+        const target = book.sectionByCode(type.id);
+        ok(target, type.id);
+        ok(book.pageHtml(target.page).includes('id="' + R.anchorId(target.section.anchor) + '"'), type.id);
+      }
+      for (const page of book.pages) for (const block of page.blocks.filter(b => b.kind === 'link' && !b.soon)) {
+        const target = book.pageById(block.to);
+        ok(target, block.to);
+        if (block.sec) ok(target.blocks.some(b => b.kind === 'section' && b.anchor === block.sec), block.sec);
+      }
+    });
+    test('参考書: 全種類のブロックと強調を描き、準備中はリンクにしない', () => {
+      const page = {id:'synthetic', title:'検査', blocks:[]};
+      const fixtures = [
+        {kind:'text', text:'説明<b>強調</b>'}, {kind:'heading', title:'小見出し'},
+        {kind:'list', ordered:true, items:['甲', '乙']},
+        {kind:'table', head:['甲', '乙'], rows:[['丙', '丁']], align:['left', 'right'], caption:'表'},
+        {kind:'callout', tone:'caution', text:'確かめましょう。'},
+        {kind:'link', to:'intro', sec:'step-1', text:'読む手順へ'},
+        {kind:'mistake', wrong:'誤り', right:'正しい読み', why:'読み方を比べましょう。'},
+        {kind:'contrast', left:'左の読み', right:'右の読み', why:'違いを確かめましょう。'}
+      ];
+      for (const block of fixtures) ok(book.blockHtml(block, page).length > 10, block.kind);
+      ok(book.blockHtml(fixtures[0], page).includes('<b>強調</b>'));
+      ok(book.blockHtml(fixtures[2], page).startsWith('<ol>'));
+      ok(!book.blockHtml({kind:'link', to:'future', text:'次の解説', soon:true}, page).includes('href='));
+      eq(R.inline('<script>悪いコード</script>'), '&lt;script&gt;悪いコード&lt;/script&gt;');
+      eq(book.sectionByCode('存在しない型'), null);
+      let threw = false;
+      try { book.exampleHtml('存在しない例', page); } catch (_) { threw = true; }
+      ok(threw, '不明な例文を黙って省略しない');
+    });
+    test('参考書: category タグは型 id の代わりに集めない・型の重複は検出する', () => {
+      const pages = [{id:'test', blocks:[{kind:'section', anchor:'a', title:'節', codes:['型']}]}];
+      const b = new R.ReferenceBook(pages, [{id:'type', kuho:['型']}, {id:'category', kuho:['分類']}], [{id:'型'}]);
+      eq(b.sectionProblems(pages[0].blocks[0]).map(p => p.id), ['type']);
+      pages[0].blocks.push({kind:'section', anchor:'b', codes:['型']});
+      let threw = false;
+      try { new R.ReferenceBook(pages, [], []); } catch (_) { threw = true; }
+      ok(threw, '型を複数の節に置くと検出する');
+    });
 
     // ---- 白文の句読点（読み順・採点とは独立） ----
     test('句読点: p は省略するか読点・句点を1つ持つ', () => {
@@ -451,7 +549,7 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'],
-                       ['rec.js', 'index.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['rec.js', 'index.html'], ['reference.js', 'reference.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
           const htmlSrc = fs.readFileSync(path.join(__dirname, html), 'utf8');

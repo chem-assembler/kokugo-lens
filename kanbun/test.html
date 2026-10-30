@@ -19,18 +19,20 @@
 </style>
 </head>
 <body>
-<h1>返り点でみる漢文 — 回帰テスト <span class="version">v96</span></h1>
+<h1>返り点でみる漢文 — 回帰テスト <span class="version">v97</span></h1>
 <div id="summary">実行中…</div>
 <ul id="list"></ul>
-<script src="kanbun.js?v=96"></script>
-<script src="progress.js?v=96"></script>
-<script src="punct-check.js?v=96"></script>
-<script src="tests.js?v=96"></script>
+<script src="kanbun.js?v=97"></script>
+<script src="progress.js?v=97"></script>
+<script src="punct-check.js?v=97"></script>
+<script src="reference.js?v=97"></script>
+<script src="tests.js?v=97"></script>
 <script>
-fetch('texts.json?v=96')
-  .then(r => r.json())
-  .then(texts => {
-    const rs = window.KanbunTests.run(texts.problems);
+Promise.all(['texts.json?v=97', 'reference.json?v=97', 'kuho.json?v=97', '../qa/questions.json'].map(url =>
+  fetch(url).then(r => { if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); })
+))
+  .then(([texts, pages, kuho, qa]) => {
+    const rs = window.KanbunTests.run(texts.problems, {pages, kuho, qa});
     const fails = rs.filter(r => !r.ok);
     const sum = document.getElementById('summary');
     sum.textContent = rs.length + ' 件中 ' + (rs.length - fails.length) + ' 件合格 / ' + fails.length + ' 件失敗';
