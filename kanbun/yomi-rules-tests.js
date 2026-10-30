@@ -34,4 +34,16 @@ assert.equal(run([{c:'愛',yomi:'あい'}]).errors.length,0); count++;
 assert(run([{c:'相',okuri:'アイ'}]).errors.length); count++;
 assert(run([{c:'自',reread:{first:{yomi:'みづか'},second:{okuri:'ミズカラ',kana:true}}}]).errors.length); count++;
 assert.equal(run([{c:'陽',yomi:'やう'}]).errors.length,0); count++;
+// 東韻の大字形と尤韻の形を混ぜない。正しい字音でも未確認形は候補に残す。
+for (const [c,right] of [['口','こう'],['同','どう'],['宋','そう'],['崩','ほう'],['擁','よう']]){
+  const r=run([{c,yomi:right}]);
+  assert.equal(r.errors.length,0); assert.equal(r.candidates.length,0); count++;
+}
+assert.equal(run([{c:'口',yomi:'こうべ'}]).errors.length,0); count++;
+assert.equal(run([{c:'口',yomi:'こうべ'}]).candidates.length,1); count++;
+assert.equal(run([{c:'口',okuri:'コウ'}]).candidates.length,1); count++;
+assert.equal(run([{c:'擁',yomi:'やう'}]).errors.length,0); count++;
+const confirmedReread=run([{c:'同',reread:{first:{yomi:'どう'},second:{yomi:'どう'}}}]);
+assert.equal(confirmedReread.candidates.length,0); count++;
+assert(run([{c:'相',yomi:'しゃう'}]).errors.length); count++;
 console.log('歴史的仮名づかい・熟語の否定対照など '+count+' 件合格');
