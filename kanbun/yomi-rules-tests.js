@@ -28,7 +28,7 @@ const separated = run([{c:'以',yomi:'もつ',okuri:'テ'},{c:'為',yomi:'な',o
 assert.equal(separated.errors.length,0); assert.equal(separated.candidates.length,1); count++;
 assert.equal(run([{c:'以',yomi:'おも'},{c:'為',yomi:'へらく'}]).errors.length,0); count++;
 assert(run([{c:'中',yomi:'ちゅう'}]).errors.length); count++;
-assert.equal(run([{c:'中',yomi:'ちう'}]).errors.length,0); count++;
+assert(run([{c:'中',yomi:'ちう'}]).errors.length); count++;
 assert(run([{c:'上',okuri:'ウエニ'}]).errors.length); count++;
 assert.equal(run([{c:'愛',yomi:'あい'}]).errors.length,0); count++;
 assert(run([{c:'相',okuri:'アイ'}]).errors.length); count++;
@@ -46,4 +46,18 @@ assert.equal(run([{c:'擁',yomi:'やう'}]).errors.length,0); count++;
 const confirmedReread=run([{c:'同',reread:{first:{yomi:'どう'},second:{yomi:'どう'}}}]);
 assert.equal(confirmedReread.candidates.length,0); count++;
 assert(run([{c:'相',yomi:'しゃう'}]).errors.length); count++;
+// 報・毛は字音表と字通で歴史的表記が異なるので、候補に残す。
+for(const [c,yomi] of [['報','ほう'],['毛','もう']]){
+ const r=run([{c,yomi}]);assert.equal(r.errors.length,0);assert.equal(r.candidates.length,1);count++;
+}
+// 東三等と尤を取り違えた旧便の誤りを否定対照にする。
+for(const [c,right,wrong] of [['中','ちゆう','ちう'],['忠','ちゆう','ちう'],['衆','しゆう','しう'],['弓','きゆう','きう'],['隆','りゆう','りう'],['窮','きゆう','きう']]){
+ assert.equal(run([{c,yomi:right}]).errors.length,0); count++;
+ assert(run([{c,yomi:wrong}]).errors.length); count++;
+}
+// 同じ現代音でも、鍾・蒸／陽／宵・蕭では歴史的表記が異なる。
+for(const [c,right,wrong] of [['鐘','しよう','しょう'],['賞','しやう','しょう'],['蕭','せう','しょう'],['虫','ちゆう','ちゅう'],['柔','じう','じゅう'],['笠','りふ','りゅう']]){
+ const r=run([{c,yomi:right}]);assert.equal(r.errors.length,0);assert.equal(r.candidates.length,0);count++;
+ assert(run([{c,yomi:wrong}]).errors.length);count++;
+}
 console.log('歴史的仮名づかい・熟語の否定対照など '+count+' 件合格');
