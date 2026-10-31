@@ -16,7 +16,7 @@
     K:  'kudashi.html', kuho: 'kuho.html', qa: '../qa/'
   };
 
-  fetch('universities.json?v=98')
+  fetch('universities.json?v=99')
     .then(r => r.json())
     .then(d => {
       DATA = d;
