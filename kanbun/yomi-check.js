@@ -109,6 +109,12 @@ problems.forEach(p => {
       // 2. ルビの重複
       if (!r.okuri) return;
       const o = hira(r.okuri);
+      // 「転た」は「うた」＋「た」で正しい。末尾が重なるというだけで落とさない。
+      // この問題のこの組合せに限り許容し、「うたた」＋「タ」などは引き続き検出する。
+      if (p.id === 'toriden-yusho' && t.c === '転' && r.yomi === 'うた' && o === 'た'){
+        warns.push(at + ': 重複に見えるが許容― 副詞「うたた」の読みは「うた」＋送り仮名「タ」');
+        return;
+      }
       for (let L = Math.min(r.yomi.length - 1, o.length); L >= 1; L--){
         if (r.yomi.slice(-L) === o.slice(0, L)){
           const key = p.id + ':' + t.c;
