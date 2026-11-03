@@ -736,9 +736,7 @@
       "meaning": "誰がAするのか。",
       "note": "動作をする人を問う形。「孰」は「たれか」とも「いづれか」とも読み、二つのうちどちらかを問うときは選択の形に近づく。",
       "examples": [
-        "sentaku-izureka",
-        "shisetsu-tareka",
-        "shiki-izureka"
+        "shisetsu-tareka"
       ],
       "blank": "たれカ",
       "blankNg": [
@@ -999,20 +997,15 @@
       ],
       "examples": [
         "mq-riennso-tori",
-        "mq-gusho-warai",
         "mq-gozasso-tareka",
         "sekiheki-moutoku",
         "kobyu-hashiru",
         "saio-nanzo",
-        "kokushu-madoi",
-        "rongo-urami",
         "rongo-naniomotte",
         "rongo-nanikaaran",
         "gaika-hajizu",
-        "baiyu-seinarazuya",
         "sekiheki-somei",
-        "sekiheki-urayaman",
-        "rongo-shishite"
+        "sekiheki-urayaman"
       ]
     },
     {
@@ -1590,7 +1583,11 @@
       "examples": [
         "hango-mata",
         "mq-gozasso-mube",
-        "mq-gozasso-madoi"
+        "mq-gozasso-madoi",
+        "kokushu-madoi",
+        "rongo-urami",
+        "baiyu-seinarazuya",
+        "rongo-shishite"
       ],
       "blank": "まタ",
       "blankNg": [
