@@ -19,16 +19,16 @@
 </style>
 </head>
 <body>
-<h1>返り点でみる漢文 — 回帰テスト <span class="version">v107</span></h1>
+<h1>返り点でみる漢文 — 回帰テスト <span class="version">v108</span></h1>
 <div id="summary">実行中…</div>
 <ul id="list"></ul>
-<script src="kanbun.js?v=107"></script>
-<script src="progress.js?v=107"></script>
-<script src="punct-check.js?v=107"></script>
-<script src="reference.js?v=107"></script>
-<script src="tests.js?v=107"></script>
+<script src="kanbun.js?v=108"></script>
+<script src="progress.js?v=108"></script>
+<script src="punct-check.js?v=108"></script>
+<script src="reference.js?v=108"></script>
+<script src="tests.js?v=108"></script>
 <script>
-Promise.all(['texts.json?v=107', 'reference.json?v=107', 'kuho.json?v=107', '../qa/questions.json'].map(url =>
+Promise.all(['texts.json?v=108', 'reference.json?v=108', 'kuho.json?v=108', '../qa/questions.json'].map(url =>
   fetch(url).then(r => { if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); })
 ))
   .then(async ([texts, pages, kuho, qa]) => {
