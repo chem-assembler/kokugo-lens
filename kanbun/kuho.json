@@ -768,7 +768,6 @@
       "meaning": "Aをどうしようか。",
       "note": "手段や処置を問う形。字の並びが逆の「何如」は状態や評価を問い「いかん」と読む。並び順で問う中身が変わる、という点が学習のねらい。",
       "examples": [
-        "gimon-ikan",
         "shiki-ikanisen",
         "shiki-sui",
         "mq-gozasso-tada",
@@ -949,7 +948,8 @@
         "gaika-watari",
         "toriden-gaei",
         "ryoshu-shikan-3",
-        "moshi-nanzokanarazu"
+        "moshi-nanzokanarazu",
+        "mq-etsubi-genka"
       ],
       "blank": "センや",
       "blankNg": [
@@ -1005,7 +1005,8 @@
         "rongo-nanikaaran",
         "gaika-hajizu",
         "sekiheki-somei",
-        "sekiheki-urayaman"
+        "sekiheki-urayaman",
+        "gimon-ikan"
       ]
     },
     {
