@@ -52,6 +52,8 @@ const readingChecks = require('./yomi-rules.js').checkReadings(problems);
 
 // ルビの重複に見えるが正しいもの。**送り仮名が助詞である場合だけ**ここに書く
 const ALLOW = {
+  'shiki-shokanara:人': '「人（ひと）と為り」の「と」は格助詞で、ルビの重複ではない',
+  'soshi-tomonishirazu:人': '「我と若と人（ひと）と」の最後の「と」は並列の助詞で、ルビの重複ではない',
   'mq-zaien-senyo:皮': '送り仮名の「は」は助詞。' +
     '「皮（かは）は」で正しい',
   'touka-tani:渓': '送り仮名の「に」は助詞。' +
