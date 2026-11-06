@@ -18,7 +18,7 @@ for (const field of ['yomi','okuri']){
 const reread = run([{c:'未登録字',reread:{first:{yomi:'しょう'},second:{okuri:'ヨウ',kana:true}}}]);
 assert.equal(reread.candidates.length,2); count++;
 assert.equal(run([{c:'未登録字',yomi:'しょう',role:'placed'}]).candidates.length,0); count++;
-for(const [a,b,ya,yb,okuri] of [['如','何','いか','ん','セン'],['所','以','ゆゑ','ん','ノ'],['嗟','夫','あ','あ',''],['孰','与','いづ','れ','ゾ'],['孰','若','いづ','れ','ゾ'],['何','如','い','かん',''],['所','謂','い','はゆる','']]){
+for(const [a,b,ya,yb,okuri] of [['如','何','いか','ん','セン'],['所','以','ゆゑ','ん','ノ'],['嗟','夫','あ','あ',''],['孰','与','いづ','れ','ゾ'],['孰','若','いづ','れ','ゾ'],['何','如','いか','ん',''],['所','謂','い','はゆる','']]){
   assert.equal(run([{c:a,yomi:ya},{c:b,yomi:yb,okuri}]).errors.length,0); count++;
   assert(run([{c:a,yomi:ya},{c:b,yomi:yb+yb,okuri}]).errors.length); count++;
   assert(run([{c:a,yomi:ya},{c:b,yomi:'',okuri}]).errors.length); count++;
@@ -60,4 +60,23 @@ for(const [c,right,wrong] of [['鐘','しよう','しょう'],['賞','しやう'
  const r=run([{c,yomi:right}]);assert.equal(r.errors.length,0);assert.equal(r.candidates.length,0);count++;
  assert(run([{c,yomi:wrong}]).errors.length);count++;
 }
+// 読みの揺れ点検の否定対照。音訓混在を許し、確認した誤形だけを落とす。
+for (const [c,wrong,right] of [
+  ['朝','てふ','てう'], ['張','てう','ちやう'], ['聴','てう','ちやう'], ['興','かう','こう'],
+  ['回','かい','くわい'], ['外','がい','ぐわい'], ['化','か','くわ'], ['花','か','くわ'],
+  ['寡','か','くわ'], ['歓','かん','くわん'], ['帥','すい','すゐ'], ['水','すい','すゐ'],
+  ['騅','すい','すゐ'], ['遂','すい','すゐ'], ['多','おお','おほ'], ['平','たい','たひ'],
+  ['惜','お','を'], ['折','お','を'], ['終','お','を'], ['酔','よ','ゑ']
+]) {
+  assert(run([{c,yomi:wrong}]).errors.length); count++;
+  assert.equal(run([{c,yomi:right}]).errors.length,0); count++;
+}
+assert(run([{c:'何',yomi:'い'},{c:'如',yomi:'かん'}]).errors.length); count++;
+// 別の音訓と、小書きの大小だけの差を新規規則で誤りにしない。
+for (const [c,yomi] of [['朝','あした'],['聴','き'],['水','みづ'],['花','はな'],['興','おこ'],
+  ['者','しゃ'],['者','しや'],['長','ちゃう'],['長','ちやう'],['化','くゎ'],['以','もっ'],['以','もつ']]) {
+  assert.equal(run([{c,yomi}]).errors.length,0); count++;
+}
+// 短い語幹用の表をokuriへ部分一致させると助詞まで誤検出する。
+assert.equal(run([{c:'酔',yomi:'ゑ',okuri:'ヨリ'}]).errors.length,0); count++;
 console.log('歴史的仮名づかい・熟語の否定対照など '+count+' 件合格');
