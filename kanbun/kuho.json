@@ -538,10 +538,8 @@
         "shieki-reiou",
         "shieki-heki",
         "rongo-tami",
-        "mq-ryosai-tsukawasu",
         "mq-gozasso-tanetsugi",
-        "kasei-shikou",
-        "touka-tsukawasu"
+        "kasei-shikou"
       ],
       "blank": "しむ",
       "blankNg": [
@@ -565,7 +563,8 @@
         "説",
         "勧",
         "召",
-        "教"
+        "教",
+        "遣"
       ],
       "kakikudashi": "AニめいジテBセしむ",
       "meaning": "AにBするよう命じて、Bさせる。",
@@ -575,7 +574,9 @@
         "saden-shifu",
         "sesetsu-sango",
         "shiki-aho-susumu",
-        "shiki-yuushi-zu"
+        "shiki-yuushi-zu",
+        "touka-tsukawasu",
+        "mq-ryosai-tsukawasu"
       ],
       "blank": "めいジテ",
       "blankNg": [
@@ -589,7 +590,8 @@
       "yomi": [
         "命じ",
         "勧め",
-        "召し"
+        "召し",
+        "遣はし"
       ]
     },
     {
