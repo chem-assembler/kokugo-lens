@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>漢文 提示モード｜国語レンズ</title>
+<style>
+  :root {
+    --ink: #322a20;
+    --paper: #faf6ec;
+    --panel: #fffdf6;
+    --frame: #d8cdb4;
+    --accent: #b3410e;   /* 訓点の朱 */
+    --pick: #2e5d47;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 0.8em;
+    padding: 0.6em 1em; background: #2e2618; color: #f5efdf;
+  }
+  header h1 { font-size: 1.15em; margin: 0; }
+  header .brand { font-size: 0.75em; color: #cfc4a6; }
+  header .version { margin-left: auto; font-size: 0.7em; color: #a89c7c; }
+  #toolbar {
+    display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center;
+    padding: 0.6em 1em; border-bottom: 1px solid var(--frame); background: var(--panel);
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.9em;
+  }
+  #text-select { font-size: 1em; max-width: 22em; padding: 0.2em; }
+  button {
+    font-family: inherit; font-size: 1em; padding: 0.3em 0.9em;
+    border: 1px solid var(--frame); border-radius: 0.4em;
+    background: #fff; color: var(--ink); cursor: pointer;
+  }
+  button:hover { background: #f3ecdb; }
+  button.primary { background: #2e5d47; color: #fff; border-color: #2e5d47; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  #steps { display: flex; gap: 0.2em; }
+  #steps span {
+    padding: 0.15em 0.6em; border-radius: 1em; color: #8a7d63; border: 1px solid var(--frame);
+  }
+  #steps span.on { background: #2e5d47; color: #fff; border-color: #2e5d47; }
+  #zoom { margin-left: auto; display: flex; gap: 0.3em; align-items: center; }
+
+  main { display: flex; gap: 1em; padding: 1em; align-items: flex-start; flex-wrap: wrap; }
+
+  /* ---- 縦書きの本文。右から左へ、一文ずつ列にする ---- */
+  #stage {
+    writing-mode: vertical-rl;
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em;
+    padding: 1.2em 1.5em; height: 36em; max-width: 100%;
+    flex: 1 1 30em; overflow-x: auto;
+    display: flex; flex-direction: column; flex-wrap: nowrap; gap: 1.2em;
+    font-size: var(--zoom, 1.2em);
+  }
+  .sent { display: flex; flex-direction: column; gap: 0.6em; }
+  .sent .line { display: block; }
+  .cell {
+    position: relative; display: inline-block;
+    width: 3.6em; height: 2.5em; cursor: pointer; border-radius: 0.3em;
+  }
+  .cell:hover { background: #f3ecdb; }
+  .cell.picked { outline: 2px solid var(--pick); background: #eef3e9; }
+  .cell .kanji {
+    position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    font-size: 1.6em; line-height: 1.5;
+  }
+  .cell .punct {
+    position: absolute; left: calc(50% + 0.1em); top: 1.9em;
+    font-size: 0.8em; line-height: 1; pointer-events: none;
+  }
+  .cell .okuri {
+    position: absolute; left: calc(50% + 0.85em); top: 1.7em;
+    writing-mode: vertical-rl; font-size: 0.55em;
+  }
+  .cell .kunten {
+    position: absolute; left: 0.15em; top: 1.6em;
+    writing-mode: vertical-rl; font-size: 0.6em; color: var(--accent); font-weight: bold;
+  }
+  .cell .joiner {
+    position: absolute; left: 0.32em; top: 2.1em;
+    width: 0.14em; height: 0.8em; border-radius: 0.07em; background: var(--accent);
+  }
+  .sent .kudashi {
+    font-size: 0.95em; color: #40382a; line-height: 1.6;
+    border-right: 2px solid #e6dcc4; padding-right: 0.4em;
+  }
+
+  /* ---- 横の欄（字の説明・現代語訳） ---- */
+  aside {
+    flex: 0 1 20em; min-width: 16em;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+  .box {
+    background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em;
+    padding: 0.8em 1em; margin-bottom: 1em;
+  }
+  .box h2 { font-size: 0.85em; margin: 0 0 0.5em; color: #6b5f48; }
+  #char-info .big { font-family: "Yu Mincho", serif; font-size: 3em; line-height: 1.1; }
+  #char-info dl { margin: 0.4em 0 0; display: grid; grid-template-columns: auto 1fr; gap: 0.3em 0.8em; }
+  #char-info dt { color: #8a7d63; font-size: 0.85em; }
+  #char-info dd { margin: 0; font-size: 1.05em; }
+  #char-info .hint { color: #8a7d63; font-size: 0.85em; }
+  #meaning ol { margin: 0; padding-left: 1.4em; line-height: 1.7; }
+  #meaning .hidden-note { color: #8a7d63; font-size: 0.85em; }
+  footer {
+    padding: 1em; font-size: 0.75em; color: #8a7d63; text-align: center;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+  }
+  footer a { color: #6b5f48; }
+</style>
+</head>
+<body>
+<header>
+  <h1>漢文 提示モード</h1>
+  <span class="brand">国語レンズ</span>
+  <span class="version">v116</span>
+</header>
+
+<div id="toolbar">
+  <label>文章:
+    <select id="text-select"></select>
+  </label>
+  <button id="btn-prev">◀ 戻す</button>
+  <button id="btn-next" class="primary">次へ ▶</button>
+  <div id="steps"></div>
+  <div id="zoom">
+    文字 <button id="btn-small">−</button><button id="btn-large">＋</button>
+  </div>
+</div>
+
+<main>
+  <div id="stage"></div>
+  <aside>
+    <div class="box" id="char-info"><h2>字の説明</h2><p class="hint">本文の字を押すと、読みと、この文での意味が出ます。</p></div>
+    <div class="box" id="meaning"><h2>現代語訳</h2><p class="hidden-note">「現代語訳」の段で表示します。</p></div>
+  </aside>
+</main>
+
+<footer>
+  <div>読みは歴史的仮名づかいで表記しています。「次へ」またはキーボードの → ・スペースで段を進めます。</div>
+  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../">レンズ一覧</a>
+</footer>
+
+<script src="kanbun.js?v=116"></script>
+<script src="present.js?v=116"></script>
+</body>
+</html>
