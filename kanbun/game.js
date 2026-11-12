@@ -75,7 +75,7 @@
     (s, t) => s + (t.role === 'placed' ? 0 : (t.reread ? 2 : 1)), 0);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  Promise.all(['texts.json?v=116', 'kuho.json?v=116'].map(url => fetch(url).then(r => {
+  Promise.all(['texts.json?v=117', 'kuho.json?v=117'].map(url => fetch(url).then(r => {
     if (!r.ok) throw new Error(url + ' HTTP ' + r.status);
     return r.json();
   })))

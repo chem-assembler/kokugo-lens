@@ -96,7 +96,14 @@
         "shiki-chisenri",
         "moshi-daijoufu",
         "junshi-aniunaru",
-        "shiki-tendoudaidai"
+        "shiki-tendoudaidai",
+        "shiki-douka",
+        "shiki-kenwo-shi",
+        "moshi-tare-itssu",
+        "raiki-airei",
+        "moshi-kanchuu-mesu",
+        "moshi-hito-koroshite",
+        "shiki-youfu-kenjin"
       ],
       "blank": "ず",
       "blankNg": [
@@ -246,7 +253,10 @@
         "airen-mochiasobu",
         "ryoshu-kan-3",
         "kinruii-1",
-        "kinruii-4"
+        "kinruii-4",
+        "shiki-hitonosuru",
+        "shiki-kenwo-shi",
+        "moshi-kanchuu-mesu"
       ],
       "blank": "なカレ",
       "blankNg": [
@@ -476,7 +486,8 @@
         "senju-senkin",
         "sekiheki-ippun",
         "soshi-tomonishirazu",
-        "shiki-hiryuushi"
+        "shiki-hiryuushi",
+        "shiki-seihei-izure"
       ]
     },
     {
@@ -606,11 +617,14 @@
       ],
       "kakikudashi": "AヲシテBセしむ",
       "meaning": "AをしてBさせる。",
-      "note": "白文に使役の字がなくても、文脈から使役と判断して読む形。「AをしてBせしむ」のほか「AをBせしむ」とも読み、「をして」は必須ではない。「心志を苦しめ」のように他動詞で表す読みもある。",
+      "note": "白文に使役の字がなくても、文脈から使役と判断して読む形。「AをしてBせしむ」のほか「AをBせしむ」とも読み、「をして」は必須ではない。「心志を苦しめ」のように他動詞で表す読みもある。「万民を親しませ」のように、使役の「す」を補う読みもある。",
       "examples": [
         "moshi-kokorozashi",
         "sekiheki-mau",
-        "shiki-kouseiden"
+        "shiki-kouseiden",
+        "shiki-douka",
+        "shiki-bokushou",
+        "shiki-goki-izure"
       ],
       "blank": "ヲシテ",
       "blankNg": [
@@ -624,7 +638,8 @@
       "noMarker": true,
       "yomi": [
         "しめ",
-        "しむ"
+        "しむ",
+        "しませ"
       ]
     },
     {
@@ -710,7 +725,11 @@
         "mq-chihoku-taku",
         "shiki-sakinzureba",
         "shiki-kouen",
-        "shiki-ryuushi"
+        "shiki-ryuushi",
+        "shiki-hitonosuru",
+        "shiki-kenwo-shi",
+        "shiki-so-niyaburu",
+        "shiki-shinnihorobu"
       ],
       "blank": "ところトなル",
       "blankNg": [
@@ -783,7 +802,12 @@
         "shisetsu-tareka",
         "rongo-teishi-tare",
         "rongo-sanguntare",
-        "shiki-taretsukai"
+        "shiki-taretsukai",
+        "rongo-yo-tare",
+        "moshi-tare-itssu",
+        "moshi-tare-keisen",
+        "raiki-tare-koku",
+        "koumon-tare-kei"
       ],
       "blank": "たれカ",
       "blankNg": [
@@ -882,7 +906,8 @@
         "gakuyo-itsuka",
         "bakusetsu-shinni",
         "baiyu-shiruka",
-        "rongo-tanou"
+        "rongo-tanou",
+        "rongo-nisanshi"
       ],
       "yomi": [
         "か"
@@ -1082,7 +1107,8 @@
         "moshi-chinori",
         "junshi-shuyu",
         "shisetsu-shikazu",
-        "rongo-manabuni"
+        "rongo-manabuni",
+        "raiki-airei"
       ],
       "blank": "しカず",
       "blankNg": [
@@ -1114,7 +1140,11 @@
       "examples": [
         "hikaku-mushiku",
         "mq-riennso-sugiru",
-        "mq-bunkan-honzou"
+        "mq-bunkan-honzou",
+        "moshi-jin-shiku",
+        "moshi-shaku-shitoku",
+        "moshi-bunwou-shi",
+        "kanpi-kimichichi"
       ],
       "blank": "なシ",
       "blankNg": [
@@ -1146,7 +1176,8 @@
         "kasei-takeshi",
         "junshi-aoku",
         "junshi-kori",
-        "senju-iwanya"
+        "senju-iwanya",
+        "moshi-tare-keisen"
       ],
       "blank": "ヨリモ",
       "blankNg": [
@@ -1186,7 +1217,11 @@
         "rongo-sugitaru",
         "keirin-3",
         "mq-chihoku-shoushou",
-        "rongo-tokuwo"
+        "rongo-tokuwo",
+        "rongo-hokushin",
+        "rongo-jitsugetsu",
+        "moshi-shitan-shitai",
+        "moshi-taikan-ame"
       ],
       "yomi": [
         "ごとし",
@@ -1207,12 +1242,15 @@
       ],
       "kakikudashi": "そノAセンよリハむしロBセヨ",
       "meaning": "Aするよりは、むしろBするほうがよい。",
-      "note": "二つの選択肢を並べ、後ろのほうを選ばせる形。前半に「その〜んよりは」、後半に「むしろ」が来るのが目印。比較との違いは、選ぶ主体の意思が入ること。",
+      "note": "二つの選択肢を並べ、後ろのほうを選ばせる形。前半に「その〜んよりは」、後半に「むしろ」が来るのが目印。比較との違いは、選ぶ主体の意思が入ること。 「与其A、不若B」も同じ選択を表し、「其のAせんよりは、Bせんに若かず」と読む。",
       "examples": [
         "sentaku-ken",
         "keiko-gyugo",
         "mq-mukei-mushiro",
-        "rongo-mo"
+        "rongo-mo",
+        "rongo-nisanshi",
+        "raiki-airei",
+        "saden-hitorishisen"
       ],
       "blank": "むしロ",
       "blankNg": [
@@ -1224,7 +1262,8 @@
         "sentaku-izureka"
       ],
       "yomi": [
-        "寧ろ"
+        "寧ろ",
+        "よりは"
       ]
     },
     {
@@ -1244,7 +1283,11 @@
       "examples": [
         "sentaku-izureka",
         "mq-gozasso-yoriha",
-        "shiki-izureka"
+        "shiki-izureka",
+        "sengoku-jokou-bi",
+        "shiki-chuuni-izure",
+        "shiki-seihei-izure",
+        "shiki-goki-izure"
       ],
       "blank": "いづレゾ",
       "blankNg": [
@@ -1276,7 +1319,9 @@
         "mq-bunkan-isogi",
         "mq-riennso-moshi",
         "kanpi-fururu",
-        "toriden-batsu"
+        "toriden-batsu",
+        "moshi-jin-shiku",
+        "moshi-bunwou-shi"
       ],
       "blank": "もシ",
       "blankNg": [
@@ -1552,7 +1597,11 @@
         "senju-shiba",
         "mq-gozasso-iwanya",
         "senju-iwanya",
-        "toriden-iwanya"
+        "toriden-iwanya",
+        "moshi-kanchuu-mesu",
+        "moshi-hito-koroshite",
+        "shiki-youfu-kenjin",
+        "shiki-tsumikaruki"
       ],
       "blank": "いはンヤ",
       "blankNg": [
@@ -1584,7 +1633,12 @@
       "examples": [
         "shiki-yojin",
         "saden-mansou",
-        "kanpeki-fui"
+        "kanpeki-fui",
+        "moshi-kanchuu-mesu",
+        "saden-tennokou",
+        "saden-chikumo",
+        "saden-konjuu",
+        "shiki-shin-nao"
       ],
       "blank": "スラ",
       "blankNg": [

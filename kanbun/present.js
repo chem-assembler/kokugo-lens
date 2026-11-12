@@ -27,7 +27,7 @@
   let picked = null;    // { id, i }
   let zoom = 1.2;
 
-  Promise.all(['texts.json?v=116', 'imi.json?v=116'].map(url => fetch(url).then(r => {
+  Promise.all(['texts.json?v=117', 'imi.json?v=117'].map(url => fetch(url).then(r => {
     if (!r.ok) throw new Error(url + ' ' + r.status);
     return r.json();
   }))).then(([texts, imiData]) => {
