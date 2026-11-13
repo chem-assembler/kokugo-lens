@@ -69,6 +69,16 @@
     font-size: 0.95em; margin: 0.6em 0 1em; color: #554b39; line-height: 1.6;
   }
 
+  #q-example {
+    margin: 0 0 1em; padding: 0.7em 0.8em;
+    border-left: 3px solid var(--frame); line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  #q-example p { margin: 0; }
+  #q-haku { font-size: 1.2em; letter-spacing: 0.05em; }
+  #q-kd { font-size: 0.95em; }
+  #q-source { display: block; font-size: 0.75em; color: #877a5e; }
+
   /* ---- 選択肢 ---- */
   #choices { display: flex; flex-direction: column; gap: 0.45em; }
   #choices button.choice {
@@ -181,6 +191,11 @@
     <div id="q-text">読み込み中…</div>
     <div id="q-pattern"></div>
     <div id="q-sub"></div>
+    <div id="q-example" hidden>
+      <p id="q-haku"></p>
+      <p id="q-kd"></p>
+      <small id="q-source"></small>
+    </div>
     <div id="choices"></div>
     <div id="judge"></div>
     <div id="explain"></div>
