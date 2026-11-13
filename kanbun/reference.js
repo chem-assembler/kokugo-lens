@@ -197,7 +197,9 @@
         const q = new URLSearchParams({p:context.p});
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);
         band.hidden = false;
-        band.innerHTML = '<span>訓点の問題から来ました。</span> <a href="' + esc('index.html?' + q) + '">問題に戻る</a>';
+        const gojun = context.mode === 'gojun';
+        band.innerHTML = '<span>' + (gojun ? '語順の問題' : '訓点の問題') + 'から来ました。</span> <a href="'
+          + esc((gojun ? 'gojun.html?' : 'index.html?') + q) + '">問題に戻る</a>';
       }
       const result = {book, page};
       window.kanbunReference = result;

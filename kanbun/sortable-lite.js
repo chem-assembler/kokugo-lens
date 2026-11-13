@@ -8,7 +8,7 @@
 
    対応オプション:
      itemSelector（本アプリでの追加）/ group{name,pull,put} / ghostClass
-     delay / delayOnTouchOnly / touchStartThreshold / filter / onStart / onEnd
+     direction（horizontal は横一列。既定は従来の縦）/ delay / delayOnTouchOnly / touchStartThreshold / filter / onStart / onEnd
 
    仕様の要点
    - 並べ替えの実体は DOM の移動。呼び出し側は DOM の並び順を正として読めばよい。
@@ -56,20 +56,28 @@
     return null;
   }
 
-  // list 内で y に対応する挿入位置（この要素の前に入れる／null なら末尾）
-  function referenceAt(inst, y) {
+  // list 内で座標に対応する挿入位置（この要素の前に入れる／null なら末尾）
+  function referenceAt(inst, x, y) {
     var items = inst.el.querySelectorAll(inst.item);
     for (var i = 0; i < items.length; i++) {
       var it = items[i];
       if (it === drag.item) continue;
       var r = it.getBoundingClientRect();
-      if (y < r.top + r.height / 2) return it;
+      if (inst.opts.direction === "horizontal"
+        ? x < r.left + r.width / 2 : y < r.top + r.height / 2) return it;
     }
     return null;
   }
 
-  function autoScroll(el, y) {
-    if (!el || el.scrollHeight <= el.clientHeight) return;
+  function autoScroll(inst, x, y) {
+    var el = inst.el;
+    if (inst.opts.direction === "horizontal") {
+      var bounds = el.getBoundingClientRect();
+      if (x < bounds.left + EDGE) el.scrollLeft -= SPEED;
+      else if (x > bounds.right - EDGE) el.scrollLeft += SPEED;
+      return;
+    }
+    if (el.scrollHeight <= el.clientHeight) return;
     var r = el.getBoundingClientRect();
     if (y < r.top + EDGE) el.scrollTop -= SPEED;
     else if (y > r.bottom - EDGE) el.scrollTop += SPEED;
@@ -113,9 +121,9 @@
     var target = listAt(x, y);
     if (!target) return;
 
-    autoScroll(target.el, y);
+    autoScroll(target, x, y);
 
-    var ref = referenceAt(target, y);
+    var ref = referenceAt(target, x, y);
     if (ref !== drag.item) {
       if (ref) target.el.insertBefore(drag.item, ref);
       else target.el.appendChild(drag.item);

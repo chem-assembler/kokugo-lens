@@ -27,6 +27,7 @@ SchoolLenz の第3の教科サブブランド。
 | `kuho.js` + `kuho.html` | 句法クイズ（3形式） |
 | `guide.js` + `guide.html` + `universities.json` | **志望校から選ぶ案内**（19大学・方式）。志望校を選ぶと「漢文がどう出るか」と「このアプリのどこをやると効くか」が出る。データは `docs/exam-kanbun-sources.md` の実測調査から起こしたもので、**推測は書かない**。`node kanbun/guide-check.js` が検査（遷移先の実在・モード名の一致・強調記法の閉じ・出題実績には調査範囲を添えているか） |
 | `kudashi.js` + `kudashi.html` | 書き下し練習（カードD&D）。**訓点を与えず白文だけで読み順を組む＝ L5 に対応**（東北大 第四問②・早稲田 文/法の形） |
+| `gojun.js` + `gojun.html` | 語順を組み立てる練習。現代語訳から字のカード（置き字を含む）を白文の語順へ並べる。句法・字数で絞り込み、誤答から参考書へ進める。漢詩は除外 |
 | `sortable-lite.js` | 並べ替え。**InfoLens から流用**し、掴む対象を `opts.itemSelector` で指定できるよう拡張 |
 | `present.html`・`present.js` | **提示モード（先生用）**。同じ出典・篇の問題を一つの文章として、白文 → 訓点 → 書き下し → 現代語訳の順に一段ずつ出す。字を押すと読みと「この文での意味」（`imi.json`）を出す |
 | `progress.js` | **学習履歴**（DOM・localStorage 非依存）。訓点モード L1/L2/L3/L4/L6 と書き下し練習(K)の**6モード**で1つの記録を共有する。`localStorage` が使えない環境ではメモリ上で動く |

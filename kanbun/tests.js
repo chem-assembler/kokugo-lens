@@ -9,6 +9,7 @@
   const K = isNode ? require('./kanbun.js') : window.Kanbun;
   const P = isNode ? require('./progress.js') : window.Progress;
   const PC = isNode ? require('./punct-check.js') : window.KanbunPunct;
+  const G = isNode ? require('./gojun.js') : window.KanbunGojun;
   const R = isNode ? require('./reference.js') : window.KanbunReference;
 
   const results = [];
@@ -537,6 +538,61 @@
       eq(K.prevReadable(p.tokens, 2), 0, '「不」の直前の読み字は「学」（「而」を飛ばす）');
     });
 
+    // ---- 語順を組み立てる ----
+    test('語順: 同じ字のカードを交換しても字の並びで正解にする', () => {
+      const p = {tokens: [tk('不'), tk('知'), tk('不'), tk('慍')]};
+      const cards = [2, 1, 0, 3].map(i => p.tokens[i].c);
+      eq(G.grade(G.chars(p), cards), {correct: true, firstMismatch: -1});
+      eq(G.grade(G.chars(p), ['不', '不', '知', '慍']), {correct: false, firstMismatch: 1});
+      eq(G.grade(G.chars(p), ['不', '知']), {correct: false, firstMismatch: 2});
+      eq(G.grade(G.chars(p), ['不', '知', '不', '慍', '知']), {correct: false, firstMismatch: 4});
+      eq(G.grade(G.chars(p), []), {correct: false, firstMismatch: 0});
+    });
+    test('語順: 候補は1問以上、全候補でカードが2枚以上あり置き字も残る', () => {
+      const pool = G.candidates(problems);
+      ok(pool.length > 0);
+      for (const p of pool) {
+        ok(G.chars(p).length >= 2, p.id);
+        eq(G.chars(p), p.tokens.map(t => t.c), p.id);
+        ok(!G.exclusionReason(p), p.id);
+      }
+      const p = problems.find(p => p.tokens.some(t => t.role === 'placed'));
+      eq(G.chars(p).length, p.tokens.length);
+      ok(G.chars(p).every(c => !/[、。？！]/.test(c)), '句読点はカードにしない');
+    });
+    test('語順: 詩形注記・注記なしの漢詩を外し、詩についての散文は残す', () => {
+      for (const id of ['shungyo-1', 'shonen-1', 'rokusai-1', 'keirin-1', 'mq-riennso-myonichi', 'shiki-sui', 'gaika-chikara', 'gaika-sui', 'gaika-gu']) {
+        eq(G.exclusionReason(problems.find(p => p.id === id)), 'poetry', id);
+      }
+      eq(G.exclusionReason({source: {work: '未収録の作品・七絶'}, tokens: [tk('甲'), tk('乙')]}), 'poetry');
+      eq(G.exclusionReason({source: {chapter: '作者・五律'}, tokens: [tk('甲'), tk('乙')]}), 'poetry');
+      ok(G.candidates(problems).some(p => p.id === 'suiko-roba'));
+      eq(G.exclusionReason({tokens: [tk('甲')]}), 'too-short');
+      eq(G.exclusionReason({tokens: [tk('甲'), tk('甲')]}), 'identical');
+    });
+    test('語順: 句法カテゴリと字数の絞り込みは両方を満たす', () => {
+      for (const category of ['', ...Object.keys(data.kuho.categories)]) {
+        for (const length of ['', 'short', 'medium', 'long']) {
+          const want = G.candidates(problems).filter(p =>
+            (!category || G.categoriesFor(p, data.kuho).includes(category))
+            && (!length || (length === 'short' ? p.tokens.length <= 6
+              : length === 'medium' ? p.tokens.length >= 7 && p.tokens.length <= 12 : p.tokens.length >= 13)));
+          eq(G.filterCandidates(problems, data.kuho, category, length).map(p => p.id), want.map(p => p.id));
+        }
+      }
+      eq(G.filterCandidates(problems, data.kuho, 'unknown', ''), []);
+    });
+    test('語順: 重複字があってもシャッフル後は別の並びで、カードを失わない', () => {
+      for (const p of G.candidates(problems)) {
+        const expected = G.chars(p);
+        // 常に同じ乱数を返し、再シャッフルが必要な経路も確かめる。
+        const result = G.shuffled(expected, () => 0.999999);
+        ok(!G.grade(expected, result).correct, p.id);
+        eq(result.slice().sort(), expected.slice().sort(), p.id);
+        eq(G.chars(p), expected, '原データを変更しない');
+      }
+    });
+
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
       test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {
@@ -580,7 +636,7 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
-                       ['rec.js', 'index.html'], ['reference.js', 'reference.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -595,7 +651,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
@@ -705,6 +761,86 @@
       catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
     };
     try {
+      const gojunReady = w => w.document.documentElement.dataset.gojunReady === 'true';
+      await check('語順の画面: タップ・ヒント・正誤判定・参考書との往復', async () => {
+        const p = problems.find(p => p.id === 'rongo-manabite');
+        let w = await open('gojun.html?p=' + p.id, gojunReady);
+        let doc = w.document;
+        ok(doc.documentElement.scrollWidth <= w.innerWidth, '375px幅でページの横はみ出しがない');
+        eq(doc.getElementById('meaning').textContent, p.meaning);
+        ok(doc.getElementById('hint-text').hidden);
+        eq(doc.querySelectorAll('#tray-source .card').length, p.tokens.length);
+        ok(!G.grade(G.chars(p), [...doc.querySelectorAll('#tray-source .card')].map(el => el.textContent)).correct);
+        doc.getElementById('btn-hint').click();
+        eq(doc.getElementById('hint-text').textContent, '書き下し：' + p.kakikudashi);
+        ok(doc.getElementById('btn-hint').disabled);
+        const first = doc.querySelector('#tray-source .card');
+        first.click();
+        eq(doc.querySelectorAll('#tray-order .card').length, 1);
+        first.click();
+        eq(doc.querySelectorAll('#tray-order .card').length, 0);
+        doc.getElementById('btn-grade').click();
+        eq(doc.getElementById('result').className, 'wrong');
+        ok(doc.getElementById('result').textContent.includes(p.kakikudashi));
+        ok(doc.getElementById('result').textContent.includes(p.tokens.map(t => t.c + (t.p || '')).join('')));
+        const href = doc.querySelector('#result a').href;
+        eq(new URL(href).searchParams.get('code'), 'hitei-fu', 'カテゴリIDを飛ばして最初の型IDを使う');
+        eq(new URL(href).searchParams.get('mode'), 'gojun');
+        for (const c of G.chars(p)) [...doc.querySelectorAll('#tray-source .card')].find(el => el.textContent === c).click();
+        doc.getElementById('btn-grade').click();
+        eq(doc.getElementById('result').className, 'ok');
+        eq(doc.querySelectorAll('#tray-source .card').length, 0, '置き字も答え欄に使う');
+        const order = doc.getElementById('tray-order');
+        order.children[0].dispatchEvent(new w.KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true}));
+        eq(order.children[1].textContent, p.tokens[0].c);
+        doc.getElementById('btn-grade').click();
+        eq(doc.querySelectorAll('.card.bad').length, p.tokens.length);
+        order.children[1].dispatchEvent(new w.KeyboardEvent('keydown', {key: 'ArrowLeft', bubbles: true}));
+        doc.getElementById('btn-grade').click();
+        eq(doc.getElementById('result').className, 'ok');
+        w = await open(href, refReady);
+        eq(w.location.hash, '#ref-sec-hitei-fu');
+        const back = w.document.querySelector('#ref-back a').href;
+        eq(new URL(back).pathname.split('/').pop(), 'gojun.html');
+        w = await open(back, gojunReady);
+        eq(new URLSearchParams(w.location.search).get('p'), p.id);
+      });
+      await check('語順の画面: 型が未登録の問題は語順の基本へ案内する', async () => {
+        const ids = new Set(data.kuho.types.map(t => t.id));
+        const p = G.candidates(problems).find(p => !(p.kuho || []).some(code => ids.has(code)));
+        ok(p);
+        const w = await open('gojun.html?p=' + p.id, gojunReady);
+        w.document.getElementById('btn-grade').click();
+        const href = w.document.querySelector('#result a').href;
+        const query = new URL(href).searchParams;
+        eq(query.get('page'), 'word-order');
+        eq(query.get('p'), p.id);
+        eq(query.get('mode'), 'gojun');
+        eq(new URL(href).hash, '#ref-sec-order-2');
+      });
+      await check('語順の画面: 絞り込みの空集合・次の問題・対象外IDを扱う', async () => {
+        let w = await open('gojun.html?p=shungyo-1', gojunReady);
+        const doc = w.document;
+        ok(doc.getElementById('notice').textContent.includes('出題対象外'));
+        ok(!doc.getElementById('exercise').hidden);
+        const category = doc.getElementById('category-select'), length = doc.getElementById('length-select');
+        category.value = 'yokuyo'; category.dispatchEvent(new w.Event('change'));
+        length.value = 'short'; length.dispatchEvent(new w.Event('change'));
+        ok(doc.getElementById('exercise').hidden);
+        ok(doc.getElementById('btn-next').disabled);
+        length.value = 'medium'; length.dispatchEvent(new w.Event('change'));
+        ok(!doc.getElementById('exercise').hidden);
+        const id = new URLSearchParams(w.location.search).get('p');
+        const p = problems.find(p => p.id === id);
+        ok(G.categoriesFor(p, data.kuho).includes('yokuyo'));
+        eq(G.lengthGroup(p), 'medium');
+        doc.getElementById('btn-next').click();
+        ok(new URLSearchParams(w.location.search).get('p') !== id);
+        doc.getElementById('btn-hint').click();
+        doc.getElementById('btn-reset').click();
+        ok(doc.getElementById('hint-text').hidden);
+        eq(doc.querySelectorAll('#tray-order .card').length, 0);
+      });
       await check('参考書の画面: 型 id から節へ着地し、375px幅で読める', async () => {
         const w = await open('reference.html?code=hitei-fu', refReady);
         eq(w.location.hash, '#ref-sec-hitei-fu');
