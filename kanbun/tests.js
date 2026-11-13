@@ -11,6 +11,7 @@
   const PC = isNode ? require('./punct-check.js') : window.KanbunPunct;
   const G = isNode ? require('./gojun.js') : window.KanbunGojun;
   const R = isNode ? require('./reference.js') : window.KanbunReference;
+  const Q = isNode ? require('./kuho.js') : window.KanbunKuho;
 
   const results = [];
   function test(name, fn){
@@ -42,6 +43,82 @@
       pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json')
     } : null);
     if (!data) throw new Error('参考書の検査データがありません');
+    // ---- 句法クイズ: 実際の出題器で全型・全 examples を検査する ----
+    const typeById = new Map(data.kuho.types.map(t => [t.id, t]));
+    const textById = new Map(problems.map(p => [p.id, p]));
+    for (const t of data.kuho.types) {
+      test('句法 ' + t.id + ': katachi の文は examples の全問題から選び、他の正解を誤答にしない', () => {
+        const ids = t.examples || [];
+        for (let i = 0; i < ids.length; i++) {
+          // 最初の乱数で実例を指定し、その後は誤答の補充順を変えて両端を確認する。
+          for (const tail of [0, 0.999999]) {
+            let first = true;
+            const quiz = Q.createQuiz(data.kuho, problems, () => {
+              if (first) { first = false; return (i + 0.5) / ids.length; }
+              return tail;
+            });
+            const q = quiz.buildQuestion('katachi', t);
+            const p = textById.get(ids[i]);
+            ok(p, ids[i]);
+            eq(q.example.id, ids[i], '全 examples を選べる');
+            ok(ids.includes(q.example.id), 'この型の examples から出す');
+            eq(q.prompt, 'この文の句形はどれですか。');
+            eq(q.example.hakubun, p.tokens.map(k => k.c + (k.p || '')).join(''), ids[i] + ' の句読点');
+            eq(q.example.kakikudashi, p.kakikudashi);
+            eq(q.example.meaning, p.meaning, '解答後に出す訳');
+            eq([q.example.work, q.example.chapter], [(p.source || {}).work || '', (p.source || {}).chapter || '']);
+            eq(q.answer, t.label);
+            eq(q.choices.length, 4, ids[i] + ' の四択');
+            eq(new Set(q.choices.map(K.normalizeKana)).size, 4, '重複しない');
+            ok(q.choices.includes(q.answer), '正解を残す');
+            const wrong = q.choices.filter(c => K.normalizeKana(c) !== K.normalizeKana(q.answer)).map(K.normalizeKana);
+            for (const id of p.kuho || []) {
+              const other = typeById.get(id);
+              if (other && other.id !== t.id) {
+                ok(!wrong.includes(K.normalizeKana(other.label)), ids[i] + ' の別解 ' + id + ' を誤答にしない');
+              }
+            }
+          }
+        }
+      });
+    }
+    test('句法: confuse と補充候補の両方から、同一文の別解と同じラベルを除く', () => {
+      const target = {id:'a', label:'正解', markers:['乎'], examples:['p'], confuse:['b']};
+      const other = {id:'b', label:'別解'};
+      const alias = {id:'c', label:'別解'};
+      const fillers = ['甲', '乙', '丙', '丁'].map((label, i) => ({id:'x' + i, label}));
+      const fixture = {types:[target, other, alias].concat(fillers)};
+      for (const random of [() => 0, () => 0.999999]) {
+        const q = Q.createQuiz(fixture, [{id:'p', kuho:['分類', 'a', 'b'], tokens:[{c:'乎', p:'。'}]}], random)
+          .buildQuestion('katachi', target);
+        ok(!q.choices.includes('別解'), 'confuse の id と補充候補の同名 id をともに除く');
+        eq(q.choices.length, 4);
+        ok(q.choices.includes('正解'));
+      }
+    });
+    test('句法: examples が無い型は従来の型・目印の出題を保つ', () => {
+      const target = Object.assign({}, data.kuho.types[0], {examples:[]});
+      const q = Q.createQuiz(data.kuho, problems).buildQuestion('katachi', target);
+      eq(q.example, null);
+      eq(q.prompt, 'この型は何の句形ですか。');
+      eq(q.sub, '目印になる字: ' + target.markers.join('・'));
+      ok(q.choices.includes(target.label));
+    });
+    test('句法: 空欄と意味の形式には実例を加えず、従来の正解を保つ', () => {
+      const quiz = Q.createQuiz(data.kuho, problems);
+      for (const t of data.kuho.types) {
+        const blank = quiz.buildQuestion('blank', t), imi = quiz.buildQuestion('imi', t);
+        eq(blank.answer, t.blank);
+        eq(imi.answer, t.meaning);
+        eq(blank.example, undefined);
+        eq(imi.example, undefined);
+        eq(blank.choices.length, 4);
+        eq(imi.choices.length, 4);
+        ok(blank.choices.includes(t.blank));
+        ok(imi.choices.includes(t.meaning));
+      }
+    });
+
     const book = new R.ReferenceBook(data.pages, problems, data.kuho.types, data.qa.patterns);
 
     test('参考書: 目次から12章すべてへ進める', () => {
@@ -840,6 +917,40 @@
         doc.getElementById('btn-reset').click();
         ok(doc.getElementById('hint-text').hidden);
         eq(doc.querySelectorAll('#tray-order .card').length, 0);
+      });
+      await check('句法の画面: 初回から実例を示し、訳は回答後だけ表示し、次問で消す', async () => {
+        const w = await open('kuho.html', w => w.document.querySelector('#choices button'));
+        const d = w.document;
+        const select = d.getElementById('kind-select');
+        select.value = 'katachi';
+        select.dispatchEvent(new w.Event('change'));
+        const pattern = d.getElementById('q-pattern').textContent;
+        const haku = d.getElementById('q-haku').textContent;
+        const kd = d.getElementById('q-kd').textContent;
+        const p = problems.find(p => p.tokens.map(t => t.c + (t.p || '')).join('') === haku && '書き下し: ' + p.kakikudashi === kd);
+        ok(p, '表示した文が texts.json にある');
+        ok(data.kuho.types.some(t => t.pattern === pattern && t.examples.includes(p.id)), '型と examples が対応する');
+        eq(d.getElementById('q-text').textContent, 'この文の句形はどれですか。');
+        ok(!d.getElementById('q-example').hidden);
+        eq(d.getElementById('q-source').textContent, [p.source.work, p.source.chapter].filter(Boolean).join('・'));
+        ok(!d.getElementById('quiz').textContent.includes(p.meaning), '回答前は訳を DOM に含めない');
+        eq(d.getElementById('explain').textContent, '');
+        ok(d.documentElement.scrollWidth <= w.innerWidth, '375px 幅で横にはみ出さない');
+        d.querySelector('#choices button').click();
+        ok(d.getElementById('explain').textContent.includes(p.meaning), '示した文の訳');
+        ok(d.getElementById('explain').textContent.includes('この文を読む手がかり:'), '型の note による説明');
+        const labels = data.kuho.types.filter(t => t.pattern === pattern && t.examples.includes(p.id)).map(t => t.note);
+        ok(labels.some(note => d.getElementById('explain').textContent.includes(note)), 'この型の note を表示');
+        d.getElementById('btn-next').click();
+        eq(d.getElementById('explain').textContent, '', '前問の訳を残さない');
+        for (const kind of ['blank', 'imi']) {
+          select.value = kind;
+          select.dispatchEvent(new w.Event('change'));
+          ok(d.getElementById('q-example').hidden, kind + ' では実例を隠す');
+          eq(d.getElementById('q-haku').textContent, '');
+          eq(d.getElementById('q-kd').textContent, '');
+          eq(d.getElementById('q-source').textContent, '');
+        }
       });
       await check('参考書の画面: 型 id から節へ着地し、375px幅で読める', async () => {
         const w = await open('reference.html?code=hitei-fu', refReady);

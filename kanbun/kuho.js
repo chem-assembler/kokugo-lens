@@ -4,7 +4,7 @@
  *
  * 型データは kuho.json（句形を有限個の「型」として持つ。化学レンズの reactions.json と同型）。
  * 出題は3形式:
- *   (a) katachi … 型（白文パターン）を見せて「何の句形か」を4択
+ *   (a) katachi … 型と実例（白文・書き下し）を見せて「何の句形か」を4択
  *   (b) blank   … 型の書き下しの一部を伏せて（○○）埋める4択
  *   (c) imi     … 意味の4択（紛らわしい対を意図的に並べる）
  *
@@ -12,15 +12,114 @@
  * ここは DOM の描画と入力だけを持ち、句形の知識はすべて kuho.json 側にある。
  */
 (function(){
-  const K = (typeof window !== 'undefined' && window.Kanbun) ? window.Kanbun : null;
+  const isNode = (typeof module !== 'undefined') && (typeof require === 'function');
+  const K = isNode ? require('./kanbun.js') : window.Kanbun;
   // 正規化できない環境でも動くよう素通しのフォールバックを持つ
   const norm = s => (K ? K.normalizeKana(String(s)) : String(s));
+
+  const BLANK_MARK = '○○';
+
+  // DOM に触れない出題器。random は全 examples を再現可能に検査するため差し替えられる。
+  function createQuiz(data, problems, random = Math.random){
+    const TYPES = data.types || [];
+    const byId = new Map(TYPES.map(t => [t.id, t]));
+    const TEXTS = new Map((problems || []).map(p => [p.id, {
+      id: p.id,
+      hakubun: (p.tokens || []).map(t => t.c + (t.p || '')).join(''),
+      kakikudashi: p.kakikudashi || '',
+      work: (p.source || {}).work || '',
+      chapter: (p.source || {}).chapter || '',
+      meaning: p.meaning || '',
+      kuho: p.kuho || []
+    }]));
+
+    function buildQuestion(kind, t){
+      if (kind === 'blank'){
+        return {
+          kind: kind, type: t,
+          prompt: '書き下しの ' + BLANK_MARK + ' に入るのはどれですか。',
+          sub: '書き下し: ' + t.kakikudashi.replace(t.blank, BLANK_MARK),
+          answer: t.blank,
+          choices: buildBlankChoices(t)
+        };
+      }
+      if (kind === 'imi'){
+        return {
+          kind: kind, type: t,
+          prompt: 'この型の意味はどれですか。',
+          sub: '書き下し: ' + t.kakikudashi,
+          answer: t.meaning,
+          choices: buildChoices(t, t.meaning, x => x.meaning)
+        };
+      }
+      // 同じ白文パターンでも文脈で句形が変わるため、実例の読みも示す。
+      const examples = (t.examples || []).map(id => {
+        const info = TEXTS.get(id);
+        if (!info) throw new Error('例文が見つかりません: ' + id);
+        return info;
+      });
+      const example = examples.length ? pick(examples, random) : null;
+      return {
+        kind: 'katachi', type: t,
+        example: example,
+        prompt: example ? 'この文の句形はどれですか。' : 'この型は何の句形ですか。',
+        sub: '目印になる字: ' + (t.markers || []).join('・'),
+        answer: t.label,
+        choices: buildChoices(t, t.label, x => x.label, example ? example.kuho : [])
+      };
+    }
+
+    // 正解 + 紛らわしい対（confuse）を優先し、足りなければ他の型から補って4択にする
+    function buildChoices(t, answer, get, excludedIds = []){
+      const out = [answer];
+      const seen = new Set([norm(answer)]);
+      const add = v => {
+        if (v == null) return;
+        const n = norm(v);
+        if (!n || seen.has(n) || out.length >= 4) return;
+        seen.add(n); out.push(v);
+      };
+      // 問題が複数の型を含む場合、その型のラベルはどれも正解になり得る。
+      // 正規化で同じラベルになる別 id からの混入も防ぐ。
+      const excludedLabels = new Set(excludedIds.map(id => byId.get(id))
+        .filter(o => o && o.id !== t.id).map(o => norm(get(o))));
+      const addType = o => {
+        if (o && o.id !== t.id && !excludedIds.includes(o.id) && !excludedLabels.has(norm(get(o)))) add(get(o));
+      };
+      (t.confuse || []).forEach(id => addType(byId.get(id)));
+      shuffle(TYPES.slice(), random).forEach(addType);
+      return shuffle(out, random);
+    }
+
+    // 空欄補充は誤答候補を型データ側で指定してある（自動生成だと別解が紛れ込むため）
+    function buildBlankChoices(t){
+      const out = [t.blank];
+      const seen = new Set([norm(t.blank)]);
+      const add = v => {
+        if (v == null) return;
+        const n = norm(v);
+        if (!n || seen.has(n) || out.length >= 4) return;
+        seen.add(n); out.push(v);
+      };
+      (t.blankNg || []).forEach(add);
+      if (out.length < 4) shuffle(TYPES.slice(), random).forEach(o => { if (o.id !== t.id) add(o.blank); });
+      return shuffle(out, random);
+    }
+
+    return { buildQuestion, texts: TEXTS };
+  }
+
+  if (isNode) { module.exports = { createQuiz }; return; }
+  window.KanbunKuho = { createQuiz };
   const $ = id => document.getElementById(id);
+  // test.html は出題器だけを利用する。
+  if (!$('choices')) return;
 
   let CATS  = {};        // カテゴリキー -> 表示名
   let TYPES = [];        // 型の配列
   const byId = new Map();
-  const TEXTS = new Map(); // 問題ID -> { hakubun, kakikudashi, work }（収録例の表示用）
+  let quiz = null;
+  let TEXTS = new Map(); // 問題ID -> 白文・書き下し・出典・訳・句形
 
   let filterCat = 'all'; // 絞り込み中のカテゴリ
   let kindPref  = 'mix'; // 出題形式の指定
@@ -34,47 +133,39 @@
     imi:     '意味'
   };
   const KIND_KEYS = ['katachi', 'blank', 'imi'];
-  const BLANK_MARK = '○○';
 
   // ---- 小道具 -------------------------------------------------------------
-  function shuffle(a){
+  function shuffle(a, random = Math.random){
     for (let i = a.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(random() * (i + 1));
       const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
     }
     return a;
   }
-  const pick = a => a[Math.floor(Math.random() * a.length)];
+  function pick(a, random = Math.random){ return a[Math.floor(random() * a.length)]; }
   const catName = key => CATS[key] || key;
 
   // ---- 読み込み -----------------------------------------------------------
-  fetch('kuho.json?v=117')
-    .then(r => r.json())
-    .then(data => {
+  // 初回から文脈を示すため、型と例文の両方がそろうまで出題しない。
+  Promise.all(['kuho.json?v=118', 'texts.json?v=118'].map(url =>
+    fetch(url).then(r => {
+      if (!r.ok) throw new Error(url + ': ' + r.status);
+      return r.json();
+    })
+  ))
+    .then(([data, texts]) => {
       CATS  = data.categories || {};
       TYPES = data.types || [];
       TYPES.forEach(t => byId.set(t.id, t));
+      quiz = createQuiz(data, texts.problems || []);
+      TEXTS = quiz.texts;
       buildSelects();
       renderMeta();
       nextQuestion();
     })
     .catch(e => {
-      $('q-text').textContent = 'kuho.json の読み込みに失敗しました: ' + e;
+      $('q-text').textContent = '句法・例文データの読み込みに失敗しました: ' + e;
     });
-
-  // 収録例を白文で見せるためだけに読む。失敗しても出題は続けられる（例が出ないだけ）
-  fetch('texts.json?v=117')
-    .then(r => r.json())
-    .then(data => {
-      (data.problems || []).forEach(p => {
-        TEXTS.set(p.id, {
-          hakubun: (p.tokens || []).map(t => t.c).join(''),
-          kakikudashi: p.kakikudashi || '',
-          work: (p.source || {}).work || ''
-        });
-      });
-    })
-    .catch(() => {});
 
   function buildSelects(){
     const cs = $('cat-select');
@@ -99,6 +190,7 @@
   }
 
   function nextQuestion(){
+    if (!quiz) return;
     const pool = poolTypes();
     if (!pool.length){
       current = null;
@@ -113,68 +205,9 @@
       while (t.id === current.type.id && guard++ < 8) t = pick(pool);
     }
     const kind = (kindPref === 'mix') ? pick(KIND_KEYS) : kindPref;
-    current = buildQuestion(kind, t);
+    current = quiz.buildQuestion(kind, t);
     answered = false;
     render();
-  }
-
-  function buildQuestion(kind, t){
-    if (kind === 'blank'){
-      return {
-        kind: kind, type: t,
-        prompt: '書き下しの ' + BLANK_MARK + ' に入るのはどれですか。',
-        sub: '書き下し: ' + t.kakikudashi.replace(t.blank, BLANK_MARK),
-        answer: t.blank,
-        choices: buildBlankChoices(t)
-      };
-    }
-    if (kind === 'imi'){
-      return {
-        kind: kind, type: t,
-        prompt: 'この型の意味はどれですか。',
-        sub: '書き下し: ' + t.kakikudashi,
-        answer: t.meaning,
-        choices: buildChoices(t, t.meaning, x => x.meaning)
-      };
-    }
-    // katachi: 白文の型と目印の字だけを見せて句形の名前を当てる
-    return {
-      kind: 'katachi', type: t,
-      prompt: 'この型は何の句形ですか。',
-      sub: '目印になる字: ' + (t.markers || []).join('・'),
-      answer: t.label,
-      choices: buildChoices(t, t.label, x => x.label)
-    };
-  }
-
-  // 正解 + 紛らわしい対（confuse）を優先し、足りなければ他の型から補って4択にする
-  function buildChoices(t, answer, get){
-    const out = [answer];
-    const seen = new Set([norm(answer)]);
-    const add = v => {
-      if (v == null) return;
-      const n = norm(v);
-      if (!n || seen.has(n) || out.length >= 4) return;
-      seen.add(n); out.push(v);
-    };
-    (t.confuse || []).forEach(id => { const o = byId.get(id); if (o) add(get(o)); });
-    shuffle(TYPES.slice()).forEach(o => { if (o.id !== t.id) add(get(o)); });
-    return shuffle(out);
-  }
-
-  // 空欄補充は誤答候補を型データ側で指定してある（自動生成だと別解が紛れ込むため）
-  function buildBlankChoices(t){
-    const out = [t.blank];
-    const seen = new Set([norm(t.blank)]);
-    const add = v => {
-      if (v == null) return;
-      const n = norm(v);
-      if (!n || seen.has(n) || out.length >= 4) return;
-      seen.add(n); out.push(v);
-    };
-    (t.blankNg || []).forEach(add);
-    if (out.length < 4) shuffle(TYPES.slice()).forEach(o => { if (o.id !== t.id) add(o.blank); });
-    return shuffle(out);
   }
 
   // ---- 描画 ---------------------------------------------------------------
@@ -185,6 +218,11 @@
     $('q-text').textContent = current.prompt;
     $('q-pattern').textContent = t.pattern;
     $('q-sub').textContent = current.sub;
+    const example = current.example;
+    $('q-example').hidden = !example;
+    $('q-haku').textContent = example ? example.hakubun : '';
+    $('q-kd').textContent = example ? '書き下し: ' + example.kakikudashi : '';
+    $('q-source').textContent = example ? [example.work, example.chapter].filter(Boolean).join('・') : '';
 
     const box = $('choices');
     box.innerHTML = '';
@@ -239,6 +277,7 @@
       ['書き下し', t.kakikudashi],
       ['意味',     t.meaning]
     ];
+    if (current.example) rows.push(['この文の訳', current.example.meaning]);
     rows.forEach(pair => {
       const d = document.createElement('div');
       d.className = 'row';
@@ -254,7 +293,7 @@
     if (t.note){
       const n = document.createElement('p');
       n.className = 'note';
-      n.textContent = t.note;
+      n.textContent = (current.example ? 'この文を読む手がかり: ' : '') + t.note;
       ex.appendChild(n);
     }
     const rel = (t.confuse || []).map(id => byId.get(id)).filter(Boolean);
@@ -277,7 +316,7 @@
         const a = document.createElement('a');
         a.href = 'index.html?p=' + encodeURIComponent(id);
         if (info){
-          [['haku', info.hakubun], ['kd', info.kakikudashi], ['src', info.work]]
+          [['haku', info.hakubun], ['kd', info.kakikudashi], ['src', [info.work, info.chapter].filter(Boolean).join('・')]]
             .forEach(pair => {
               const s = document.createElement('span');
               s.className = pair[0];
