@@ -192,7 +192,12 @@
       };
       scrollToSection();
       window.addEventListener('hashchange', scrollToSection);
-      if (context.from === 'kanbun' && book.byProblem.has(context.p)) {
+      if (context.from === 'kanbun' && context.mode === 'ichiji' && context.p) {
+        const band = doc.getElementById('ref-back');
+        band.hidden = false;
+        band.innerHTML = '<span>一字ちがいの問題から来ました。</span> <a href="'
+          + esc('ichiji.html?' + new URLSearchParams({id:context.p})) + '">問題に戻る</a>';
+      } else if (context.from === 'kanbun' && book.byProblem.has(context.p)) {
         const band = doc.getElementById('ref-back');
         const q = new URLSearchParams({p:context.p});
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);

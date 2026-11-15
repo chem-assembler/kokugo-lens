@@ -539,6 +539,49 @@
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
+      test('一字ちがい: 全組の差分・出典・句法・誤答を検査する', () => {
+        const result = require('./ichiji-check.js').validate(require('./ichiji.json'), {problems}, data.kuho);
+        eq(result.errors, []);
+      });
+      test('一字ちがい: 差分の許容範囲と壊したデータを判別する', () => {
+        const C = require('./ichiji-check.js');
+        ok(C.smallDifference('不必学。', '必不学。'));
+        ok(C.smallDifference('未知生、', '不知生、'));
+        ok(C.smallDifference('和而不同', '和不同'));
+        ok(!C.smallDifference('和而不同', '和而不同。'));
+        ok(!C.smallDifference('使人笑', '見笑'));
+        const original = require('./ichiji.json');
+        const check = mutate => {
+          const copy = JSON.parse(JSON.stringify(original));
+          mutate(copy);
+          ok(C.validate(copy, {problems}, data.kuho).errors.length > 0, '壊したデータを検出する');
+        };
+        check(d => { delete d.pairs[0].a; });
+        check(d => { d.pairs[0].kuho = ['missing']; });
+        check(d => { d.pairs[0].a.from = 'missing'; });
+        check(d => { d.pairs[0].a.hakubun += '学'; });
+        check(d => { d.pairs[0].a.kakikudashi += '学ぶ'; });
+        check(d => { d.pairs[0].ng[0] = d.pairs[0].point; });
+        check(d => { const p = d.pairs.find(p => p.id === 'isho-taku'); delete p.note; });
+        check(d => { d.pairs[0].b.kakikudashi = d.pairs[0].a.kakikudashi; });
+        check(d => { d.pairs = d.pairs.filter(p => p.theme !== '可／能'); });
+      });
+      test('一字ちがい: 各文の4択に正解・相手・他組2件が重複なく入り、意味も4択になる', () => {
+        const I = require('./ichiji.js'), pairs = require('./ichiji.json').pairs;
+        for (const pair of pairs) {
+          for (const side of ['a', 'b']) {
+            const choices = I.readingChoices(pair, side, pairs, () => 0.5);
+            eq(choices.length, 4);
+            eq(new Set(choices.map(I.normalized)).size, 4);
+            ok(choices.includes(pair.a.kakikudashi) && choices.includes(pair.b.kakikudashi));
+            const others = choices.filter(s => s !== pair.a.kakikudashi && s !== pair.b.kakikudashi);
+            ok(others.every(s => pairs.some(p => p.id !== pair.id && [p.a.kakikudashi, p.b.kakikudashi].includes(s))));
+          }
+          const choices = I.meaningChoices(pair, () => 0.5);
+          eq(choices.length, 4); ok(choices.includes(pair.point));
+        }
+      });
+
       test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {
         require('child_process').execFileSync(process.execPath,
           [require('path').join(__dirname, 'yomi-rules-tests.js')], {encoding:'utf8'});
@@ -580,7 +623,7 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
-                       ['rec.js', 'index.html'], ['reference.js', 'reference.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['ichiji.js', 'ichiji.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -595,7 +638,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'ichiji.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
