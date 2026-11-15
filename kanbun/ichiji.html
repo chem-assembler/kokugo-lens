@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一字ちがいで比べる｜国語レンズ</title>
+<style>
+  :root { --ink:#322a20; --paper:#faf6ec; --panel:#fffdf6; --frame:#d8cdb4; --ok:#1a7a2e; --ng:#b3231c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif; }
+  header { display:flex; flex-wrap:wrap; gap:.6em; align-items:baseline; padding:.7em 1em; background:#2e2618; color:#f5efdf; }
+  h1 { font-size:1.15em; margin:0; }
+  header .brand { color:#cfc4a6; font-size:.75em; }
+  .version { margin-left:auto; color:#a89c7c; font-size:.7em; }
+  #toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:.7em; padding:.7em 1em; background:var(--panel); border-bottom:1px solid var(--frame); }
+  #toolbar, main, footer { font-family:"Yu Gothic","Meiryo",sans-serif; }
+  select, button { font:inherit; color:inherit; border:1px solid var(--frame); border-radius:.4em; background:white; padding:.5em .7em; }
+  select { max-width:100%; }
+  button { cursor:pointer; min-height:44px; }
+  button:hover:not(:disabled) { background:#f3ecdb; }
+  button:focus-visible, select:focus-visible, a:focus-visible { outline:3px solid #b3410e; outline-offset:2px; }
+  button:disabled { cursor:default; }
+  .primary { background:#2e5d47; color:white; }
+  main { max-width:65em; margin:auto; padding:1em; line-height:1.7; }
+  h2 { font-size:1.05em; }
+  #notice { color:var(--ng); }
+  #context, .hint, #counter { font-size:.9em; color:#6b5f48; }
+  #sentences, #reading-choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8em; }
+  .sentence, fieldset, #explanation { min-width:0; background:var(--panel); border:1px solid var(--frame); border-radius:.5em; padding:.8em; margin:0; }
+  .sentence h3 { font:inherit; font-weight:bold; margin:0; }
+  .hakubun { font-family:"Yu Mincho",serif; font-size:1.5em; margin:.4em 0; overflow-wrap:anywhere; }
+  .choices { display:grid; gap:.5em; }
+  .choices button { width:100%; text-align:left; line-height:1.6; overflow-wrap:anywhere; }
+  .choices button.correct { border-color:var(--ok); background:#e7f3e4; }
+  .choices button.wrong { border-color:var(--ng); background:#fde8e6; }
+  .feedback { margin:.5em 0 0; min-height:1.7em; }
+  #meaning-section { margin-top:1.5em; }
+  #explanation { margin-top:1em; border-color:#2e5d47; }
+  #explanation h2 { margin-top:0; }
+  #explanation p { overflow-wrap:anywhere; }
+  #reference-links a { display:block; margin:.4em 0; color:#2e5d47; }
+  #next { margin-top:1em; }
+  footer { padding:1em; font-size:.8em; color:#887a5d; line-height:1.8; }
+  footer a { color:#6b5f48; }
+  [hidden] { display:none !important; }
+  @media(max-width:600px) { #reading-choices { grid-template-columns:1fr; } main { padding:.7em; } .hakubun { font-size:1.25em; } #toolbar { font-size:.9em; } }
+</style>
+</head>
+<body>
+<header><h1>一字ちがいで比べる</h1><span class="brand">国語レンズ</span><span class="version">v117</span></header>
+<div id="toolbar"><label>主題 <select id="theme"><option value="">すべて</option></select></label><span id="counter"></span></div>
+<main>
+  <p class="hint">一字や語順の違いに注目して、A・Bの読みと意味を比べましょう。書き下しは、この練習で採る読みを選んでください。</p>
+  <p id="notice" role="status" aria-live="polite">問題を読み込んでいます。</p>
+  <article id="exercise" hidden aria-labelledby="pair-title">
+    <h2 id="pair-title" tabindex="-1"></h2><p id="context" hidden></p>
+    <div id="sentences"><section class="sentence"><h3>A</h3><p id="hakubun-a" class="hakubun"></p></section><section class="sentence"><h3>B</h3><p id="hakubun-b" class="hakubun"></p></section></div>
+    <h2>① それぞれの書き下しはどれか</h2>
+    <div id="reading-choices"></div>
+    <section id="meaning-section" hidden aria-labelledby="meaning-title"><h2 id="meaning-title" tabindex="-1">② 意味の違いを正しく言っているのはどれか</h2><div id="meaning-choices" class="choices"></div><p id="meaning-feedback" class="feedback" role="status"></p></section>
+    <section id="explanation" hidden aria-labelledby="point-title"><h2 id="point-title">読みと意味を確かめる</h2><div id="answers"></div><p id="point"></p><p id="note" class="hint"></p><nav id="reference-links" aria-label="この組の句法の解説"></nav></section>
+    <button id="next" class="primary" type="button" disabled>次へ</button>
+  </article>
+</main>
+<footer><div>読みは歴史的仮名づかいで表記しています。文脈により別の読み方もあります。</div>国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../">レンズ一覧</a></footer>
+<script src="ichiji.js?v=117"></script>
+</body>
+</html>
