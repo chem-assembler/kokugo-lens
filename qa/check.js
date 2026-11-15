@@ -103,6 +103,38 @@ console.log('  測定（choice）を持つ項目: ' + ((d.patterns || []).length
 for (const p of noChoice) errs.push(p.code + ': choice の variant がない（測定モードでめくりに落ちる）');
 for (const p of noFlip) errs.push(p.code + ': flip の variant がない（暗記モードで出せない）');
 
+// 参考書で明示された対応だけを送り出し、描画される節の id まで確かめる。
+const refLinks = require('./reference-links.js');
+const R = require('../kanbun/reference.js');
+const book = new R.ReferenceBook(require('../kanbun/reference.json'),
+  require('../kanbun/texts.json').problems, require('../kanbun/kuho.json').types, d.patterns);
+for (const code of Object.keys(refLinks.sections)) {
+  if (!codes.has(code)) errs.push('参考書の対応表にない問題コード: ' + code);
+  const target = book.sectionByCode(code);
+  const url = new URL(refLinks.href('漢文', code), 'https://example.test/qa/');
+  if (!target || url.pathname !== '/kanbun/reference.html'
+      || url.searchParams.get('page') !== target.page.id
+      || url.hash !== '#' + R.anchorId(target.section.anchor)
+      || !book.pageHtml(target.page).includes('id="' + url.hash.slice(1) + '"')) {
+    errs.push(code + ': 参考書の対応先の章・節・アンカーが一致しない');
+  }
+  if (url.searchParams.get('from') !== 'qa' || url.searchParams.get('p') !== code) {
+    errs.push(code + ': 一問一答に戻るための情報がない');
+  }
+  if (refLinks.href('化学', code) !== '' || refLinks.href(undefined, code) !== '') {
+    errs.push(code + ': 漢文以外にも参考書リンクが出る');
+  }
+}
+for (const p of d.patterns) {
+  if (!!refLinks.href('漢文', p.code) !== !!book.sectionByCode(p.code)) {
+    errs.push(p.code + ': 参考書で明示した対応とリンクの有無が一致しない');
+  }
+}
+if (refLinks.href('漢文', 'unknown') || refLinks.href('漢文', 'toString')) {
+  errs.push('対応のないコードにも参考書リンクが出る');
+}
+console.log('  参考書の節への対応: ' + Object.keys(refLinks.sections).length + ' / ' + codes.size);
+
 console.log('----');
 for (const w of warn) console.log('warn: ' + w);
 if (errs.length){

@@ -197,7 +197,14 @@
         const q = new URLSearchParams({p:context.p});
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);
         band.hidden = false;
-        band.innerHTML = '<span>訓点の問題から来ました。</span> <a href="' + esc('index.html?' + q) + '">問題に戻る</a>';
+        const kudashi = context.mode === 'kudashi';
+        band.innerHTML = '<span>' + (kudashi ? '書き下し練習' : '訓点の問題')
+          + 'から来ました。</span> <a href="' + esc((kudashi ? 'kudashi.html?' : 'index.html?') + q) + '">問題に戻る</a>';
+      } else if (context.from === 'qa' && book.patterns.has(context.p)) {
+        const band = doc.getElementById('ref-back');
+        band.hidden = false;
+        band.innerHTML = '<span>一問一答から来ました。</span> <a href="'
+          + esc('../qa/?' + new URLSearchParams({from:'kanbun', code:context.p})) + '">問題に戻る</a>';
       }
       const result = {book, page};
       window.kanbunReference = result;

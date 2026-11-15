@@ -402,6 +402,12 @@ function slTrack(name, params) {
   }
 
   // ---- 暗記モード（めくり） ----
+  function referenceLinkHtml(pattern) {
+    var ref = window.KanbunQaReference;
+    var url = ref && ref.href(DATA.meta && DATA.meta.domain, pattern.code);
+    return url ? '<a class="a-link" href="' + esc(url) + '">📖 参考書で読む</a>' : '';
+  }
+
   function renderFlip(item) {
     var p = item.pattern, v = item.variant;
     var host = $('card-host');
@@ -421,7 +427,7 @@ function slTrack(name, params) {
           '<div class="a-label">こたえ</div>' +
           '<p class="a-text">' + esc(v.a) + '</p>' +
           (v.supplement ? '<p class="a-supp">' + esc(v.supplement) + '</p>' : '') +
-          linkHtml(p) +
+          linkHtml(p) + referenceLinkHtml(p) +
         '</div>' +
         '<div class="actions">' +
           '<button class="btn again" id="btn-again-q">✗ あやしい</button>' +
@@ -491,7 +497,7 @@ function slTrack(name, params) {
         '<p class="a-text" style="color:' + (ok ? 'var(--yuki)' : 'var(--bad)') + '">' +
           (ok ? 'すべて正しく選べました' : '正しい選択と一致しませんでした') + '</p>' +
         (v.supplement ? '<p class="a-supp">' + esc(v.supplement) + '</p>' : '') +
-        linkHtml(p) +
+        linkHtml(p) + referenceLinkHtml(p) +
       '</div>' +
       '<div class="actions"><button class="btn primary" id="btn-next" style="flex:1">つぎへ</button></div>';
     $('btn-next').addEventListener('click', function () { advance(p.code, ok); });
