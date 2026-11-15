@@ -15,6 +15,7 @@
   const $ = id => document.getElementById(id);
 
   let problems = [];
+  let referenceTypes = new Map();
   let problem = null;
   let showYomi = false;
   let graded = null;      // 直近の判定結果
@@ -33,9 +34,12 @@
     step !== 'K1' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  fetch('texts.json?v=118')
-    .then(r => r.json())
-    .then(data => {
+  Promise.all(['texts.json?v=118', 'kuho.json?v=118'].map(url => fetch(url).then(r => {
+    if (!r.ok) throw new Error(url + ' HTTP ' + r.status);
+    return r.json();
+  })))
+    .then(([data, kuho]) => {
+      referenceTypes = new Map(kuho.types.map(type => [type.id, type]));
       problems = data.problems.slice()
         .sort((a, b) => K.difficulty(a) - K.difficulty(b));
       const sel = $('problem-select');
@@ -46,9 +50,12 @@
       });
       refreshOptionLabels();
       setupTrays();
-      loadProblem(0);
+      const requested = new URLSearchParams(window.location.search).get('p');
+      const start = problems.findIndex(p => p.id === requested);
+      sel.value = start >= 0 ? start : 0;
+      loadProblem(+sel.value);
     })
-    .catch(e => { $('meta').textContent = 'texts.json の読み込みに失敗しました: ' + e; });
+    .catch(e => { $('meta').textContent = '問題データの読み込みに失敗しました: ' + e; });
 
   // ---- 学習履歴（訓点モードと同じ localStorage を共有する） ----------------
   // 印は訓点モードと同じ意味。◎=全モード制覇 / ○=どれか / 無印=未着手。
@@ -464,6 +471,25 @@
       const partial = K.toKakikudashi(withInputs(), orderTrayIndices());
       r.innerHTML = '× ' + graded.message
         + (partial ? '<span class="kudashi">' + partial + '</span>' : '');
+    }
+    if (graded){
+      const types = (problem.kuho || []).map(code => referenceTypes.get(code)).filter(Boolean);
+      if (types.length){
+        const links = document.createElement('nav');
+        links.className = 'reference-links';
+        links.setAttribute('aria-label', 'この問題の句法の解説');
+        const label = document.createElement('p');
+        label.textContent = '📖 この句法を読む';
+        links.appendChild(label);
+        for (const type of types){
+          const a = document.createElement('a');
+          a.href = 'reference.html?' + new URLSearchParams({code:type.id, from:'kanbun', p:problem.id, mode:'kudashi'});
+          a.dataset.kuho = type.id;
+          a.textContent = type.name || type.label;
+          links.appendChild(a);
+        }
+        r.appendChild(links);
+      }
     }
     renderMeta();
   }

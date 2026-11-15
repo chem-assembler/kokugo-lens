@@ -184,6 +184,21 @@
         if (block.sec) ok(target.blocks.some(b => b.kind === 'section' && b.anchor === block.sec), block.sec);
       }
     });
+    test('書き下し練習: 全問題の句法の型から実在する参考書の節へ進める', () => {
+      for (const p of problems) {
+        // kuho にはカテゴリも混在する。リンク対象は型 id だけ。
+        const types = (p.kuho || []).filter(code => book.types.has(code));
+        for (const code of types) {
+          const url = new URL('reference.html?' + new URLSearchParams({code, from:'kanbun', p:p.id, mode:'kudashi'}),
+            'https://example.test/kanbun/');
+          const target = book.sectionByCode(url.searchParams.get('code'));
+          ok(target, p.id + '/' + code);
+          ok(book.pageHtml(target.page).includes('id="' + R.anchorId(target.section.anchor) + '"'), code);
+          eq(url.searchParams.get('p'), p.id);
+          eq(url.searchParams.get('mode'), 'kudashi');
+        }
+      }
+    });
     test('参考書: 全種類のブロックと強調を描き、準備中はリンクにしない', () => {
       const page = {id:'synthetic', title:'検査', blocks:[]};
       const fixtures = [
@@ -1049,6 +1064,67 @@
         w = await open(exerciseHref, gameReady);
         eq(w.kanbunApp.problem.id, new URL(exerciseHref).searchParams.get('p'));
         ok(!w.document.getElementById('reference-back').hidden);
+      });
+      const kudashiReady = w => w.document.querySelectorAll('#tray-source .card').length > 0;
+      const qaReady = w => w.document.querySelector('#btn-reveal');
+      await check('書き下し練習の画面: 誤答・正解後に全型を案内し、同じ問題へ戻れる', async () => {
+        const ids = new Set(data.kuho.types.map(t => t.id));
+        const p = problems.find(p => (p.kuho || []).filter(c => ids.has(c)).length > 1);
+        let w = await open('kudashi.html?p=' + p.id, kudashiReady);
+        eq(w.document.querySelectorAll('.reference-links a').length, 0);
+        w.document.getElementById('btn-grade').click();
+        eq(w.document.getElementById('result').className, 'wrong');
+        eq(Array.from(w.document.querySelectorAll('.reference-links a')).map(a => a.dataset.kuho),
+          p.kuho.filter(c => ids.has(c)));
+        const href = w.document.querySelector('.reference-links a').href;
+        eq(new URL(href).searchParams.get('mode'), 'kudashi');
+        w.document.getElementById('btn-answer').click();
+        eq(w.document.querySelectorAll('.reference-links a').length, p.kuho.filter(c => ids.has(c)).length);
+        w.document.getElementById('btn-reset').click();
+        eq(w.document.querySelectorAll('.reference-links a').length, 0);
+        w = await open(href, refReady);
+        const back = w.document.querySelector('#ref-back a').href;
+        eq(new URL(back).pathname.split('/').pop(), 'kudashi.html');
+        eq(new URL(back).searchParams.get('p'), p.id);
+        w = await open(back, kudashiReady);
+        ok(w.document.getElementById('meta').textContent.includes(p.source.work));
+        eq(Array.from(w.document.querySelectorAll('#tray-source .kanji')).map(el => el.textContent).join(''),
+          p.tokens.map(t => t.c).join(''));
+        const empty = problems.find(p => !(p.kuho || []).length);
+        ok(empty, 'kuho が空の実際の問題を使う');
+        w = await open('kudashi.html?p=' + empty.id, kudashiReady);
+        w.document.getElementById('btn-grade').click();
+        eq(w.document.querySelectorAll('.reference-links a').length, 0);
+      });
+      await check('一問一答の画面: 答えの後だけ参考書へ案内し、未対応項目は出さない', async () => {
+        const code = 'kbn.kun.hakubun';
+        let w = await open('../qa/?from=kanbun&code=' + code, qaReady);
+        eq(w.document.querySelectorAll('a[href*="reference.html"]').length, 0);
+        w.document.getElementById('btn-reveal').click();
+        const href = w.document.querySelector('a[href*="reference.html"]').href;
+        w = await open(href, refReady);
+        eq(w.location.hash, '#ref-sec-forms');
+        w = await open(w.document.querySelector('#ref-back a').href, qaReady);
+        eq(w.QaEngine.backFrom().code, code);
+        w = await open('../qa/?from=kanbun&code=kbn.koji.mujun', qaReady);
+        w.document.getElementById('btn-reveal').click();
+        eq(w.document.querySelectorAll('a[href*="reference.html"]').length, 0);
+      });
+      await check('一問一答の画面: 測定の正解・不正解後にも参考書を案内する', async () => {
+        for (const correct of [false, true]) {
+          const w = await open('../qa/', w => w.document.querySelector('button[data-unit="kunten"][data-mode="choice"]'));
+          w.document.querySelector('button[data-unit="kunten"][data-mode="choice"]').click();
+          eq(w.document.querySelectorAll('a[href*="reference.html"]').length, 0);
+          const question = w.document.querySelector('.q-text').textContent;
+          const p = data.qa.patterns.find(p => p.variants.some(v => v.mode === 'choice' && v.q === question));
+          const v = p.variants.find(v => v.mode === 'choice' && v.q === question);
+          const chosen = correct ? v.correct : [v.options.findIndex((_, i) => !v.correct.includes(i))];
+          for (const i of chosen) w.document.querySelector('input[value="' + i + '"]').click();
+          w.document.getElementById('btn-grade').click();
+          eq(w.document.querySelector('.a-label').textContent, correct ? '正解' : '不正解');
+          const href = w.document.querySelector('a[href*="reference.html"]').href;
+          eq(new URL(href).searchParams.get('p'), p.code);
+        }
       });
       await check('参考書の画面: 未知のコード・章でも目次へ戻れ、別の来訪者に帯を出さない', async () => {
         for (const q of ['?code=missing', '?page=missing']) {

@@ -202,9 +202,17 @@
         const q = new URLSearchParams({p:context.p});
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);
         band.hidden = false;
-        const gojun = context.mode === 'gojun';
-        band.innerHTML = '<span>' + (gojun ? '語順の問題' : '訓点の問題') + 'から来ました。</span> <a href="'
-          + esc((gojun ? 'gojun.html?' : 'index.html?') + q) + '">問題に戻る</a>';
+        // どの練習から来たか（mode）で、帯の文と戻り先を決める。表に無い mode は訓点モード
+        const back = {gojun: ['語順の問題', 'gojun.html'], kudashi: ['書き下し練習', 'kudashi.html'],
+                      hataraki: ['字の働きの問題', 'hataraki.html'], chobun: ['長文ステージ', 'chobun.html']}[context.mode]
+                     || ['訓点の問題', 'index.html'];
+        band.innerHTML = '<span>' + back[0] + 'から来ました。</span> <a href="'
+          + esc(back[1] + '?' + q) + '">問題に戻る</a>';
+      } else if (context.from === 'qa' && book.patterns.has(context.p)) {
+        const band = doc.getElementById('ref-back');
+        band.hidden = false;
+        band.innerHTML = '<span>一問一答から来ました。</span> <a href="'
+          + esc('../qa/?' + new URLSearchParams({from:'kanbun', code:context.p})) + '">問題に戻る</a>';
       }
       const result = {book, page};
       window.kanbunReference = result;
