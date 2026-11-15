@@ -10,6 +10,7 @@
   const P = isNode ? require('./progress.js') : window.Progress;
   const PC = isNode ? require('./punct-check.js') : window.KanbunPunct;
   const G = isNode ? require('./gojun.js') : window.KanbunGojun;
+  const PR = isNode ? require('./print.js') : window.KanbunPrint;
   const R = isNode ? require('./reference.js') : window.KanbunReference;
   const Q = isNode ? require('./kuho.js') : window.KanbunKuho;
 
@@ -684,6 +685,101 @@
         eq(G.chars(p), expected, '原データを変更しない');
       }
     });
+    // ---- 授業プリント（ブラウザの印刷へ渡す内容も Node で組み立てる） ----
+    test('プリント: 文脈に合う句法の目印・置き字を除き、選んだ位置だけを載せる', () => {
+      const p = {id:'print-probe', source:{work:'検査', chapter:'篇'}, kuho:['neg'],
+        tokens:[tk('不'), tk('学'), tk('而', null, {role:'placed'}), tk('見'), tk('学')],
+        kakikudashi:'学ばず', meaning:'学ばない'};
+      const g = PR.groupTexts([p])[0];
+      const imi = {'print-probe':['否定','学ぶ','読まない','見る','習う']};
+      const types = [{id:'neg', markers:['不']}, {id:'passive', markers:['見']}];
+      const words = PR.wordCandidates(g,imi,types);
+      eq(words.map(w => w.key), ['print-probe:1','print-probe:3','print-probe:4']);
+      const options = {raw:false, marked:false, kudashi:false, meaning:false, words:true};
+      const chosen = ['print-probe:4','print-probe:0','print-probe:2','missing:0'];
+      const blank = PR.buildWorksheet(g,imi,types,options,chosen);
+      eq(blank.pages.length,1); eq(blank.pages[0].entries.map(w => [w.key,w.meaning]), [['print-probe:4','']]);
+      const answer = PR.buildWorksheet(g,imi,types,Object.assign({},options,{answers:true}),chosen);
+      eq(answer.pages[0].entries[0].meaning,'習う');
+      eq(PR.buildWorksheet(g,imi,types,options,[]).pages, []);
+      const multi = Object.assign({},p,{tokens:[tk('与'),tk('其'),tk('学'),tk('与')],kuho:['choice']});
+      eq(PR.wordCandidates(PR.groupTexts([multi])[0],{'print-probe':['A','B','C','D']},
+        [{id:'choice',markers:['与其']}]).map(w => w.index),[2,3]);
+    });
+    test('プリント: 熟語返りは列の境で切らず、再読・句読点・訓点を描く', () => {
+      const tokens = Array.from({length:14}, () => tk('学'));
+      tokens[11] = tk('孰','二',{join:true}); tokens[12] = tk('与');
+      tokens[0] = tk('未','一レ',{p:'、',reread:{first:{okuri:'ダ'},second:{okuri:'ズ'}}});
+      const g = PR.groupTexts([{id:'joined',source:{work:'検査'},tokens,kakikudashi:'解答',meaning:'訳'}])[0];
+      const cols = PR.textColumns(g);
+      eq(cols.map(c => c.tokens.length),[11,3]); eq(cols[1].continued,true);
+      eq(cols[1].tokens[0].join,true); eq(cols[0].tokens[0].mark,'一レ');
+      const model = PR.buildWorksheet(g,{},[],{raw:false,marked:true,kudashi:false,meaning:false},[]);
+      const html = PR.renderWorksheet(model);
+      ok(html.includes('class="joiner"')); ok(html.includes('class="punct">、'));
+      ok(html.includes('class="okuri">ダ')); ok(!html.includes('>ズ<'));
+      const raw = PR.renderWorksheet(PR.buildWorksheet(g,{},[],{kudashi:false,meaning:false},[]));
+      ok(!raw.includes('class="kunten"')); ok(!raw.includes('class="okuri"'));
+      ok(!raw.includes('class="joiner"'));
+    });
+    test('プリント: 64通りの設定・空欄切替・HTMLの特殊文字・不明な文章を扱う', () => {
+      const p = {id:'safe',source:{work:'<検査>',chapter:'&篇'},tokens:[tk('字')],
+        kakikudashi:'<書>&"',meaning:'<訳>&"'};
+      const g = PR.groupTexts([p])[0], imi = {safe:['<意味>&"']};
+      for (let bits=0; bits<64; bits++){
+        const options = Object.fromEntries(Object.keys(PR.DEFAULTS).map((k,i) => [k,!!(bits & (1 << i))]));
+        const model = PR.buildWorksheet(g,imi,[],options,['safe:0']);
+        eq(model.pages.map(p => p.kind),['raw','marked','kudashi','meaning','words'].filter(k => options[k]));
+        const html = PR.renderWorksheet(model);
+        ok(!html.includes('<検査>') && !html.includes('<書>') && !html.includes('<訳>') && !html.includes('<意味>'));
+        if (!options.answers) ok(!html.includes('&lt;書&gt;') && !html.includes('&lt;訳&gt;') && !html.includes('&lt;意味&gt;'));
+        if (options.kudashi && options.answers) ok(html.includes('&lt;書&gt;&amp;&quot;'));
+      }
+      let threw = false;
+      try { PR.buildWorksheet(null,{},[],{},[]); } catch (_) { threw = true; }
+      ok(threw,'不明な文章を別の文章に黙って置き換えない');
+    });
+    if (isNode){
+      const imi = require('./imi.json'), types = require('./kuho.json').types;
+      const groups = PR.groupTexts(problems);
+      test('プリント: 提示モードと同じ key・掲載順で全問題を文章にまとめる', () => {
+        eq(groups.flatMap(g => g.problems).map(p => p.id).sort(), problems.map(p => p.id).sort());
+        for (const g of groups){
+          eq(g.key,g.problems[0].source.work + '・' + (g.problems[0].source.chapter || ''));
+          eq(g.problems.map(p => p.id), problems.filter(p => p.source.work + '・' + (p.source.chapter || '') === g.key).map(p => p.id));
+        }
+      });
+      for (const group of groups) test('プリント 全文章 ' + group.key + ': 白文・訓点・空欄・答えを組み立てる', () => {
+        const before = JSON.stringify(group);
+        const candidates = PR.wordCandidates(group,imi,types);
+        for (const raw of [true,false]) for (const answers of [false,true]){
+          const model = PR.buildWorksheet(group,imi,types,{raw,marked:!raw,kudashi:true,meaning:true,words:true,answers},candidates.map(w => w.key));
+          const html = PR.renderWorksheet(model);
+          ok(html.length > 0); eq((html.match(/class="sheet"/g) || []).length,model.pages.length);
+          const textPages = model.pages.filter(p => p.columns);
+          eq(textPages.flatMap(p => p.columns).flatMap(c => c.tokens).map(t => t.char),group.problems.flatMap(p => p.tokens).map(t => t.c));
+          for (const page of textPages){
+            ok(page.columns.length <= PR.LIMITS.columns);
+            for (const col of page.columns){
+              ok(col.tokens.length <= PR.LIMITS.rows); ok(!col.tokens[col.tokens.length-1].join);
+            }
+          }
+          for (const kind of ['kudashi','meaning']){
+            const pages = model.pages.filter(p => p.kind === kind);
+            eq(pages.flatMap(p => p.entries).map(e => e.problemId),group.problems.map(p => p.id));
+            for (const page of pages){
+              ok(page.entries.reduce((n,e) => n + e.lines + 1,0) <= PR.LIMITS.answerLines);
+              for (const entry of page.entries){
+                const problem = group.problems.find(p => p.id === entry.problemId);
+                eq(entry.answer,answers ? (kind === 'kudashi' ? problem.kakikudashi : problem.meaning) : '');
+              }
+            }
+          }
+          eq(model.pages.filter(p => p.kind === 'words').flatMap(p => p.entries).map(w => [w.key,w.meaning]),candidates.map(w => [w.key,answers ? w.meaning : '']));
+        }
+        eq(JSON.stringify(group),before,'元の問題を書き換えない');
+      });
+    }
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
@@ -771,7 +867,8 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
-                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'], ['ichiji.js', 'ichiji.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'], ['ichiji.js', 'ichiji.html'],
+                       ['present.js', 'present.html'], ['print.js', 'print.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -786,7 +883,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }

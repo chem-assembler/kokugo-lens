@@ -59,6 +59,7 @@
 
   function choose(k){
     group = groups[k];
+    $('btn-print').disabled = !group;
     step = 0;
     picked = null;
     renderCharInfo();
@@ -188,6 +189,9 @@
     const s = Math.min(STEPS.length - 1, Math.max(0, step + d));
     if (s !== step){ step = s; render(); }
   }
+  $('btn-print').addEventListener('click', () => {
+    if (group) window.open('print.html?t=' + encodeURIComponent(group.key), '_blank', 'noopener');
+  });
   $('btn-next').addEventListener('click', () => go(1));
   $('btn-prev').addEventListener('click', () => go(-1));
   $('text-select').addEventListener('change', e => choose(+e.target.value));

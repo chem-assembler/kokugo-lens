@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>漢文 授業プリント｜国語レンズ</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; color:#111; background:#ddd; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; }
+  #print-controls { padding:1em; background:#fff; border-bottom:1px solid #999; font-family:"Yu Gothic",Meiryo,sans-serif; }
+  #print-controls h1 { font-size:1.2em; margin:0 0 .6em; }
+  #print-controls p { margin:.5em 0; }
+  fieldset { margin:.5em 0; padding:.5em; border:1px solid #aaa; }
+  .choices { display:flex; flex-wrap:wrap; gap:.5em 1em; }
+  label { display:inline-flex; align-items:center; gap:.3em; }
+  button { padding:.4em .8em; background:#fff; border:1px solid #777; border-radius:.2em; font:inherit; cursor:pointer; color:#111; }
+  button:disabled { opacity:.5; cursor:default; }
+  button[aria-pressed="true"] { color:#fff; background:#254e3b; border-color:#254e3b; }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline:3px solid #2469a0; outline-offset:2px; }
+  #word-picker { max-height:22em; overflow:auto; }
+  .word-row { padding:.4em 0; border-top:1px solid #ccc; }
+  .word-row button { margin:.15em; min-width:2.5em; }
+  #pages { padding:1px 0; overflow-x:auto; }
+  /* 各 sheet の内容領域 186×273mm + 余白12mm = A4。画面も同じ寸法。 */
+  .sheet { position:relative; width:210mm; min-height:297mm; padding:12mm; margin:8mm auto; background:white; box-shadow:0 1mm 3mm #aaa; }
+  .sheet-header { border-bottom:.3mm solid #111; padding-bottom:3mm; margin-bottom:4mm; }
+  .sheet h1 { font-size:16pt; line-height:1.4; margin:0; overflow-wrap:anywhere; }
+  .source { margin:1.5mm 0 3mm; font-size:10pt; overflow-wrap:anywhere; }
+  .student-fields { display:flex; flex-wrap:wrap; justify-content:space-between; gap:3mm; font-size:11pt; }
+  .sheet h2 { margin:0 0 4mm; font-size:12pt; }
+  .page-number { position:absolute; bottom:5mm; right:12mm; font-size:9pt; }
+  /* 紙面での折返しには頼らず、12字×9列ずつに組み立てて改ページ。 */
+  .passage { display:flex; flex-direction:row-reverse; align-items:flex-start; justify-content:flex-start; gap:3mm; }
+  .text-column { flex:0 0 17mm; width:17mm; }
+  .sentence-number { height:6mm; text-align:center; font-size:9pt; }
+  .vertical-line { writing-mode:vertical-rl; text-orientation:upright; display:block; height:192mm; width:17mm; }
+  .cell { display:inline-block; position:relative; vertical-align:top; width:17mm; height:16mm; }
+  .kanji { position:absolute; top:0; left:4.5mm; font-size:18pt; line-height:1.25; }
+  .punct { position:absolute; top:7mm; left:9mm; font-size:8pt; line-height:1; }
+  .okuri { position:absolute; top:4mm; left:12mm; writing-mode:vertical-rl; font-size:6pt; line-height:1; }
+  .okuri.long { top:.5mm; font-size:5.3pt; }
+  .kunten { position:absolute; top:7mm; left:2mm; writing-mode:vertical-rl; font-size:7pt; line-height:1; }
+  .joiner { position:absolute; top:14mm; left:3.5mm; width:0; height:4mm; border-left:.35mm solid #111; }
+  .answer-entry { display:flex; gap:2mm; margin-bottom:8mm; break-inside:avoid; }
+  .entry-number { flex:0 0 7mm; padding-top:1mm; font-size:10pt; }
+  .answer-lines { flex:1; min-width:0; min-height:calc(var(--lines) * 8mm); font-size:12pt; line-height:8mm; overflow-wrap:anywhere; position:relative; }
+  .answer-rule { position:absolute; left:0; right:0; border-bottom:.2mm solid #999; }
+  .answer-text { position:relative; }
+  .word-table { width:100%; border-collapse:collapse; font-size:12pt; table-layout:fixed; }
+  .word-table th, .word-table td { border:.25mm solid #777; padding:3mm; overflow-wrap:anywhere; }
+  .word-table tr { height:17mm; break-inside:avoid; }
+  .word-table th:first-child { width:13mm; }
+  .word-table th:nth-child(2) { width:20mm; }
+  @page { size:A4 portrait; margin:12mm; }
+  @media print {
+    html, body { margin:0; padding:0; background:#fff; }
+    #print-controls { display:none !important; }
+    #pages { padding:0; overflow:visible; }
+    .sheet { width:186mm; min-height:273mm; margin:0; padding:0; box-shadow:none; break-after:page; page-break-after:always; }
+    .sheet:last-child { break-after:auto; page-break-after:auto; }
+    .page-number { bottom:0; right:0; }
+  }
+</style>
+</head>
+<body>
+<section id="print-controls" aria-label="プリント設定">
+  <h1>漢文 授業プリント <small>v117</small></h1>
+  <a id="present-link" href="present.html">提示モードへ</a>
+  <fieldset id="settings" disabled>
+    <legend>載せる項目</legend>
+    <div class="choices">
+      <label><input id="opt-raw" type="checkbox" checked>白文だけ</label>
+      <label><input id="opt-marked" type="checkbox">訓点つき白文</label>
+      <label><input id="opt-kudashi" type="checkbox" checked>書き下しの欄</label>
+      <label><input id="opt-meaning" type="checkbox" checked>現代語訳の欄</label>
+      <label><input id="opt-words" type="checkbox">重要な字の意味の欄</label>
+      <label><input id="opt-answers" type="checkbox">答えつき（外すと空欄）</label>
+    </div>
+    <div id="word-picker" hidden>
+      <p>載せたい字を押してください。句法の目印・置き字は候補に出しません。同じ字も、文中の位置ごとに選べます。</p>
+      <div id="word-buttons"></div>
+    </div>
+  </fieldset>
+  <button id="btn-print" type="button" disabled>印刷する</button>
+  <p>白文の数字と各欄の数字は対応します。長い文章は複数ページになります。印刷設定は A4・縦・倍率100%、ヘッダーとフッターなしを推奨します。</p>
+  <p id="notice" role="status" aria-live="polite">データを読み込んでいます…</p>
+</section>
+<main id="pages" aria-label="プリントのプレビュー"></main>
+<script src="kanbun.js?v=117"></script>
+<script src="print.js?v=117"></script>
+</body>
+</html>
