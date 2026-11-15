@@ -808,7 +808,7 @@
         check(d => { d.pairs[0].ng[0] = d.pairs[0].point; });
         check(d => { const p = d.pairs.find(p => p.id === 'isho-taku'); delete p.note; });
         check(d => { d.pairs[0].b.kakikudashi = d.pairs[0].a.kakikudashi; });
-        check(d => { d.pairs = d.pairs.filter(p => p.theme !== '可／能'); });
+        check(d => { d.pairs = d.pairs.filter(p => p.theme !== '豈／何'); });
       });
       test('一字ちがい: 各文の4択に正解・相手・他組2件が重複なく入り、意味も4択になる', () => {
         const I = require('./ichiji.js'), pairs = require('./ichiji.json').pairs;
