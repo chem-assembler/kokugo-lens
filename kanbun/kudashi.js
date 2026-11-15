@@ -34,7 +34,7 @@
     step !== 'K1' && askList.some(a => a.i === i && a.nth === nth);
 
   // ---- 問題の読み込み ----------------------------------------------------
-  Promise.all(['texts.json?v=118', 'kuho.json?v=118'].map(url => fetch(url).then(r => {
+  Promise.all(['texts.json?v=119', 'kuho.json?v=119'].map(url => fetch(url).then(r => {
     if (!r.ok) throw new Error(url + ' HTTP ' + r.status);
     return r.json();
   })))
