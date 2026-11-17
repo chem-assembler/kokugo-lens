@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字の働き｜国語レンズ</title>
+<style>
+  :root { --ink: #322a20; --paper: #faf6ec; --panel: #fffdf6; --frame: #d8cdb4; --ok: #1a7a2e; --ng: #b3231c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.8em; padding: 0.6em 1em; background: #2e2618; color: #f5efdf; }
+  header h1 { font-size: 1.15em; margin: 0; }
+  header .brand { font-size: 0.75em; color: #cfc4a6; }
+  header .version { margin-left: auto; font-size: 0.7em; color: #a89c7c; }
+  #toolbar { display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center; padding: 0.6em 1em; border-bottom: 1px solid var(--frame); background: var(--panel); font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.85em; }
+  select, button { font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 1em; padding: 0.4em 0.7em; border: 1px solid var(--frame); border-radius: 0.4em; background: #fff; color: var(--ink); }
+  button { cursor: pointer; min-height: 44px; }
+  button:hover { background: #f3ecdb; }
+  button.primary { background: #2e5d47; color: #fff; border-color: #2e5d47; }
+  button:disabled { opacity: 0.45; cursor: default; }
+  main { padding: 1em; max-width: 64em; margin: auto; font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 0.9em; }
+  h2 { font-size: 0.95em; margin: 0 0 0.5em; color: #6b5f48; }
+  .box { min-width: 0; padding: 0.8em; margin-bottom: 1em; background: var(--panel); border: 1px solid var(--frame); border-radius: 0.5em; }
+  #meaning { line-height: 1.8; margin: 0; }
+  .hint, #source, #pool-count, #answer-count { color: #6b5f48; font-size: 0.85em; line-height: 1.7; }
+  #notice { color: #b3231c; line-height: 1.7; }
+  #notice:empty { display: none; }
+  .tray { display: flex; flex-flow: row nowrap; gap: 0.35em; min-height: 5.5em; padding: 0.5em; overflow-x: auto; background: #f6f0e0; border-radius: 0.4em; }
+  #tray-order { background: #eef3e9; }
+  .card { flex: 0 0 2em; display: flex; align-items: center; justify-content: center; min-height: 2.4em; font-family: "Yu Mincho", serif; font-size: 1.5em; background: #fff; border: 1px solid var(--frame); border-radius: 0.3em; cursor: grab; touch-action: pan-x pan-y; user-select: none; }
+  .card:active { cursor: grabbing; }
+  .card:focus-visible { outline: 3px solid #2e5d47; outline-offset: -3px; }
+  .card.bad { background: #fde0dd; border-color: var(--ng); }
+  .sortable-ghost { opacity: 0.35; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.5em; }
+  #hint-text { line-height: 1.8; }
+  #result { margin-top: 1em; padding: 0.8em; border-radius: 0.5em; line-height: 1.8; overflow-wrap: anywhere; }
+  #result p { margin: 0.4em 0; }
+  #result.ok { background: #e7f3e4; border: 1px solid var(--ok); }
+  #result.wrong { background: #fde8e6; border: 1px solid var(--ng); }
+  #result a, footer a { color: #6b5f48; }
+  footer { padding: 0.8em 1em 1.5em; font-size: 0.75em; color: #998a6a; font-family: "Yu Gothic", sans-serif; line-height: 1.8; }
+  @media (max-width: 450px) { main { padding: 0.7em; } .box { padding: 0.6em; } header h1 { font-size: 1.05em; } }
+
+  [hidden] { display: none !important; }
+  select { max-width: 100%; min-height: 44px; }
+  #toolbar label { max-width: 100%; }
+  #sentence { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15em; font-family: "Yu Mincho", serif; font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 2; }
+  .cell { white-space: nowrap; }
+  #sentence button { font-family: inherit; font-size: inherit; padding: 0 0.15em; border-color: transparent; border-radius: 0.15em; background: transparent; opacity: 1; }
+  #sentence button:disabled { color: #6b5f48; }
+  #sentence button.target { border: 3px solid #2e5d47; background: #e7f3e4; text-decoration: underline; text-underline-offset: 0.2em; }
+  #sentence button.done:not(.target) { border-bottom: 2px solid #2e5d47; }
+  .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5em; }
+  .choices button { overflow-wrap: anywhere; white-space: normal; text-align: left; line-height: 1.6; }
+  .choices button:disabled { opacity: 1; color: #6b5f48; }
+  .choices button.correct { border: 2px solid var(--ok); background: #e7f3e4; color: #195c28; }
+  .choices button.incorrect { border: 2px solid var(--ng); background: #fde0dd; color: var(--ng); }
+  .feedback { min-height: 1.6em; margin: 0.5em 0 0; }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #2e5d47; outline-offset: 2px; }
+  #result nav a { display: inline-block; margin: 0.2em 0.6em 0.2em 0; padding: 0.4em 0; }
+</style>
+</head>
+<body data-hataraki>
+<header><h1>漢文｜字の働き</h1><span class="brand">国語レンズ｜KokugoLenz</span><span class="version">v118</span></header>
+<div id="toolbar">
+  <label>句法のまとまり：<select id="category-select"><option value="">すべて</option></select></label>
+  <label>働き：<select id="role-select"><option value="">すべて</option></select></label>
+  <label><input type="checkbox" id="marker-only">目印の字だけ</label>
+  <label><input type="checkbox" id="all-mode">この文を全部</label>
+  <span id="pool-count"></span>
+</div>
+<main>
+  <p class="hint">漢字の使い方 → 返り点 → 書き下し。まず一字ずつ、読み・この文での意味・文中での働きを確かめましょう。</p>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <div id="exercise" hidden>
+    <section class="box"><h2>白文</h2><div id="sentence" role="group" aria-label="白文の字を選ぶ"></div>
+      <p id="target-label"></p><p id="sentence-count" class="hint" aria-live="polite"></p>
+      <p class="hint">印の字が出題中です。ほかの字を押して選び直せます。「この文を全部」は絞り込み対象の字を順に問います。<br>読みは送り仮名を含む歴史的仮名づかい。再読文字は二つの読みを「…」で示します。熟語では単独の読みが付いていない字もあります。</p>
+    </section>
+    <section id="step-0" class="box" hidden><h2 tabindex="-1">① 読み</h2><div class="choices" role="group" aria-label="読みの四択"></div><p class="feedback" role="status"></p></section>
+    <section id="step-1" class="box" hidden><h2 tabindex="-1">② この文での意味</h2><div class="choices" role="group" aria-label="意味の四択"></div><p class="feedback" role="status"></p></section>
+    <section id="step-2" class="box" hidden><h2 tabindex="-1">③ 文中での働き</h2><div class="choices" role="group" aria-label="働きの十択"></div><p class="feedback" role="status"></p></section>
+    <div id="result" role="status" aria-live="polite" hidden></div>
+    <p id="source"></p>
+  </div>
+  <div class="actions"><button id="btn-next" class="primary" disabled>次の文・字</button></div>
+</main>
+<footer>
+  <div>働きはこの教材の10区分による暫定整理です。品詞名とは異なり、同じ漢字でも文中での働きは変わります。</div>
+  国語レンズ（KokugoLenz）｜<a href="reference.html">漢文の参考書</a>｜<a href="index.html">返り点の練習</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="gojun.html">語順を組み立てる</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="test.html">回帰テスト</a>
+</footer>
+<script src="hataraki.js?v=118"></script>
+</body>
+</html>
