@@ -19,24 +19,26 @@
 </style>
 </head>
 <body>
-<h1>返り点でみる漢文 — 回帰テスト <span class="version">v119</span></h1>
+<h1>返り点でみる漢文 — 回帰テスト <span class="version">v120</span></h1>
 <div id="summary">実行中…</div>
 <ul id="list"></ul>
-<script src="kanbun.js?v=119"></script>
-<script src="progress.js?v=119"></script>
-<script src="punct-check.js?v=119"></script>
-<script src="reference.js?v=119"></script>
-<script src="gojun.js?v=119"></script>
-<script src="kuho.js?v=119"></script>
-<script src="print.js?v=119"></script>
-<script src="hataraki.js?v=119"></script>
-<script src="tests.js?v=119"></script>
+<script src="kanbun.js?v=120"></script>
+<script src="progress.js?v=120"></script>
+<script src="punct-check.js?v=120"></script>
+<script src="reference.js?v=120"></script>
+<script src="gojun.js?v=120"></script>
+<script src="kuho.js?v=120"></script>
+<script src="print.js?v=120"></script>
+<script src="hataraki.js?v=120"></script>
+<script src="chobun-check.js?v=120"></script>
+<script src="chobun.js?v=120"></script>
+<script src="tests.js?v=120"></script>
 <script>
-Promise.all(['texts.json?v=119', 'reference.json?v=119', 'kuho.json?v=119', '../qa/questions.json', 'imi.json?v=119', 'hataraki.json?v=119'].map(url =>
+Promise.all(['texts.json?v=120', 'reference.json?v=120', 'kuho.json?v=120', '../qa/questions.json', 'imi.json?v=120', 'hataraki.json?v=120', 'chobun.json?v=120'].map(url =>
   fetch(url).then(r => { if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); })
 ))
-  .then(async ([texts, pages, kuho, qa, imi, hataraki]) => {
-    const data = {pages, kuho, qa, imi, hataraki};
+  .then(async ([texts, pages, kuho, qa, imi, hataraki, chobun]) => {
+    const data = {pages, kuho, qa, imi, hataraki, chobun};
     const rs = window.KanbunTests.run(texts.problems, data)
       .concat(await window.KanbunTests.runBrowser(texts.problems, data));
     const fails = rs.filter(r => !r.ok);

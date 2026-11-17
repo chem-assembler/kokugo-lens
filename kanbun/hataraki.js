@@ -200,7 +200,7 @@
       if (entry) load(entry);
     }
     try {
-      const [texts, imi, hataraki, kuho] = await Promise.all(['texts.json?v=118', 'imi.json?v=118', 'hataraki.json?v=118', 'kuho.json?v=118'].map(async url => {
+      const [texts, imi, hataraki, kuho] = await Promise.all(['texts.json?v=120', 'imi.json?v=120', 'hataraki.json?v=120', 'kuho.json?v=120'].map(async url => {
         const response = await fetch(url); if (!response.ok) throw new Error(url + ': ' + response.status); return response.json();
       }));
       quiz = createQuiz(texts.problems, imi, hataraki, kuho);

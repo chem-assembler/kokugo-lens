@@ -42,7 +42,7 @@
         if (!response.ok) throw new Error('読み込み失敗: ' + url);
         return response.json();
       };
-      const [data, kuho] = await Promise.all([load('ichiji.json?v=119'), load('kuho.json?v=119')]);
+      const [data, kuho] = await Promise.all([load('ichiji.json?v=120'), load('kuho.json?v=120')]);
       const pairs = data.pairs;
       if (!Array.isArray(pairs) || !pairs.length) throw new Error('問題がありません');
       const types = new Map(kuho.types.map(t => [t.id, t]));

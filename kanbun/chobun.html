@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>長文ステージ｜国語レンズ</title>
+<style>
+:root { --paper:#faf6ec; --ink:#322a20; --panel:#fffdf6; --frame:#d8cdb4; --green:#2e5d47; --red:#b3410e; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Gothic","Meiryo",sans-serif; line-height:1.7; }
+header { background:#2e2618; color:#f5efdf; padding:.7rem 1rem; display:flex; align-items:baseline; gap:1rem; }
+h1 { margin:0; font-size:1.25rem; } header small { margin-left:auto; }
+main { max-width:1000px; margin:auto; padding:1rem; }
+h2 { font-size:1.25rem; margin:.5rem 0; } h3 { font-size:1.05rem; }
+a { color:var(--green); text-underline-offset:.2em; }
+button { font:inherit; color:var(--ink); background:white; border:1px solid var(--frame); border-radius:.4rem; padding:.5rem .8rem; cursor:pointer; min-height:44px; }
+button:hover { background:#f1ebdc; } button:disabled { opacity:.5; cursor:default; }
+button.primary { background:var(--green); color:white; border-color:var(--green); }
+button:focus-visible, a:focus-visible, input:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:1rem; }
+.card,.box { border:1px solid var(--frame); background:var(--panel); border-radius:.6rem; padding:1rem; margin-bottom:1rem; min-width:0; }
+.card { margin:0; } .card p { margin:.4rem 0; } .card nav { display:flex; flex-wrap:wrap; gap:.5rem 1rem; margin:.6rem 0; }
+.badge { color:var(--green); font-weight:bold; } .muted { font-size:.9rem; color:#685e4c; }
+.toolbar { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:1rem 0; }
+.toolbar button[aria-pressed="true"] { background:var(--green); color:white; }
+/* 本文の外枠だけが横スクロールする。文番号と問いは常に横書き。 */
+#passage { direction:rtl; width:100%; height:clamp(280px,58vh,560px); overflow:auto; border:1px solid var(--frame); background:var(--panel); padding:1rem; border-radius:.5rem; }
+#passage-inner { direction:ltr; writing-mode:vertical-rl; height:100%; min-width:100%; display:flex; flex-direction:column; gap:1.2em; font:1.15rem/1.8 "Yu Mincho","Hiragino Mincho ProN",serif; }
+.sentence { display:block; padding:.3em .6em; border-right:3px solid transparent; }
+.sentence.target { border-right-color:var(--red); background:#fff0d9; }
+.sentence .num { font-family:sans-serif; font-size:.65em; color:#756953; padding-bottom:.5em; }
+.cell { display:inline-block; position:relative; width:3.3em; height:2.5em; vertical-align:top; }
+.kanji { position:absolute; left:50%; top:0; transform:translateX(-50%); font-size:1.5em; line-height:1.5; }
+.punct { position:absolute; left:calc(50% + .1em); top:1.9em; font-size:.8em; line-height:1; }
+.okuri { position:absolute; left:calc(50% + .85em); top:1.5em; font-size:.55em; line-height:1.1; }
+.kunten { position:absolute; left:.15em; top:1.6em; font-size:.6em; color:var(--red); line-height:1.1; }
+.second { position:absolute; left:calc(50% + 1em); top:.05em; font-size:.5em; line-height:1.1; color:var(--red); }
+.joiner { position:absolute; left:.3em; top:2.1em; width:.14em; height:.8em; background:var(--red); }
+.kudashi { font-size:1.15em; line-height:2; white-space:normal; }
+.break { max-height:100%; font:.75rem/1.7 sans-serif; color:#6d5940; border-right:1px dashed var(--frame); padding:.5em; }
+#question { margin-top:1rem; } fieldset { border:0; padding:0; margin:.6rem 0; min-width:0; }
+legend { font-weight:bold; width:100%; } .choice { display:flex; gap:.6rem; align-items:baseline; border:1px solid var(--frame); border-radius:.4rem; margin:.5rem 0; padding:.6rem; cursor:pointer; }
+.choice:has(input:checked) { border-color:var(--green); background:#eef3e9; }
+.choice input { flex-shrink:0; } .answer.good { border-left:4px solid var(--green); } .answer.wrong { border-left:4px solid var(--red); }
+.reference-links { display:flex; flex-wrap:wrap; gap:.5rem 1rem; }
+footer { text-align:center; padding:1rem; font-size:.8rem; color:#685e4c; }
+@media(max-width:450px) { main { padding:.75rem; } h1 { font-size:1.05rem; } .box { padding:.8rem; } #passage { padding:.6rem; } }
+</style>
+</head>
+<body>
+<header><h1>漢文 長文ステージ</h1><small>v120</small></header>
+<main>
+<p id="status" role="status">データを読み込んでいます…</p>
+<section id="stage-list" hidden aria-labelledby="list-title">
+<h2 id="list-title" tabindex="-1">句法を使って、文章を読もう</h2>
+<p>漢字と句法を練習したら、文章で確かめましょう。全問正解でクリアです。</p>
+<p class="muted" id="storage-note"></p>
+<div class="cards" id="cards"></div>
+</section>
+<section id="stage-view" hidden aria-labelledby="stage-title">
+<button id="back-list">← ステージ一覧</button>
+<h2 id="stage-title" tabindex="-1"></h2>
+<p id="work"></p><p id="intro"></p><p id="passage-note" class="muted"></p>
+<div class="toolbar" role="group" aria-label="本文の表示">
+<button data-view="plain" aria-pressed="true">白文</button><button data-view="marks" aria-pressed="false">訓点つき</button><button data-view="kudashi" aria-pressed="false">書き下し</button>
+</div>
+<p class="muted">本文は右から左へ読みます。枠内を横にスクロールできます。問いの対象は朱色の傍線の文です。</p>
+<div id="passage" role="region" tabindex="0" aria-label="縦書きの本文"><div id="passage-inner"></div></div>
+<div id="question" class="box"></div>
+<div id="results" hidden></div>
+</section>
+</main>
+<footer><div>読みは歴史的仮名づかいで表記しています。</div><a href="index.html">訓点モード</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="../">レンズ一覧</a></footer>
+<script src="kanbun.js?v=120"></script>
+<script src="chobun-check.js?v=120"></script>
+<script src="chobun.js?v=120"></script>
+</body>
+</html>

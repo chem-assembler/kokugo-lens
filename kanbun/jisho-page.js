@@ -53,7 +53,7 @@
       }
       showEntry(chars.includes(selected) ? selected : chars[0] || null, false);
     }
-    Promise.all(['jisho.json?v=118', 'texts.json?v=118'].map(url => fetch(url).then(r => {
+    Promise.all(['jisho.json?v=120', 'texts.json?v=120'].map(url => fetch(url).then(r => {
       if (!r.ok) throw new Error(url + ' ' + r.status);
       return r.json();
     }))).then(([data, texts]) => {

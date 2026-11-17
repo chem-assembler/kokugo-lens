@@ -174,7 +174,7 @@
     }
     controls(false);
     try {
-      const [texts, types] = await Promise.all(['texts.json?v=119', 'kuho.json?v=119'].map(async url => {
+      const [texts, types] = await Promise.all(['texts.json?v=120', 'kuho.json?v=120'].map(async url => {
         const r = await fetch(url);
         if (!r.ok) throw new Error(url + ': ' + r.status);
         return r.json();

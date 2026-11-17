@@ -14,6 +14,8 @@
   const R = isNode ? require('./reference.js') : window.KanbunReference;
   const Q = isNode ? require('./kuho.js') : window.KanbunKuho;
   const H = isNode ? require('./hataraki.js') : window.KanbunHataraki;
+  const C = isNode ? require('./chobun.js') : window.KanbunChobun;
+  const CC = isNode ? require('./chobun-check.js') : window.KanbunChobunCheck;
 
   const results = [];
   function test(name, fn){
@@ -43,9 +45,70 @@
     results.length = 0;
     const data = referenceData || (isNode ? {
       pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json'),
-      imi: require('./imi.json'), hataraki: require('./hataraki.json')
+      imi: require('./imi.json'), hataraki: require('./hataraki.json'), chobun: require('./chobun.json')
     } : null);
     if (!data) throw new Error('参考書の検査データがありません');
+    // ---- 長文の実データ・破損検出・採点・記録 ----
+    test('長文: 全ステージの対象文・四択・カテゴリが有効', () => {
+      eq(CC.check(data.chobun, {problems}, data.kuho), []);
+      eq(new Set(data.chobun.stages.map(s => s.category)).size, Object.keys(data.kuho.categories).length);
+    });
+    test('長文: 不正な参照・解答・重複肢・カテゴリを検出する', () => {
+      const damage = fn => {
+        const copy = JSON.parse(JSON.stringify(data.chobun)); fn(copy.stages[0]);
+        return CC.check(copy, {problems}, data.kuho);
+      };
+      for (const mutate of [s => s.problems[0] = 'missing', s => s.questions[0].p = 'missing',
+        s => s.questions[0].answer = 4, s => s.questions[0].answer = -1,
+        s => s.questions[0].choices[1] = s.questions[0].choices[0], s => s.category = 'missing',
+        s => s.questions.reverse()]) ok(damage(mutate).length > 0);
+    });
+    test('長文: 全問正解だけをクリアとし、未解答・誤答を通さない', () => {
+      for (const stage of data.chobun.stages) {
+        const answers = stage.questions.map(q => q.answer);
+        ok(C.grade(stage, answers).clear);
+        ok(!C.grade(stage, []).clear);
+        answers[0] = (answers[0] + 1) % 4;
+        ok(!C.grade(stage, answers).clear);
+      }
+    });
+    test('長文: 保存拒否・読込拒否・保存容量不足でもメモリにクリアを残す', () => {
+      for (const get of [() => null, () => { throw Error('blocked'); },
+        () => ({getItem:() => '{}', setItem:() => { throw Error('quota'); }})]) {
+        const p = C.createProgress(get); p.markClear('stage', 'sig');
+        ok(p.isClear('stage', 'sig')); ok(!p.isClear('stage', 'new')); ok(p.isMemory());
+      }
+      let saved = '{}';
+      const get = () => ({getItem:() => saved, setItem:(key,value) => {saved = value;}});
+      C.createProgress(get).markClear('stage', 'sig');
+      ok(C.createProgress(get).isClear('stage', 'sig'));
+      ok(!C.createProgress(get).isClear('stage', 'changed-data'));
+      ok(!C.createProgress(() => ({getItem:() => 'null'})).isClear('stage', 'sig'));
+    });
+    test('長文: 差し替え時に記録を更新し、誤答の参考書リンクに復帰先を残す', () => {
+      const stage = data.chobun.stages[0], texts = new Map(problems.map(p => [p.id, p]));
+      const sig = C.signature(stage, texts), copy = JSON.parse(JSON.stringify(stage));
+      copy.questions[0].explain += '更新'; ok(sig !== C.signature(copy, texts));
+      const p = texts.get(stage.questions[0].p);
+      const href = C.referenceHref(stage, stage.questions[0], p, new Map(data.kuho.types.map(t => [t.id,t])), 0);
+      const q = new URLSearchParams(href.split('?')[1]);
+      eq(q.get('mode'), 'chobun'); eq(q.get('s'), stage.id); eq(q.get('p'), p.id); eq(q.get('q'), '0');
+      eq(q.get('from'), 'kanbun'); ok(q.has('code') || q.has('page'));
+      ok(R.referenceHref('hitei', '', {from:'kanbun', p:p.id, mode:'chobun', s:stage.id, q:'0'}).includes('s=' + stage.id));
+      // 型タグのない文でも、実在する章へ着地する。カテゴリIDと章IDは同じとは限らない。
+      const pageIds = new Set(data.pages.map(p => p.id));
+      for (const s of data.chobun.stages) {
+        ok(pageIds.has(s.referencePage), s.id + ' の参考書章');
+        const fallback = C.referenceHref(s, {}, {id:'fixture',kuho:[]}, new Map(), 0);
+        ok(pageIds.has(new URLSearchParams(fallback.split('?')[1]).get('page')));
+        for (const question of s.questions) {
+          const url = C.referenceHref(s,question,texts.get(question.p),new Map(data.kuho.types.map(t => [t.id,t])),0);
+          const params = new URLSearchParams(url.split('?')[1]);
+          if (params.has('page')) ok(pageIds.has(params.get('page')));
+          else ok(data.pages.some(page => page.blocks.some(block => (block.codes || []).includes(params.get('code')))));
+        }
+      }
+    });
     // ---- 句法クイズ: 実際の出題器で全型・全 examples を検査する ----
     const typeById = new Map(data.kuho.types.map(t => [t.id, t]));
     const textById = new Map(problems.map(p => [p.id, p]));
@@ -1080,7 +1143,7 @@
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
                        ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'],
                        ['ichiji.js', 'ichiji.html'], ['present.js', 'present.html'], ['print.js', 'print.html'],
-                       ['hataraki.js', 'hataraki.html'], ['jisho-page.js', 'jisho.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['hataraki.js', 'hataraki.html'], ['jisho-page.js', 'jisho.html'], ['chobun.js', 'chobun.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -1095,7 +1158,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html', 'hataraki.html', 'jisho.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html', 'hataraki.html', 'jisho.html', 'chobun.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
@@ -1175,8 +1238,9 @@
   // 実ページを1枚ずつ開く。iframe を非表示にはせず、携帯幅で描画する。
   async function runBrowser(problems, data){
     const rs = [];
-    let savedProgress = null, canRestore = false;
+    let savedProgress = null, savedChobun = null, canRestore = false, canRestoreChobun = false;
     try { savedProgress = localStorage.getItem(P.KEY); canRestore = true; } catch (_) { /* 保存できない環境でも検査する */ }
+    try { savedChobun = localStorage.getItem(C.KEY); localStorage.removeItem(C.KEY); canRestoreChobun = true; } catch (_) { /* メモリ代替は単体検査で確認 */ }
     const frame = document.createElement('iframe');
     frame.title = '参考書と問題の往復を確かめる';
     frame.style.cssText = 'position:absolute;left:-10000px;width:375px;height:812px;border:0;';
@@ -1326,6 +1390,53 @@
         d.getElementById('btn-dictionary-marks').click();
         eq(d.querySelectorAll('.in-dictionary').length, 0);
       });
+      const chobunReady = w => w.document.documentElement.dataset.chobunReady === 'true';
+      await check('長文の画面: 縦書き3表示・対象の傍線・誤答から参考書との往復', async () => {
+        const stage = data.chobun.stages[0];
+        let w = await open('chobun.html?s=' + stage.id, chobunReady), d = w.document;
+        ok(d.documentElement.scrollWidth <= w.innerWidth, '375px幅でページが横にはみ出さない');
+        eq(w.getComputedStyle(d.getElementById('passage-inner')).writingMode, 'vertical-rl');
+        eq(d.querySelectorAll('.sentence').length, stage.problems.length);
+        eq(d.querySelector('.sentence.target').dataset.problem, stage.questions[0].p);
+        eq(d.querySelectorAll('.kunten').length, 0);
+        d.querySelector('[data-view="marks"]').click(); ok(d.querySelectorAll('.kunten').length > 0);
+        d.querySelector('[data-view="kudashi"]').click();
+        ok(d.querySelector('.kudashi').textContent === problems.find(p => p.id === stage.problems[0]).kakikudashi);
+        d.querySelector('[data-view="plain"]').click(); eq(d.querySelectorAll('.kunten').length, 0);
+        ok(d.getElementById('next-question').disabled, '未回答は進めない');
+        for (const q of stage.questions) {
+          d.querySelector('input[value="' + ((q.answer + 1) % 4) + '"]').click();
+          d.getElementById('next-question').click();
+        }
+        eq(d.querySelectorAll('.answer.wrong').length, stage.questions.length);
+        const href = d.querySelector('.reference-links a').href;
+        const params = new URL(href).searchParams;
+        eq(params.get('mode'), 'chobun'); eq(params.get('s'), stage.id); eq(params.get('q'), '0');
+        w = await open(href, refReady);
+        ok(w.document.getElementById('ref-back').textContent.includes('長文の問題'));
+        const back = w.document.querySelector('#ref-back a').href;
+        eq(new URL(back).pathname.split('/').pop(), 'chobun.html');
+        w = await open(back, chobunReady);
+        ok(w.document.getElementById('stage-title').textContent.includes('否定'));
+        eq(w.document.querySelector('.sentence.target').dataset.problem, stage.questions[0].p);
+      });
+      await check('長文の画面: 全問正解・記録の再読込・次のまとまり・カテゴリ別クイズ', async () => {
+        const stage = data.chobun.stages[0];
+        let w = await open('chobun.html?s=' + stage.id, chobunReady), d = w.document;
+        for (const q of stage.questions) {
+          d.querySelector('input[value="' + q.answer + '"]').click();
+          d.getElementById('next-question').click();
+        }
+        ok(d.getElementById('results').textContent.includes('クリア！'));
+        ok(d.getElementById('results').textContent.includes('次は「使役」へ'));
+        eq(d.querySelectorAll('.answer.wrong').length, 0);
+        w = await open('chobun.html', chobunReady); d = w.document;
+        eq(d.querySelectorAll('.card').length, data.chobun.stages.length);
+        if (canRestoreChobun) ok(d.querySelector('[data-stage="' + stage.id + '"] .badge'));
+        const href = d.querySelector('[data-stage="shieki"] nav a').href;
+        w = await open(href, w => w.document.querySelector('#choices button'));
+        eq(w.document.getElementById('cat-select').value, 'shieki');
+      });
       const gojunReady = w => w.document.documentElement.dataset.gojunReady === 'true';
       await check('語順の画面: タップ・ヒント・正誤判定・参考書との往復', async () => {
         const p = problems.find(p => p.id === 'rongo-manabite');
@@ -1465,7 +1576,10 @@
           ok(w.document.getElementById('ref-sec-hitei-fu'));
           ok(w.document.getElementById('ref-back').textContent.includes('句法クイズから来ました。'));
           // 章を移った後も、再読込後も戻る文脈を残す。
-          w = await open(w.location.href, refReady);
+          // 同じ URL（ハッシュだけ違う）を src に入れても読み直されないので、reload で読み直す
+          await new Promise(resolve => { frame.onload = resolve; w.location.reload(); });
+          await wait(() => refReady(frame.contentWindow));
+          w = frame.contentWindow;
           w = await open(w.document.querySelector('#chapter-list a').href, refReady);
           const back = w.document.querySelector('#ref-back a').href;
           eq(new URL(back).pathname.split('/').pop(), 'kuho.html');
@@ -1611,6 +1725,10 @@
       });
     } finally {
       frame.remove();
+      if (canRestoreChobun) {
+        if (savedChobun === null) localStorage.removeItem(C.KEY);
+        else localStorage.setItem(C.KEY, savedChobun);
+      }
       if (canRestore) {
         if (savedProgress === null) localStorage.removeItem(P.KEY);
         else localStorage.setItem(P.KEY, savedProgress);
