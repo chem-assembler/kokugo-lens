@@ -122,6 +122,44 @@
 
     const book = new R.ReferenceBook(data.pages, problems, data.kuho.types, data.qa.patterns);
 
+    for (const t of data.kuho.types) {
+      test('句法 ' + t.id + ': 全形式の参考書リンクは実在する節へ進むか、未収録なら出さない', () => {
+        const quiz = Q.createQuiz(data.kuho, problems);
+        for (const kind of ['katachi', 'blank', 'imi']) {
+          const q = quiz.buildQuestion(kind, t);
+          const href = Q.referenceHref(q, book);
+          const target = book.sectionByCode(t.id);
+          if (!target) { eq(href, null); continue; }
+          ok(href, t.id);
+          const url = new URL(href, 'https://example.test/kanbun/');
+          eq(url.pathname, '/kanbun/reference.html');
+          eq(url.searchParams.get('code'), t.id);
+          eq(url.searchParams.get('from'), 'kanbun');
+          eq(url.searchParams.get('mode'), 'kuho');
+          eq(url.searchParams.get('kind'), kind);
+          eq(url.searchParams.get('p'), q.example ? q.example.id : null);
+          ok(book.pageHtml(target.page).includes('id="' + R.anchorId(target.section.anchor) + '"'), t.id);
+          const start = Q.startOptions('?type=' + t.id + '&kind=' + kind, data.kuho.types);
+          eq(start.type.id, t.id);
+          eq(start.kind, kind);
+        }
+      });
+    }
+    test('句法: 未知の型や節のない型はリンクを出さず、無効な開始指定は通常出題へ戻す', () => {
+      eq(Q.referenceHref({type:{id:'missing'}, kind:'blank'}, book), null);
+      const t = data.kuho.types[0];
+      const emptyBook = new R.ReferenceBook([], [], data.kuho.types);
+      eq(Q.referenceHref({type:t, kind:'blank'}, emptyBook), null);
+      eq(Q.referenceHref(null, book), null);
+      eq(Q.startOptions('?type=missing&kind=invalid', data.kuho.types), {type:null, kind:'mix'});
+      eq(Q.startOptions('', data.kuho.types), {type:null, kind:'mix'});
+    });
+    test('句法: 参考書で章を移っても戻る型・形式を保つ', () => {
+      const context = {from:'kanbun', mode:'kuho', type:'hitei-fu', kind:'blank'};
+      const url = new URL(R.referenceHref('hitei', 'hitei-fu', context), 'https://example.test/kanbun/');
+      for (const [key, value] of Object.entries(context)) eq(url.searchParams.get(key), value);
+    });
+
     test('参考書: 目次から12章すべてへ進める', () => {
       eq(book.pages.length, 12);
       const html = book.indexHtml();
@@ -1105,6 +1143,50 @@
           eq(d.getElementById('q-haku').textContent, '');
           eq(d.getElementById('q-kd').textContent, '');
           eq(d.getElementById('q-source').textContent, '');
+        }
+      });
+      await check('句法の画面: 全形式で正解・誤答後に参考書へ進み、同じ型と形式で続けられる', async () => {
+        const t = data.kuho.types.find(t => t.id === 'hitei-fu');
+        for (const kind of ['katachi', 'blank', 'imi']) for (const right of [false, true]) {
+          let w = await open('kuho.html?type=' + t.id + '&kind=' + kind,
+            w => w.document.querySelector('#choices button'));
+          let d = w.document;
+          eq(d.getElementById('q-pattern').textContent, t.pattern);
+          eq(d.getElementById('kind-select').value, kind);
+          eq(d.querySelectorAll('.reference-links a').length, 0, '回答前は出さない');
+          const answer = kind === 'katachi' ? t.label : kind === 'blank' ? t.blank : t.meaning;
+          Array.from(d.querySelectorAll('#choices button')).find(b =>
+            (K.normalizeKana(b.textContent) === K.normalizeKana(answer)) === right).click();
+          eq(d.getElementById('judge').className, right ? 'ok' : 'ng');
+          const link = d.querySelector('.reference-links a');
+          eq(link.textContent, '📖 この句法を読む');
+          const query = new URL(link.href).searchParams;
+          eq(query.get('code'), t.id);
+          eq(query.get('kind'), kind);
+          if (kind === 'katachi') ok(t.examples.includes(query.get('p')));
+          else eq(query.get('p'), null);
+          ok(d.documentElement.scrollWidth <= w.innerWidth, '375px 幅で横にはみ出さない');
+          w = await open(link.href, refReady);
+          ok(w.document.getElementById('ref-sec-hitei-fu'));
+          ok(w.document.getElementById('ref-back').textContent.includes('句法クイズから来ました。'));
+          // 章を移った後も、再読込後も戻る文脈を残す。
+          w = await open(w.location.href, refReady);
+          w = await open(w.document.querySelector('#chapter-list a').href, refReady);
+          const back = w.document.querySelector('#ref-back a').href;
+          eq(new URL(back).pathname.split('/').pop(), 'kuho.html');
+          eq(new URL(back).searchParams.get('type'), t.id);
+          eq(new URL(back).searchParams.get('kind'), kind);
+          w = await open(back, w => w.document.querySelector('#choices button'));
+          d = w.document;
+          eq(d.getElementById('q-pattern').textContent, t.pattern);
+          eq(d.getElementById('kind-select').value, kind);
+          eq(d.querySelectorAll('.reference-links a').length, 0);
+          d.getElementById('btn-next').click();
+          eq(d.getElementById('q-pattern').textContent, t.pattern);
+          eq(d.getElementById('kind-select').value, kind);
+          d.getElementById('cat-select').value = 'all';
+          d.getElementById('cat-select').dispatchEvent(new w.Event('change'));
+          eq(d.getElementById('explain').textContent, '');
         }
       });
       await check('参考書の画面: 型 id から節へ着地し、375px幅で読める', async () => {

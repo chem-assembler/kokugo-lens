@@ -18,6 +18,23 @@
   const norm = s => (K ? K.normalizeKana(String(s)) : String(s));
 
   const BLANK_MARK = '○○';
+  const KIND_KEYS = ['katachi', 'blank', 'imi'];
+
+  // 参考書に節がある型だけ案内する。実例がある形式では、その問題 id も渡す。
+  function referenceHref(question, book){
+    if (!question || !book.sectionByCode(question.type.id)) return null;
+    const q = new URLSearchParams({code:question.type.id, from:'kanbun', mode:'kuho', kind:question.kind});
+    if (question.example) q.set('p', question.example.id);
+    return 'reference.html?' + q;
+  }
+
+  function startOptions(search, types){
+    const q = new URLSearchParams(search);
+    return {
+      type: types.find(t => t.id === q.get('type')) || null,
+      kind: KIND_KEYS.includes(q.get('kind')) ? q.get('kind') : 'mix'
+    };
+  }
 
   // DOM に触れない出題器。random は全 examples を再現可能に検査するため差し替えられる。
   function createQuiz(data, problems, random = Math.random){
@@ -109,8 +126,8 @@
     return { buildQuestion, texts: TEXTS };
   }
 
-  if (isNode) { module.exports = { createQuiz }; return; }
-  window.KanbunKuho = { createQuiz };
+  if (isNode) { module.exports = { createQuiz, referenceHref, startOptions }; return; }
+  window.KanbunKuho = { createQuiz, referenceHref, startOptions };
   const $ = id => document.getElementById(id);
   // test.html は出題器だけを利用する。
   if (!$('choices')) return;
@@ -119,6 +136,7 @@
   let TYPES = [];        // 型の配列
   const byId = new Map();
   let quiz = null;
+  let book = null;
   let TEXTS = new Map(); // 問題ID -> 白文・書き下し・出典・訳・句形
 
   let filterCat = 'all'; // 絞り込み中のカテゴリ
@@ -132,8 +150,6 @@
     blank:   '書き下しの空欄',
     imi:     '意味'
   };
-  const KIND_KEYS = ['katachi', 'blank', 'imi'];
-
   // ---- 小道具 -------------------------------------------------------------
   function shuffle(a, random = Math.random){
     for (let i = a.length - 1; i > 0; i--){
@@ -147,19 +163,32 @@
 
   // ---- 読み込み -----------------------------------------------------------
   // 初回から文脈を示すため、型と例文の両方がそろうまで出題しない。
-  Promise.all(['kuho.json?v=119', 'texts.json?v=119'].map(url =>
+  Promise.all(['kuho.json?v=119', 'texts.json?v=119', 'reference.json?v=119'].map(url =>
     fetch(url).then(r => {
       if (!r.ok) throw new Error(url + ': ' + r.status);
       return r.json();
     })
   ))
-    .then(([data, texts]) => {
+    .then(([data, texts, pages]) => {
       CATS  = data.categories || {};
       TYPES = data.types || [];
       TYPES.forEach(t => byId.set(t.id, t));
       quiz = createQuiz(data, texts.problems || []);
       TEXTS = quiz.texts;
+      book = new window.KanbunReference.ReferenceBook(pages, [], TYPES);
+      const start = startOptions(window.location.search, TYPES);
+      kindPref = start.kind;
       buildSelects();
+      if (start.type){
+        // 戻った型で続けられるよう、範囲にその型だけの項目を加える。
+        const o = document.createElement('option');
+        o.value = 'type:' + start.type.id;
+        o.textContent = '型: ' + start.type.label + '（' + start.type.pattern + '）';
+        $('cat-select').appendChild(o);
+        filterCat = o.value;
+      }
+      $('cat-select').value = filterCat;
+      $('kind-select').value = kindPref;
       renderMeta();
       nextQuestion();
     })
@@ -185,6 +214,7 @@
 
   // ---- 出題 ---------------------------------------------------------------
   function poolTypes(){
+    if (filterCat.startsWith('type:')) return TYPES.filter(t => 'type:' + t.id === filterCat);
     return (filterCat === 'all') ? TYPES.slice()
                                  : TYPES.filter(t => t.category === filterCat);
   }
@@ -303,6 +333,17 @@
       p.textContent = '紛らわしい型: ' +
         rel.map(o => o.label + '「' + o.kakikudashi + '」＝' + o.meaning).join(' ／ ');
       ex.appendChild(p);
+    }
+    const href = referenceHref(current, book);
+    if (href){
+      const links = document.createElement('p');
+      links.className = 'reference-links';
+      const a = document.createElement('a');
+      a.href = href;
+      a.dataset.kuho = t.id;
+      a.textContent = '📖 この句法を読む';
+      links.appendChild(a);
+      ex.appendChild(links);
     }
     if ((t.examples || []).length){
       const box = document.createElement('div');
