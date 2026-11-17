@@ -13,6 +13,7 @@
   const PR = isNode ? require('./print.js') : window.KanbunPrint;
   const R = isNode ? require('./reference.js') : window.KanbunReference;
   const Q = isNode ? require('./kuho.js') : window.KanbunKuho;
+  const H = isNode ? require('./hataraki.js') : window.KanbunHataraki;
 
   const results = [];
   function test(name, fn){
@@ -41,7 +42,8 @@
   function run(problems, referenceData){
     results.length = 0;
     const data = referenceData || (isNode ? {
-      pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json')
+      pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json'),
+      imi: require('./imi.json'), hataraki: require('./hataraki.json')
     } : null);
     if (!data) throw new Error('参考書の検査データがありません');
     // ---- 句法クイズ: 実際の出題器で全型・全 examples を検査する ----
@@ -819,6 +821,71 @@
       });
     }
 
+    // ---- 字の働き: 出題器を実データ全字と、候補の優先順位が分かる小データで検査する ----
+    const hatarakiQuiz = H.createQuiz(problems, data.imi, data.hataraki, data.kuho);
+    test('字の働き: 全字の読み・意味は四択、正解は一つ、同じ文面を重複させない', () => {
+      for (const entry of hatarakiQuiz.entries) for (const kind of ['reading', 'meaning']) {
+        const q = hatarakiQuiz.choices(entry.p, entry.i, kind, () => 0.37);
+        eq(q.choices.length, 4, entry.p.id);
+        eq(new Set(q.choices.map(H.choiceKey)).size, 4, entry.p.id + ' 重複');
+        eq(q.choices.filter(c => H.choiceKey(c) === H.choiceKey(q.answer)).length, 1, entry.p.id + ' 正解');
+        eq(q.answer, kind === 'reading' ? H.reading(entry.token) : data.imi[entry.p.id][entry.i]);
+        if (kind === 'reading' && entry.token.role === 'placed') eq(q.answer, '読まない');
+      }
+    });
+    test('字の働き: 同字の別問題を優先し、正解と同じ文面・同じ問題の用例は誤答にしない', () => {
+      const make = (id, c, yomi) => ({id, tokens:c.map((ch, i) => ({c:ch, yomi:yomi[i]}))});
+      const ps = [make('a', ['之', '之'], ['これ', 'このもんだけ']), make('b', ['之'], ['ゆく']),
+        make('c', ['之'], ['これ']), make('d', ['之'], ['それ']), make('e', ['之'], ['その']),
+        make('f', ['人', '天', '地'], ['ひと', 'てん', 'ち'])];
+      const imi = {a:['対象', 'この問題だけ'], b:['進む'], c:['対象。'], d:['修飾'], e:['標識'], f:['人間', '天空', '地面']};
+      const roles = Object.fromEntries(ps.map(p => [p.id, p.tokens.map(() => '修飾語')]));
+      const q = H.createQuiz(ps, imi, roles, {types:[], categories:{}});
+      for (const random of [() => 0, () => 0.999999]) {
+        eq(q.choices(ps[0], 0, 'reading', random).choices.slice().sort(), ['これ', 'ゆく', 'それ', 'その'].sort());
+        eq(q.choices(ps[0], 0, 'meaning', random).choices.slice().sort(), ['対象', '進む', '修飾', '標識'].sort());
+      }
+      // 同字に一つしか誤答がなければ、残りは他字の実データから補う。
+      const small = H.createQuiz(ps.slice(0, 2).concat(ps[5]), imi, roles, {types:[], categories:{}});
+      const out = small.choices(ps[0], 0, 'reading', () => 0);
+      ok(out.choices.includes('ゆく'));
+      eq(out.choices.filter(c => ['ひと', 'てん', 'ち'].includes(c)).length, 2);
+      ok(!out.choices.includes('このもんだけ'));
+    });
+    test('字の働き: 送り仮名・再読・熟語で単独の読みがない字を置き字と区別する', () => {
+      eq(H.reading({yomi:'まな', okuri:'ビテ'}), 'まなびて');
+      eq(H.reading({role:'placed', yomi:'の'}), '読まない');
+      eq(H.reading({reread:{first:{yomi:'いま',okuri:'ダ'},second:{okuri:'ズ'}}}), 'いまだ…ず');
+      const p = problems.find(p => p.id === 'koumon-toso');
+      eq(H.reading(p.tokens[1]), '');
+      ok(p.tokens[1].role !== 'placed');
+      eq(H.ROLES.length, 10); eq(new Set(H.ROLES).size, 10);
+      for (const role of H.ROLES) ok(H.RULES[role], role);
+    });
+    test('字の働き: category・働き・目印を併用し、置き字と助字を重く選ぶ', () => {
+      eq(hatarakiQuiz.candidates().length, problems.reduce((n, p) => n + p.tokens.length, 0));
+      for (const category of Object.keys(data.kuho.categories)) for (const role of H.ROLES) {
+        const pool = hatarakiQuiz.candidates({category, role, markerOnly:true});
+        for (const e of pool) {
+          ok(e.marker); eq(e.role, role); ok(hatarakiQuiz.categoriesFor(e.p).includes(category));
+        }
+      }
+      eq(hatarakiQuiz.candidates({category:'missing'}), []);
+      eq(hatarakiQuiz.pick([], null), null);
+      const plain = hatarakiQuiz.entries.find(e => hatarakiQuiz.weight(e) === 1);
+      for (const e of hatarakiQuiz.entries.filter(e => e.marker || e.token.role === 'placed' || e.token.c === '之')) ok(hatarakiQuiz.weight(e) > hatarakiQuiz.weight(plain));
+      const pool = hatarakiQuiz.entries.slice(0, 2);
+      eq(hatarakiQuiz.pick(pool, pool[0], () => 0), pool[1]);
+    });
+    test('字の働き: 参考書リンクは実在の型だけ、文と字の位置を保持する', () => {
+      for (const p of problems) for (const link of hatarakiQuiz.referenceLinks(p, 0)) {
+        const q = new URL(link.href, 'https://example.test/kanbun/').searchParams;
+        eq(q.get('p'), p.id); eq(q.get('i'), '0'); eq(q.get('mode'), 'hataraki');
+        ok(data.kuho.types.some(t => t.id === q.get('code')));
+      }
+      eq(hatarakiQuiz.referenceLinks({id:'no-kuho'}, 0), []);
+    });
+
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
       test('一字ちがい: 全組の差分・出典・句法・誤答を検査する', () => {
@@ -885,6 +952,9 @@
         ok(failed, '他組の候補が足りない場合は停止する');
       });
 
+      test('字の働き: 前便の台帳検査を通す', () => {
+        require('child_process').execFileSync(process.execPath, [require('path').join(__dirname, 'hataraki-check.js')], {encoding:'utf8'});
+      });
       test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {
         require('child_process').execFileSync(process.execPath,
           [require('path').join(__dirname, 'yomi-rules-tests.js')], {encoding:'utf8'});
@@ -926,8 +996,9 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
-                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'], ['ichiji.js', 'ichiji.html'],
-                       ['present.js', 'present.html'], ['print.js', 'print.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'],
+                       ['ichiji.js', 'ichiji.html'], ['present.js', 'present.html'], ['print.js', 'print.html'],
+                       ['hataraki.js', 'hataraki.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -942,7 +1013,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html', 'hataraki.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
@@ -1052,6 +1123,86 @@
       catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
     };
     try {
+      const hatarakiReady = w => w.document.documentElement.dataset.hatarakiReady === 'true';
+      const answerHataraki = (w, p, i, mistake = false) => {
+        const answers = [H.reading(p.tokens[i]), data.imi[p.id][i], data.hataraki[p.id][i]];
+        answers.forEach((answer, n) => {
+          const buttons = [...w.document.querySelectorAll('#step-' + n + ' .choices button')];
+          const label = answer || 'この字だけの読みは付いていない';
+          const b = buttons.find(b => (mistake && n === 0) ? b.textContent !== label : b.textContent === label);
+          ok(b, '正解ボタン ' + n); b.click();
+        });
+      };
+      await check('字の働きの画面: 指定字・白文の句読点・三段階・誤答から参考書を往復', async () => {
+        const p = problems.find(p => p.id === 'rongo-manabite');
+        let w = await open('hataraki.html?p=' + p.id + '&i=1', hatarakiReady), doc = w.document;
+        eq(doc.querySelector('#sentence .target').textContent, '而');
+        eq(doc.getElementById('sentence').textContent, p.tokens.map(t => t.c + (t.p || '')).join(''));
+        eq(doc.querySelectorAll('#step-0 .choices button').length, 4);
+        ok(doc.getElementById('step-1').hidden); ok(doc.getElementById('step-2').hidden); ok(doc.getElementById('result').hidden);
+        doc.querySelector('#step-0 .choices button').click();
+        ok(!doc.getElementById('step-1').hidden); ok(doc.getElementById('step-2').hidden);
+        eq(doc.querySelectorAll('#step-1 .choices button').length, 4);
+        [...doc.querySelectorAll('#step-1 button')].find(b => b.textContent === data.imi[p.id][1]).click();
+        eq(doc.querySelectorAll('#step-2 .choices button').length, 10);
+        [...doc.querySelectorAll('#step-2 button')].find(b => b.textContent === '置き字').click();
+        ok(!doc.getElementById('result').hidden);
+        // 一度読み込み直して、誤答を確実に作る。
+        w = await open('hataraki.html?p=' + p.id + '&i=1', hatarakiReady); doc = w.document;
+        answerHataraki(w, p, 1, true);
+        ok(doc.getElementById('result').textContent.includes(p.kakikudashi));
+        ok(doc.getElementById('result').textContent.includes(p.meaning));
+        const href = doc.querySelector('#result nav a').href;
+        eq(new URL(href).searchParams.get('mode'), 'hataraki');
+        w = await open(href, refReady);
+        ok(w.document.getElementById('ref-back').textContent.includes('字の働き'));
+        const back = w.document.querySelector('#ref-back a').href;
+        eq(new URL(back).searchParams.get('i'), '1');
+        w = await open(back, hatarakiReady);
+        eq(w.document.querySelector('#sentence .target').dataset.index, '1');
+      });
+      await check('字の働きの画面: この文を全部で置き字を含む全位置を一度ずつ問う', async () => {
+        const p = problems.find(p => p.id === 'rongo-manabite');
+        const w = await open('hataraki.html?p=' + p.id + '&i=0', hatarakiReady), doc = w.document;
+        doc.getElementById('all-mode').click();
+        const seen = [];
+        for (let n = 0; n < p.tokens.length; n++) {
+          const i = Number(doc.querySelector('#sentence .target').dataset.index);
+          seen.push(i); ok(doc.getElementById('btn-next').disabled);
+          answerHataraki(w, p, i); ok(!doc.getElementById('btn-next').disabled);
+          ok(!doc.querySelector('#result nav'));
+          if (n + 1 < p.tokens.length) doc.getElementById('btn-next').click();
+        }
+        eq(seen, p.tokens.map((_, i) => i));
+        eq(doc.querySelectorAll('#sentence .done').length, p.tokens.length);
+        ok(doc.getElementById('sentence-count').textContent.includes(p.tokens.length + ' / ' + p.tokens.length));
+        ok(doc.documentElement.scrollWidth <= doc.documentElement.clientWidth + 1, '375px幅で横にはみ出さない');
+      });
+      await check('字の働きの画面: 三条件の併用・対象ゼロ・復帰・字の選び直し', async () => {
+        const w = await open('hataraki.html?p=rongo-manabite&i=0', hatarakiReady), doc = w.document;
+        const change = (id, value) => { doc.getElementById(id).value = value; doc.getElementById(id).dispatchEvent(new w.Event('change')); };
+        change('category-select', 'hitei'); change('role-select', '助動詞'); doc.getElementById('marker-only').click();
+        const p = problems.find(p => p.id === new URL(w.location.href).searchParams.get('p'));
+        const i = Number(new URL(w.location.href).searchParams.get('i'));
+        eq(data.hataraki[p.id][i], '助動詞');
+        ok(H.createQuiz(problems, data.imi, data.hataraki, data.kuho).categoriesFor(p).includes('hitei'));
+        // どのカテゴリにもない値を一時的に足し、空の出題候補を検査する。
+        const opt = doc.createElement('option'); opt.value = 'missing'; doc.getElementById('category-select').appendChild(opt);
+        change('category-select', 'missing'); ok(doc.getElementById('exercise').hidden); ok(doc.getElementById('btn-next').disabled);
+        change('category-select', ''); change('role-select', ''); doc.getElementById('marker-only').click();
+        ok(!doc.getElementById('exercise').hidden);
+        const b = [...doc.querySelectorAll('#sentence button')].find(b => !b.disabled && !b.classList.contains('target'));
+        if (b) { b.click(); eq(new URL(w.location.href).searchParams.get('i'), b.dataset.index); }
+      });
+      await check('字の働きの画面: 句法のない文には誤答時も参考書リンクを出さない・不正URLの案内', async () => {
+        const p = problems.find(p => !(p.kuho || []).some(id => data.kuho.types.some(t => t.id === id)));
+        let w = await open('hataraki.html?p=' + p.id + '&i=0', hatarakiReady);
+        answerHataraki(w, p, 0, true);
+        ok(!w.document.querySelector('#result nav'));
+        w = await open('hataraki.html?p=missing&i=-1', hatarakiReady);
+        ok(w.document.getElementById('notice').textContent.includes('見つかりません'));
+        ok(!w.document.getElementById('exercise').hidden);
+      });
       const gojunReady = w => w.document.documentElement.dataset.gojunReady === 'true';
       await check('語順の画面: タップ・ヒント・正誤判定・参考書との往復', async () => {
         const p = problems.find(p => p.id === 'rongo-manabite');

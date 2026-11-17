@@ -18,7 +18,7 @@
   }
   function referenceHref(page, anchor, context) {
     const q = new URLSearchParams({page});
-    for (const key of ['from', 'p', 'mode', 'type', 'kind']) if (context && context[key]) q.set(key, context[key]);
+    for (const key of ['from', 'p', 'mode', 'type', 'kind', 'i']) if (context && context[key]) q.set(key, context[key]);
     return 'reference.html?' + q + (anchor ? '#' + anchorId(anchor) : '');
   }
   function problemHref(id, page, anchor) {
@@ -154,7 +154,7 @@
       const book = new ReferenceBook(pages, texts.problems, kuho.types, qa.patterns);
       const params = new URLSearchParams(location.search);
       const context = {};
-      for (const key of ['from', 'p', 'mode', 'type', 'kind']) if (params.get(key)) context[key] = params.get(key);
+      for (const key of ['from', 'p', 'mode', 'type', 'kind', 'i']) if (params.get(key)) context[key] = params.get(key);
       if (context.from === 'kanbun' && context.mode === 'kuho' && !context.type) {
         context.type = params.get('code');
       }
@@ -213,6 +213,7 @@
         const back = {kuho: ['句法クイズ', 'kuho.html'], gojun: ['語順の問題', 'gojun.html'], kudashi: ['書き下し練習', 'kudashi.html'],
                       hataraki: ['字の働きの問題', 'hataraki.html'], chobun: ['長文ステージ', 'chobun.html']}[context.mode]
                      || ['訓点の問題', 'index.html'];
+        if (context.mode === 'hataraki' && /^d+$/.test(context.i || '')) q.set('i', context.i);
         band.innerHTML = '<span>' + back[0] + 'から来ました。</span> <a href="'
           + esc(back[1] + '?' + q) + '">問題に戻る</a>';
       } else if (context.from === 'qa' && book.patterns.has(context.p)) {
