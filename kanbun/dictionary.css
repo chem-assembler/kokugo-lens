@@ -1,0 +1,17 @@
+/* 提示モードと辞書で同じ項目を使う。 */
+.dictionary-entry { margin-top: 1em; border-top: 1px solid var(--frame); padding-top: 0.8em; overflow-wrap: anywhere; }
+.dictionary-entry h3 { margin: 0 0 0.6em; font-size: 1em; }
+.dictionary-entry p { margin: 0.4em 0; line-height: 1.7; }
+.dictionary-entry .uses { padding: 0; margin: 0.8em 0; list-style: none; }
+.dictionary-entry .use { padding: 0.7em; border: 1px solid var(--frame); border-radius: 0.4em; margin: 0.6em 0; }
+.dictionary-entry .use.current { border: 2px solid var(--pick); background: #eef3e9; }
+.dictionary-entry .use-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3em 0.7em; }
+.dictionary-entry .role { font-size: 0.8em; color: #6b5f48; }
+.dictionary-entry .match-note { color: var(--pick); font-weight: bold; font-size: 0.85em; }
+.dictionary-entry .chui { background: #f3ecdb; border-radius: 0.4em; padding: 0.7em; font-size: 0.9em; }
+.dictionary-entry a { color: var(--pick); }
+.dictionary-entry .example { border-top: 1px dashed var(--frame); margin-top: 0.6em; padding-top: 0.5em; }
+.dictionary-entry .example .hakubun { font-family: "Yu Mincho", "YuMincho", serif; font-size: 1.15em; }
+.dictionary-entry .example .source { color: #6b5f48; font-size: 0.8em; }
+.dictionary-entry .example-links { display: flex; flex-wrap: wrap; gap: 0.5em 1em; }
+.dictionary-entry .no-example { font-size: 0.85em; color: #6b5f48; }

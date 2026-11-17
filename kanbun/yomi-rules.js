@@ -286,4 +286,4 @@ function checkReadings(problems){
   }
   return {errors, candidates};
 }
-module.exports = {checkReadings};
+module.exports = {checkReadings, SPELLINGS, YOMI_ONLY};

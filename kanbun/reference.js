@@ -213,7 +213,7 @@
         const back = {kuho: ['句法クイズ', 'kuho.html'], gojun: ['語順の問題', 'gojun.html'], kudashi: ['書き下し練習', 'kudashi.html'],
                       hataraki: ['字の働きの問題', 'hataraki.html'], chobun: ['長文ステージ', 'chobun.html']}[context.mode]
                      || ['訓点の問題', 'index.html'];
-        if (context.mode === 'hataraki' && /^d+$/.test(context.i || '')) q.set('i', context.i);
+        if (context.mode === 'hataraki' && /^\d+$/.test(context.i || '')) q.set('i', context.i);
         band.innerHTML = '<span>' + back[0] + 'から来ました。</span> <a href="'
           + esc(back[1] + '?' + q) + '">問題に戻る</a>';
       } else if (context.from === 'qa' && book.patterns.has(context.p)) {
