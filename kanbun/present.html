@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>漢文 提示モード｜国語レンズ</title>
+<link rel="stylesheet" href="dictionary.css?v=118">
 <style>
   :root {
     --ink: #322a20;
@@ -63,6 +64,8 @@
     position: relative; display: inline-block;
     width: 3.6em; height: 2.5em; cursor: pointer; border-radius: 0.3em;
   }
+  .cell.in-dictionary .kanji { text-decoration: underline dotted #a7b9a2; text-underline-offset: 0.15em; }
+  .cell:focus-visible { outline: 2px solid var(--pick); }
   .cell:hover { background: #f3ecdb; }
   .cell.picked { outline: 2px solid var(--pick); background: #eef3e9; }
   .cell .kanji {
@@ -111,10 +114,20 @@
     padding: 1em; font-size: 0.75em; color: #8a7d63; text-align: center;
     font-family: "Yu Gothic", "Meiryo", sans-serif;
   }
+  aside { max-width: 100%; }
+  #char-info dd { min-width: 0; overflow-wrap: anywhere; }
+  @media (max-width: 600px) {
+    main { padding: 0.6em; }
+    aside { flex: 1 1 100%; min-width: 0; }
+    #toolbar > label { display: flex; align-items: center; gap: 0.4em; max-width: 100%; flex: 1 1 100%; }
+    #text-select { max-width: 100%; min-width: 0; flex: 1; }
+    #steps { flex-wrap: wrap; }
+    header { flex-wrap: wrap; }
+  }
   footer a { color: #6b5f48; }
 </style>
 </head>
-<body>
+<body data-present>
 <header>
   <h1>漢文 提示モード</h1>
   <span class="brand">国語レンズ</span>
@@ -128,6 +141,7 @@
   <button id="btn-prev">◀ 戻す</button>
   <button id="btn-next" class="primary">次へ ▶</button>
   <div id="steps"></div>
+  <button id="btn-dictionary-marks" aria-pressed="false">辞書の字に印：切</button>
   <div id="zoom">
     文字 <button id="btn-small">−</button><button id="btn-large">＋</button>
   </div>
@@ -143,7 +157,7 @@
 
 <footer>
   <div>読みは歴史的仮名づかいで表記しています。「次へ」またはキーボードの → ・スペースで段を進めます。</div>
-  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../">レンズ一覧</a>
+  国語レンズ（KokugoLenz）｜<a href="index.html">訓点モード</a>｜<a href="jisho.html">重要漢字の辞書</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="kudashi.html">書き下し練習</a>｜<a href="kuho.html">句法クイズ</a>｜<a href="../">レンズ一覧</a>
 </footer>
 
 <script src="kanbun.js?v=118"></script>

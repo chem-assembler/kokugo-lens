@@ -672,6 +672,88 @@
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
+      test('辞書: jisho-checkで150字の形・出現順・用例・読みを検査する', () => {
+        const errors = require('./jisho-check.js').checkDictionary(require('./jisho.json'), {problems});
+        eq(errors, []);
+      });
+      test('辞書: 壊したid・位置・働き・読み・空の意味などを検出する', () => {
+        const {checkDictionary} = require('./jisho-check.js');
+        const original = require('./jisho.json');
+        const mutations = [
+          d => {d['不'].uses[0].rei[0].id = 'missing';},
+          d => {d['不'].uses[0].rei[0].i = -1;},
+          d => {d['不'].uses[0].rei[0].i = 1.5;},
+          d => {d['不'].uses[0].rei[0].i = 9999;},
+          d => {d['不'].uses[0].rei[0] = {id:'rongo-manabite',i:0};},
+          d => {d['不'].uses[0].hataraki = '副詞';},
+          d => {d['不'].on = ['フ'];},
+          d => {d['不'].kun = ['ず（打消し）'];},
+          d => {d['不'].uses[0].yomi = '';},
+          d => {d['不'].uses[0].yomi = 'ズ';},
+          d => {d['朝'].on = ['ちょう'];},
+          d => {d['自'].kun = ['みずから'];},
+          d => {d['得'].kun = ['える'];},
+          d => {d['不'].uses[0].imi = '  ';},
+          d => {d['於'].uses[0].yomi = 'おいて';},
+          d => {d['不'].uses[0].rei.push({...d['不'].uses[0].rei[0]});},
+          d => {d['不'].uses[0].rei = [null];},
+          d => {d['不'].uses = [null];},
+          d => {delete d['不'];},
+          d => {const first=d['不'];delete d['不'];d['不']=first;}
+        ];
+        mutations.forEach((mutate, i) => {
+          const changed = JSON.parse(JSON.stringify(original)); mutate(changed);
+          ok(checkDictionary(changed, {problems}).length > 0, '否定対照' + i);
+        });
+      });
+      const dictionary = require('./jisho.json');
+      const {buildDictionaryEntry, matchingUses} = require('./present.js');
+      const byProblem = new Map(problems.map(p => [p.id, p]));
+      for (const [c, entry] of Object.entries(dictionary)) {
+        test('辞書の描画 ' + c + ': 提示欄と用例付きページの両方を組み立てる', () => {
+          for (const examples of [undefined, byProblem]) {
+            const html = buildDictionaryEntry(c, entry, null, examples);
+            ok(html.includes('辞書の項目'));
+            eq((html.match(/data-use=/g) || []).length, entry.uses.length);
+            ok(!html.includes('undefined') && !html.includes('[object Object]'));
+            if (examples) for (const u of entry.uses) for (const r of u.rei) {
+              const p = byProblem.get(r.id);
+              ok(html.includes(p.kakikudashi));
+              ok(html.includes('present.html?p=' + encodeURIComponent(r.id)));
+              ok(html.includes('index.html?p=' + encodeURIComponent(r.id)));
+            }
+          }
+          entry.uses.forEach((u, i) => u.rei.forEach(r => {
+            const match = matchingUses(entry, {...r, meaning:'故意に違う語釈'});
+            eq(match.kind, 'exact'); ok(match.indices.includes(i));
+            ok(buildDictionaryEntry(c, entry, r).includes('この用例の使い方'));
+          }));
+        });
+      }
+      test('辞書: 意味の照合は候補と表示し、辞書にない字には項目を出さない', () => {
+        const context = {id:'unlisted', i:0, meaning:'楽しむ'};
+        eq(matchingUses(dictionary['楽'], context), {indices:[0],kind:'similar'});
+        ok(buildDictionaryEntry('楽', dictionary['楽'], context).includes('意味が近い使い方（候補）'));
+        eq(buildDictionaryEntry('仮', undefined, context), '');
+        const hostile = JSON.parse(JSON.stringify(dictionary['楽']));
+        hostile.uses[0].imi = '<img src=x onerror=alert(1)>';
+        ok(!buildDictionaryEntry('楽', hostile).includes('<img'));
+      });
+      test('辞書: 働き10種・読み・カタカナ・大小の検索と0件を扱う', () => {
+        const {filterCharacters} = require('./jisho-page.js');
+        eq(filterCharacters(dictionary, '', '').length, 150);
+        eq(filterCharacters(dictionary, '', 'いはく'), ['曰']);
+        eq(filterCharacters(dictionary, '', 'イハク'), ['曰']);
+        eq(filterCharacters(dictionary, '', 'シャウ'), filterCharacters(dictionary, '', 'しやう'));
+        eq(filterCharacters(dictionary, '', 'まさに'), ['且','将']);
+        for (const role of require('./present.js').HATARAKI) {
+          const actual = filterCharacters(dictionary, role, '');
+          ok(actual.length > 0, role);
+          ok(actual.every(c => dictionary[c].uses.some(u => u.hataraki === role)), role);
+        }
+        eq(filterCharacters(dictionary, '置き字', 'いはく'), []);
+        eq(filterCharacters(dictionary, '', 'zzzz'), []);
+      });
       test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {
         require('child_process').execFileSync(process.execPath,
           [require('path').join(__dirname, 'yomi-rules-tests.js')], {encoding:'utf8'});
@@ -713,7 +795,7 @@
       test('版: js 内の fetch(?v=) が HTML の script の ?v= と一致する', () => {
         const fs = require('fs'), path = require('path');
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
-                       ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['present.js', 'present.html'], ['jisho-page.js', 'jisho.html'], ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -728,7 +810,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'present.html', 'jisho.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
@@ -838,6 +920,47 @@
       catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
     };
     try {
+      await check('辞書の画面: 150字・検索・働き・用例リンク・375px幅', async () => {
+        const w = await open('jisho.html?c=曰', w => w.document.querySelectorAll('#character-grid button').length === 150);
+        const d = w.document;
+        eq(d.getElementById('entry-title').textContent, '曰');
+        eq(d.getElementById('role-filter').options.length, 11);
+        ok(d.documentElement.scrollWidth <= w.innerWidth, '375px幅で横にはみ出さない');
+        ok(d.querySelector('.example .hakubun'));
+        const href = d.querySelector('.example a[href^="present.html?p="]').href;
+        const query = new URL(href).searchParams;
+        ok(problems.some(p => p.id === query.get('p')));
+        const input = d.getElementById('reading-search');
+        input.value = 'イハク'; input.dispatchEvent(new w.Event('input'));
+        eq(d.querySelectorAll('#character-grid button').length, 1);
+        d.getElementById('role-filter').value = '置き字';
+        d.getElementById('role-filter').dispatchEvent(new w.Event('change'));
+        eq(d.querySelectorAll('#character-grid button').length, 0);
+        ok(d.getElementById('entry-content').textContent.includes('条件に合う字がありません'));
+        d.getElementById('reset').click();
+        eq(d.querySelectorAll('#character-grid button').length, 150);
+        d.querySelector('[data-character="見"]').click();
+        eq(d.getElementById('entry-title').textContent, '見');
+        eq(new URLSearchParams(w.location.search).get('c'), '見');
+        ok(d.querySelector('.no-example'), '補足用法には未収録と明記する');
+      });
+      await check('提示の画面: 辞書・この用例の強調・印の切替・辞書外の字', async () => {
+        const w = await open('present.html?p=chosan-kubaru', w => w.document.querySelector('#stage .cell'));
+        const d = w.document;
+        ok(d.documentElement.scrollWidth <= w.innerWidth, '375px幅で横にはみ出さない');
+        eq(d.querySelectorAll('.in-dictionary').length, 0);
+        const cells = () => [...d.querySelectorAll('#stage .cell')];
+        cells().find(el => el.querySelector('.kanji').textContent === '曰').click();
+        ok(d.querySelector('#char-info .dictionary-entry'));
+        ok(d.querySelector('#char-info .use.current').textContent.includes('この用例の使い方'));
+        d.getElementById('btn-dictionary-marks').click();
+        eq(d.getElementById('btn-dictionary-marks').getAttribute('aria-pressed'), 'true');
+        ok(d.querySelectorAll('.in-dictionary').length > 0);
+        cells().find(el => !el.classList.contains('in-dictionary')).click();
+        eq(d.querySelector('#char-info .dictionary-entry'), null);
+        d.getElementById('btn-dictionary-marks').click();
+        eq(d.querySelectorAll('.in-dictionary').length, 0);
+      });
       const gojunReady = w => w.document.documentElement.dataset.gojunReady === 'true';
       await check('語順の画面: タップ・ヒント・正誤判定・参考書との往復', async () => {
         const p = problems.find(p => p.id === 'rongo-manabite');
