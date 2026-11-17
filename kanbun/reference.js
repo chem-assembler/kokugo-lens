@@ -18,7 +18,7 @@
   }
   function referenceHref(page, anchor, context) {
     const q = new URLSearchParams({page});
-    for (const key of ['from', 'p', 'mode']) if (context && context[key]) q.set(key, context[key]);
+    for (const key of ['from', 'p', 'mode', 's', 'q']) if (context && context[key]) q.set(key, context[key]);
     return 'reference.html?' + q + (anchor ? '#' + anchorId(anchor) : '');
   }
   function problemHref(id, page, anchor) {
@@ -154,7 +154,7 @@
       const book = new ReferenceBook(pages, texts.problems, kuho.types, qa.patterns);
       const params = new URLSearchParams(location.search);
       const context = {};
-      for (const key of ['from', 'p', 'mode']) if (params.get(key)) context[key] = params.get(key);
+      for (const key of ['from', 'p', 'mode', 's', 'q']) if (params.get(key)) context[key] = params.get(key);
       const homeQuery = new URLSearchParams(context).toString();
       doc.getElementById('ref-home').href = 'reference.html' + (homeQuery ? '?' + homeQuery : '');
       doc.getElementById('chapter-list').innerHTML = book.indexHtml(context);
@@ -197,9 +197,10 @@
         const q = new URLSearchParams({p:context.p});
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);
         band.hidden = false;
-        const gojun = context.mode === 'gojun';
-        band.innerHTML = '<span>' + (gojun ? '語順の問題' : '訓点の問題') + 'から来ました。</span> <a href="'
-          + esc((gojun ? 'gojun.html?' : 'index.html?') + q) + '">問題に戻る</a>';
+        const gojun = context.mode === 'gojun', chobun = context.mode === 'chobun';
+        if (chobun) for (const key of ['s', 'q']) if (context[key]) q.set(key, context[key]);
+        band.innerHTML = '<span>' + (chobun ? '長文の問題' : gojun ? '語順の問題' : '訓点の問題') + 'から来ました。</span> <a href="'
+          + esc((chobun ? 'chobun.html?' : gojun ? 'gojun.html?' : 'index.html?') + q) + '">問題に戻る</a>';
       }
       const result = {book, page};
       window.kanbunReference = result;

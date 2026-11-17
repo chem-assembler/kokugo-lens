@@ -28,13 +28,15 @@
 <script src="reference.js?v=118"></script>
 <script src="gojun.js?v=118"></script>
 <script src="kuho.js?v=118"></script>
+<script src="chobun-check.js?v=118"></script>
+<script src="chobun.js?v=118"></script>
 <script src="tests.js?v=118"></script>
 <script>
-Promise.all(['texts.json?v=118', 'reference.json?v=118', 'kuho.json?v=118', '../qa/questions.json'].map(url =>
+Promise.all(['texts.json?v=118', 'reference.json?v=118', 'kuho.json?v=118', '../qa/questions.json', 'chobun.json?v=118'].map(url =>
   fetch(url).then(r => { if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); })
 ))
-  .then(async ([texts, pages, kuho, qa]) => {
-    const data = {pages, kuho, qa};
+  .then(async ([texts, pages, kuho, qa, chobun]) => {
+    const data = {pages, kuho, qa, chobun};
     const rs = window.KanbunTests.run(texts.problems, data)
       .concat(await window.KanbunTests.runBrowser(texts.problems, data));
     const fails = rs.filter(r => !r.ok);

@@ -160,6 +160,11 @@
       quiz = createQuiz(data, texts.problems || []);
       TEXTS = quiz.texts;
       buildSelects();
+      const requestedCat = new URLSearchParams(location.search).get('cat');
+      if (Object.prototype.hasOwnProperty.call(CATS, requestedCat)) {
+        filterCat = requestedCat;
+        $('cat-select').value = requestedCat;
+      }
       renderMeta();
       nextQuestion();
     })

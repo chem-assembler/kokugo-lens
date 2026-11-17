@@ -29,6 +29,8 @@ SchoolLenz の第3の教科サブブランド。
 | `kudashi.js` + `kudashi.html` | 書き下し練習（カードD&D）。**訓点を与えず白文だけで読み順を組む＝ L5 に対応**（東北大 第四問②・早稲田 文/法の形） |
 | `gojun.js` + `gojun.html` | 語順を組み立てる練習。現代語訳から字のカード（置き字を含む）を白文の語順へ並べる。句法・字数で絞り込み、誤答から参考書へ進める。漢詩は除外 |
 | `sortable-lite.js` | 並べ替え。**InfoLens から流用**し、掴む対象を `opts.itemSelector` で指定できるよう拡張 |
+| `chobun.html`・`chobun.js`・`chobun.json` | **長文ステージ**。11の句法カテゴリごとに文章を読み、句法・現代語訳→内容説明の5問に答える。白文／訓点／書き下しを縦書きで切り替え、誤答は参考書へ。全問正解をブラウザに記録（保存不可ならメモリ）。題材・読む順・問い・省略注は JSON で差し替え可能。使役・受身などは短い対句、抑揚は別場面の比較での試作 |
+| `chobun-check.js` | 長文ステージの問題 ID・カテゴリ・四択の範囲と重複・内容説明を置く順を検査。`node kanbun/chobun-check.js`。`tests.js` からも同じ検査を呼ぶ |
 | `present.html`・`present.js` | **提示モード（先生用）**。同じ出典・篇の問題を一つの文章として、白文 → 訓点 → 書き下し → 現代語訳の順に一段ずつ出す。字を押すと読みと「この文での意味」（`imi.json`）を出す |
 | `progress.js` | **学習履歴**（DOM・localStorage 非依存）。訓点モード L1/L2/L3/L4/L6 と書き下し練習(K)の**6モード**で1つの記録を共有する。`localStorage` が使えない環境ではメモリ上で動く |
 | `texts.json` | 問題データ（トークン列・訓点・正解の読み順・書き下し）。現在666問（**故事成語100問**・思想159問・史伝70問・文章119問・**漢詩26首109問**・明清の筆記60問・日本漢文12問ほか。熟語返り2問を含む）125問・**明清の筆記60問**・日本漢文12問・史記／漢詩ほか48問。熟語返り2問を含む）。**11句法すべてに例文あり**。`note` は帰属の疑義・読みの落とし穴を書く欄で、クリア後に表示される |
@@ -267,3 +269,24 @@ FG-03 は切り出しが否定を落として抑揚が成り立たないと分�
   シェルがコマンド置換として解釈し、識別子が黙って空欄になる（2026-08-12 実発生）。
   コード名は裸で書くか、長いメッセージは `-F` でファイルから渡す
 - 訓読には流派差があり正解が一意でない（設計書 §4.3）。失敗例を見つけたらテストを足して直す＝**テストが仕様の正**
+
+### 長文ステージの差し替えと検査
+
+`kanbun/chobun.json` の `stages` が一覧と次のまとまりの順番を決める。
+各ステージの `problems` に読む順の既存 ID、`questions` に自作の4〜6問を置く。
+`naiyou` は句法・訳の後に置く。`breaks` は直後に続く問題 ID をキーとする省略・場面注、
+`note` は題材全体の注意。`code` は誤答時に開く句法の型（省略時は対象文の型、型がなければ `referencePage` で指定した章、未指定なら序章）。
+長さの足りない部分を原文の創作で埋めない。試作の候補には未収録部分があるため、注記を確かめて選ぶ。
+
+全問正解は専用キー `slz-koku-chobun-v1` に保存する。保存不可なら画面内のメモリを使う。
+本文や問いの差し替え後は以前のクリアを流用しない。句法クイズは `?cat=<category>` でそのカテゴリを選んで開く。
+
+確認コマンド（ルートから）:
+
+- `node kanbun/tests.js`（長文の実データ検査・不正データ検出・採点・保存不可・版の同期も含む）
+- `node kanbun/chobun-check.js`
+- `node kanbun/kuho-check.js` / `node kanbun/yomi-check.js` / `node kanbun/yomi-rules-tests.js`
+- `node kanbun/imi-check.js` / `node kanbun/guide-check.js` / `node kanbun/verify_demos.js` / `node kanbun/punct-check.js`
+- `node qa/check.js`
+- `node tools/gen-reference.mjs --check` / `node tools/reference-md-check.js` / `node tools/reference-check.mjs`
+- ローカル配信した `kanbun/test.html` と、400px幅の `kanbun/chobun.html` で表示・採点・参考書からの復帰を確認する。
