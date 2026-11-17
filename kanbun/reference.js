@@ -18,7 +18,7 @@
   }
   function referenceHref(page, anchor, context) {
     const q = new URLSearchParams({page});
-    for (const key of ['from', 'p', 'mode']) if (context && context[key]) q.set(key, context[key]);
+    for (const key of ['from', 'p', 'mode', 'type', 'kind']) if (context && context[key]) q.set(key, context[key]);
     return 'reference.html?' + q + (anchor ? '#' + anchorId(anchor) : '');
   }
   function problemHref(id, page, anchor) {
@@ -154,7 +154,10 @@
       const book = new ReferenceBook(pages, texts.problems, kuho.types, qa.patterns);
       const params = new URLSearchParams(location.search);
       const context = {};
-      for (const key of ['from', 'p', 'mode']) if (params.get(key)) context[key] = params.get(key);
+      for (const key of ['from', 'p', 'mode', 'type', 'kind']) if (params.get(key)) context[key] = params.get(key);
+      if (context.from === 'kanbun' && context.mode === 'kuho' && !context.type) {
+        context.type = params.get('code');
+      }
       const homeQuery = new URLSearchParams(context).toString();
       doc.getElementById('ref-home').href = 'reference.html' + (homeQuery ? '?' + homeQuery : '');
       doc.getElementById('chapter-list').innerHTML = book.indexHtml(context);
@@ -182,6 +185,7 @@
         const url = new URL(location.href);
         url.searchParams.delete('code');
         url.searchParams.set('page', target.page.id);
+        if (context.mode === 'kuho' && context.type) url.searchParams.set('type', context.type);
         url.hash = anchorId(target.section.anchor);
         history.replaceState(null, '', url);
       }
@@ -197,13 +201,16 @@
         band.hidden = false;
         band.innerHTML = '<span>一字ちがいの問題から来ました。</span> <a href="'
           + esc('ichiji.html?' + new URLSearchParams({id:context.p})) + '">問題に戻る</a>';
-      } else if (context.from === 'kanbun' && book.byProblem.has(context.p)) {
+      } else if (context.from === 'kanbun' && (context.mode === 'kuho'
+        ? book.types.has(context.type) && book.sectionByCode(context.type)
+        : book.byProblem.has(context.p))) {
         const band = doc.getElementById('ref-back');
-        const q = new URLSearchParams({p:context.p});
+        const q = context.mode === 'kuho' ? new URLSearchParams({type:context.type}) : new URLSearchParams({p:context.p});
+        if (context.mode === 'kuho' && ['katachi', 'blank', 'imi'].includes(context.kind)) q.set('kind', context.kind);
         if (['L1', 'L2', 'L3', 'L4', 'L6'].includes(context.mode)) q.set('mode', context.mode);
         band.hidden = false;
         // どの練習から来たか（mode）で、帯の文と戻り先を決める。表に無い mode は訓点モード
-        const back = {gojun: ['語順の問題', 'gojun.html'], kudashi: ['書き下し練習', 'kudashi.html'],
+        const back = {kuho: ['句法クイズ', 'kuho.html'], gojun: ['語順の問題', 'gojun.html'], kudashi: ['書き下し練習', 'kudashi.html'],
                       hataraki: ['字の働きの問題', 'hataraki.html'], chobun: ['長文ステージ', 'chobun.html']}[context.mode]
                      || ['訓点の問題', 'index.html'];
         band.innerHTML = '<span>' + back[0] + 'から来ました。</span> <a href="'
