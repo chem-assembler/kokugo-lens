@@ -23,8 +23,11 @@
     const own = pair[side].kakikudashi, opponent = pair[other].kakikudashi;
     const pool = shuffle(unique(pairs.filter(p => p.id !== pair.id).flatMap(p => [p.a.kakikudashi, p.b.kakikudashi])), random)
       .filter(s => normalized(s) !== normalized(own) && normalized(s) !== normalized(opponent));
-    if (normalized(own) === normalized(opponent) || pool.length < 2) throw new Error('書き下しの異なる4択を作れません: ' + pair.id);
-    return shuffle([own, opponent, ...pool.slice(0, 2)], random);
+    // 同じ訓読になる二文は正解を一つにまとめ、他組から三つ補う。
+    const readings = unique([own, opponent]);
+    const needed = 4 - readings.length;
+    if (pool.length < needed) throw new Error('書き下しの異なる4択を作れません: ' + pair.id);
+    return shuffle([...readings, ...pool.slice(0, needed)], random);
   }
   function meaningChoices(pair, random) {
     const a = unique([pair.point, ...(pair.ng || [])]);

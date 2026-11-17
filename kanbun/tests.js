@@ -805,12 +805,13 @@
         check(d => { d.pairs[0].a.from = 'missing'; });
         check(d => { d.pairs[0].a.hakubun += '学'; });
         check(d => { d.pairs[0].a.kakikudashi += '学ぶ'; });
+        check(d => { d.pairs[0].a.meaning += '別の意味'; });
+        check(d => { d.pairs[0].theme = '可／能'; });
         check(d => { d.pairs[0].ng[0] = d.pairs[0].point; });
         check(d => { const p = d.pairs.find(p => p.id === 'isho-taku'); delete p.note; });
-        check(d => { d.pairs[0].b.kakikudashi = d.pairs[0].a.kakikudashi; });
         check(d => { d.pairs = d.pairs.filter(p => p.theme !== '豈／何'); });
       });
-      test('一字ちがい: 各文の4択に正解・相手・他組2件が重複なく入り、意味も4択になる', () => {
+      test('一字ちがい: 同じ訓読も含め各文の4択が重複せず、意味も4択になる', () => {
         const I = require('./ichiji.js'), pairs = require('./ichiji.json').pairs;
         for (const pair of pairs) {
           for (const side of ['a', 'b']) {
@@ -819,11 +820,31 @@
             eq(new Set(choices.map(I.normalized)).size, 4);
             ok(choices.includes(pair.a.kakikudashi) && choices.includes(pair.b.kakikudashi));
             const others = choices.filter(s => s !== pair.a.kakikudashi && s !== pair.b.kakikudashi);
+            eq(others.length, I.normalized(pair.a.kakikudashi) === I.normalized(pair.b.kakikudashi) ? 3 : 2);
             ok(others.every(s => pairs.some(p => p.id !== pair.id && [p.a.kakikudashi, p.b.kakikudashi].includes(s))));
           }
           const choices = I.meaningChoices(pair, () => 0.5);
           eq(choices.length, 4); ok(choices.includes(pair.point));
         }
+      });
+
+      test('一字ちがい: 同じ訓読を許し、表記ゆれも重複させず候補不足は検出する', () => {
+        const I = require('./ichiji.js'), C = require('./ichiji-check.js');
+        const data = JSON.parse(JSON.stringify(require('./ichiji.json')));
+        const pair = data.pairs.find(p => p.id === 'fujin-an');
+        eq(pair.a.kakikudashi, pair.b.kakikudashi);
+        eq(C.validate(data, {problems}, require('./kuho.json')).errors, []);
+        pair.b.kakikudashi += '。';
+        for (const side of ['a', 'b']) {
+          const choices = I.readingChoices(pair, side, data.pairs, () => 0.5);
+          eq(choices.length, 4);
+          eq(new Set(choices.map(I.normalized)).size, 4);
+          ok(choices.includes(pair[side].kakikudashi));
+        }
+        let failed = false;
+        try { I.readingChoices(pair, 'a', [pair], () => 0.5); }
+        catch (e) { failed = /4択/.test(e.message); }
+        ok(failed, '他組の候補が足りない場合は停止する');
       });
 
       test('読み仮名: 歴史的仮名づかいと熟語の不備・候補を区別する', () => {

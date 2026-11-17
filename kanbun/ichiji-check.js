@@ -2,7 +2,10 @@
 'use strict';
 /* 一字ちがいの構造・参照・4択を検査する。漢文の自然さや訳の妥当性は人の確認が必要。 */
 /* 可／能 の組は外した（レビュアー4回目 B9「可は可能でとる」と食い違う「可＝許可」の説明だったため・2026-11-16）。 */
-const requiredThemes = ['不必／必不', '不常／常不', '不俱／俱不', '不復／復不', '不甚／甚不',
+/* 2026-11-16 作例見直し: 不復／復不は復不の定型性・訓読を保証できず削除。
+ * 不常／常不も常不有の不自然さ、毎聴朝と不常悦の文意の不安定さから2組とも削除。
+ * この2主題は必須にしない。数合わせの作例を戻さず、残る各主題に2組以上を求める。 */
+const requiredThemes = ['不必／必不', '不俱／俱不', '不甚／甚不',
   '未／不', '使A／見', '為A所Bの有無', '無不／不無', '豈／何', '莫如／不如',
   '猶／如', '将／当', '非／不', '而の有無'];
 const clean = s => [...s.replace(/[\p{P}\p{Z}\s]/gu, '')];
@@ -25,7 +28,8 @@ function validate(data, texts, kuho) {
   const normalized = require('./ichiji.js').normalized;
   const pairs = data && data.pairs;
   if (!Array.isArray(pairs)) return {errors:['pairs は配列が必要です'], counts, sourceCount:0, exceptions:[]};
-  if (pairs.length < 40) errors.push('40組以上が必要です: ' + pairs.length);
+  // 指示された組の削除を認め、旧40組の固定下限を必須主題の2組ずつに置き換える。
+  if (pairs.length < requiredThemes.length * 2) errors.push('必須主題数×2組以上が必要です: ' + pairs.length);
   let sourceCount = 0;
   const exceptions = [];
   for (const p of pairs) {
@@ -34,6 +38,7 @@ function validate(data, texts, kuho) {
     if (!nonempty(p.id) || !/^[a-z0-9-]+$/.test(p.id)) fail('id は英小文字・数字・ハイフン');
     if (ids.has(p.id)) fail('id重複'); ids.add(p.id);
     if (!nonempty(p.theme)) fail('theme が空');
+    if (p.theme === '可／能') fail('可／能の組は作らない');
     counts[p.theme] = (counts[p.theme] || 0) + 1;
     if (!Array.isArray(p.kuho)) fail('kuho は配列が必要');
     else {
@@ -57,6 +62,7 @@ function validate(data, texts, kuho) {
           const hakubun = ref.tokens.map(t => t.c + (t.p || '')).join('');
           if (s.hakubun !== hakubun) fail(key + ': from の白文と不一致');
           if (s.kakikudashi !== ref.kakikudashi) fail(key + ': from の書き下しと不一致');
+          if (s.meaning !== ref.meaning) fail(key + ': from の訳と不一致');
         }
       }
     }
@@ -66,7 +72,7 @@ function validate(data, texts, kuho) {
         if (!nonempty(p.note)) fail('一字差・二字の入れ替えを超える理由がない');
         exceptions.push(p.id);
       }
-      if (nonempty(p.a.kakikudashi) && nonempty(p.b.kakikudashi) && normalized(p.a.kakikudashi) === normalized(p.b.kakikudashi)) fail('相手の書き下しが正解と重複');
+      // 同じ書き下しも許す。区別は訳と point に示し、4択では一つにまとめる。
     }
     if (!Array.isArray(p.ng) || p.ng.length !== 3 || p.ng.some(s => !nonempty(s))) fail('ng は空でない3つの誤答が必要');
     else if (nonempty(p.point) && new Set([p.point, ...p.ng].map(normalized)).size !== 4) fail('意味の正解・誤答に重複');
