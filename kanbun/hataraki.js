@@ -92,7 +92,14 @@
         href: 'reference.html?' + new URLSearchParams({code:type.id, from:'kanbun', p:p.id, i:String(i), mode:'hataraki'})
       }));
     }
-    return {entries, byId, choices, candidates, categoriesFor, weight, pick, referenceLinks};
+    function roleReferenceLink(p, i) {
+      return {
+        label: '字の働きの10区分',
+        href: 'reference.html?' + new URLSearchParams({page:'word-order', from:'kanbun', p:p.id, i:String(i), mode:'hataraki'})
+          + '#ref-sec-hataraki'
+      };
+    }
+    return {entries, byId, choices, candidates, categoriesFor, weight, pick, referenceLinks, roleReferenceLink};
   }
 
   async function init() {
@@ -124,6 +131,11 @@
       line('考え方：', RULES[role]);
       if (p.note) line('注：', p.note);
       if (wrong) {
+        const roleLink = quiz.roleReferenceLink(p, i);
+        const roleNav = document.createElement('nav'); roleNav.setAttribute('aria-label', '字の働きの解説');
+        const roleAnchor = document.createElement('a'); roleAnchor.href = roleLink.href;
+        roleAnchor.textContent = '📖 ' + roleLink.label + 'を読む'; roleNav.appendChild(roleAnchor);
+        box.appendChild(roleNav);
         const links = quiz.referenceLinks(p, i);
         if (links.length) {
           const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'この問題の句法の解説');
