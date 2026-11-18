@@ -13,9 +13,9 @@ try {
   if (!hataraki || typeof hataraki !== 'object' || Array.isArray(hataraki)) throw new Error('hataraki.json が id と配列の対応表ではない');
   const problems = texts.problems;
   const ids = new Set(problems.map(p => p.id));
-  if (problems.length !== 750) errs.push('問題数は750問が必要（実際は ' + problems.length + ' 問）');
+  if (problems.length !== 751) errs.push('問題数は751問が必要（実際は ' + problems.length + ' 問）');
   if (ids.size !== problems.length) errs.push('texts.json に重複 id がある');
-  if (Object.keys(hataraki).length !== 750) errs.push('働きのキーは750件が必要（実際は ' + Object.keys(hataraki).length + ' 件）');
+  if (Object.keys(hataraki).length !== 751) errs.push('働きのキーは751件が必要（実際は ' + Object.keys(hataraki).length + ' 件）');
   for (const p of problems) {
     if (!Array.isArray(p.tokens)) { errs.push(p.id + ': tokens が配列ではない'); continue; }
     const v = Object.prototype.hasOwnProperty.call(hataraki, p.id) ? hataraki[p.id] : undefined;
@@ -48,5 +48,5 @@ try {
 for (const e of errs) console.log('NG ' + e);
 console.log('----');
 console.log('検査字数 ' + total + '・置き字 ' + placedCount + '・join ' + joinCount + '・指定6字の再読 ' + rereadCount);
-console.log(errs.length ? errs.length + ' 件の不備があります' : '750問の働きに不備なし');
+console.log(errs.length ? errs.length + ' 件の不備があります' : '751問の働きに不備なし');
 process.exit(errs.length ? 1 : 0);

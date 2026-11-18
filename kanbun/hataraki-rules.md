@@ -108,6 +108,8 @@
 
 ## 検査と記録
 
-`node kanbun/hataraki-check.js` は750キーの過不足、tokensとの長さ、10種の値、placedとの双方向一致、次の読み字とのjoin一致、指定6字の再読を検査する。不備は終了コード1。意味の正しさや上記の解釈差を自動で保証する検査ではない。`node kanbun/tests.js` からも同じ検査を呼ぶ。版は上げていない。
+`node kanbun/hataraki-check.js` は751キーの過不足、tokensとの長さ、10種の値、placedとの双方向一致、次の読み字とのjoin一致、指定6字の再読を検査する。不備は終了コード1。意味の正しさや上記の解釈差を自動で保証する検査ではない。`node kanbun/tests.js` からも同じ検査を呼ぶ。版は上げていない。
 
 変更全件は作業場所の `hataraki-changes-final.jsonl`（id・0始まり位置・字・前後・規則・理由・imi・書き下し・訳・kuho）に保存。`hataraki-changes.jsonl` は検査で取り消した中間変更を含む追記型の履歴。`hataraki-distribution-before.tsv` と `hataraki-distribution-after.tsv` は全字種の分布、`hataraki-token-audit.jsonl` は全字照合表、`hataraki-priority-review.jsonl` は主要な多義字の判定根拠。`progress.jsonl` に指示名と保存済みIDを追記し、再実行では一致する保存済みIDを飛ばす。
+
+2026-11-18: kanbun-yomi-gemini で shiki-shuka-douka を1問追加し、台帳と検査の必要件数を751に更新。「須賈」は二字とも使役の対象で目的語。「食飲」は用意する飲食物として二字とも目的語とした。
