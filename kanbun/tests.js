@@ -948,6 +948,19 @@
       }
       eq(hatarakiQuiz.referenceLinks({id:'no-kuho'}, 0), []);
     });
+    test('字の働き: 句法の有無によらず10区分の実在する節へ進み、全字の位置を保持する', () => {
+      const book = new R.ReferenceBook(data.pages, problems, data.kuho.types, data.qa.patterns);
+      const html = new Map();
+      for (const {p, i} of hatarakiQuiz.entries) {
+        const url = new URL(hatarakiQuiz.roleReferenceLink(p, i).href, 'https://example.test/kanbun/');
+        const q = url.searchParams, page = book.pageById(q.get('page'));
+        ok(page, p.id);
+        if (!html.has(page.id)) html.set(page.id, book.pageHtml(page));
+        ok(html.get(page.id).includes('id="' + url.hash.slice(1) + '"'), url.href);
+        eq(q.get('p'), p.id); eq(q.get('i'), String(i));
+        eq(q.get('mode'), 'hataraki'); eq(q.get('from'), 'kanbun');
+      }
+    });
 
     // ---- 版の同期（.js の中の ?v= は HTML だけ見る検査の死角になる） ----
     if (isNode){
@@ -1298,9 +1311,14 @@
         answerHataraki(w, p, 1, true);
         ok(doc.getElementById('result').textContent.includes(p.kakikudashi));
         ok(doc.getElementById('result').textContent.includes(p.meaning));
-        const href = doc.querySelector('#result nav a').href;
+        const roleNav = doc.querySelector('#result nav[aria-label="字の働きの解説"]');
+        ok(roleNav, '字の働きへの案内がある');
+        ok(doc.querySelector('#result nav[aria-label="この問題の句法の解説"] a'), '句法の案内も残る');
+        const href = roleNav.querySelector('a').href;
         eq(new URL(href).searchParams.get('mode'), 'hataraki');
         w = await open(href, refReady);
+        eq(w.location.hash, '#ref-sec-hataraki');
+        ok(w.document.getElementById('ref-sec-hataraki'), '10区分の節が表示される');
         ok(w.document.getElementById('ref-back').textContent.includes('字の働き'));
         const back = w.document.querySelector('#ref-back a').href;
         eq(new URL(back).searchParams.get('i'), '1');
@@ -1340,11 +1358,21 @@
         const b = [...doc.querySelectorAll('#sentence button')].find(b => !b.disabled && !b.classList.contains('target'));
         if (b) { b.click(); eq(new URL(w.location.href).searchParams.get('i'), b.dataset.index); }
       });
-      await check('字の働きの画面: 句法のない文には誤答時も参考書リンクを出さない・不正URLの案内', async () => {
+      await check('字の働きの画面: 句法のない文でも10区分の節を往復・不正URLの案内', async () => {
         const p = problems.find(p => !(p.kuho || []).some(id => data.kuho.types.some(t => t.id === id)));
         let w = await open('hataraki.html?p=' + p.id + '&i=0', hatarakiReady);
         answerHataraki(w, p, 0, true);
-        ok(!w.document.querySelector('#result nav'));
+        ok(!w.document.querySelector('#result nav[aria-label="この問題の句法の解説"]'));
+        const href = w.document.querySelector('#result nav[aria-label="字の働きの解説"] a').href;
+        w = await open(href, refReady);
+        eq(w.location.hash, '#ref-sec-hataraki');
+        const section = w.document.getElementById('ref-sec-hataraki');
+        ok(section.textContent.includes('区分は今後見直すことがある。'));
+        for (const role of H.ROLES) ok([...section.querySelectorAll('h3')].some(h => h.textContent === role), role);
+        const back = w.document.querySelector('#ref-back a').href;
+        eq(new URL(back).searchParams.get('p'), p.id); eq(new URL(back).searchParams.get('i'), '0');
+        w = await open(back, hatarakiReady);
+        eq(w.document.querySelector('#sentence .target').dataset.index, '0');
         w = await open('hataraki.html?p=missing&i=-1', hatarakiReady);
         ok(w.document.getElementById('notice').textContent.includes('見つかりません'));
         ok(!w.document.getElementById('exercise').hidden);
