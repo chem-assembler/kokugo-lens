@@ -1243,7 +1243,7 @@
     try { savedChobun = localStorage.getItem(C.KEY); localStorage.removeItem(C.KEY); canRestoreChobun = true; } catch (_) { /* メモリ代替は単体検査で確認 */ }
     const frame = document.createElement('iframe');
     frame.title = '参考書と問題の往復を確かめる';
-    frame.style.cssText = 'position:absolute;left:-10000px;width:375px;height:812px;border:0;';
+    frame.style.cssText = 'position:absolute;left:-10000px;width:375px;height:667px;border:0;';
     document.body.appendChild(frame);
     const wait = async fn => {
       const until = Date.now() + 20000;
@@ -1269,6 +1269,120 @@
       catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
     };
     try {
+      // 全入口を同じ携帯幅で検査する。データ読込前の空画面では合格させない。
+      const longest = problems.reduce((a, b) => a.tokens.length > b.tokens.length ? a : b);
+      const printGroup = PR.groupTexts(problems).reduce((a, b) =>
+        a.problems.reduce((n, p) => n + p.tokens.length, 0) >
+        b.problems.reduce((n, p) => n + p.tokens.length, 0) ? a : b);
+      const mobilePages = [
+        ['index', 'index.html?p=' + longest.id + '&mode=L3', gameReady],
+        ['kudashi', 'kudashi.html?p=rongo-manabite', w => w.document.querySelector('#tray-source .card')],
+        ['gojun', 'gojun.html', w => w.document.documentElement.dataset.gojunReady === 'true'],
+        ['ichiji', 'ichiji.html', w => w.document.documentElement.dataset.ichijiReady === 'true'],
+        ['hataraki', 'hataraki.html?p=' + longest.id + '&i=0', w => w.document.documentElement.dataset.hatarakiReady === 'true'],
+        ['kuho', 'kuho.html', w => w.document.querySelector('#choices button')],
+        ['chobun', 'chobun.html', w => w.document.documentElement.dataset.chobunReady === 'true'],
+        ['present', 'present.html?t=' + encodeURIComponent(printGroup.key), w => w.document.querySelector('#stage .cell')],
+        ['print', 'print.html?t=' + encodeURIComponent(printGroup.key), w => w.document.querySelector('#pages .sheet')],
+        ['jisho', 'jisho.html?c=曰', w => w.document.querySelectorAll('#character-grid button').length === 150],
+        ['reference', 'reference.html', refReady],
+        ['guide', 'guide.html', w => w.document.querySelector('#detail .card')],
+        ['test', 'test.html?mobile-layout=1', w => w.document.documentElement.dataset.mobileLayoutReady === 'true'],
+        ['../qa/', '../qa/', w => w.document.querySelector('#unit-list .unit')]
+      ];
+      const assertMobile = async w => {
+        if (w.document.fonts) await w.document.fonts.ready;
+        await new Promise(resolve => w.requestAnimationFrame(() => w.requestAnimationFrame(resolve)));
+        eq(w.innerWidth, 375, 'iframe の幅');
+        eq(w.innerHeight, 667, 'iframe の高さ');
+        ok(w.document.documentElement.scrollWidth <= w.innerWidth, '375×667pxでページ全体が横にはみ出さない');
+        const controls = w.document.querySelectorAll('button, select, input[type="search"], input.free, [role="button"], #stage .cell, .tray .card, label:has(input[type="checkbox"]), label:has(input[type="radio"])');
+        for (const el of controls) {
+          const rect = el.getBoundingClientRect();
+          if (!rect.width || !rect.height) continue; // 非表示の段・ダイアログを除く。
+          ok(rect.width >= 39.5 && rect.height >= 39.5,
+            '操作領域40px: ' + (el.id || el.className || el.tagName) + ' = ' + rect.width + '×' + rect.height);
+        }
+      };
+      for (const [name, url, ready] of mobilePages) {
+        await check('スマホ全ページ: ' + name + '（375×667px・横はみ出し・操作領域）', async () => {
+          const w = await open(url, ready);
+          if (name === 'test') {
+            const li = w.document.createElement('li'); li.className = 'ng';
+            li.textContent = '検査用の長い失敗メッセージ: ' + 'reference-source-path/'.repeat(20);
+            w.document.getElementById('list').appendChild(li);
+          }
+          await assertMobile(w);
+        });
+      }
+      await check('スマホの状態変化: 訓点4モード・送り仮名パレット・正解表示', async () => {
+        for (const mode of ['L1', 'L3', 'L4', 'L6']) {
+          const w = await open('index.html?p=rongo-manabite&mode=' + mode, gameReady);
+          if (mode === 'L4') w.document.querySelector('#sentence .cell').click();
+          await assertMobile(w);
+          w.document.getElementById('btn-answer').click();
+          await assertMobile(w);
+        }
+      });
+      await check('スマホの状態変化: 書き下しK2/K3のカードと送り仮名シート', async () => {
+        const w = await open('kudashi.html?p=rongo-manabite', w => w.document.querySelector('#tray-source .card'));
+        for (const step of ['K2', 'K3']) {
+          const select = w.document.getElementById('step-select'); select.value = step;
+          select.dispatchEvent(new w.Event('change'));
+          await assertMobile(w);
+          const reading = w.document.querySelector('.card .reading');
+          ok(reading, '送り仮名の入力対象がある'); reading.click();
+          ok(!w.document.getElementById('sheet').hidden);
+          await assertMobile(w);
+          w.document.getElementById('sheet-close').click();
+        }
+        const p = problems.find(p => p.tokens.some(t => t.reread));
+        const reread = await open('kudashi.html?p=' + p.id, w => w.document.querySelector('.card .dup'));
+        reread.document.querySelector('.card .dup').click();
+        await assertMobile(reread);
+      });
+      await check('スマホの状態変化: 提示の最大/最小倍率・辞書・プリント全設定', async () => {
+        const w = await open('present.html?t=' + encodeURIComponent(printGroup.key), w => w.document.querySelector('#stage .cell'));
+        for (const id of ['btn-small', 'btn-large']) {
+          for (let n = 0; n < 10; n++) w.document.getElementById(id).click();
+          w.document.querySelector('#stage .cell').click();
+          await assertMobile(w);
+        }
+        const sheet = await open('print.html?t=' + encodeURIComponent(printGroup.key), w => w.document.querySelector('#pages .sheet'));
+        for (const input of sheet.document.querySelectorAll('#settings input')) {
+          if (!input.checked) input.click();
+        }
+        await assertMobile(sheet);
+        ok(sheet.document.getElementById('pages').scrollWidth > sheet.innerWidth, 'A4はプレビュー枠内で横スクロールする');
+      });
+      await check('スマホの状態変化: 志望校の全選択肢', async () => {
+        const w = await open('guide.html', w => w.document.querySelector('#detail .card'));
+        const select = w.document.getElementById('uni-select');
+        for (const option of select.options) {
+          select.value = option.value; select.dispatchEvent(new w.Event('change'));
+          await assertMobile(w);
+        }
+      });
+      await check('スマホの状態変化: 参考書の全章・開いた目次と練習', async () => {
+        for (const page of data.pages) {
+          const w = await open('reference.html?page=' + encodeURIComponent(page.id), refReady);
+          w.document.querySelectorAll('details').forEach(el => { el.open = true; });
+          await assertMobile(w);
+        }
+      });
+      await check('スマホの状態変化: 一問一答のマップ・めくり・測定', async () => {
+        let w = await open('../qa/', w => w.document.querySelector('#unit-list .unit'));
+        w.document.getElementById('btn-map').click();
+        await assertMobile(w);
+        for (const mode of ['flip', 'choice']) {
+          w = await open('../qa/', w => w.document.querySelector('#unit-list .unit'));
+          w.document.querySelector('button[data-unit="kunten"][data-mode="' + mode + '"]').click();
+          await assertMobile(w);
+          if (mode === 'choice') w.document.querySelector('#opts input').click();
+          w.document.getElementById(mode === 'flip' ? 'btn-reveal' : 'btn-grade').click();
+          await assertMobile(w);
+        }
+      });
       const hatarakiReady = w => w.document.documentElement.dataset.hatarakiReady === 'true';
       const answerHataraki = (w, p, i, mistake = false) => {
         const answers = [H.reading(p.tokens[i]), data.imi[p.id][i], data.hataraki[p.id][i]];

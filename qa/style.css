@@ -206,3 +206,21 @@ button{font-family:inherit}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
 footer{padding:24px 0 40px;text-align:center;color:var(--ink-faint);font-size:12px}
+
+/* スマホの操作領域と本文 */
+@media screen and (max-width:700px) {
+  .top, .brand, .study-head, .actions { flex-wrap:wrap; }
+  .top > *, .brand, .pbar, .mi-k { min-width:0; }
+  .pbar { min-width:80px; }
+  button, .back, .a-link, .back-band a, footer a { min-width:40px; min-height:40px; }
+  button, .a-link { max-width:100%; overflow-wrap:anywhere; white-space:normal; }
+  .quit, .back, .unit .u-sum, .u-stat, .map-sum .sub, .legend, .gr, .map-note,
+  .confirm-cta p, .detail .sub, .mi, .mi-s, .study-head .q-of, .q-hint,
+  .answer .a-label, .answer .a-supp, .a-link, .back-band, .score .s span, footer { font-size:14px; }
+  .gh, .gh span, .gc .gc-n, .chip, .brand .dom, .opt.is-missed span::after { font-size:14px; }
+  .unit, .map-sum, .detail, .card, .result { min-width:0; overflow-wrap:anywhere; }
+  .actions .btn { flex:1 1 110px; }
+  .opt { min-height:40px; }
+  .opt span { min-width:0; }
+  .back-band a, footer a { display:inline-flex; align-items:center; max-width:100%; }
+}

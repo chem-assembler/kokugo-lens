@@ -15,3 +15,13 @@
 .dictionary-entry .example .source { color: #6b5f48; font-size: 0.8em; }
 .dictionary-entry .example-links { display: flex; flex-wrap: wrap; gap: 0.5em 1em; }
 .dictionary-entry .no-example { font-size: 0.85em; color: #6b5f48; }
+
+/* スマホの辞書説明 */
+@media screen and (max-width: 700px) {
+  .dictionary-entry .role, .dictionary-entry .match-note,
+  .dictionary-entry .chui, .dictionary-entry .example .source,
+  .dictionary-entry .no-example { font-size: 14px; }
+  .dictionary-entry .example-links a, .dictionary-entry > a {
+    display: inline-flex; align-items: center; min-width: 40px; min-height: 40px; max-width: 100%;
+  }
+}

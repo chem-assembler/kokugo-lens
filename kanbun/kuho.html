@@ -161,6 +161,29 @@
     #quiz, #side { max-width: none; width: 100%; }
     #q-pattern { font-size: 1.5em; }
   }
+
+  /* スマホでは操作領域を確保し、本文枠の中だけで横スクロールする。 */
+  @media screen and (max-width: 700px) {
+    header { flex-wrap: wrap; }
+    header > * { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+    header .brand { font-size: 14px; }
+    #toolbar { font-size: 14px; }
+    #toolbar > label { display: flex; flex-wrap: wrap; align-items: center; gap: .3em; min-width: 0; max-width: 100%; }
+    #toolbar select { min-width: 0; max-width: 100%; }
+    button, select, input:not([type="checkbox"]):not([type="radio"]) { min-width: 40px; min-height: 40px; }
+    button { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+    main, aside { min-width: 0; max-width: 100%; }
+    footer { font-size: 14px; overflow-wrap: anywhere; }
+    footer a { display: inline-flex; align-items: center; min-width: 40px; min-height: 40px; max-width: 100%; vertical-align: middle; }
+
+    #quiz, #side, #explain .row .v { min-width: 0; }
+    #quiz, #side { flex-basis: auto; }
+    #choices button, #explain { overflow-wrap: anywhere; }
+    #explain .row { flex-wrap: wrap; }
+    #q-kind, #q-source, #score-panel .label, #meta, #explain .row .k,
+    #explain .examples .label, #explain .examples .kd, #explain .examples .src, #explain .rel { font-size: 14px; }
+    .reference-links a, #explain .examples a { display: inline-flex; flex-direction: column; justify-content: center; min-width: 40px; min-height: 40px; max-width: 100%; }
+  }
 </style>
 </head>
 <body>
