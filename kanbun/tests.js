@@ -15,6 +15,7 @@
   const Q = isNode ? require('./kuho.js') : window.KanbunKuho;
   const H = isNode ? require('./hataraki.js') : window.KanbunHataraki;
   const C = isNode ? require('./chobun.js') : window.KanbunChobun;
+  const MI = isNode ? require('./michi.js') : window.KanbunMichi;
   const CC = isNode ? require('./chobun-check.js') : window.KanbunChobunCheck;
 
   const results = [];
@@ -45,9 +46,84 @@
     results.length = 0;
     const data = referenceData || (isNode ? {
       pages: require('./reference.json'), kuho: require('./kuho.json'), qa: require('../qa/questions.json'),
-      imi: require('./imi.json'), hataraki: require('./hataraki.json'), chobun: require('./chobun.json')
+      imi: require('./imi.json'), hataraki: require('./hataraki.json'), chobun: require('./chobun.json'),
+      ichiji: require('./ichiji.json'), dictionary: require('./jisho.json')
     } : null);
     if (!data) throw new Error('参考書の検査データがありません');
+    // ---- 道すじ: 実データのカテゴリ・全リンク・既存記録 ----
+    const michiData = {...data, problems};
+    test('道すじ: 全カテゴリを句法台帳の順に並べ、字→返り点→書き下し→訳→長文へ案内する', () => {
+      const route = MI.groups(michiData);
+      eq(route.map(g => g.id), Object.keys(data.kuho.categories));
+      for (const group of route) {
+        ok(group.problems.length > 0, group.id + ' に短文');
+        ok(group.stages.length > 0, group.id + ' に長文');
+        const steps = MI.steps(group, group.problems[0], data.dictionary);
+        eq(steps.map(s => s.id), ['characters','marks','writing','translation','passage']);
+        const quiz = new URL(steps[3].links[0].href, 'https://example.test/kanbun/');
+        eq(quiz.searchParams.get('cat'), group.id); eq(quiz.searchParams.get('kind'), 'imi');
+        for (const link of steps[4].links) {
+          const url = new URL(link.href, 'https://example.test/kanbun/');
+          ok(group.stages.some(stage => stage.id === url.searchParams.get('s')));
+          ok(!url.searchParams.has('q'), '長文は訳・内容説明を含め最初から解く');
+        }
+      }
+    });
+    test('道すじ: 各モードの正解・一問一答の測定・現在の長文署名だけを集計する', () => {
+      const group = MI.groups(michiData)[0], problem = group.problems[0], stage = group.stages[0];
+      const byId = new Map(problems.map(p => [p.id,p]));
+      const qa = group.qa[0]; ok(qa);
+      const records = {practice:{[problem.id]:{L1:2,L3:1,K:1,L4:99}},
+        qa:{[qa.code]:{right:30,box:5,cRight:0}}, chobun:{[stage.id]:C.signature(stage,byId)}};
+      let counts = MI.progress(group, records, problems);
+      ok(counts.marks[0].startsWith('L1 正解 1 /'));
+      ok(counts.marks[1].startsWith('L3 正解 1 /'));
+      ok(counts.writing[0].startsWith('書き下し正解 1 /'));
+      ok(counts.translation[0].includes(' 0 /'), '自己採点の正解を測定の正解にしない');
+      ok(counts.passage[0].startsWith('長文全問正解 1 /'));
+      records.chobun[stage.id] = '古い本文'; records.qa[qa.code].cRight = 1;
+      counts = MI.progress(group, records, problems);
+      ok(counts.passage[0].startsWith('長文全問正解 0 /'));
+      ok(counts.translation[0].includes(' 1 /'));
+      ok(!('characters' in counts), '字の働きの架空の記録を表示しない');
+      eq(MI.progress(group, {practice:null,qa:null,chobun:null}, problems), {});
+    });
+    test('道すじ: 保存拒否・壊れた記録を読み取り不可とし、読み取り時に書き込まない', () => {
+      for (const text of ['null','[]','1','"x"','{bad'])
+        eq(MI.readRecord({localStorage:{getItem:() => text}}, 'key'), null);
+      eq(MI.readRecord({get localStorage(){ throw Error('blocked'); }}, 'key'), null);
+      eq(MI.readRecord({localStorage:{getItem:() => null, setItem:() => {throw Error('must not write');}}}, 'key'), {});
+    });
+    if (isNode) test('道すじ: 全短文のリンク先と HTML の全リンク・script が実在し、対応する URL 引数を使う', () => {
+      const fs = require('fs'), path = require('path');
+      const root = path.resolve(__dirname, '..');
+      function exists(href) {
+        const url = new URL(href, 'https://example.test/kanbun/');
+        const target = path.join(root, decodeURIComponent(url.pathname));
+        const file = url.pathname.endsWith('/') ? path.join(target, 'index.html') : target;
+        ok(fs.existsSync(file), href);
+        return url;
+      }
+      for (const group of MI.groups(michiData)) for (const problem of group.problems) {
+        for (const step of MI.steps(group, problem, data.dictionary)) for (const item of step.links) {
+          const url = exists(item.href), q = url.searchParams, page = url.pathname.split('/').pop();
+          if (q.has('p')) eq(q.get('p'), problem.id);
+          if (page === 'index.html') ok(['L1','L3'].includes(q.get('mode')));
+          if (page === 'hataraki.html') ok(problem.tokens[Number(q.get('i'))]);
+          if (page === 'gojun.html') eq(q.has('p'), !G.exclusionReason(problem));
+          if (page === 'jisho.html' && q.has('c')) ok(data.dictionary[q.get('c')]);
+          if (page === 'reference.html') ok(group.types.some(t => t.id === q.get('code')));
+          if (page === 'kuho.html') eq(q.get('cat'), group.id);
+          if (page === 'ichiji.html' && q.has('id')) ok(group.pairs.some(p => p.id === q.get('id')));
+          if (url.pathname === '/qa/' && q.has('code')) ok(group.qa.some(p => p.code === q.get('code')));
+        }
+      }
+      const html = fs.readFileSync(path.join(__dirname, 'michi.html'), 'utf8');
+      for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) exists(m[1]);
+      const index = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+      ok(/id="michi-entry"[\s\S]*?href="michi.html"/.test(index));
+      ok(/<footer>[\s\S]*?href="michi.html"/.test(index));
+    });
     // ---- 長文の実データ・破損検出・採点・記録 ----
     test('長文: 全ステージの対象文・四択・カテゴリが有効', () => {
       eq(CC.check(data.chobun, {problems}, data.kuho), []);
@@ -1143,7 +1219,7 @@
         const pairs = [['kudashi.js', 'kudashi.html'], ['game.js', 'index.html'], ['kuho.js', 'kuho.html'], ['guide.js', 'guide.html'],
                        ['rec.js', 'index.html'], ['reference.js', 'reference.html'], ['gojun.js', 'gojun.html'],
                        ['ichiji.js', 'ichiji.html'], ['present.js', 'present.html'], ['print.js', 'print.html'],
-                       ['hataraki.js', 'hataraki.html'], ['jisho-page.js', 'jisho.html'], ['chobun.js', 'chobun.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
+                       ['hataraki.js', 'hataraki.html'], ['jisho-page.js', 'jisho.html'], ['chobun.js', 'chobun.html'], ['michi.js', 'michi.html']];   // rec.js の中の demos.json?v= も同じ版に揃える
         const versions = new Set();
         for (const [js, html] of pairs){
           const jsSrc = fs.readFileSync(path.join(__dirname, js), 'utf8');
@@ -1158,7 +1234,7 @@
             throw new Error(js + ' と ' + html + ' の版が食い違う: ' + uniq.join(','));
           }
         }
-        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html', 'hataraki.html', 'jisho.html', 'chobun.html']) {
+        for (const html of ['index.html', 'test.html', 'guide.html', 'kudashi.html', 'kuho.html', 'reference.html', 'gojun.html', 'ichiji.html', 'present.html', 'print.html', 'hataraki.html', 'jisho.html', 'chobun.html', 'michi.html']) {
           const text = fs.readFileSync(path.join(__dirname, html), 'utf8');
           for (const m of text.matchAll(/(?:\?v=|>v)(\d+)/g)) versions.add(m[1]);
         }
@@ -1269,6 +1345,35 @@
       catch (e) { rs.push({name, ok:false, msg:String(e.message || e)}); }
     };
     try {
+      await check('道すじの画面: 全カテゴリ・文の選択・記録の再読込・次の句法・375/400px幅', async () => {
+        let w = await open('michi.html', w => w.document.documentElement.dataset.michiReady === 'true');
+        let d = w.document;
+        eq(d.querySelectorAll('#route .group').length, Object.keys(data.kuho.categories).length);
+        const group = MI.groups({...data,problems})[0], select = d.getElementById('sentence-' + group.id);
+        const problem = group.problems[1]; ok(problem);
+        select.value = problem.id; select.dispatchEvent(new w.Event('change'));
+        const marks = d.querySelector('#' + group.id + ' [data-step="marks"] a');
+        eq(new URL(marks.href).searchParams.get('p'), problem.id);
+        const characters = d.querySelector('#' + group.id + ' [data-step="characters"]');
+        ok(!characters.querySelector('.progress'));
+        P.markClear(problem.id, 'L1', Date.now());
+        w.dispatchEvent(new w.Event('storage'));
+        ok(d.querySelector('#' + group.id + ' [data-step="marks"] .progress').textContent.includes('L1 正解'));
+        const saved = localStorage.getItem(P.KEY);
+        w.dispatchEvent(new w.Event('focus')); eq(localStorage.getItem(P.KEY), saved, '読むだけで記録を変更しない');
+        for (const width of [375,400]) {
+          frame.style.width = width + 'px';
+          await new Promise(resolve => setTimeout(resolve, 50));
+          for (const detail of d.querySelectorAll('.group')) detail.open = true;
+          ok(d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1, '道すじの横はみ出し ' + width);
+          for (const a of d.querySelectorAll('.practice a')) {
+            const r = a.getBoundingClientRect(); ok(r.width > 0 && r.right <= width + 1, a.textContent);
+          }
+        }
+        const next = d.querySelector('#' + group.id + ' > a[href^="#"]'); next.click();
+        await wait(() => w.location.hash === next.hash && d.querySelector(next.hash).open);
+        frame.style.width = '375px';
+      });
       const hatarakiReady = w => w.document.documentElement.dataset.hatarakiReady === 'true';
       const answerHataraki = (w, p, i, mistake = false) => {
         const answers = [H.reading(p.tokens[i]), data.imi[p.id][i], data.hataraki[p.id][i]];
