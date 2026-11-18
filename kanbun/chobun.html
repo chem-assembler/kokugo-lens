@@ -46,6 +46,25 @@ legend { font-weight:bold; width:100%; } .choice { display:flex; gap:.6rem; alig
 .reference-links { display:flex; flex-wrap:wrap; gap:.5rem 1rem; }
 footer { text-align:center; padding:1rem; font-size:.8rem; color:#685e4c; }
 @media(max-width:450px) { main { padding:.75rem; } h1 { font-size:1.05rem; } .box { padding:.8rem; } #passage { padding:.6rem; } }
+
+  /* スマホでは操作領域を確保し、本文枠の中だけで横スクロールする。 */
+  @media screen and (max-width: 700px) {
+    header { flex-wrap: wrap; }
+    header > * { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+    header .brand { font-size: 14px; }
+    #toolbar { font-size: 14px; }
+    #toolbar > label { display: flex; flex-wrap: wrap; align-items: center; gap: .3em; min-width: 0; max-width: 100%; }
+    #toolbar select { min-width: 0; max-width: 100%; }
+    button, select, input:not([type="checkbox"]):not([type="radio"]) { min-width: 40px; min-height: 40px; }
+    button { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+    main, aside { min-width: 0; max-width: 100%; }
+    footer { font-size: 14px; overflow-wrap: anywhere; }
+    footer a { display: inline-flex; align-items: center; min-width: 40px; min-height: 40px; max-width: 100%; vertical-align: middle; }
+
+    .break { font-size: 14px; }
+    .card nav a, .reference-links a { display: inline-flex; align-items: center; min-width: 40px; min-height: 40px; max-width: 100%; }
+    label.choice { min-height: 40px; overflow-wrap: anywhere; }
+  }
 </style>
 </head>
 <body>
