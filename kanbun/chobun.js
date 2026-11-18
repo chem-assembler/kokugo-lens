@@ -62,7 +62,7 @@
     };
     const link = (text, href) => { const a = el('a', text); a.href = href; return a; };
     try {
-      const [data, texts, kuho] = await Promise.all(['chobun.json?v=120', 'texts.json?v=120', 'kuho.json?v=120'].map(async url => {
+      const [data, texts, kuho] = await Promise.all(['chobun.json?v=121', 'texts.json?v=121', 'kuho.json?v=121'].map(async url => {
         const r = await win.fetch(url); if (!r.ok) throw new Error(url + ': ' + r.status); return r.json();
       }));
       const errors = win.KanbunChobunCheck.check(data, texts, kuho);

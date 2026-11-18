@@ -163,7 +163,7 @@
 
   // ---- 読み込み -----------------------------------------------------------
   // 初回から文脈を示すため、型と例文の両方がそろうまで出題しない。
-  Promise.all(['kuho.json?v=120', 'texts.json?v=120', 'reference.json?v=120'].map(url =>
+  Promise.all(['kuho.json?v=121', 'texts.json?v=121', 'reference.json?v=121'].map(url =>
     fetch(url).then(r => {
       if (!r.ok) throw new Error(url + ': ' + r.status);
       return r.json();

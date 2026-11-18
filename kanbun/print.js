@@ -156,7 +156,7 @@
       $('btn-print').disabled = !model.pages.length;
       $('word-picker').hidden = !options.words;
     }
-    Promise.all(['texts.json?v=120','imi.json?v=120','kuho.json?v=120'].map(url => fetch(url).then(r => {
+    Promise.all(['texts.json?v=121','imi.json?v=121','kuho.json?v=121'].map(url => fetch(url).then(r => {
       if (!r.ok) throw new Error(url + ': ' + r.status);
       return r.json();
     }))).then(([texts,imiData,kuho]) => {

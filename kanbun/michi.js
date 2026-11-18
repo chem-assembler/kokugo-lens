@@ -91,7 +91,7 @@
     const anchor = item => { const a = el('a', item.label); a.href = item.href; return a; };
     try {
       const [texts, kuho, chobun, ichiji, qa, dictionary] = await Promise.all([
-        'texts.json?v=120', 'kuho.json?v=120', 'chobun.json?v=120', 'ichiji.json?v=120', '../qa/questions.json', 'jisho.json?v=120'
+        'texts.json?v=121', 'kuho.json?v=121', 'chobun.json?v=121', 'ichiji.json?v=121', '../qa/questions.json', 'jisho.json?v=121'
       ].map(async url => {
         const r = await win.fetch(url); if (!r.ok) throw Error(url + ': ' + r.status); return r.json();
       }));

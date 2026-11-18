@@ -149,7 +149,7 @@
     };
     try {
       const [pages, texts, kuho, qa] = await Promise.all([
-        load('reference.json?v=120'), load('texts.json?v=120'), load('kuho.json?v=120'), load('../qa/questions.json')
+        load('reference.json?v=121'), load('texts.json?v=121'), load('kuho.json?v=121'), load('../qa/questions.json')
       ]);
       const book = new ReferenceBook(pages, texts.problems, kuho.types, qa.patterns);
       const params = new URLSearchParams(location.search);
