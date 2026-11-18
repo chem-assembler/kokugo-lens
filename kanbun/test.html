@@ -32,13 +32,14 @@
 <script src="hataraki.js?v=120"></script>
 <script src="chobun-check.js?v=120"></script>
 <script src="chobun.js?v=120"></script>
+<script src="michi.js?v=120"></script>
 <script src="tests.js?v=120"></script>
 <script>
-Promise.all(['texts.json?v=120', 'reference.json?v=120', 'kuho.json?v=120', '../qa/questions.json', 'imi.json?v=120', 'hataraki.json?v=120', 'chobun.json?v=120'].map(url =>
+Promise.all(['texts.json?v=120', 'reference.json?v=120', 'kuho.json?v=120', '../qa/questions.json', 'imi.json?v=120', 'hataraki.json?v=120', 'chobun.json?v=120', 'ichiji.json?v=120', 'jisho.json?v=120'].map(url =>
   fetch(url).then(r => { if (!r.ok) throw new Error(url + ': ' + r.status); return r.json(); })
 ))
-  .then(async ([texts, pages, kuho, qa, imi, hataraki, chobun]) => {
-    const data = {pages, kuho, qa, imi, hataraki, chobun};
+  .then(async ([texts, pages, kuho, qa, imi, hataraki, chobun, ichiji, dictionary]) => {
+    const data = {pages, kuho, qa, imi, hataraki, chobun, ichiji, dictionary};
     const rs = window.KanbunTests.run(texts.problems, data)
       .concat(await window.KanbunTests.runBrowser(texts.problems, data));
     const fails = rs.filter(r => !r.ok);

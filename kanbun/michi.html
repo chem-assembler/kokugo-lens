@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>漢文 学習の道すじ｜国語レンズ</title>
+<style>
+  :root { --ink:#322a20; --paper:#faf6ec; --panel:#fffdf6; --frame:#d8cdb4; --accent:#b3410e; --pick:#2e5d47; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif; }
+  header { display:flex; flex-wrap:wrap; align-items:baseline; gap:.8em; padding:.6em 1em; background:#2e2618; color:#f5efdf; }
+  header h1 { font-size:1.15em; margin:0; }
+  .brand { font-size:.75em; color:#cfc4a6; }
+  .version { margin-left:auto; font-size:.7em; color:#a89c7c; }
+  main { max-width:56em; margin:auto; padding:1em; line-height:1.8; }
+  .intro,.group { background:var(--panel); border:1px solid var(--frame); border-radius:.5em; padding:1em; margin-bottom:1em; }
+  .intro h2 { font-size:1.1em; margin-top:0; }
+  .intro p { margin:.5em 0; }
+  nav,.practice,.progress,.muted,label,select,footer { font-family:"Yu Gothic","Meiryo",sans-serif; }
+  a { color:var(--pick); text-underline-offset:.15em; overflow-wrap:anywhere; }
+  a:focus-visible,select:focus-visible,summary:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  #category-nav { display:flex; flex-wrap:wrap; gap:.5em; margin:1em 0; }
+  #category-nav a,.practice a { display:inline-block; border:1px solid var(--frame); border-radius:.4em; padding:.45em .7em; background:#fff; }
+  .group { scroll-margin-top:1em; }
+  summary { cursor:pointer; font-size:1.1em; font-weight:bold; }
+  .sentence-picker { display:block; margin-top:1em; }
+  select { display:block; width:100%; min-width:0; max-width:100%; font-size:1em; padding:.5em; color:var(--ink); background:#fff; border:1px solid var(--frame); border-radius:.4em; }
+  .steps { padding-left:1.7em; }
+  .steps > li { padding:.7em 0; border-bottom:1px solid var(--frame); }
+  h3 { font-size:1em; margin:0; }
+  .steps p { margin:.35em 0; }
+  .practice { display:flex; flex-wrap:wrap; gap:.4em; }
+  .progress { color:var(--pick); font-size:.85em; }
+  .muted { color:#6b5f48; font-size:.85em; }
+  .next { margin-top:1em; }
+  footer { padding:1em; font-size:.75em; color:#6b5f48; text-align:center; }
+  @media(max-width:600px) { main { padding:.6em; } .intro,.group { padding:.8em; } .practice a { max-width:100%; } }
+</style>
+</head>
+<body data-michi>
+<header><h1>漢文 学習の道すじ</h1><span class="brand">国語レンズ</span><span class="version">v120</span></header>
+<main>
+<section class="intro" aria-labelledby="intro-title">
+<h2 id="intro-title">一つの句法を、字から文章へ</h2>
+<p>文法は「漢字の読み・意味・文中での働き → 返り点 → 書き下し」、内容は「現代語訳 → 内容説明」の順に練習します。</p>
+<p>短い文で字と句法を十分に練習したら、長文へ。長文を解けたら、次の句法へ進みましょう。苦手なところにはいつでも戻れます。</p>
+<p class="muted">文を選ぶと、その文を開ける練習のリンクが切り替わります。句法クイズはまとまりで絞ります。記録はこのブラウザで読み取れる分だけを表示し、進む条件にはしません。</p>
+</section>
+<p id="status" role="status">道すじを読み込んでいます…</p>
+<p id="record-note" class="muted"></p>
+<nav id="category-nav" aria-label="句法のまとまり"></nav>
+<div id="route"></div>
+<noscript>道すじの表示には JavaScript が必要です。</noscript>
+</main>
+<footer><div>読みは歴史的仮名づかいで表記しています。</div><a href="index.html">訓点モード</a>｜<a href="reference.html">漢文の参考書</a>｜<a href="jisho.html">重要漢字の辞書</a>｜<a href="../qa/">一問一答</a>｜<a href="../">レンズ一覧</a></footer>
+<script src="progress.js?v=120"></script>
+<script src="gojun.js?v=120"></script>
+<script src="chobun.js?v=120"></script>
+<script src="michi.js?v=120"></script>
+</body>
+</html>
